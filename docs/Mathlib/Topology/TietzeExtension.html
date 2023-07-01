@@ -1,0 +1,290 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Topology.TietzeExtension</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Topology.TietzeExtension";</script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Topology</span>.<span class="name">TietzeExtension</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Topology</span>.<span class="name">TietzeExtension</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Topology/UrysohnsBounded.html">Mathlib.Topology.UrysohnsBounded</a></li><li><a href="../.././Mathlib/Analysis/SpecificLimits/Basic.html">Mathlib.Analysis.SpecificLimits.Basic</a></li><li><a href="../.././Mathlib/Data/Set/Intervals/IsoIoo.html">Mathlib.Data.Set.Intervals.IsoIoo</a></li><li><a href="../.././Mathlib/Topology/Algebra/Order/MonotoneContinuity.html">Mathlib.Topology.Algebra.Order.MonotoneContinuity</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Topology.TietzeExtension" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#BoundedContinuousFunction.tietze_extension_step"><span class="name">BoundedContinuousFunction</span>.<span class="name">tietze_extension_step</span></a></div><div class="nav_link"><a class="break_within" href="#BoundedContinuousFunction.exists_extension_norm_eq_of_closedEmbedding'"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_extension_norm_eq_of_closedEmbedding'</span></a></div><div class="nav_link"><a class="break_within" href="#BoundedContinuousFunction.exists_extension_norm_eq_of_closedEmbedding"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_extension_norm_eq_of_closedEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#BoundedContinuousFunction.exists_norm_eq_restrict_eq_of_closed"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_norm_eq_restrict_eq_of_closed</span></a></div><div class="nav_link"><a class="break_within" href="#BoundedContinuousFunction.exists_extension_forall_mem_Icc_of_closedEmbedding"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_extension_forall_mem_Icc_of_closedEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#BoundedContinuousFunction.exists_extension_forall_exists_le_ge_of_closedEmbedding"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_extension_forall_exists_le_ge_of_closedEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#BoundedContinuousFunction.exists_extension_forall_mem_of_closedEmbedding"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_extension_forall_mem_of_closedEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#BoundedContinuousFunction.exists_forall_mem_restrict_eq_of_closed"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_forall_mem_restrict_eq_of_closed</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousMap.exists_extension_forall_mem_of_closedEmbedding"><span class="name">ContinuousMap</span>.<span class="name">exists_extension_forall_mem_of_closedEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousMap.exists_extension_of_closedEmbedding"><span class="name">ContinuousMap</span>.<span class="name">exists_extension_of_closedEmbedding</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousMap.exists_restrict_eq_forall_mem_of_closed"><span class="name">ContinuousMap</span>.<span class="name">exists_restrict_eq_forall_mem_of_closed</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousMap.exists_restrict_eq_of_closed"><span class="name">ContinuousMap</span>.<span class="name">exists_restrict_eq_of_closed</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Tietze-extension-theorem">Tietze extension theorem <a class="hover-link" href="#Tietze-extension-theorem">#</a></h1><p>In this file we prove a few version of the Tietze extension theorem. The theorem says that a
+continuous function <code>s → ℝ</code> defined on a closed set in a normal topological space <code>Y</code> can be
+extended to a continuous function on the whole space. Moreover, if all values of the original
+function belong to some (finite or infinite, open or closed) interval, then the extension can be
+chosen so that it takes values in the same interval. In particular, if the original function is a
+bounded function, then there exists a bounded extension of the same norm.</p><p>The proof mostly follows <a href="https://ncatlab.org/nlab/show/Tietze+extension+theorem">https://ncatlab.org/nlab/show/Tietze+extension+theorem</a>. We patch a small
+gap in the proof for unbounded functions, see
+<code><a href="../.././Mathlib/Topology/TietzeExtension.html#BoundedContinuousFunction.exists_extension_forall_exists_le_ge_of_closedEmbedding">exists_extension_forall_exists_le_ge_of_closedEmbedding</a></code>.</p><h2 class="markdown-heading" id="Implementation-notes">Implementation notes <a class="hover-link" href="#Implementation-notes">#</a></h2><p>We first prove the theorems for a closed embedding <code>e : X → Y</code> of a topological space into a normal
+topological space, then specialize them to the case <code>X = s : <a href="../.././Mathlib/Init/Set.html#Set">Set</a> Y</code>, <code>e = (↑)</code>.</p><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>Tietze extension theorem, Urysohn's lemma, normal topological space</p></div><div class="decl" id="BoundedContinuousFunction.tietze_extension_step"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L55-L99">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#BoundedContinuousFunction.tietze_extension_step"><span class="name">BoundedContinuousFunction</span>.<span class="name">tietze_extension_step</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction">BoundedContinuousFunction</a> <span class="fn">X</span> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <span class="fn">Y</span><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><a href="../.././Mathlib/Topology/Maps.html#ClosedEmbedding">ClosedEmbedding</a> <span class="fn">↑<span class="fn">e</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">g</span><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">3</span></span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> (<span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction.compContinuous">BoundedContinuousFunction.compContinuous</a> <span class="fn">g</span> <span class="fn">e</span></span>) <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">2</span> <a href="../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">3</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></span></span></div></div><p>One step in the proof of the Tietze extension theorem. If <code>e : C(X, Y)</code> is a closed embedding
+of a topological space into a normal topological space and <code>f : X →ᵇ ℝ</code> is a bounded continuous
+function, then there exists a bounded continuous function <code>g : Y →ᵇ ℝ</code> of the norm <code>‖g‖ ≤ ‖f‖ / 3</code>
+such that the distance between <code>g ∘ e</code> and <code>f</code> is at most <code>(2 / 3) * ‖f‖</code>.</p></div></div><div class="decl" id="BoundedContinuousFunction.exists_extension_norm_eq_of_closedEmbedding'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L106-L148">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#BoundedContinuousFunction.exists_extension_norm_eq_of_closedEmbedding'"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_extension_norm_eq_of_closedEmbedding'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction">BoundedContinuousFunction</a> <span class="fn">X</span> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <span class="fn">Y</span><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><a href="../.././Mathlib/Topology/Maps.html#ClosedEmbedding">ClosedEmbedding</a> <span class="fn">↑<span class="fn">e</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">g</span><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction.compContinuous">BoundedContinuousFunction.compContinuous</a> <span class="fn">g</span> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></span></span></div></div><p><strong>Tietze extension theorem</strong> for real-valued bounded continuous maps, a version with a closed
+embedding and bundled composition. If <code>e : C(X, Y)</code> is a closed embedding of a topological space
+into a normal topological space and <code>f : X →ᵇ ℝ</code> is a bounded continuous function, then there exists
+a bounded continuous function <code>g : Y →ᵇ ℝ</code> of the same norm such that <code>g ∘ e = f</code>.</p></div></div><div class="decl" id="BoundedContinuousFunction.exists_extension_norm_eq_of_closedEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L155-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#BoundedContinuousFunction.exists_extension_norm_eq_of_closedEmbedding"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_extension_norm_eq_of_closedEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction">BoundedContinuousFunction</a> <span class="fn">X</span> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><span class="fn">X</span> → <span class="fn">Y</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(he : <span class="fn"><a href="../.././Mathlib/Topology/Maps.html#ClosedEmbedding">ClosedEmbedding</a> <span class="fn">e</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">g</span><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">g</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">f</span></span></span></span></span></div></div><p><strong>Tietze extension theorem</strong> for real-valued bounded continuous maps, a version with a closed
+embedding and unbundled composition. If <code>e : C(X, Y)</code> is a closed embedding of a topological space
+into a normal topological space and <code>f : X →ᵇ ℝ</code> is a bounded continuous function, then there exists
+a bounded continuous function <code>g : Y →ᵇ ℝ</code> of the same norm such that <code>g ∘ e = f</code>.</p></div></div><div class="decl" id="BoundedContinuousFunction.exists_norm_eq_restrict_eq_of_closed"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L165-L168">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#BoundedContinuousFunction.exists_norm_eq_restrict_eq_of_closed"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_norm_eq_restrict_eq_of_closed</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">Y</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction">BoundedContinuousFunction</a> <span class="fn">↑<span class="fn">s</span></span> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">g</span><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction.restrict">BoundedContinuousFunction.restrict</a> <span class="fn">g</span> <span class="fn">s</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></span></span></div></div><p><strong>Tietze extension theorem</strong> for real-valued bounded continuous maps, a version for a closed
+set. If <code>f</code> is a bounded continuous real-valued function defined on a closed set in a normal
+topological space, then it can be extended to a bounded continuous function of the same norm defined
+on the whole space.</p></div></div><div class="decl" id="BoundedContinuousFunction.exists_extension_forall_mem_Icc_of_closedEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L179-L192">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#BoundedContinuousFunction.exists_extension_forall_mem_Icc_of_closedEmbedding"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_extension_forall_mem_Icc_of_closedEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction">BoundedContinuousFunction</a> <span class="fn">X</span> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><span class="fn">X</span> → <span class="fn">Y</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">X</span>), <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">a</span> <span class="fn">b</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hle : <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><a href="../.././Mathlib/Topology/Maps.html#ClosedEmbedding">ClosedEmbedding</a> <span class="fn">e</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn">(<span class="fn">∀ (<span class="fn">y</span> : <span class="fn">Y</span>), <span class="fn"><span class="fn">↑<span class="fn">g</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">a</span> <span class="fn">b</span></span></span></span>) <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">g</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">f</span></span></span></span></span></div></div><p><strong>Tietze extension theorem</strong> for real-valued bounded continuous maps, a version for a closed
+embedding and a bounded continuous function that takes values in a non-trivial closed interval.
+See also <code><a href="../.././Mathlib/Topology/TietzeExtension.html#BoundedContinuousFunction.exists_extension_forall_mem_of_closedEmbedding">exists_extension_forall_mem_of_closedEmbedding</a></code> for a more general statement that works
+for any interval (finite or infinite, open or closed).</p><p>If <code>e : X → Y</code> is a closed embedding and <code>f : X →ᵇ ℝ</code> is a bounded continuous function such that
+<code>f x ∈ [a, b]</code> for all <code>x</code>, where <code>a ≤ b</code>, then there exists a bounded continuous function
+<code>g : Y →ᵇ ℝ</code> such that <code>g y ∈ [a, b]</code> for all <code>y</code> and <code>g ∘ e = f</code>.</p></div></div><div class="decl" id="BoundedContinuousFunction.exists_extension_forall_exists_le_ge_of_closedEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L200-L305">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#BoundedContinuousFunction.exists_extension_forall_exists_le_ge_of_closedEmbedding"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_extension_forall_exists_le_ge_of_closedEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction">BoundedContinuousFunction</a> <span class="fn">X</span> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><span class="fn">X</span> → <span class="fn">Y</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(he : <span class="fn"><a href="../.././Mathlib/Topology/Maps.html#ClosedEmbedding">ClosedEmbedding</a> <span class="fn">e</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn">(<span class="fn">∀ (<span class="fn">y</span> : <span class="fn">Y</span>), <span class="fn">∃ <span class="fn">x₁</span> <span class="fn">x₂</span>, <span class="fn"><span class="fn">↑<span class="fn">g</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Icc">Set.Icc</a> (<span class="fn">↑<span class="fn">f</span> <span class="fn">x₁</span></span>) (<span class="fn">↑<span class="fn">f</span> <span class="fn">x₂</span></span>)</span></span></span></span>) <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">g</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">f</span></span></span></span></span></div></div><p><strong>Tietze extension theorem</strong> for real-valued bounded continuous maps, a version for a closed
+embedding. Let <code>e</code> be a closed embedding of a nonempty topological space <code>X</code> into a normal
+topological space <code>Y</code>. Let <code>f</code> be a bounded continuous real-valued function on <code>X</code>. Then there
+exists a bounded continuous function <code>g : Y →ᵇ ℝ</code> such that <code>g ∘ e = f</code> and each value <code>g y</code> belongs
+to a closed interval <code>[f x₁, f x₂]</code> for some <code>x₁</code> and <code>x₂</code>.</p></div></div><div class="decl" id="BoundedContinuousFunction.exists_extension_forall_mem_of_closedEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L315-L324">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#BoundedContinuousFunction.exists_extension_forall_mem_of_closedEmbedding"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_extension_forall_mem_of_closedEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction">BoundedContinuousFunction</a> <span class="fn">X</span> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><span class="fn">X</span> → <span class="fn">Y</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hs : <span class="fn"><a href="../.././Mathlib/Data/Set/Intervals/OrdConnected.html#Set.OrdConnected">Set.OrdConnected</a> <span class="fn">t</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">X</span>), <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hne : <span class="fn"><a href="../.././Mathlib/Data/Set/Basic.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><a href="../.././Mathlib/Topology/Maps.html#ClosedEmbedding">ClosedEmbedding</a> <span class="fn">e</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn">(<span class="fn">∀ (<span class="fn">y</span> : <span class="fn">Y</span>), <span class="fn"><span class="fn">↑<span class="fn">g</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span></span>) <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">g</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">f</span></span></span></span></span></div></div><p><strong>Tietze extension theorem</strong> for real-valued bounded continuous maps, a version for a closed
+embedding. Let <code>e</code> be a closed embedding of a nonempty topological space <code>X</code> into a normal
+topological space <code>Y</code>. Let <code>f</code> be a bounded continuous real-valued function on <code>X</code>. Let <code>t</code> be
+a nonempty convex set of real numbers (we use <code>OrdConnected</code> instead of <code><a href="../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a></code> to automatically
+deduce this argument by typeclass search) such that <code>f x ∈ t</code> for all <code>x</code>. Then there exists
+a bounded continuous real-valued function <code>g : Y →ᵇ ℝ</code> such that <code>g y ∈ t</code> for all <code>y</code> and
+<code>g ∘ e = f</code>.</p></div></div><div class="decl" id="BoundedContinuousFunction.exists_forall_mem_restrict_eq_of_closed"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L333-L339">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#BoundedContinuousFunction.exists_forall_mem_restrict_eq_of_closed"><span class="name">BoundedContinuousFunction</span>.<span class="name">exists_forall_mem_restrict_eq_of_closed</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">Y</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction">BoundedContinuousFunction</a> <span class="fn">↑<span class="fn">s</span></span> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Set/Intervals/OrdConnected.html#Set.OrdConnected">Set.OrdConnected</a> <span class="fn">t</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">↑<span class="fn">s</span></span>), <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hne : <span class="fn"><a href="../.././Mathlib/Data/Set/Basic.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn">(<span class="fn">∀ (<span class="fn">y</span> : <span class="fn">Y</span>), <span class="fn"><span class="fn">↑<span class="fn">g</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span></span>) <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Bounded.html#BoundedContinuousFunction.restrict">BoundedContinuousFunction.restrict</a> <span class="fn">g</span> <span class="fn">s</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></span></span></div></div><p><strong>Tietze extension theorem</strong> for real-valued bounded continuous maps, a version for a closed
+set. Let <code>s</code> be a closed set in a normal topological space <code>Y</code>. Let <code>f</code> be a bounded continuous
+real-valued function on <code>s</code>. Let <code>t</code> be a nonempty convex set of real numbers (we use
+<code>OrdConnected</code> instead of <code><a href="../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a></code> to automatically deduce this argument by typeclass search) such
+that <code>f x ∈ t</code> for all <code>x : s</code>. Then there exists a bounded continuous real-valued function
+<code>g : Y →ᵇ ℝ</code> such that <code>g y ∈ t</code> for all <code>y</code> and <code>g.restrict s = f</code>.</p></div></div><div class="decl" id="ContinuousMap.exists_extension_forall_mem_of_closedEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L352-L384">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#ContinuousMap.exists_extension_forall_mem_of_closedEmbedding"><span class="name">ContinuousMap</span>.<span class="name">exists_extension_forall_mem_of_closedEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><span class="fn">X</span> → <span class="fn">Y</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hs : <span class="fn"><a href="../.././Mathlib/Data/Set/Intervals/OrdConnected.html#Set.OrdConnected">Set.OrdConnected</a> <span class="fn">t</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">X</span>), <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hne : <span class="fn"><a href="../.././Mathlib/Data/Set/Basic.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><a href="../.././Mathlib/Topology/Maps.html#ClosedEmbedding">ClosedEmbedding</a> <span class="fn">e</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn">(<span class="fn">∀ (<span class="fn">y</span> : <span class="fn">Y</span>), <span class="fn"><span class="fn">↑<span class="fn">g</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span></span>) <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">g</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">f</span></span></span></span></span></div></div><p><strong>Tietze extension theorem</strong> for real-valued continuous maps, a version for a closed
+embedding. Let <code>e</code> be a closed embedding of a nonempty topological space <code>X</code> into a normal
+topological space <code>Y</code>. Let <code>f</code> be a continuous real-valued function on <code>X</code>. Let <code>t</code> be a nonempty
+convex set of real numbers (we use <code>OrdConnected</code> instead of <code><a href="../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a></code> to automatically deduce this
+argument by typeclass search) such that <code>f x ∈ t</code> for all <code>x</code>. Then there exists a continuous
+real-valued function <code>g : C(Y, ℝ)</code> such that <code>g y ∈ t</code> for all <code>y</code> and <code>g ∘ e = f</code>.</p></div></div><div class="decl" id="ContinuousMap.exists_extension_of_closedEmbedding"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L391-L394">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#ContinuousMap.exists_extension_of_closedEmbedding"><span class="name">ContinuousMap</span>.<span class="name">exists_extension_of_closedEmbedding</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">X</span> → <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><a href="../.././Mathlib/Topology/Maps.html#ClosedEmbedding">ClosedEmbedding</a> <span class="fn">e</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">g</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">e</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">f</span></span></span></span></div></div><p><strong>Tietze extension theorem</strong> for real-valued continuous maps, a version for a closed
+embedding. Let <code>e</code> be a closed embedding of a nonempty topological space <code>X</code> into a normal
+topological space <code>Y</code>. Let <code>f</code> be a continuous real-valued function on <code>X</code>. Then there exists a
+continuous real-valued function <code>g : C(Y, ℝ)</code> such that <code>g ∘ e = f</code>.</p></div></div><div class="decl" id="ContinuousMap.exists_restrict_eq_forall_mem_of_closed"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L403-L408">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#ContinuousMap.exists_restrict_eq_forall_mem_of_closed"><span class="name">ContinuousMap</span>.<span class="name">exists_restrict_eq_forall_mem_of_closed</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">Y</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">↑<span class="fn">s</span></span><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Set/Intervals/OrdConnected.html#Set.OrdConnected">Set.OrdConnected</a> <span class="fn">t</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ht : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">↑<span class="fn">s</span></span>), <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hne : <span class="fn"><a href="../.././Mathlib/Data/Set/Basic.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn">(<span class="fn">∀ (<span class="fn">y</span> : <span class="fn">Y</span>), <span class="fn"><span class="fn">↑<span class="fn">g</span> <span class="fn">y</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span></span>) <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap.restrict">ContinuousMap.restrict</a> <span class="fn">s</span> <span class="fn">g</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></span></span></div></div><p><strong>Tietze extension theorem</strong> for real-valued continuous maps, a version for a closed set. Let
+<code>s</code> be a closed set in a normal topological space <code>Y</code>. Let <code>f</code> be a continuous real-valued function
+on <code>s</code>. Let <code>t</code> be a nonempty convex set of real numbers (we use <code>ord_connected</code> instead of <code>convex</code>
+to automatically deduce this argument by typeclass search) such that <code>f x ∈ t</code> for all <code>x : s</code>. Then
+there exists a continuous real-valued function <code>g : C(Y, ℝ)</code> such that <code>g y ∈ t</code> for all <code>y</code> and
+<code>g.restrict s = f</code>.</p></div></div><div class="decl" id="ContinuousMap.exists_restrict_eq_of_closed"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/TietzeExtension.lean#L415-L419">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Topology/TietzeExtension.html#ContinuousMap.exists_restrict_eq_of_closed"><span class="name">ContinuousMap</span>.<span class="name">exists_restrict_eq_of_closed</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Topology/Separation.html#NormalSpace">NormalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">Y</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">↑<span class="fn">s</span></span><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn"><span class="fn"><a href="../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap.restrict">ContinuousMap.restrict</a> <span class="fn">s</span> <span class="fn">g</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></span></div></div><p><strong>Tietze extension theorem</strong> for real-valued continuous maps, a version for a closed set. Let
+<code>s</code> be a closed set in a normal topological space <code>Y</code>. Let <code>f</code> be a continuous real-valued function
+on <code>s</code>. Then there exists a continuous real-valued function <code>g : C(Y, ℝ)</code> such that
+<code>g.restrict s = f</code>.</p></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

@@ -1,0 +1,611 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="stylesheet" href="../../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../../.././favicon.ico"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Combinatorics.SimpleGraph.Regularity.Uniform</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Combinatorics.SimpleGraph.Regularity.Uniform";</script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Combinatorics</span>.<span class="name">SimpleGraph</span>.<span class="name">Regularity</span>.<span class="name">Uniform</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Combinatorics</span>.<span class="name">SimpleGraph</span>.<span class="name">Regularity</span>.<span class="name">Uniform</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Density.html">Mathlib.Combinatorics.SimpleGraph.Density</a></li><li><a href="../../../.././Mathlib/SetTheory/Ordinal/Basic.html">Mathlib.SetTheory.Ordinal.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Combinatorics.SimpleGraph.Regularity.Uniform" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.IsUniform"><span class="name">SimpleGraph</span>.<span class="name">IsUniform</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.IsUniform.mono"><span class="name">SimpleGraph</span>.<span class="name">IsUniform</span>.<span class="name">mono</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.IsUniform.symm"><span class="name">SimpleGraph</span>.<span class="name">IsUniform</span>.<span class="name">symm</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.isUniform_comm"><span class="name">SimpleGraph</span>.<span class="name">isUniform_comm</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.isUniform_singleton"><span class="name">SimpleGraph</span>.<span class="name">isUniform_singleton</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.not_isUniform_zero"><span class="name">SimpleGraph</span>.<span class="name">not_isUniform_zero</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.isUniform_one"><span class="name">SimpleGraph</span>.<span class="name">isUniform_one</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.not_isUniform_iff"><span class="name">SimpleGraph</span>.<span class="name">not_isUniform_iff</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.nonuniformWitnesses"><span class="name">SimpleGraph</span>.<span class="name">nonuniformWitnesses</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.left_nonuniformWitnesses_subset"><span class="name">SimpleGraph</span>.<span class="name">left_nonuniformWitnesses_subset</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.left_nonuniformWitnesses_card"><span class="name">SimpleGraph</span>.<span class="name">left_nonuniformWitnesses_card</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.right_nonuniformWitnesses_subset"><span class="name">SimpleGraph</span>.<span class="name">right_nonuniformWitnesses_subset</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.right_nonuniformWitnesses_card"><span class="name">SimpleGraph</span>.<span class="name">right_nonuniformWitnesses_card</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.nonuniformWitnesses_spec"><span class="name">SimpleGraph</span>.<span class="name">nonuniformWitnesses_spec</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.nonuniformWitness"><span class="name">SimpleGraph</span>.<span class="name">nonuniformWitness</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.nonuniformWitness_subset"><span class="name">SimpleGraph</span>.<span class="name">nonuniformWitness_subset</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.le_card_nonuniformWitness"><span class="name">SimpleGraph</span>.<span class="name">le_card_nonuniformWitness</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.nonuniformWitness_spec"><span class="name">SimpleGraph</span>.<span class="name">nonuniformWitness_spec</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.nonUniforms"><span class="name">Finpartition</span>.<span class="name">nonUniforms</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.mk_mem_nonUniforms_iff"><span class="name">Finpartition</span>.<span class="name">mk_mem_nonUniforms_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.nonUniforms_mono"><span class="name">Finpartition</span>.<span class="name">nonUniforms_mono</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.nonUniforms_bot"><span class="name">Finpartition</span>.<span class="name">nonUniforms_bot</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.IsUniform"><span class="name">Finpartition</span>.<span class="name">IsUniform</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.botIsUniform"><span class="name">Finpartition</span>.<span class="name">botIsUniform</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.isUniformOne"><span class="name">Finpartition</span>.<span class="name">isUniformOne</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.IsUniform.mono"><span class="name">Finpartition</span>.<span class="name">IsUniform</span>.<span class="name">mono</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.isUniformOfEmpty"><span class="name">Finpartition</span>.<span class="name">isUniformOfEmpty</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.nonempty_of_not_uniform"><span class="name">Finpartition</span>.<span class="name">nonempty_of_not_uniform</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.nonuniformWitnesses"><span class="name">Finpartition</span>.<span class="name">nonuniformWitnesses</span></a></div><div class="nav_link"><a class="break_within" href="#Finpartition.nonuniformWitness_mem_nonuniformWitnesses"><span class="name">Finpartition</span>.<span class="name">nonuniformWitness_mem_nonuniformWitnesses</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Graph-uniformity-and-uniform-partitions">Graph uniformity and uniform partitions <a class="hover-link" href="#Graph-uniformity-and-uniform-partitions">#</a></h1><p>In this file we define uniformity of a pair of vertices in a graph and uniformity of a partition of
+vertices of a graph. Both are also known as ε-regularity.</p><p>Finsets of vertices <code>s</code> and <code>t</code> are <code>ε</code>-uniform in a graph <code>G</code> if their edge density is at most
+<code>ε</code>-far from the density of any big enough <code>s'</code> and <code>t'</code> where <code>s' ⊆ s</code>, <code>t' ⊆ t</code>.
+The definition is pretty technical, but it amounts to the edges between <code>s</code> and <code>t</code> being "random"
+The literature contains several definitions which are equivalent up to scaling <code>ε</code> by some constant
+when the partition is equitable.</p><p>A partition <code>P</code> of the vertices is <code>ε</code>-uniform if the proportion of non <code>ε</code>-uniform pairs of parts
+is less than <code>ε</code>.</p><h2 class="markdown-heading" id="Main-declarations">Main declarations <a class="hover-link" href="#Main-declarations">#</a></h2><ul>
+<li><code><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a></code>: Graph uniformity of a pair of finsets of vertices.</li>
+<li><code><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">SimpleGraph.nonuniformWitness</a></code>: <code>G.<a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">nonuniformWitness</a> ε s t</code> and <code>G.<a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">nonuniformWitness</a> ε t s</code>
+together witness the non-uniformity of <code>s</code> and <code>t</code>.</li>
+<li><code><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonUniforms">Finpartition.nonUniforms</a></code>: Non uniform pairs of parts of a partition.</li>
+<li><code><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.IsUniform">Finpartition.IsUniform</a></code>: Uniformity of a partition.</li>
+<li><code><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonuniformWitnesses">Finpartition.nonuniformWitnesses</a></code>: For each non-uniform pair of parts of a partition, pick
+witnesses of non-uniformity and dump them all together.</li>
+</ul><h2 class="markdown-heading" id="References">References <a class="hover-link" href="#References">#</a></h2><p>[Yaël Dillies, Bhavik Mehta, <em>Formalising Szemerédi’s Regularity Lemma in Lean</em>][srl_itp]</p></div><div class="mod_doc"><h3 class="markdown-heading" id="Graph-uniformity">Graph uniformity <a class="hover-link" href="#Graph-uniformity">#</a></h3></div><div class="decl" id="SimpleGraph.IsUniform"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L59-L61">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform"><span class="name">SimpleGraph</span>.<span class="name">IsUniform</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ε : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><p>A pair of finsets of vertices is <code>ε</code>-uniform (aka <code>ε</code>-regular) iff their edge density is close
+to the density of any big enough pair of subsets. Intuitively, the edges between them are
+random-like.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-SimpleGraph.IsUniform" class="instances-for-list"></ul></details></div></div><div class="decl" id="SimpleGraph.IsUniform.mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L66-L68">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform.mono"><span class="name">SimpleGraph</span>.<span class="name">IsUniform</span>.<span class="name">mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε' : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">ε'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hε : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε'</span> <span class="fn">s</span> <span class="fn">t</span></span></div></div></div></div><div class="decl" id="SimpleGraph.IsUniform.symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L71-L73">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform.symm"><span class="name">SimpleGraph</span>.<span class="name">IsUniform</span>.<span class="name">symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Init/Logic.html#Symmetric">Symmetric</a> (<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span></span>)</span></div></div></div></div><div class="decl" id="SimpleGraph.isUniform_comm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L78-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.isUniform_comm"><span class="name">SimpleGraph</span>.<span class="name">isUniform_comm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">t</span> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.isUniform_singleton"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L82-L91">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.isUniform_singleton"><span class="name">SimpleGraph</span>.<span class="name">isUniform_singleton</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">ε</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">{<span class="fn">a</span>}</span> <span class="fn">{<span class="fn">b</span>}</span></span></div></div></div></div><div class="decl" id="SimpleGraph.not_isUniform_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L94-L95">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.not_isUniform_zero"><span class="name">SimpleGraph</span>.<span class="name">not_isUniform_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">0</span> <span class="fn">s</span> <span class="fn">t</span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.isUniform_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L98-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.isUniform_one"><span class="name">SimpleGraph</span>.<span class="name">isUniform_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">1</span> <span class="fn">s</span> <span class="fn">t</span></span></div></div></div></div><div class="decl" id="SimpleGraph.not_isUniform_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L108-L112">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.not_isUniform_iff"><span class="name">SimpleGraph</span>.<span class="name">not_isUniform_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a>   <span class="fn">∃ <span class="fn">s'</span>,
+    <span class="fn"><span class="fn"><span class="fn">s'</span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a>       <span class="fn">∃ <span class="fn">t'</span>,
+        <span class="fn"><span class="fn"><span class="fn">t'</span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">t</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a>           <span class="fn"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">s</span></span>)</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">ε</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">s'</span></span>)</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a>             <span class="fn"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">t</span></span>)</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">ε</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">t'</span></span>)</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a>               <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn">|<span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Density.html#SimpleGraph.edgeDensity">SimpleGraph.edgeDensity</a> <span class="fn">G</span> <span class="fn">s'</span> <span class="fn">t'</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Density.html#SimpleGraph.edgeDensity">SimpleGraph.edgeDensity</a> <span class="fn">G</span> <span class="fn">s</span> <span class="fn">t</span></span></span>|</span>)</span></span></span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.nonuniformWitnesses"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L122-L125">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitnesses"><span class="name">SimpleGraph</span>.<span class="name">nonuniformWitnesses</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ε : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> <a href="../../../.././Init/Prelude.html#Prod">×</a> <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span></span></div></div><p>An arbitrary pair of subsets witnessing the non-uniformity of <code>(s, t)</code>. If <code>(s, t)</code> is uniform,
+returns <code>(s, t)</code>. Witnesses for <code>(s, t)</code> and <code>(t, s)</code> don't necessarily match. See
+<code><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">SimpleGraph.nonuniformWitness</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-SimpleGraph.nonuniformWitnesses" class="instances-for-list"></ul></details></div></div><div class="decl" id="SimpleGraph.left_nonuniformWitnesses_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L128-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.left_nonuniformWitnesses_subset"><span class="name">SimpleGraph</span>.<span class="name">left_nonuniformWitnesses_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitnesses">SimpleGraph.nonuniformWitnesses</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span>).fst</span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="SimpleGraph.left_nonuniformWitnesses_card"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L134-L137">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.left_nonuniformWitnesses_card"><span class="name">SimpleGraph</span>.<span class="name">left_nonuniformWitnesses_card</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">s</span></span>)</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">ε</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">(<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitnesses">SimpleGraph.nonuniformWitnesses</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span>).fst</span></span>)</span></span></div></div></div></div><div class="decl" id="SimpleGraph.right_nonuniformWitnesses_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L140-L143">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.right_nonuniformWitnesses_subset"><span class="name">SimpleGraph</span>.<span class="name">right_nonuniformWitnesses_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitnesses">SimpleGraph.nonuniformWitnesses</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span>).snd</span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">t</span></span></div></div></div></div><div class="decl" id="SimpleGraph.right_nonuniformWitnesses_card"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L146-L149">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.right_nonuniformWitnesses_card"><span class="name">SimpleGraph</span>.<span class="name">right_nonuniformWitnesses_card</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">t</span></span>)</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">ε</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">(<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitnesses">SimpleGraph.nonuniformWitnesses</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span>).snd</span></span>)</span></span></div></div></div></div><div class="decl" id="SimpleGraph.nonuniformWitnesses_spec"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L152-L157">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitnesses_spec"><span class="name">SimpleGraph</span>.<span class="name">nonuniformWitnesses_spec</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a>   <span class="fn">↑(<span class="fn">|<span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Density.html#SimpleGraph.edgeDensity">SimpleGraph.edgeDensity</a> <span class="fn">G</span> <span class="fn">(<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitnesses">SimpleGraph.nonuniformWitnesses</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span>).fst</span>
+          <span class="fn">(<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitnesses">SimpleGraph.nonuniformWitnesses</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span>).snd</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a>         <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Density.html#SimpleGraph.edgeDensity">SimpleGraph.edgeDensity</a> <span class="fn">G</span> <span class="fn">s</span> <span class="fn">t</span></span></span>|</span>)</span></span></div></div></div></div><div class="decl" id="SimpleGraph.nonuniformWitness"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L163-L164">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness"><span class="name">SimpleGraph</span>.<span class="name">nonuniformWitness</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ε : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span></div></div><p>Arbitrary witness of non-uniformity. <code>G.<a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">nonuniformWitness</a> ε s t</code> and
+<code>G.<a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">nonuniformWitness</a> ε t s</code> form a pair of subsets witnessing the non-uniformity of <code>(s, t)</code>. If
+<code>(s, t)</code> is uniform, returns <code>s</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">SimpleGraph.nonuniformWitness</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn"><a href="../../../.././Mathlib/SetTheory/Ordinal/Basic.html#WellOrderingRel">WellOrderingRel</a> <span class="fn">s</span> <span class="fn">t</span></span> then <span class="fn">(<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitnesses">SimpleGraph.nonuniformWitnesses</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span>).fst</span>
+  else <span class="fn">(<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitnesses">SimpleGraph.nonuniformWitnesses</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">t</span> <span class="fn">s</span></span>).snd</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-SimpleGraph.nonuniformWitness" class="instances-for-list"></ul></details></div></div><div class="decl" id="SimpleGraph.nonuniformWitness_subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L167-L171">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness_subset"><span class="name">SimpleGraph</span>.<span class="name">nonuniformWitness_subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">SimpleGraph.nonuniformWitness</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="SimpleGraph.le_card_nonuniformWitness"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L174-L179">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.le_card_nonuniformWitness"><span class="name">SimpleGraph</span>.<span class="name">le_card_nonuniformWitness</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn">s</span></span>)</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">ε</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">SimpleGraph.nonuniformWitness</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span>)</span>)</span></span></div></div></div></div><div class="decl" id="SimpleGraph.nonuniformWitness_spec"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L182-L190">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness_spec"><span class="name">SimpleGraph</span>.<span class="name">nonuniformWitness_spec</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">s</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a>   <span class="fn">↑(<span class="fn">|<span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Density.html#SimpleGraph.edgeDensity">SimpleGraph.edgeDensity</a> <span class="fn">G</span> (<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">SimpleGraph.nonuniformWitness</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span>) (<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">SimpleGraph.nonuniformWitness</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">t</span> <span class="fn">s</span></span>)</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a>         <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Density.html#SimpleGraph.edgeDensity">SimpleGraph.edgeDensity</a> <span class="fn">G</span> <span class="fn">s</span> <span class="fn">t</span></span></span>|</span>)</span></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Uniform-partitions">Uniform partitions <a class="hover-link" href="#Uniform-partitions">#</a></h3></div><div class="decl" id="Finpartition.nonUniforms"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L207-L208">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonUniforms"><span class="name">Finpartition</span>.<span class="name">nonUniforms</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(P : <span class="fn"><a href="../../../.././Mathlib/Order/Partition/Finpartition.html#Finpartition">Finpartition</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ε : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span> <a href="../../../.././Init/Prelude.html#Prod">×</a> <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span></span>)</span></div></div><p>The pairs of parts of a partition <code>P</code> which are not <code>ε</code>-uniform in a graph <code>G</code>. Note that we
+dismiss the diagonal. We do not care whether <code>s</code> is <code>ε</code>-uniform with itself.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonUniforms">Finpartition.nonUniforms</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset.filter">Finset.filter</a> (<span class="fn">fun <span class="fn">uv</span> =&gt <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn"><span class="fn">uv</span>.fst</span> <span class="fn"><span class="fn">uv</span>.snd</span></span></span></span>) (<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Prod.html#Finset.offDiag">Finset.offDiag</a> <span class="fn"><span class="fn">P</span>.parts</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Finpartition.nonUniforms" class="instances-for-list"></ul></details></div></div><div class="decl" id="Finpartition.mk_mem_nonUniforms_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L211-L213">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.mk_mem_nonUniforms_iff"><span class="name">Finpartition</span>.<span class="name">mk_mem_nonUniforms_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(P : <span class="fn"><a href="../../../.././Mathlib/Order/Partition/Finpartition.html#Finpartition">Finpartition</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn">u</span>, <span class="fn">v</span>)</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonUniforms">Finpartition.nonUniforms</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">u</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">P</span>.parts</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">v</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">P</span>.parts</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">u</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">v</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">u</span> <span class="fn">v</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="Finpartition.nonUniforms_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L216-L217">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonUniforms_mono"><span class="name">Finpartition</span>.<span class="name">nonUniforms_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(P : <span class="fn"><a href="../../../.././Mathlib/Order/Partition/Finpartition.html#Finpartition">Finpartition</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε' : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">ε'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonUniforms">Finpartition.nonUniforms</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε'</span></span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonUniforms">Finpartition.nonUniforms</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε</span></span></span></div></div></div></div><div class="decl" id="Finpartition.nonUniforms_bot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L220-L227">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonUniforms_bot"><span class="name">Finpartition</span>.<span class="name">nonUniforms_bot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">ε</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonUniforms">Finpartition.nonUniforms</a> <a href="../../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a> <span class="fn">G</span> <span class="fn">ε</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <a href="../../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span></div></div></div></div><div class="decl" id="Finpartition.IsUniform"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L232-L233">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.IsUniform"><span class="name">Finpartition</span>.<span class="name">IsUniform</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(P : <span class="fn"><a href="../../../.././Mathlib/Order/Partition/Finpartition.html#Finpartition">Finpartition</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ε : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><p>A finpartition of a graph's vertex set is <code>ε</code>-uniform (aka <code>ε</code>-regular) iff the proportion of
+its pairs of parts that are not <code>ε</code>-uniform is at most <code>ε</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.IsUniform">Finpartition.IsUniform</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   (<span class="fn"><span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> (<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonUniforms">Finpartition.nonUniforms</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε</span></span>)</span>)</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">↑(<span class="fn"><span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn"><span class="fn">P</span>.parts</span></span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn"><a href="../../../.././Mathlib/Data/Finset/Card.html#Finset.card">Finset.card</a> <span class="fn"><span class="fn">P</span>.parts</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span>)</span>)</span> <a href="../../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">ε</span></span></span>)</span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Finpartition.IsUniform" class="instances-for-list"></ul></details></div></div><div class="decl" id="Finpartition.botIsUniform"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L236-L239">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.botIsUniform"><span class="name">Finpartition</span>.<span class="name">botIsUniform</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">ε</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.IsUniform">Finpartition.IsUniform</a> <a href="../../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a> <span class="fn">G</span> <span class="fn">ε</span></span></div></div></div></div><div class="decl" id="Finpartition.isUniformOne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L242-L246">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.isUniformOne"><span class="name">Finpartition</span>.<span class="name">isUniformOne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(P : <span class="fn"><a href="../../../.././Mathlib/Order/Partition/Finpartition.html#Finpartition">Finpartition</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.IsUniform">Finpartition.IsUniform</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="Finpartition.IsUniform.mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L251-L252">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.IsUniform.mono"><span class="name">Finpartition</span>.<span class="name">IsUniform</span>.<span class="name">mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <span class="fn"><a href="../../../.././Mathlib/Order/Partition/Finpartition.html#Finpartition">Finpartition</a> <span class="fn">A</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε' : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hP : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.IsUniform">Finpartition.IsUniform</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">ε</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">ε'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.IsUniform">Finpartition.IsUniform</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε'</span></span></div></div></div></div><div class="decl" id="Finpartition.isUniformOfEmpty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L255-L256">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.isUniformOfEmpty"><span class="name">Finpartition</span>.<span class="name">isUniformOfEmpty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <span class="fn"><a href="../../../.././Mathlib/Order/Partition/Finpartition.html#Finpartition">Finpartition</a> <span class="fn">A</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hP : <span class="fn"><span class="fn"><span class="fn">P</span>.parts</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <a href="../../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.IsUniform">Finpartition.IsUniform</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε</span></span></div></div></div></div><div class="decl" id="Finpartition.nonempty_of_not_uniform"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L259-L260">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonempty_of_not_uniform"><span class="name">Finpartition</span>.<span class="name">nonempty_of_not_uniform</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <span class="fn"><a href="../../../.././Mathlib/Order/Partition/Finpartition.html#Finpartition">Finpartition</a> <span class="fn">A</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.IsUniform">Finpartition.IsUniform</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset.Nonempty">Finset.Nonempty</a> <span class="fn"><span class="fn">P</span>.parts</span></span></div></div></div></div><div class="decl" id="Finpartition.nonuniformWitnesses"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L266-L267">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonuniformWitnesses"><span class="name">Finpartition</span>.<span class="name">nonuniformWitnesses</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(P : <span class="fn"><a href="../../../.././Mathlib/Order/Partition/Finpartition.html#Finpartition">Finpartition</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ε : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> (<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>)</span></div></div><p>A choice of witnesses of non-uniformity among the parts of a finpartition.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonuniformWitnesses">Finpartition.nonuniformWitnesses</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Image.html#Finset.image">Finset.image</a> (<span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">SimpleGraph.nonuniformWitness</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span></span>)
+    (<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset.filter">Finset.filter</a> (<span class="fn">fun <span class="fn">t</span> =&gt <span class="fn"><span class="fn"><span class="fn">s</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">t</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span></span></span></span>) <span class="fn"><span class="fn">P</span>.parts</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Finpartition.nonuniformWitnesses" class="instances-for-list"></ul></details></div></div><div class="decl" id="Finpartition.nonuniformWitness_mem_nonuniformWitnesses"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.lean#L272-L274">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonuniformWitness_mem_nonuniformWitnesses"><span class="name">Finpartition</span>.<span class="name">nonuniformWitness_mem_nonuniformWitnesses</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <span class="fn"><a href="../../../.././Mathlib/Order/Partition/Finpartition.html#Finpartition">Finpartition</a> <span class="fn">A</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.IsUniform">SimpleGraph.IsUniform</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><span class="fn">t</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">P</span>.parts</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hst : <span class="fn"><span class="fn">s</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#SimpleGraph.nonuniformWitness">SimpleGraph.nonuniformWitness</a> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span> <span class="fn">t</span></span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../.././Mathlib/Combinatorics/SimpleGraph/Regularity/Uniform.html#Finpartition.nonuniformWitnesses">Finpartition.nonuniformWitnesses</a> <span class="fn">P</span> <span class="fn">G</span> <span class="fn">ε</span> <span class="fn">s</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

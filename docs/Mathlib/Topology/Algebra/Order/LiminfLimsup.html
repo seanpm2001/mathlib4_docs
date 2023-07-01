@@ -1,0 +1,913 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="stylesheet" href="../../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../../.././favicon.ico"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Topology.Algebra.Order.LiminfLimsup</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Topology.Algebra.Order.LiminfLimsup";</script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Topology</span>.<span class="name">Algebra</span>.<span class="name">Order</span>.<span class="name">LiminfLimsup</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Topology</span>.<span class="name">Algebra</span>.<span class="name">Order</span>.<span class="name">LiminfLimsup</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Algebra/IndicatorFunction.html">Mathlib.Algebra.IndicatorFunction</a></li><li><a href="../../../.././Mathlib/Order/LiminfLimsup.html">Mathlib.Order.LiminfLimsup</a></li><li><a href="../../../.././Mathlib/Algebra/BigOperators/Intervals.html">Mathlib.Algebra.BigOperators.Intervals</a></li><li><a href="../../../.././Mathlib/Algebra/BigOperators/Order.html">Mathlib.Algebra.BigOperators.Order</a></li><li><a href="../../../.././Mathlib/Order/Filter/Archimedean.html">Mathlib.Order.Filter.Archimedean</a></li><li><a href="../../../.././Mathlib/Order/Filter/CountableInter.html">Mathlib.Order.Filter.CountableInter</a></li><li><a href="../../../.././Mathlib/Topology/Order/Basic.html">Mathlib.Topology.Order.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Topology.Algebra.Order.LiminfLimsup" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#isBounded_le_nhds"><span class="name">isBounded_le_nhds</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.isBoundedUnder_le"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isBoundedUnder_le</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.bddAbove_range_of_cofinite"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">bddAbove_range_of_cofinite</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.bddAbove_range"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">bddAbove_range</span></a></div><div class="nav_link"><a class="break_within" href="#isCobounded_ge_nhds"><span class="name">isCobounded_ge_nhds</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.isCoboundedUnder_ge"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isCoboundedUnder_ge</span></a></div><div class="nav_link"><a class="break_within" href="#isBounded_le_atBot"><span class="name">isBounded_le_atBot</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.isBoundedUnder_le_atBot"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isBoundedUnder_le_atBot</span></a></div><div class="nav_link"><a class="break_within" href="#bddAbove_range_of_tendsto_atTop_atBot"><span class="name">bddAbove_range_of_tendsto_atTop_atBot</span></a></div><div class="nav_link"><a class="break_within" href="#isBounded_ge_nhds"><span class="name">isBounded_ge_nhds</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.isBoundedUnder_ge"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isBoundedUnder_ge</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.bddBelow_range_of_cofinite"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">bddBelow_range_of_cofinite</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.bddBelow_range"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">bddBelow_range</span></a></div><div class="nav_link"><a class="break_within" href="#isCobounded_le_nhds"><span class="name">isCobounded_le_nhds</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.isCoboundedUnder_le"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isCoboundedUnder_le</span></a></div><div class="nav_link"><a class="break_within" href="#isBounded_ge_atTop"><span class="name">isBounded_ge_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.isBoundedUnder_ge_atTop"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isBoundedUnder_ge_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#bddBelow_range_of_tendsto_atTop_atTop"><span class="name">bddBelow_range_of_tendsto_atTop_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#lt_mem_sets_of_limsSup_lt"><span class="name">lt_mem_sets_of_limsSup_lt</span></a></div><div class="nav_link"><a class="break_within" href="#gt_mem_sets_of_limsInf_gt"><span class="name">gt_mem_sets_of_limsInf_gt</span></a></div><div class="nav_link"><a class="break_within" href="#le_nhds_of_limsSup_eq_limsInf"><span class="name">le_nhds_of_limsSup_eq_limsInf</span></a></div><div class="nav_link"><a class="break_within" href="#limsSup_nhds"><span class="name">limsSup_nhds</span></a></div><div class="nav_link"><a class="break_within" href="#limsInf_nhds"><span class="name">limsInf_nhds</span></a></div><div class="nav_link"><a class="break_within" href="#limsInf_eq_of_le_nhds"><span class="name">limsInf_eq_of_le_nhds</span></a></div><div class="nav_link"><a class="break_within" href="#limsSup_eq_of_le_nhds"><span class="name">limsSup_eq_of_le_nhds</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.limsup_eq"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">limsup_eq</span></a></div><div class="nav_link"><a class="break_within" href="#Filter.Tendsto.liminf_eq"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">liminf_eq</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_of_liminf_eq_limsup"><span class="name">tendsto_of_liminf_eq_limsup</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_of_le_liminf_of_limsup_le"><span class="name">tendsto_of_le_liminf_of_limsup_le</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_of_no_upcrossings"><span class="name">tendsto_of_no_upcrossings</span></a></div><div class="nav_link"><a class="break_within" href="#eventually_le_limsup"><span class="name">eventually_le_limsup</span></a></div><div class="nav_link"><a class="break_within" href="#eventually_liminf_le"><span class="name">eventually_liminf_le</span></a></div><div class="nav_link"><a class="break_within" href="#limsup_eq_bot"><span class="name">limsup_eq_bot</span></a></div><div class="nav_link"><a class="break_within" href="#liminf_eq_top"><span class="name">liminf_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#Antitone.map_limsSup_of_continuousAt"><span class="name">Antitone</span>.<span class="name">map_limsSup_of_continuousAt</span></a></div><div class="nav_link"><a class="break_within" href="#Antitone.map_limsup_of_continuousAt"><span class="name">Antitone</span>.<span class="name">map_limsup_of_continuousAt</span></a></div><div class="nav_link"><a class="break_within" href="#Antitone.map_limsInf_of_continuousAt"><span class="name">Antitone</span>.<span class="name">map_limsInf_of_continuousAt</span></a></div><div class="nav_link"><a class="break_within" href="#Antitone.map_liminf_of_continuousAt"><span class="name">Antitone</span>.<span class="name">map_liminf_of_continuousAt</span></a></div><div class="nav_link"><a class="break_within" href="#Monotone.map_limsSup_of_continuousAt"><span class="name">Monotone</span>.<span class="name">map_limsSup_of_continuousAt</span></a></div><div class="nav_link"><a class="break_within" href="#Monotone.map_limsup_of_continuousAt"><span class="name">Monotone</span>.<span class="name">map_limsup_of_continuousAt</span></a></div><div class="nav_link"><a class="break_within" href="#Monotone.map_limsInf_of_continuousAt"><span class="name">Monotone</span>.<span class="name">map_limsInf_of_continuousAt</span></a></div><div class="nav_link"><a class="break_within" href="#Monotone.map_liminf_of_continuousAt"><span class="name">Monotone</span>.<span class="name">map_liminf_of_continuousAt</span></a></div><div class="nav_link"><a class="break_within" href="#iInf_eq_of_forall_le_of_tendsto"><span class="name">iInf_eq_of_forall_le_of_tendsto</span></a></div><div class="nav_link"><a class="break_within" href="#iSup_eq_of_forall_le_of_tendsto"><span class="name">iSup_eq_of_forall_le_of_tendsto</span></a></div><div class="nav_link"><a class="break_within" href="#iUnion_Ici_eq_Ioi_of_lt_of_tendsto"><span class="name">iUnion_Ici_eq_Ioi_of_lt_of_tendsto</span></a></div><div class="nav_link"><a class="break_within" href="#iUnion_Iic_eq_Iio_of_lt_of_tendsto"><span class="name">iUnion_Iic_eq_Iio_of_lt_of_tendsto</span></a></div><div class="nav_link"><a class="break_within" href="#limsup_eq_tendsto_sum_indicator_nat_atTop"><span class="name">limsup_eq_tendsto_sum_indicator_nat_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#limsup_eq_tendsto_sum_indicator_atTop"><span class="name">limsup_eq_tendsto_sum_indicator_atTop</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Lemmas-about-liminf-and-limsup-in-an-order-topology">Lemmas about liminf and limsup in an order topology. <a class="hover-link" href="#Lemmas-about-liminf-and-limsup-in-an-order-topology">#</a></h1></div><div class="decl" id="isBounded_le_nhds"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L38-L40">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#isBounded_le_nhds"><span class="name">isBounded_le_nhds</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBounded">Filter.IsBounded</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span></div></div></div></div><div class="decl" id="Filter.Tendsto.isBoundedUnder_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L43-L45">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.isBoundedUnder_le"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isBoundedUnder_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span></div></div></div></div><div class="decl" id="Filter.Tendsto.bddAbove_range_of_cofinite"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L48-L50">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.bddAbove_range_of_cofinite"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">bddAbove_range_of_cofinite</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">Filter.cofinite</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Bounds/Basic.html#BddAbove">BddAbove</a> (<span class="fn"><a href="../../../.././Mathlib/Data/Set/Image.html#Set.range">Set.range</a> <span class="fn">u</span></span>)</span></div></div></div></div><div class="decl" id="Filter.Tendsto.bddAbove_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L53-L55">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.bddAbove_range"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">bddAbove_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Bounds/Basic.html#BddAbove">BddAbove</a> (<span class="fn"><a href="../../../.././Mathlib/Data/Set/Image.html#Set.range">Set.range</a> <span class="fn">u</span></span>)</span></div></div></div></div><div class="decl" id="isCobounded_ge_nhds"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L58-L59">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#isCobounded_ge_nhds"><span class="name">isCobounded_ge_nhds</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsCobounded">Filter.IsCobounded</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span></div></div></div></div><div class="decl" id="Filter.Tendsto.isCoboundedUnder_ge"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L62-L64">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.isCoboundedUnder_ge"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isCoboundedUnder_ge</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsCoboundedUnder">Filter.IsCoboundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span></div></div></div></div><div class="decl" id="isBounded_le_atBot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L67-L69">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#isBounded_le_atBot"><span class="name">isBounded_le_atBot</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hα : <span class="fn"><a href="../../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBounded">Filter.IsBounded</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">Filter.atBot</span></span></div></div></div></div><div class="decl" id="Filter.Tendsto.isBoundedUnder_le_atBot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L72-L74">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.isBoundedUnder_le_atBot"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isBoundedUnder_le_atBot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">f</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span></div></div></div></div><div class="decl" id="bddAbove_range_of_tendsto_atTop_atBot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L77-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#bddAbove_range_of_tendsto_atTop_atBot"><span class="name">bddAbove_range_of_tendsto_atTop_atBot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">Filter.atTop</span> <span class="fn">Filter.atBot</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Bounds/Basic.html#BddAbove">BddAbove</a> (<span class="fn"><a href="../../../.././Mathlib/Data/Set/Image.html#Set.range">Set.range</a> <span class="fn">u</span></span>)</span></div></div></div></div><div class="decl" id="isBounded_ge_nhds"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L88-L89">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#isBounded_ge_nhds"><span class="name">isBounded_ge_nhds</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeInf">SemilatticeInf</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBounded">Filter.IsBounded</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span></div></div></div></div><div class="decl" id="Filter.Tendsto.isBoundedUnder_ge"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L92-L94">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.isBoundedUnder_ge"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isBoundedUnder_ge</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeInf">SemilatticeInf</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span></div></div></div></div><div class="decl" id="Filter.Tendsto.bddBelow_range_of_cofinite"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L97-L99">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.bddBelow_range_of_cofinite"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">bddBelow_range_of_cofinite</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeInf">SemilatticeInf</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">Filter.cofinite</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Bounds/Basic.html#BddBelow">BddBelow</a> (<span class="fn"><a href="../../../.././Mathlib/Data/Set/Image.html#Set.range">Set.range</a> <span class="fn">u</span></span>)</span></div></div></div></div><div class="decl" id="Filter.Tendsto.bddBelow_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L102-L104">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.bddBelow_range"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">bddBelow_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeInf">SemilatticeInf</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Bounds/Basic.html#BddBelow">BddBelow</a> (<span class="fn"><a href="../../../.././Mathlib/Data/Set/Image.html#Set.range">Set.range</a> <span class="fn">u</span></span>)</span></div></div></div></div><div class="decl" id="isCobounded_le_nhds"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L107-L108">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#isCobounded_le_nhds"><span class="name">isCobounded_le_nhds</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeInf">SemilatticeInf</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsCobounded">Filter.IsCobounded</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span></div></div></div></div><div class="decl" id="Filter.Tendsto.isCoboundedUnder_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L111-L113">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.isCoboundedUnder_le"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isCoboundedUnder_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeInf">SemilatticeInf</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsCoboundedUnder">Filter.IsCoboundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span></div></div></div></div><div class="decl" id="isBounded_ge_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L116-L118">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#isBounded_ge_atTop"><span class="name">isBounded_ge_atTop</span></a></span><span class="decl_args">
+<span class="fn">(α : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBounded">Filter.IsBounded</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) <span class="fn">Filter.atTop</span></span></div></div></div></div><div class="decl" id="Filter.Tendsto.isBoundedUnder_ge_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L121-L123">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.isBoundedUnder_ge_atTop"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">isBoundedUnder_ge_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">f</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span></div></div></div></div><div class="decl" id="bddBelow_range_of_tendsto_atTop_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L126-L128">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#bddBelow_range_of_tendsto_atTop_atTop"><span class="name">bddBelow_range_of_tendsto_atTop_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Lattice.html#SemilatticeInf">SemilatticeInf</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">Filter.atTop</span> <span class="fn">Filter.atTop</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Bounds/Basic.html#BddBelow">BddBelow</a> (<span class="fn"><a href="../../../.././Mathlib/Data/Set/Image.html#Set.range">Set.range</a> <span class="fn">u</span></span>)</span></div></div></div></div><div class="decl" id="lt_mem_sets_of_limsSup_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L137-L140">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#lt_mem_sets_of_limsSup_lt"><span class="name">lt_mem_sets_of_limsSup_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBounded">Filter.IsBounded</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(l : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsSup">Filter.limsSup</a> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ᶠ (a : <span class="fn">α</span>) in <span class="fn">f</span>, <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="gt_mem_sets_of_limsInf_gt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L144-L146">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#gt_mem_sets_of_limsInf_gt"><span class="name">gt_mem_sets_of_limsInf_gt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBounded">Filter.IsBounded</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span></span> → <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsInf">Filter.limsInf</a> <span class="fn">f</span></span></span> → <span class="fn">∀ᶠ (a : <span class="fn">α</span>) in <span class="fn">f</span>, <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">a</span></span></span></span></span></div></div></div></div><div class="decl" id="le_nhds_of_limsSup_eq_limsInf"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L154-L157">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#le_nhds_of_limsSup_eq_limsInf"><span class="name">le_nhds_of_limsSup_eq_limsInf</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hl : <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBounded">Filter.IsBounded</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBounded">Filter.IsBounded</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsSup">Filter.limsSup</a> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsInf">Filter.limsInf</a> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span></span></div></div><p>If the liminf and the limsup of a filter coincide, then this filter converges to
+their common value, at least if the filter is eventually bounded above and below.</p></div></div><div class="decl" id="limsSup_nhds"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L161-L168">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#limsSup_nhds"><span class="name">limsSup_nhds</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsSup">Filter.limsSup</a> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="limsInf_nhds"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L172-L173">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#limsInf_nhds"><span class="name">limsInf_nhds</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsInf">Filter.limsInf</a> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="decl" id="limsInf_eq_of_le_nhds"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L178-L188">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#limsInf_eq_of_le_nhds"><span class="name">limsInf_eq_of_le_nhds</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsInf">Filter.limsInf</a> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div><p>If a filter is converging, its limsup coincides with its limit.</p></div></div><div class="decl" id="limsSup_eq_of_le_nhds"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L193-L194">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#limsSup_eq_of_le_nhds"><span class="name">limsSup_eq_of_le_nhds</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsSup">Filter.limsSup</a> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></span></div></div><p>If a filter is converging, its liminf coincides with its limit.</p></div></div><div class="decl" id="Filter.Tendsto.limsup_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L199-L201">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.limsup_eq"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">limsup_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">u</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div><p>If a function has a limit, then its limsup coincides with its limit.</p></div></div><div class="decl" id="Filter.Tendsto.liminf_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L205-L207">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Filter.Tendsto.liminf_eq"><span class="name">Filter</span>.<span class="name">Tendsto</span>.<span class="name">liminf_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> <span class="fn">u</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div><p>If a function has a limit, then its liminf coincides with its limit.</p></div></div><div class="decl" id="tendsto_of_liminf_eq_limsup"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L212-L215">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#tendsto_of_liminf_eq_limsup"><span class="name">tendsto_of_liminf_eq_limsup</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hinf : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> <span class="fn">u</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hsup : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">u</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span>) <a href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#_auto._@.Mathlib.Topology.Algebra.Order.LiminfLimsup._hyg.1835">_auto✝</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h' : <span class="fn"><a href="../../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span>) <a href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#_auto._@.Mathlib.Topology.Algebra.Order.LiminfLimsup._hyg.1883">_auto✝</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span></div></div><p>If the liminf and the limsup of a function coincide, then the limit of the function
+exists and has the same value.</p></div></div><div class="decl" id="tendsto_of_le_liminf_of_limsup_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L220-L227">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#tendsto_of_le_liminf_of_limsup_le"><span class="name">tendsto_of_le_liminf_of_limsup_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hinf : <span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> <span class="fn">u</span> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hsup : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">u</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span>) <a href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#_auto._@.Mathlib.Topology.Algebra.Order.LiminfLimsup._hyg.1973">_auto✝</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h' : <span class="fn"><a href="../../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span>) <a href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#_auto._@.Mathlib.Topology.Algebra.Order.LiminfLimsup._hyg.2015">_auto✝</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">a</span></span>)</span></div></div><p>If a number <code>a</code> is less than or equal to the <code>liminf</code> of a function <code>f</code> at some filter
+and is greater than or equal to the <code>limsup</code> of <code>f</code>, then <code>f</code> tends to <code>a</code> along this filter.</p></div></div><div class="decl" id="tendsto_of_no_upcrossings"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L234-L251">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#tendsto_of_no_upcrossings"><span class="name">tendsto_of_no_upcrossings</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Basic.html#DenselyOrdered">DenselyOrdered</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#Dense">Dense</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(H : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span> → <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a>(<span class="fn">(<span class="fn">∃ᶠ (n : <span class="fn">β</span>) in <span class="fn">f</span>, <span class="fn"><span class="fn"><span class="fn">u</span> <span class="fn">n</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">a</span></span></span>) <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn">∃ᶠ (n : <span class="fn">β</span>) in <span class="fn">f</span>, <span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span></span>)</span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span>) <a href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#_auto._@.Mathlib.Topology.Algebra.Order.LiminfLimsup._hyg.2245">_auto✝</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h' : <span class="fn"><a href="../../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span>) <a href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#_auto._@.Mathlib.Topology.Algebra.Order.LiminfLimsup._hyg.2287">_auto✝</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">c</span>, <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">u</span> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">c</span></span>)</span></span></div></div><p>Assume that, for any <code>a < b</code>, a sequence can not be infinitely many times below <code>a</code> and
+above <code>b</code>. If it is also ultimately bounded above and below, then it has to converge. This even
+works if <code>a</code> and <code>b</code> are restricted to a dense subset.</p></div></div><div class="decl" id="eventually_le_limsup"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L256-L272">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#eventually_le_limsup"><span class="name">eventually_le_limsup</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Bases.html#TopologicalSpace.FirstCountableTopology">TopologicalSpace.FirstCountableTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/CountableInter.html#CountableInterFilter">CountableInterFilter</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span>) <a href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#_auto._@.Mathlib.Topology.Algebra.Order.LiminfLimsup._hyg.2655">_auto✝</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ᶠ (b : <span class="fn">β</span>) in <span class="fn">f</span>, <span class="fn"><span class="fn"><span class="fn">u</span> <span class="fn">b</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">u</span> <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="eventually_liminf_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L275-L277">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#eventually_liminf_le"><span class="name">eventually_liminf_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/ConditionallyCompleteLattice/Basic.html#ConditionallyCompleteLinearOrder">ConditionallyCompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Bases.html#TopologicalSpace.FirstCountableTopology">TopologicalSpace.FirstCountableTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/CountableInter.html#CountableInterFilter">CountableInterFilter</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.IsBoundedUnder">Filter.IsBoundedUnder</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">x_1</span></span></span>) <span class="fn">f</span> <span class="fn">u</span></span>) <a href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#_auto._@.Mathlib.Topology.Algebra.Order.LiminfLimsup._hyg.2946">_auto✝</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ᶠ (b : <span class="fn">β</span>) in <span class="fn">f</span>, <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> <span class="fn">u</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="limsup_eq_bot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L288-L294">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#limsup_eq_bot"><span class="name">limsup_eq_bot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Bases.html#TopologicalSpace.FirstCountableTopology">TopologicalSpace.FirstCountableTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/CountableInter.html#CountableInterFilter">CountableInterFilter</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">u</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <a href="../../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">u</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn">f</span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <a href="../../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span></span></div></div></div></div><div class="decl" id="liminf_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L298-L299">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#liminf_eq_top"><span class="name">liminf_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Bases.html#TopologicalSpace.FirstCountableTopology">TopologicalSpace.FirstCountableTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/CountableInter.html#CountableInterFilter">CountableInterFilter</a> <span class="fn">f</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">β</span> → <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> <span class="fn">u</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <a href="../../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">u</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn">f</span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <a href="../../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span></span></div></div></div></div><div class="decl" id="Antitone.map_limsSup_of_continuousAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L313-L353">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Antitone.map_limsSup_of_continuousAt"><span class="name">Antitone</span>.<span class="name">map_limsSup_of_continuousAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f_decr : <span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Antitone">Antitone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f_cont : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#ContinuousAt">ContinuousAt</a> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsSup">Filter.limsSup</a> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsSup">Filter.limsSup</a> <span class="fn">F</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> <span class="fn">f</span> <span class="fn">F</span></span></span></div></div><p>An antitone function between complete linear ordered spaces sends a <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsSup">Filter.limsSup</a></code>
+to the <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a></code> of the image if it is continuous at the <code>limsSup</code>.</p></div></div><div class="decl" id="Antitone.map_limsup_of_continuousAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L359-L361">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Antitone.map_limsup_of_continuousAt"><span class="name">Antitone</span>.<span class="name">map_limsup_of_continuousAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f_decr : <span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Antitone">Antitone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn">ι</span> → <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f_cont : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#ContinuousAt">ContinuousAt</a> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">a</span> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">a</span> <span class="fn">F</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> (<span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">a</span></span>) <span class="fn">F</span></span></span></div></div><p>A continuous antitone function between complete linear ordered spaces sends a <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a></code>
+to the <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a></code> of the images.</p></div></div><div class="decl" id="Antitone.map_limsInf_of_continuousAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L366-L369">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Antitone.map_limsInf_of_continuousAt"><span class="name">Antitone</span>.<span class="name">map_limsInf_of_continuousAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f_decr : <span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Antitone">Antitone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f_cont : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#ContinuousAt">ContinuousAt</a> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsInf">Filter.limsInf</a> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsInf">Filter.limsInf</a> <span class="fn">F</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">f</span> <span class="fn">F</span></span></span></div></div><p>An antitone function between complete linear ordered spaces sends a <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsInf">Filter.limsInf</a></code>
+to the <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a></code> of the image if it is continuous at the <code>limsInf</code>.</p></div></div><div class="decl" id="Antitone.map_liminf_of_continuousAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L375-L377">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Antitone.map_liminf_of_continuousAt"><span class="name">Antitone</span>.<span class="name">map_liminf_of_continuousAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f_decr : <span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Antitone">Antitone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn">ι</span> → <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f_cont : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#ContinuousAt">ContinuousAt</a> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> <span class="fn">a</span> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> <span class="fn">a</span> <span class="fn">F</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> (<span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">a</span></span>) <span class="fn">F</span></span></span></div></div><p>A continuous antitone function between complete linear ordered spaces sends a <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a></code>
+to the <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a></code> of the images.</p></div></div><div class="decl" id="Monotone.map_limsSup_of_continuousAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L382-L384">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Monotone.map_limsSup_of_continuousAt"><span class="name">Monotone</span>.<span class="name">map_limsSup_of_continuousAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f_incr : <span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f_cont : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#ContinuousAt">ContinuousAt</a> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsSup">Filter.limsSup</a> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsSup">Filter.limsSup</a> <span class="fn">F</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">f</span> <span class="fn">F</span></span></span></div></div><p>A monotone function between complete linear ordered spaces sends a <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsSup">Filter.limsSup</a></code>
+to the <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a></code> of the image if it is continuous at the <code>limsSup</code>.</p></div></div><div class="decl" id="Monotone.map_limsup_of_continuousAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L390-L392">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Monotone.map_limsup_of_continuousAt"><span class="name">Monotone</span>.<span class="name">map_limsup_of_continuousAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f_incr : <span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn">ι</span> → <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f_cont : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#ContinuousAt">ContinuousAt</a> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">a</span> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">a</span> <span class="fn">F</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> (<span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">a</span></span>) <span class="fn">F</span></span></span></div></div><p>A continuous monotone function between complete linear ordered spaces sends a <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a></code>
+to the <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a></code> of the images.</p></div></div><div class="decl" id="Monotone.map_limsInf_of_continuousAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L397-L399">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Monotone.map_limsInf_of_continuousAt"><span class="name">Monotone</span>.<span class="name">map_limsInf_of_continuousAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f_incr : <span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f_cont : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#ContinuousAt">ContinuousAt</a> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsInf">Filter.limsInf</a> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsInf">Filter.limsInf</a> <span class="fn">F</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> <span class="fn">f</span> <span class="fn">F</span></span></span></div></div><p>A monotone function between complete linear ordered spaces sends a <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsInf">Filter.limsInf</a></code>
+to the <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a></code> of the image if it is continuous at the <code>limsInf</code>.</p></div></div><div class="decl" id="Monotone.map_liminf_of_continuousAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L405-L407">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#Monotone.map_liminf_of_continuousAt"><span class="name">Monotone</span>.<span class="name">map_liminf_of_continuousAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">R</span> → <span class="fn">S</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f_incr : <span class="fn"><a href="../../../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn">ι</span> → <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f_cont : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#ContinuousAt">ContinuousAt</a> <span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> <span class="fn">a</span> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> <span class="fn">a</span> <span class="fn">F</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a> (<span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">a</span></span>) <span class="fn">F</span></span></span></div></div><p>A continuous monotone function between complete linear ordered spaces sends a <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a></code>
+to the <code><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.liminf">Filter.liminf</a></code> of the images.</p></div></div><div class="decl" id="iInf_eq_of_forall_le_of_tendsto"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L420-L423">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#iInf_eq_of_forall_le_of_tendsto"><span class="name">iInf_eq_of_forall_le_of_tendsto</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{as : <span class="fn"><span class="fn">ι</span> → <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x_le : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">as</span> <span class="fn">i</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(as_lim : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">as</span> <span class="fn">F</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">x</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⨅ (i : <span class="fn">ι</span>), <span class="fn"><span class="fn">as</span> <span class="fn">i</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="iSup_eq_of_forall_le_of_tendsto"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L426-L428">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#iSup_eq_of_forall_le_of_tendsto"><span class="name">iSup_eq_of_forall_le_of_tendsto</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{as : <span class="fn"><span class="fn">ι</span> → <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(le_x : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">as</span> <span class="fn">i</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(as_lim : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">as</span> <span class="fn">F</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">x</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⨆ (i : <span class="fn">ι</span>), <span class="fn"><span class="fn">as</span> <span class="fn">i</span></span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="iUnion_Ici_eq_Ioi_of_lt_of_tendsto"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L431-L442">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#iUnion_Ici_eq_Ioi_of_lt_of_tendsto"><span class="name">iUnion_Ici_eq_Ioi_of_lt_of_tendsto</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{as : <span class="fn"><span class="fn">ι</span> → <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x_lt : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">as</span> <span class="fn">i</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(as_lim : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">as</span> <span class="fn">F</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">x</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⋃ (i : <span class="fn">ι</span>), <span class="fn"><a href="../../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> (<span class="fn"><span class="fn">as</span> <span class="fn">i</span></span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="iUnion_Iic_eq_Iio_of_lt_of_tendsto"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L445-L448">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#iUnion_Iic_eq_Iio_of_lt_of_tendsto"><span class="name">iUnion_Iic_eq_Iio_of_lt_of_tendsto</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/CompleteLattice.html#CompleteLinearOrder">CompleteLinearOrder</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Order/Basic.html#OrderTopology">OrderTopology</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{as : <span class="fn"><span class="fn">ι</span> → <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(lt_x : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">as</span> <span class="fn">i</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">x</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(as_lim : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">as</span> <span class="fn">F</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">x</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⋃ (i : <span class="fn">ι</span>), <span class="fn"><a href="../../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Iic">Set.Iic</a> (<span class="fn"><span class="fn">as</span> <span class="fn">i</span></span>)</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Iio">Set.Iio</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="limsup_eq_tendsto_sum_indicator_nat_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L457-L512">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#limsup_eq_tendsto_sum_indicator_nat_atTop"><span class="name">limsup_eq_tendsto_sum_indicator_nat_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">s</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{<span class="fn">ω</span> |
+    <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><a href="../../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset.range">Finset.range</a> <span class="fn">n</span></span>) <span class="fn">fun <span class="fn">k</span> =&gt <span class="fn"><a href="../../../.././Mathlib/Algebra/IndicatorFunction.html#Set.indicator">Set.indicator</a> (<span class="fn"><span class="fn">s</span> (<span class="fn"><span class="fn">k</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span>) <span class="fn">1</span> <span class="fn">ω</span></span></span></span></span>) <span class="fn">Filter.atTop</span>
+      <span class="fn">Filter.atTop</span></span>}</span></span></div></div></div></div><div class="decl" id="limsup_eq_tendsto_sum_indicator_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Algebra/Order/LiminfLimsup.lean#L515-L525">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Topology/Algebra/Order/LiminfLimsup.html#limsup_eq_tendsto_sum_indicator_atTop"><span class="name">limsup_eq_tendsto_sum_indicator_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="decl_args">
+<span class="fn">(R : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Ring/Defs.html#StrictOrderedSemiring">StrictOrderedSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/Archimedean.html#Archimedean">Archimedean</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Order/LiminfLimsup.html#Filter.limsup">Filter.limsup</a> <span class="fn">s</span> <span class="fn">Filter.atTop</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{<span class="fn">ω</span> |
+    <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><a href="../../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset.range">Finset.range</a> <span class="fn">n</span></span>) <span class="fn">fun <span class="fn">k</span> =&gt <span class="fn"><a href="../../../.././Mathlib/Algebra/IndicatorFunction.html#Set.indicator">Set.indicator</a> (<span class="fn"><span class="fn">s</span> (<span class="fn"><span class="fn">k</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span>) <span class="fn">1</span> <span class="fn">ω</span></span></span></span></span>) <span class="fn">Filter.atTop</span>
+      <span class="fn">Filter.atTop</span></span>}</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

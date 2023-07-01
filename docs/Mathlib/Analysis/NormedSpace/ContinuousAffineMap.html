@@ -1,0 +1,749 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.NormedSpace.ContinuousAffineMap</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.NormedSpace.ContinuousAffineMap";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">NormedSpace</span>.<span class="name">ContinuousAffineMap</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">NormedSpace</span>.<span class="name">ContinuousAffineMap</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Analysis/NormedSpace/AffineIsometry.html">Mathlib.Analysis.NormedSpace.AffineIsometry</a></li><li><a href="../../.././Mathlib/Analysis/NormedSpace/OperatorNorm.html">Mathlib.Analysis.NormedSpace.OperatorNorm</a></li><li><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html">Mathlib.Topology.Algebra.ContinuousAffineMap</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.NormedSpace.ContinuousAffineMap" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">contLinear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.coe_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">coe_contLinear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.coe_contLinear_eq_linear"><span class="name">ContinuousAffineMap</span>.<span class="name">coe_contLinear_eq_linear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.coe_mk_const_linear_eq_linear"><span class="name">ContinuousAffineMap</span>.<span class="name">coe_mk_const_linear_eq_linear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.coe_linear_eq_coe_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">coe_linear_eq_coe_contLinear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.comp_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">comp_contLinear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.map_vadd"><span class="name">ContinuousAffineMap</span>.<span class="name">map_vadd</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.contLinear_map_vsub"><span class="name">ContinuousAffineMap</span>.<span class="name">contLinear_map_vsub</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.const_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">const_contLinear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.contLinear_eq_zero_iff_exists_const"><span class="name">ContinuousAffineMap</span>.<span class="name">contLinear_eq_zero_iff_exists_const</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.to_affine_map_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">to_affine_map_contLinear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.zero_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">zero_contLinear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.add_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">add_contLinear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.sub_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">sub_contLinear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.neg_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">neg_contLinear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.smul_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">smul_contLinear</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.decomp"><span class="name">ContinuousAffineMap</span>.<span class="name">decomp</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.hasNorm"><span class="name">ContinuousAffineMap</span>.<span class="name">hasNorm</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.norm_def"><span class="name">ContinuousAffineMap</span>.<span class="name">norm_def</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.norm_contLinear_le"><span class="name">ContinuousAffineMap</span>.<span class="name">norm_contLinear_le</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.norm_image_zero_le"><span class="name">ContinuousAffineMap</span>.<span class="name">norm_image_zero_le</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.norm_eq"><span class="name">ContinuousAffineMap</span>.<span class="name">norm_eq</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.instNormedAddCommGroupContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsor"><span class="name">ContinuousAffineMap</span>.<span class="name">instNormedAddCommGroupContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsor</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.instNormedSpaceContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToSeminormedAddCommGroupInstNormedAddCommGroupContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsor"><span class="name">ContinuousAffineMap</span>.<span class="name">instNormedSpaceContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToSeminormedAddCommGroupInstNormedAddCommGroupContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsor</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.norm_comp_le"><span class="name">ContinuousAffineMap</span>.<span class="name">norm_comp_le</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.toConstProdContinuousLinearMap"><span class="name">ContinuousAffineMap</span>.<span class="name">toConstProdContinuousLinearMap</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.toConstProdContinuousLinearMap_fst"><span class="name">ContinuousAffineMap</span>.<span class="name">toConstProdContinuousLinearMap_fst</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousAffineMap.toConstProdContinuousLinearMap_snd"><span class="name">ContinuousAffineMap</span>.<span class="name">toConstProdContinuousLinearMap_snd</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Continuous-affine-maps-between-normed-spaces">Continuous affine maps between normed spaces. <a class="hover-link" href="#Continuous-affine-maps-between-normed-spaces">#</a></h1><p>This file develops the theory of continuous affine maps between affine spaces modelled on normed
+spaces.</p><p>In the particular case that the affine spaces are just normed vector spaces <code>V</code>, <code>W</code>, we define a
+norm on the space of continuous affine maps by defining the norm of <code>f : V →A[𝕜] W</code> to be
+<code>‖f‖ = max ‖f 0‖ ‖f.cont_linear‖</code>. This is chosen so that we have a linear isometry:
+<code>(V →A[𝕜] W) ≃ₗᵢ[𝕜] W × (V →L[𝕜] W)</code>.</p><p>The abstract picture is that for an affine space <code>P</code> modelled on a vector space <code>V</code>, together with
+a vector space <code>W</code>, there is an exact sequence of <code>𝕜</code>-modules: <code>0 → C → A → L → 0</code> where <code>C</code>, <code>A</code>
+are the spaces of constant and affine maps <code>P → W</code> and <code>L</code> is the space of linear maps <code>V → W</code>.</p><p>Any choice of a base point in <code>P</code> corresponds to a splitting of this sequence so in particular if we
+take <code>P = V</code>, using <code>0 : V</code> as the base point provides a splitting, and we prove this is an
+isometric decomposition.</p><p>On the other hand, choosing a base point breaks the affine invariance so the norm fails to be
+submultiplicative: for a composition of maps, we have only <code>‖f.comp g‖ ≤ ‖f‖ * ‖g‖ + ‖f 0‖</code>.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions: <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a></code></li>
+<li><code><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.hasNorm">ContinuousAffineMap.hasNorm</a></code></li>
+<li><code><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.norm_comp_le">ContinuousAffineMap.norm_comp_le</a></code></li>
+<li><code><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.toConstProdContinuousLinearMap">ContinuousAffineMap.toConstProdContinuousLinearMap</a></code></li>
+</ul></div><div class="decl" id="ContinuousAffineMap.contLinear"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L62-L65">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">contLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">W</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">W</span></span></div></div><p>The linear map underlying a continuous affine map is continuous.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-ContinuousAffineMap.contLinear" class="instances-for-list"></ul></details></div></div><div class="decl" id="ContinuousAffineMap.coe_contLinear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L69-L70">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.coe_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">coe_contLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">W</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn"><span class="fn">f</span>.linear</span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.coe_contLinear_eq_linear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L74-L75">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.coe_contLinear_eq_linear"><span class="name">ContinuousAffineMap</span>.<span class="name">coe_contLinear_eq_linear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">W</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">f</span>.linear</span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.coe_mk_const_linear_eq_linear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L79-L81">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.coe_mk_const_linear_eq_linear"><span class="name">ContinuousAffineMap</span>.<span class="name">coe_mk_const_linear_eq_linear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">W</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap">→ᵃ[</a><span class="fn">R</span><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn"><span class="fn">f</span>.toFun</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">{ <span class="fn">toAffineMap</span> := <span class="fn">f</span>, <span class="fn">cont</span> := <span class="fn">h</span> }</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn"><span class="fn">f</span>.linear</span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.coe_linear_eq_coe_contLinear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L84-L86">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.coe_linear_eq_coe_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">coe_linear_eq_coe_contLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">W</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn"><span class="fn">f</span>.linear</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span>)</span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.comp_contLinear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L90-L92">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.comp_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">comp_contLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W₂ : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q₂ : <a href="../../.././foundational_types.html">Type</a> u_7}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">W</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">Q₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">W₂</span> <span class="fn">Q₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Q</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">Q₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap.comp">ContinuousAffineMap.comp</a> <span class="fn">g</span> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap.comp">ContinuousLinearMap.comp</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">g</span></span>) (<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span>)</span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.map_vadd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L96-L97">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.map_vadd"><span class="name">ContinuousAffineMap</span>.<span class="name">map_vadd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">W</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn">P</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">f</span> (<span class="fn"><span class="fn">v</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HVAdd.hVAdd">+ᵥ</a> <span class="fn">p</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span>) <span class="fn">v</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HVAdd.hVAdd">+ᵥ</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">p</span></span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.contLinear_map_vsub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L101-L102">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear_map_vsub"><span class="name">ContinuousAffineMap</span>.<span class="name">contLinear_map_vsub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">W</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₁ : <span class="fn">P</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <span class="fn">P</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span>) (<span class="fn"><span class="fn">p₁</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#VSub.vsub">-ᵥ</a> <span class="fn">p₂</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">p₁</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#VSub.vsub">-ᵥ</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">p₂</span></span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.const_contLinear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L106-L107">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.const_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">const_contLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">W</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(q : <span class="fn">Q</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap.const">ContinuousAffineMap.const</a> <span class="fn">R</span> <span class="fn">P</span> <span class="fn">q</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.contLinear_eq_zero_iff_exists_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L110-L122">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear_eq_zero_iff_exists_const"><span class="name">ContinuousAffineMap</span>.<span class="name">contLinear_eq_zero_iff_exists_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">W</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">q</span>, <span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap.const">ContinuousAffineMap.const</a> <span class="fn">R</span> <span class="fn">P</span> <span class="fn">q</span></span></span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.to_affine_map_contLinear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L126-L128">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.to_affine_map_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">to_affine_map_contLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousLinearMap.toContinuousAffineMap">ContinuousLinearMap.toContinuousAffineMap</a> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.zero_contLinear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L132-L133">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.zero_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">zero_contLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.add_contLinear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L137-L138">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.add_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">add_contLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> (<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">g</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">g</span></span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.sub_contLinear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L142-L143">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.sub_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">sub_contLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> (<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">g</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">g</span></span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.neg_contLinear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L147-L148">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.neg_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">neg_contLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.smul_contLinear"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L152-L153">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.smul_contLinear"><span class="name">ContinuousAffineMap</span>.<span class="name">smul_contLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(t : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">P</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> (<span class="fn"><span class="fn">t</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">t</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.decomp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L156-L159">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.decomp"><span class="name">ContinuousAffineMap</span>.<span class="name">decomp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">R</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">R</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../../.././Init/Prelude.html#Function.const">Function.const</a> <span class="fn">V</span> (<span class="fn">↑<span class="fn">f</span> <span class="fn">0</span></span>)</span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.hasNorm"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L168-L169">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.hasNorm"><span class="name">ContinuousAffineMap</span>.<span class="name">hasNorm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm">Norm</a> (<span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></div></div><p>Note that unlike the operator norm for linear maps, this norm is <em>not</em> submultiplicative:
+we do <em>not</em> necessarily have <code>‖f.comp g‖ ≤ ‖f‖ * ‖g‖</code>. See <code><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.norm_comp_le">norm_comp_le</a></code> for what we can say.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">ContinuousAffineMap.hasNorm</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">norm</span> := <span class="fn">fun <span class="fn">f</span> =&gt <span class="fn"><a href="../../.././Init/Prelude.html#Max.max">max</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">↑<span class="fn">f</span> <span class="fn">0</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span> }</span></span></li></ul></details></div></div><div class="decl" id="ContinuousAffineMap.norm_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L172-L173">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.norm_def"><span class="name">ContinuousAffineMap</span>.<span class="name">norm_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Max.max">max</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">↑<span class="fn">f</span> <span class="fn">0</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.norm_contLinear_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L176-L177">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.norm_contLinear_le"><span class="name">ContinuousAffineMap</span>.<span class="name">norm_contLinear_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.norm_image_zero_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L180-L181">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.norm_image_zero_le"><span class="name">ContinuousAffineMap</span>.<span class="name">norm_image_zero_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">↑<span class="fn">f</span> <span class="fn">0</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.norm_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L185-L189">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.norm_eq"><span class="name">ContinuousAffineMap</span>.<span class="name">norm_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.instNormedAddCommGroupContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsor"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L193-L224">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.instNormedAddCommGroupContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsor"><span class="name">ContinuousAffineMap</span>.<span class="name">instNormedAddCommGroupContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsor</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> (<span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="ContinuousAffineMap.instNormedSpaceContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToSeminormedAddCommGroupInstNormedAddCommGroupContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsor"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L226-L232">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.instNormedSpaceContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToSeminormedAddCommGroupInstNormedAddCommGroupContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsor"><span class="name">ContinuousAffineMap</span>.<span class="name">instNormedSpaceContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToSeminormedAddCommGroupInstNormedAddCommGroupContinuousAffineMapToRingToNormedRingToNormedCommRingToNormedFieldToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsorToAddCommGroupToModuleToSeminormedAddCommGroupToTopologicalSpaceToUniformSpaceToPseudoMetricSpaceToAddTorsorToNormedAddTorsor</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> (<span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="ContinuousAffineMap.norm_comp_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L234-L250">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.norm_comp_le"><span class="name">ContinuousAffineMap</span>.<span class="name">norm_comp_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">W₂</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap.comp">ContinuousAffineMap.comp</a> <span class="fn">f</span> <span class="fn">g</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">f</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">g</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">↑<span class="fn">f</span> <span class="fn">0</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.toConstProdContinuousLinearMap"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L259-L271">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.toConstProdContinuousLinearMap"><span class="name">ContinuousAffineMap</span>.<span class="name">toConstProdContinuousLinearMap</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(V : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(W : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>) <a href="../../.././Mathlib/Analysis/NormedSpace/LinearIsometry.html#LinearIsometryEquiv">≃ₗᵢ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Analysis/NormedSpace/LinearIsometry.html#LinearIsometryEquiv">]</a> <span class="fn"><span class="fn">W</span> <a href="../../.././Init/Prelude.html#Prod">×</a> (<span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">W</span></span>)</span></span></div></div><p>The space of affine maps between two normed spaces is linearly isometric to the product of the
+codomain with the space of linear maps, by taking the value of the affine map at <code>(0 : V)</code> and the
+linear part.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-ContinuousAffineMap.toConstProdContinuousLinearMap" class="instances-for-list"></ul></details></div></div><div class="decl" id="ContinuousAffineMap.toConstProdContinuousLinearMap_fst"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L275-L277">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.toConstProdContinuousLinearMap_fst"><span class="name">ContinuousAffineMap</span>.<span class="name">toConstProdContinuousLinearMap_fst</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(V : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(W : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.toConstProdContinuousLinearMap">ContinuousAffineMap.toConstProdContinuousLinearMap</a> <span class="fn">𝕜</span> <span class="fn">V</span> <span class="fn">W</span></span>) <span class="fn">f</span></span>).fst</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="ContinuousAffineMap.toConstProdContinuousLinearMap_snd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/ContinuousAffineMap.lean#L281-L283">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.toConstProdContinuousLinearMap_snd"><span class="name">ContinuousAffineMap</span>.<span class="name">toConstProdContinuousLinearMap_snd</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(V : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(W : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">→A[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/ContinuousAffineMap.html#ContinuousAffineMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.toConstProdContinuousLinearMap">ContinuousAffineMap.toConstProdContinuousLinearMap</a> <span class="fn">𝕜</span> <span class="fn">V</span> <span class="fn">W</span></span>) <span class="fn">f</span></span>).snd</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/ContinuousAffineMap.html#ContinuousAffineMap.contLinear">ContinuousAffineMap.contLinear</a> <span class="fn">f</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

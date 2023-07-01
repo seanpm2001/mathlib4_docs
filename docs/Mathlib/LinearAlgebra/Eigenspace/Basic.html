@@ -1,0 +1,775 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.LinearAlgebra.Eigenspace.Basic</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.LinearAlgebra.Eigenspace.Basic";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">LinearAlgebra</span>.<span class="name">Eigenspace</span>.<span class="name">Basic</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">LinearAlgebra</span>.<span class="name">Eigenspace</span>.<span class="name">Basic</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/LinearAlgebra/FiniteDimensional.html">Mathlib.LinearAlgebra.FiniteDimensional</a></li><li><a href="../../.././Mathlib/LinearAlgebra/GeneralLinearGroup.html">Mathlib.LinearAlgebra.GeneralLinearGroup</a></li><li><a href="../../.././Mathlib/Algebra/Algebra/Spectrum.html">Mathlib.Algebra.Algebra.Spectrum</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.LinearAlgebra.Eigenspace.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Module.End.eigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.eigenspace_zero"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.HasEigenvector"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasEigenvector</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.HasEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasEigenvalue</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.Eigenvalues"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">Eigenvalues</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.Eigenvalues.val"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">Eigenvalues</span>.<span class="name">val</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.Eigenvalues.instCoeOut"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">Eigenvalues</span>.<span class="name">instCoeOut</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.Eigenvalues.instDecidableEq"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">Eigenvalues</span>.<span class="name">instDecidableEq</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.hasEigenvalue_of_hasEigenvector"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasEigenvalue_of_hasEigenvector</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.mem_eigenspace_iff"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">mem_eigenspace_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.HasEigenvector.apply_eq_smul"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasEigenvector</span>.<span class="name">apply_eq_smul</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.HasEigenvalue.exists_hasEigenvector"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasEigenvalue</span>.<span class="name">exists_hasEigenvector</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.mem_spectrum_of_hasEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">mem_spectrum_of_hasEigenvalue</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.hasEigenvalue_iff_mem_spectrum"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasEigenvalue_iff_mem_spectrum</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.eigenspace_div"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace_div</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.eigenspaces_independent"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspaces_independent</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.eigenvectors_linearIndependent"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenvectors_linearIndependent</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.generalizedEigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.mem_generalizedEigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">mem_generalizedEigenspace</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.generalizedEigenspace_zero"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.HasGeneralizedEigenvector"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasGeneralizedEigenvector</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.HasGeneralizedEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasGeneralizedEigenvalue</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.generalizedEigenrange"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenrange</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.exp_ne_zero_of_hasGeneralizedEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">exp_ne_zero_of_hasGeneralizedEigenvalue</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.maximalGeneralizedEigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">maximalGeneralizedEigenspace</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.generalizedEigenspace_le_maximal"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace_le_maximal</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.mem_maximalGeneralizedEigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">mem_maximalGeneralizedEigenspace</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.maximalGeneralizedEigenspaceIndex"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">maximalGeneralizedEigenspaceIndex</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.maximalGeneralizedEigenspace_eq"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">maximalGeneralizedEigenspace_eq</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.hasGeneralizedEigenvalue_of_hasGeneralizedEigenvalue_of_le"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasGeneralizedEigenvalue_of_hasGeneralizedEigenvalue_of_le</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.eigenspace_le_generalizedEigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace_le_generalizedEigenspace</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.hasGeneralizedEigenvalue_of_hasEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasGeneralizedEigenvalue_of_hasEigenvalue</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.hasEigenvalue_of_hasGeneralizedEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasEigenvalue_of_hasGeneralizedEigenvalue</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.hasGeneralizedEigenvalue_iff_hasEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasGeneralizedEigenvalue_iff_hasEigenvalue</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.generalizedEigenspace_le_generalizedEigenspace_finrank"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace_le_generalizedEigenspace_finrank</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.generalizedEigenspace_eq_generalizedEigenspace_finrank_of_le"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace_eq_generalizedEigenspace_finrank_of_le</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.generalizedEigenspace_restrict"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace_restrict</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.eigenspace_restrict_le_eigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace_restrict_le_eigenspace</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.generalized_eigenvec_disjoint_range_ker"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalized_eigenvec_disjoint_range_ker</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.eigenspace_restrict_eq_bot"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace_restrict_eq_bot</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.pos_finrank_generalizedEigenspace_of_hasEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">pos_finrank_generalizedEigenspace_of_hasEigenvalue</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.map_generalizedEigenrange_le"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">map_generalizedEigenrange_le</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Eigenvectors-and-eigenvalues">Eigenvectors and eigenvalues <a class="hover-link" href="#Eigenvectors-and-eigenvalues">#</a></h1><p>This file defines eigenspaces, eigenvalues, and eigenvalues, as well as their generalized
+counterparts. We follow Axler's approach [axler2015] because it allows us to derive many properties
+without choosing a basis and without using matrices.</p><p>An eigenspace of a linear map <code>f</code> for a scalar <code>μ</code> is the kernel of the map <code>(f - μ • id)</code>. The
+nonzero elements of an eigenspace are eigenvectors <code>x</code>. They have the property <code>f x = μ • x</code>. If
+there are eigenvectors for a scalar <code>μ</code>, the scalar <code>μ</code> is called an eigenvalue.</p><p>There is no consensus in the literature whether <code>0</code> is an eigenvector. Our definition of
+<code><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvector">HasEigenvector</a></code> permits only nonzero vectors. For an eigenvector <code>x</code> that may also be <code>0</code>, we
+write <code>x ∈ f.<a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">eigenspace</a> μ</code>.</p><p>A generalized eigenspace of a linear map <code>f</code> for a natural number <code>k</code> and a scalar <code>μ</code> is the kernel
+of the map <code>(f - μ • id) ^ k</code>. The nonzero elements of a generalized eigenspace are generalized
+eigenvectors <code>x</code>. If there are generalized eigenvectors for a natural number <code>k</code> and a scalar <code>μ</code>,
+the scalar <code>μ</code> is called a generalized eigenvalue.</p><p>The fact that the eigenvalues are the roots of the minimal polynomial is proved in
+<code>LinearAlgebra.Eigenspace.Minpoly</code>.</p><p>The existence of eigenvalues over an algebraically closed field
+(and the fact that the generalized eigenspaces then span) is deferred to
+<code>LinearAlgebra.Eigenspace.IsAlgClosed</code>.</p><h2 class="markdown-heading" id="References">References <a class="hover-link" href="#References">#</a></h2><ul>
+<li>[Sheldon Axler, <em>Linear Algebra Done Right</em>][axler2015]</li>
+<li>https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>eigenspace, eigenvector, eigenvalue, eigen</p></div><div class="decl" id="Module.End.eigenspace"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L66-L67">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R</span> <span class="fn">M</span></span></div></div><p>The submodule <code><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">eigenspace</a> f μ</code> for a linear map <code>f</code> and a scalar <code>μ</code> consists of all vectors <code>x</code>
+such that <code>f x = μ • x</code>. (Def 5.36 of [axler2015])</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> (<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span>) <span class="fn">μ</span></span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.End.eigenspace" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.eigenspace_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L71-L71">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace_zero"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> <span class="fn">f</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="Module.End.HasEigenvector"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L75-L76">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvector"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasEigenvector</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A nonzero element of an eigenspace is an eigenvector. (Def 5.7 of [axler2015])</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvector">Module.End.HasEigenvector</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span>)</span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.End.HasEigenvector" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.HasEigenvalue"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L81-L82">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasEigenvalue</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A scalar <code>μ</code> is an eigenvalue for a linear map <code>f</code> if there are nonzero vectors <code>x</code>
+such that <code>f x = μ • x</code>. (Def 5.5 of [axler2015])</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue">Module.End.HasEigenvalue</a> <span class="fn">f</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> <span class="fn">f</span> <span class="fn">a</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span>)</span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.End.HasEigenvalue" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.Eigenvalues"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L86-L87">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.Eigenvalues"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">Eigenvalues</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a> v</div></div><p>The eigenvalues of the endomorphism <code>f</code>, as a subtype of <code>R</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.Eigenvalues">Module.End.Eigenvalues</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">μ</span> // <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue">Module.End.HasEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span></span> }</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.End.Eigenvalues" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.Eigenvalues.val"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L91-L91">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.Eigenvalues.val"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">Eigenvalues</span>.<span class="name">val</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.Eigenvalues">Module.End.Eigenvalues</a> <span class="fn">f</span></span> → <span class="fn">R</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">Subtype.val</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.End.Eigenvalues.val" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.Eigenvalues.instCoeOut"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L93-L94">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.Eigenvalues.instCoeOut"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">Eigenvalues</span>.<span class="name">instCoeOut</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Coe.html#CoeOut">CoeOut</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.Eigenvalues">Module.End.Eigenvalues</a> <span class="fn">f</span></span>) <span class="fn">R</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Module.End.Eigenvalues.instCoeOut</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">coe</span> := <span class="fn">↑<span class="fn">f</span></span> }</span></span></li></ul></details></div></div><div class="decl" id="Module.End.Eigenvalues.instDecidableEq"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L96-L98">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.Eigenvalues.instDecidableEq"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">Eigenvalues</span>.<span class="name">instDecidableEq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.Eigenvalues">Module.End.Eigenvalues</a> <span class="fn">f</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.Eigenvalues.instDecidableEq">Module.End.Eigenvalues.instDecidableEq</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#inferInstanceAs">inferInstanceAs</a> (<span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue">Module.End.HasEigenvalue</a> <span class="fn">f</span> <span class="fn">x</span></span> }</span></span>)</span></span></li></ul></details></div></div><div class="decl" id="Module.End.hasEigenvalue_of_hasEigenvector"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L100-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.hasEigenvalue_of_hasEigenvector"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasEigenvalue_of_hasEigenvector</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvector">Module.End.HasEigenvector</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue">Module.End.HasEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span></span></div></div></div></div><div class="decl" id="Module.End.mem_eigenspace_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L106-L107">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.mem_eigenspace_iff"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">mem_eigenspace_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">μ</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="Module.End.HasEigenvector.apply_eq_smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L110-L112">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvector.apply_eq_smul"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasEigenvector</span>.<span class="name">apply_eq_smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvector">Module.End.HasEigenvector</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">μ</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="Module.End.HasEigenvalue.exists_hasEigenvector"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L115-L117">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue.exists_hasEigenvector"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasEigenvalue</span>.<span class="name">exists_hasEigenvector</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hμ : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue">Module.End.HasEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">v</span>, <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvector">Module.End.HasEigenvector</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">v</span></span></span></div></div></div></div><div class="decl" id="Module.End.mem_spectrum_of_hasEigenvalue"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L120-L126">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.mem_spectrum_of_hasEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">mem_spectrum_of_hasEigenvalue</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hμ : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue">Module.End.HasEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">μ</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Spectrum.html#spectrum">spectrum</a> <span class="fn">R</span> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="Module.End.hasEigenvalue_iff_mem_spectrum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L129-L132">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.hasEigenvalue_iff_mem_spectrum"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasEigenvalue_iff_mem_spectrum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue">Module.End.HasEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">μ</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Spectrum.html#spectrum">spectrum</a> <span class="fn">K</span> <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="Module.End.eigenspace_div"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L135-L144">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace_div"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace_div</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> <span class="fn">f</span> (<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">b</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> (<span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">K</span> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span>) <span class="fn">a</span></span></span>)</span></span></div></div></div></div><div class="decl" id="Module.End.eigenspaces_independent"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L149-L243">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspaces_independent"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspaces_independent</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/SupIndep.html#CompleteLattice.Independent">CompleteLattice.Independent</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> <span class="fn">f</span></span>)</span></div></div><p>The eigenspaces of a linear operator form an independent family of subspaces of <code>V</code>.  That is,
+any eigenspace has trivial intersection with the span of all the other eigenspaces.</p></div></div><div class="decl" id="Module.End.eigenvectors_linearIndependent"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L251-L255">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenvectors_linearIndependent"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenvectors_linearIndependent</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μs : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(xs : <span class="fn"><span class="fn">↑<span class="fn">μs</span></span> → <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_eigenvec : <span class="fn">∀ (<span class="fn">μ</span> : <span class="fn">↑<span class="fn">μs</span></span>), <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvector">Module.End.HasEigenvector</a> <span class="fn">f</span> (<span class="fn">↑<span class="fn">μ</span></span>) (<span class="fn"><span class="fn">xs</span> <span class="fn">μ</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">K</span> <span class="fn">xs</span></span></div></div><p>Eigenvectors corresponding to distinct eigenvalues of a linear operator are linearly
+independent. (Lemma 5.10 of [axler2015])</p><p>We use the eigenvalues as indexing set to ensure that there is only one eigenvector for each
+eigenvalue in the image of <code>xs</code>.</p></div></div><div class="decl" id="Module.End.generalizedEigenspace"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L261-L267">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> <a href="../../.././Mathlib/Order/Hom/Basic.html#OrderHom">→o</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R</span> <span class="fn">M</span></span></span></div></div><p>The generalized eigenspace for a linear map <code>f</code>, a scalar <code>μ</code>, and an exponent <code>k ∈ ℕ</code> is the
+kernel of <code>(f - μ • id) ^ k</code>. (Def 8.10 of [axler2015]). Furthermore, a generalized eigenspace for
+some exponent <code>k</code> is contained in the generalized eigenspace for exponents larger than <code>k</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.End.generalizedEigenspace" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.mem_generalizedEigenspace"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L271-L272">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.mem_generalizedEigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">mem_generalizedEigenspace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) <span class="fn">k</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">↑(<span class="fn">(<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">μ</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">1</span></span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">k</span></span>) <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="Module.End.generalizedEigenspace_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L276-L278">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace_zero"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">0</span></span>) <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> (<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">k</span></span>)</span></span></div></div></div></div><div class="decl" id="Module.End.HasGeneralizedEigenvector"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L283-L284">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasGeneralizedEigenvector"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasGeneralizedEigenvector</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A nonzero element of a generalized eigenspace is a generalized eigenvector.
+(Def 8.9 of [axler2015])</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasGeneralizedEigenvector">Module.End.HasGeneralizedEigenvector</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">k</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) <span class="fn">k</span></span></span></span>)</span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.End.HasGeneralizedEigenvector" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.HasGeneralizedEigenvalue"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L289-L290">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasGeneralizedEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">HasGeneralizedEigenvalue</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A scalar <code>μ</code> is a generalized eigenvalue for a linear map <code>f</code> and an exponent <code>k ∈ ℕ</code> if there
+are generalized eigenvectors for <code>f</code>, <code>k</code>, and <code>μ</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasGeneralizedEigenvalue">Module.End.HasGeneralizedEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) <span class="fn">k</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span>)</span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.End.HasGeneralizedEigenvalue" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.generalizedEigenrange"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L295-L296">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenrange"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenrange</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R</span> <span class="fn">M</span></span></div></div><p>The generalized eigenrange for a linear map <code>f</code>, a scalar <code>μ</code>, and an exponent <code>k ∈ ℕ</code> is the
+range of <code>(f - μ • id) ^ k</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenrange">Module.End.generalizedEigenrange</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.range">LinearMap.range</a> (<span class="fn">(<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span>) <span class="fn">μ</span></span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">k</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.End.generalizedEigenrange" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.exp_ne_zero_of_hasGeneralizedEigenvalue"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L300-L303">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.exp_ne_zero_of_hasGeneralizedEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">exp_ne_zero_of_hasGeneralizedEigenvalue</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasGeneralizedEigenvalue">Module.End.HasGeneralizedEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">k</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div><p>The exponent of a generalized eigenvalue is never 0.</p></div></div><div class="decl" id="Module.End.maximalGeneralizedEigenspace"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L307-L308">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.maximalGeneralizedEigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">maximalGeneralizedEigenspace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R</span> <span class="fn">M</span></span></div></div><p>The union of the kernels of <code>(f - μ • id) ^ k</code> over all <code>k</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.maximalGeneralizedEigenspace">Module.End.maximalGeneralizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">⨆ (k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) <span class="fn">k</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.End.maximalGeneralizedEigenspace" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.generalizedEigenspace_le_maximal"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L311-L313">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace_le_maximal"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace_le_maximal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.maximalGeneralizedEigenspace">Module.End.maximalGeneralizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span></span></div></div></div></div><div class="decl" id="Module.End.mem_maximalGeneralizedEigenspace"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L317-L319">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.mem_maximalGeneralizedEigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">mem_maximalGeneralizedEigenspace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.maximalGeneralizedEigenspace">Module.End.maximalGeneralizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">k</span>, <span class="fn"><span class="fn">↑(<span class="fn">(<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">μ</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">1</span></span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">k</span></span>) <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span></div></div></div></div><div class="decl" id="Module.End.maximalGeneralizedEigenspaceIndex"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L325-L326">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.maximalGeneralizedEigenspaceIndex"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">maximalGeneralizedEigenspaceIndex</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Nat">ℕ</a></div></div><p>If there exists a natural number <code>k</code> such that the kernel of <code>(f - μ • id) ^ k</code> is the
+maximal generalized eigenspace, then this value is the least such <code>k</code>. If not, this value is not
+meaningful.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.maximalGeneralizedEigenspaceIndex">Module.End.maximalGeneralizedEigenspaceIndex</a> <span class="fn">f</span> <span class="fn">μ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Order/OrderIsoNat.html#monotonicSequenceLimitIndex">monotonicSequenceLimitIndex</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.End.maximalGeneralizedEigenspaceIndex" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.maximalGeneralizedEigenspace_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L331-L335">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.maximalGeneralizedEigenspace_eq"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">maximalGeneralizedEigenspace_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[h : <span class="fn"><a href="../../.././Mathlib/RingTheory/Noetherian.html#IsNoetherian">IsNoetherian</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.maximalGeneralizedEigenspace">Module.End.maximalGeneralizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.maximalGeneralizedEigenspaceIndex">Module.End.maximalGeneralizedEigenspaceIndex</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span></div></div><p>For an endomorphism of a Noetherian module, the maximal eigenspace is always of the form kernel
+<code>(f - μ • id) ^ k</code> for some <code>k</code>.</p></div></div><div class="decl" id="Module.End.hasGeneralizedEigenvalue_of_hasGeneralizedEigenvalue_of_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L340-L346">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.hasGeneralizedEigenvalue_of_hasGeneralizedEigenvalue_of_le"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasGeneralizedEigenvalue_of_hasGeneralizedEigenvalue_of_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hk : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasGeneralizedEigenvalue">Module.End.HasGeneralizedEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasGeneralizedEigenvalue">Module.End.HasGeneralizedEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">m</span></span></div></div><p>A generalized eigenvalue for some exponent <code>k</code> is also
+a generalized eigenvalue for exponents larger than <code>k</code>.</p></div></div><div class="decl" id="Module.End.eigenspace_le_generalizedEigenspace"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L350-L352">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace_le_generalizedEigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace_le_generalizedEigenspace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hk : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) <span class="fn">k</span></span></span></div></div><p>The eigenspace is a subspace of the generalized eigenspace.</p></div></div><div class="decl" id="Module.End.hasGeneralizedEigenvalue_of_hasEigenvalue"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L356-L360">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.hasGeneralizedEigenvalue_of_hasEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasGeneralizedEigenvalue_of_hasEigenvalue</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hk : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hμ : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue">Module.End.HasEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasGeneralizedEigenvalue">Module.End.HasGeneralizedEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">k</span></span></div></div><p>All eigenvalues are generalized eigenvalues.</p></div></div><div class="decl" id="Module.End.hasEigenvalue_of_hasGeneralizedEigenvalue"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L364-L368">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.hasEigenvalue_of_hasGeneralizedEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasEigenvalue_of_hasGeneralizedEigenvalue</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hμ : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasGeneralizedEigenvalue">Module.End.HasGeneralizedEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue">Module.End.HasEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span></span></div></div><p>All generalized eigenvalues are eigenvalues.</p></div></div><div class="decl" id="Module.End.hasGeneralizedEigenvalue_iff_hasEigenvalue"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L373-L375">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.hasGeneralizedEigenvalue_iff_hasEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">hasGeneralizedEigenvalue_iff_hasEigenvalue</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hk : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasGeneralizedEigenvalue">Module.End.HasGeneralizedEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">k</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue">Module.End.HasEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span></span></span></div></div><p>Generalized eigenvalues are actually just eigenvalues.</p></div></div><div class="decl" id="Module.End.generalizedEigenspace_le_generalizedEigenspace_finrank"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L380-L382">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace_le_generalizedEigenspace_finrank"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace_le_generalizedEigenspace_finrank</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">K</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span></span></div></div><p>Every generalized eigenvector is a generalized eigenvector for exponent <code>finrank K V</code>.
+(Lemma 8.11 of [axler2015])</p></div></div><div class="decl" id="Module.End.generalizedEigenspace_eq_generalizedEigenspace_finrank_of_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L386-L389">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace_eq_generalizedEigenspace_finrank_of_le"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace_eq_generalizedEigenspace_finrank_of_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">K</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hk : <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <span class="fn">K</span> <span class="fn">V</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span></span></div></div><p>Generalized eigenspaces for exponents at least <code>finrank K V</code> are equal to each other.</p></div></div><div class="decl" id="Module.End.generalizedEigenspace_restrict"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L394-L403">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace_restrict"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalizedEigenspace_restrict</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfp : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">M</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">p</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">p</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.restrict">LinearMap.restrict</a> <span class="fn">f</span> <span class="fn">hfp</span></span>) <span class="fn">μ</span></span>) <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#Submodule.comap">Submodule.comap</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule.subtype">Submodule.subtype</a> <span class="fn">p</span></span>) (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) <span class="fn">k</span></span>)</span></span></div></div><p>If <code>f</code> maps a subspace <code>p</code> into itself, then the generalized eigenspace of the restriction
+of <code>f</code> to <code>p</code> is the part of the generalized eigenspace of <code>f</code> that lies in <code>p</code>.</p></div></div><div class="decl" id="Module.End.eigenspace_restrict_le_eigenspace"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L408-L412">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace_restrict_le_eigenspace"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace_restrict_le_eigenspace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfp : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">M</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">p</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">p</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#Submodule.map">Submodule.map</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule.subtype">Submodule.subtype</a> <span class="fn">p</span></span>) (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.restrict">LinearMap.restrict</a> <span class="fn">f</span> <span class="fn">hfp</span></span>) <span class="fn">μ</span></span>)</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span></span></div></div><p>If <code>p</code> is an invariant submodule of an endomorphism <code>f</code>, then the <code>μ</code>-eigenspace of the
+restriction of <code>f</code> to <code>p</code> is a submodule of the <code>μ</code>-eigenspace of <code>f</code>.</p></div></div><div class="decl" id="Module.End.generalized_eigenvec_disjoint_range_ker"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L416-L431">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalized_eigenvec_disjoint_range_ker"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">generalized_eigenvec_disjoint_range_ker</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenrange">Module.End.generalizedEigenrange</a> <span class="fn">f</span> <span class="fn">μ</span> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span>)
+  (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <span class="fn">K</span> <span class="fn">V</span></span>)</span>)</span></div></div><p>Generalized eigenrange and generalized eigenspace for exponent <code>finrank K V</code> are disjoint.</p></div></div><div class="decl" id="Module.End.eigenspace_restrict_eq_bot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L436-L440">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace_restrict_eq_bot"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">eigenspace_restrict_eq_bot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfp : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">M</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">p</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">p</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">R</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hμp : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.eigenspace">Module.End.eigenspace</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.restrict">LinearMap.restrict</a> <span class="fn">f</span> <span class="fn">hfp</span></span>) <span class="fn">μ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span></div></div><p>If an invariant subspace <code>p</code> of an endomorphism <code>f</code> is disjoint from the <code>μ</code>-eigenspace of <code>f</code>,
+then the restriction of <code>f</code> to <code>p</code> has trivial <code>μ</code>-eigenspace.</p></div></div><div class="decl" id="Module.End.pos_finrank_generalizedEigenspace_of_hasEigenvalue"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L444-L451">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.pos_finrank_generalizedEigenspace_of_hasEigenvalue"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">pos_finrank_generalizedEigenspace_of_hasEigenvalue</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.HasEigenvalue">Module.End.HasEigenvalue</a> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hk : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <span class="fn">K</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenspace">Module.End.generalizedEigenspace</a> <span class="fn">f</span> <span class="fn">μ</span></span>) <span class="fn">k</span></span></span> }</span></span></span></div></div><p>The generalized eigenspace of an eigenvalue has positive dimension for positive exponents.</p></div></div><div class="decl" id="Module.End.map_generalizedEigenrange_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Eigenspace/Basic.lean#L456-L465">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.map_generalizedEigenrange_le"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">map_generalizedEigenrange_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">K</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">K</span> <span class="fn">V</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#Submodule.map">Submodule.map</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenrange">Module.End.generalizedEigenrange</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Eigenspace/Basic.html#Module.End.generalizedEigenrange">Module.End.generalizedEigenrange</a> <span class="fn">f</span> <span class="fn">μ</span> <span class="fn">n</span></span></span></div></div><p>A linear map maps a generalized eigenrange into itself.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

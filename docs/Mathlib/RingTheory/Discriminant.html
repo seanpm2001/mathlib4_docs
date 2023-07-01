@@ -1,0 +1,449 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.RingTheory.Discriminant</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.RingTheory.Discriminant";</script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">RingTheory</span>.<span class="name">Discriminant</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">RingTheory</span>.<span class="name">Discriminant</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/RingTheory/Norm.html">Mathlib.RingTheory.Norm</a></li><li><a href="../.././Mathlib/RingTheory/Trace.html">Mathlib.RingTheory.Trace</a></li><li><a href="../.././Mathlib/NumberTheory/NumberField/Basic.html">Mathlib.NumberTheory.NumberField.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.RingTheory.Discriminant" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Algebra.discr"><span class="name">Algebra</span>.<span class="name">discr</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_def"><span class="name">Algebra</span>.<span class="name">discr_def</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_reindex"><span class="name">Algebra</span>.<span class="name">discr_reindex</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_zero_of_not_linearIndependent"><span class="name">Algebra</span>.<span class="name">discr_zero_of_not_linearIndependent</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_of_matrix_vecMul"><span class="name">Algebra</span>.<span class="name">discr_of_matrix_vecMul</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_of_matrix_mulVec"><span class="name">Algebra</span>.<span class="name">discr_of_matrix_mulVec</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_not_zero_of_basis"><span class="name">Algebra</span>.<span class="name">discr_not_zero_of_basis</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_isUnit_of_basis"><span class="name">Algebra</span>.<span class="name">discr_isUnit_of_basis</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two"><span class="name">Algebra</span>.<span class="name">discr_eq_det_embeddingsMatrixReindex_pow_two</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_powerBasis_eq_prod"><span class="name">Algebra</span>.<span class="name">discr_powerBasis_eq_prod</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_powerBasis_eq_prod'"><span class="name">Algebra</span>.<span class="name">discr_powerBasis_eq_prod'</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_powerBasis_eq_prod''"><span class="name">Algebra</span>.<span class="name">discr_powerBasis_eq_prod''</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_powerBasis_eq_norm"><span class="name">Algebra</span>.<span class="name">discr_powerBasis_eq_norm</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_isIntegral"><span class="name">Algebra</span>.<span class="name">discr_isIntegral</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_eq_discr_of_toMatrix_coeff_isIntegral"><span class="name">Algebra</span>.<span class="name">discr_eq_discr_of_toMatrix_coeff_isIntegral</span></a></div><div class="nav_link"><a class="break_within" href="#Algebra.discr_mul_isIntegral_mem_adjoin"><span class="name">Algebra</span>.<span class="name">discr_mul_isIntegral_mem_adjoin</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Discriminant-of-a-family-of-vectors">Discriminant of a family of vectors <a class="hover-link" href="#Discriminant-of-a-family-of-vectors">#</a></h1><p>Given an <code>A</code>-algebra <code>B</code> and <code>b</code>, an <code>ι</code>-indexed family of elements of <code>B</code>, we define the
+<em>discriminant</em> of <code>b</code> as the determinant of the matrix whose <code>(i j)</code>-th element is the trace of
+<code>b i * b j</code>.</p><h2 class="markdown-heading" id="Main-definition">Main definition <a class="hover-link" href="#Main-definition">#</a></h2><ul>
+<li><code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> A b</code> : the discriminant of <code>b : ι → B</code>.</li>
+</ul><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><ul>
+<li><code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_zero_of_not_linearIndependent">Algebra.discr_zero_of_not_linearIndependent</a></code> : if <code>b</code> is not linear independent, then
+<code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> A b = 0</code>.</li>
+<li><code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_of_matrix_vecMul">Algebra.discr_of_matrix_vecMul</a></code> and <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_of_matrix_mulVec">Algebra.discr_of_matrix_mulVec</a></code> : formulas relating
+<code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> A ι b</code> with <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> A ((P.map (algebraMap A B)).vecMul b)</code> and
+<code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> A ((P.map (algebraMap A B)).mulVec b)</code>.</li>
+<li><code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_not_zero_of_basis">Algebra.discr_not_zero_of_basis</a></code> : over a field, if <code>b</code> is a basis, then
+<code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> K b ≠ 0</code>.</li>
+<li><code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two">Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two</a></code> : if <code>L/K</code> is a field extension and
+<code>b : ι → L</code>, then <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">discr</a> K b</code> is the square of the determinant of the matrix whose <code>(i, j)</code>
+coefficient is <code>σⱼ (b i)</code>, where <code>σⱼ : L →ₐ[K] E</code> is the embedding in an algebraically closed
+field <code>E</code> corresponding to <code>j : ι</code> via a bijection <code>e : ι ≃ (L →ₐ[K] E)</code>.</li>
+<li><code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_powerBasis_eq_prod">Algebra.discr_powerBasis_eq_prod</a></code> : the discriminant of a power basis.</li>
+<li><code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_isIntegral">Algebra.discr_isIntegral</a></code> : if <code>K</code> and <code>L</code> are fields and <code><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> R K L</code>, if
+<code>b : ι → L</code> satisfies <code> ∀ i, <a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> R (b i)</code>, then <code><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> R (discr K b)</code>.</li>
+<li><code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_mul_isIntegral_mem_adjoin">Algebra.discr_mul_isIntegral_mem_adjoin</a></code> : let <code>K</code> be the fraction field of an integrally
+closed domain <code>R</code> and let <code>L</code> be a finite separable extension of <code>K</code>. Let <code>B : <a href="../.././Mathlib/RingTheory/PowerBasis.html#PowerBasis">PowerBasis</a> K L</code>
+be such that <code><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> R B.gen</code>. Then for all, <code>z : L</code> we have
+<code>(discr K B.basis) • z ∈ adjoin R ({B.gen} : set L)</code>.</li>
+</ul><h2 class="markdown-heading" id="Implementation-details">Implementation details <a class="hover-link" href="#Implementation-details">#</a></h2><p>Our definition works for any <code>A</code>-algebra <code>B</code>, but note that if <code>B</code> is not free as an <code>A</code>-module,
+then <code>trace A B = 0</code> by definition, so <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">discr</a> A b = 0</code> for any <code>b</code>.</p></div><div class="decl" id="Algebra.discr"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L72-L73">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr"><span class="name">Algebra</span>.<span class="name">discr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn"><span class="fn">ι</span> → <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">A</span></div></div><p>Given an <code>A</code>-algebra <code>B</code> and <code>b</code>, an <code>ι</code>-indexed family of elements of <code>B</code>, we define
+<code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">discr</a> A ι b</code> as the determinant of <code>traceMatrix A ι b</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">A</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Trace.html#Algebra.traceMatrix">Algebra.traceMatrix</a> <span class="fn">A</span> <span class="fn">b</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Algebra.discr" class="instances-for-list"></ul></details></div></div><div class="decl" id="Algebra.discr_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L76-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_def"><span class="name">Algebra</span>.<span class="name">discr_def</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn"><span class="fn">ι</span> → <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">A</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Trace.html#Algebra.traceMatrix">Algebra.traceMatrix</a> <span class="fn">A</span> <span class="fn">b</span></span>)</span></span></div></div></div></div><div class="decl" id="Algebra.discr_reindex"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L89-L90">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_reindex"><span class="name">Algebra</span>.<span class="name">discr_reindex</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι'</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis.html#Basis">Basis</a> <span class="fn">ι</span> <span class="fn">A</span> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">ι</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> <span class="fn">ι'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">A</span> (<span class="fn"><span class="fn">↑<span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">↑<span class="fn"><span class="fn">f</span>.symm</span></span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">A</span> <span class="fn">↑<span class="fn">b</span></span></span></span></div></div></div></div><div class="decl" id="Algebra.discr_zero_of_not_linearIndependent"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L94-L107">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_zero_of_not_linearIndependent"><span class="name">Algebra</span>.<span class="name">discr_zero_of_not_linearIndependent</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn"><span class="fn">ι</span> → <span class="fn">B</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hli : <span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../.././Mathlib/LinearAlgebra/LinearIndependent.html#LinearIndependent">LinearIndependent</a> <span class="fn">A</span> <span class="fn">b</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">A</span> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div><p>If <code>b</code> is not linear independent, then <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> A b = 0</code>.</p></div></div><div class="decl" id="Algebra.discr_of_matrix_vecMul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L114-L117">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_of_matrix_vecMul"><span class="name">Algebra</span>.<span class="name">discr_of_matrix_vecMul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn"><span class="fn">ι</span> → <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(P : <span class="fn"><a href="../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">ι</span> <span class="fn">ι</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">A</span> (<span class="fn"><a href="../.././Mathlib/Data/Matrix/Basic.html#Matrix.vecMul">Matrix.vecMul</a> <span class="fn">b</span> (<span class="fn"><a href="../.././Mathlib/Data/Matrix/Basic.html#Matrix.map">Matrix.map</a> <span class="fn">P</span> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">A</span> <span class="fn">B</span></span>)</span></span>)</span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">P</span></span> <a href="../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">2</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">A</span> <span class="fn">b</span></span></span></span></div></div><p>Relation between <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> A ι b</code> and
+<code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> A ((P.map (algebraMap A B)).vecMul b)</code>.</p></div></div><div class="decl" id="Algebra.discr_of_matrix_mulVec"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L122-L125">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_of_matrix_mulVec"><span class="name">Algebra</span>.<span class="name">discr_of_matrix_mulVec</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn"><span class="fn">ι</span> → <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(P : <span class="fn"><a href="../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">ι</span> <span class="fn">ι</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">A</span> (<span class="fn"><a href="../.././Mathlib/Data/Matrix/Basic.html#Matrix.mulVec">Matrix.mulVec</a> (<span class="fn"><a href="../.././Mathlib/Data/Matrix/Basic.html#Matrix.map">Matrix.map</a> <span class="fn">P</span> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">A</span> <span class="fn">B</span></span>)</span></span>) <span class="fn">b</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">P</span></span> <a href="../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">2</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">A</span> <span class="fn">b</span></span></span></span></div></div><p>Relation between <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> A ι b</code> and
+<code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> A ((P.map (algebraMap A B)).mulVec b)</code>.</p></div></div><div class="decl" id="Algebra.discr_not_zero_of_basis"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L139-L153">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_not_zero_of_basis"><span class="name">Algebra</span>.<span class="name">discr_not_zero_of_basis</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/Finiteness.html#Module.Finite">Module.Finite</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis.html#Basis">Basis</a> <span class="fn">ι</span> <span class="fn">K</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">K</span> <span class="fn">↑<span class="fn">b</span></span></span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div><p>Over a field, if <code>b</code> is a basis, then <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> K b ≠ 0</code>.</p></div></div><div class="decl" id="Algebra.discr_isUnit_of_basis"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L157-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_isUnit_of_basis"><span class="name">Algebra</span>.<span class="name">discr_isUnit_of_basis</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/Finiteness.html#Module.Finite">Module.Finite</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis.html#Basis">Basis</a> <span class="fn">ι</span> <span class="fn">K</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">K</span> <span class="fn">↑<span class="fn">b</span></span></span>)</span></div></div><p>Over a field, if <code>b</code> is a basis, then <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> K b</code> is a unit.</p></div></div><div class="decl" id="Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L167-L170">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two"><span class="name">Algebra</span>.<span class="name">discr_eq_det_embeddingsMatrixReindex_pow_two</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/Finiteness.html#Module.Finite">Module.Finite</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(b : <span class="fn"><span class="fn">ι</span> → <span class="fn">L</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">ι</span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> (<span class="fn"><span class="fn">L</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">K</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">E</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">E</span></span>) (<span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">K</span> <span class="fn">b</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Trace.html#Algebra.embeddingsMatrixReindex">Algebra.embeddingsMatrixReindex</a> <span class="fn">K</span> <span class="fn">E</span> <span class="fn">b</span> <span class="fn">e</span></span>)</span> <a href="../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">2</span></span></span></div></div><p>If <code>L/K</code> is a field extension and <code>b : ι → L</code>, then <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">discr</a> K b</code> is the square of the
+determinant of the matrix whose <code>(i, j)</code> coefficient is <code>σⱼ (b i)</code>, where <code>σⱼ : L →ₐ[K] E</code> is the
+embedding in an algebraically closed field <code>E</code> corresponding to <code>j : ι</code> via a bijection
+<code>e : ι ≃ (L →ₐ[K] E)</code>.</p></div></div><div class="decl" id="Algebra.discr_powerBasis_eq_prod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L174-L180">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_powerBasis_eq_prod"><span class="name">Algebra</span>.<span class="name">discr_powerBasis_eq_prod</span></a></span><span class="decl_args">
+<span class="fn">(K : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/Finiteness.html#Module.Finite">Module.Finite</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(pb : <span class="fn"><a href="../.././Mathlib/RingTheory/PowerBasis.html#PowerBasis">PowerBasis</a> <span class="fn">K</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn"><span class="fn">pb</span>.dim</span></span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> (<span class="fn"><span class="fn">L</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">K</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">E</span></span>)</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">E</span></span>) (<span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">K</span> <span class="fn">↑<span class="fn"><span class="fn">pb</span>.basis</span></span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.prod">Finset.prod</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><a href="../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.prod">Finset.prod</a> (<span class="fn"><a href="../.././Mathlib/Order/LocallyFinite.html#Finset.Ioi">Finset.Ioi</a> <span class="fn">i</span></span>) <span class="fn">fun <span class="fn">j</span> =&gt <span class="fn">(<span class="fn"><span class="fn">↑(<span class="fn">↑<span class="fn">e</span> <span class="fn">j</span></span>) <span class="fn"><span class="fn">pb</span>.gen</span></span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑(<span class="fn">↑<span class="fn">e</span> <span class="fn">i</span></span>) <span class="fn"><span class="fn">pb</span>.gen</span></span></span>) <a href="../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">2</span></span></span></span></span></span></span></div></div><p>The discriminant of a power basis.</p></div></div><div class="decl" id="Algebra.discr_powerBasis_eq_prod'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L184-L189">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_powerBasis_eq_prod'"><span class="name">Algebra</span>.<span class="name">discr_powerBasis_eq_prod'</span></a></span><span class="decl_args">
+<span class="fn">(K : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/Finiteness.html#Module.Finite">Module.Finite</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(pb : <span class="fn"><a href="../.././Mathlib/RingTheory/PowerBasis.html#PowerBasis">PowerBasis</a> <span class="fn">K</span> <span class="fn">L</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn"><span class="fn">pb</span>.dim</span></span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> (<span class="fn"><span class="fn">L</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">K</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">E</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">E</span></span>) (<span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">K</span> <span class="fn">↑<span class="fn"><span class="fn">pb</span>.basis</span></span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.prod">Finset.prod</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">i</span> =&gt
+    <span class="fn"><a href="../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.prod">Finset.prod</a> (<span class="fn"><a href="../.././Mathlib/Order/LocallyFinite.html#Finset.Ioi">Finset.Ioi</a> <span class="fn">i</span></span>) <span class="fn">fun <span class="fn">j</span> =&gt <span class="fn"><a href="../.././Init/Prelude.html#Neg.neg">-</a>(<span class="fn">(<span class="fn"><span class="fn">↑(<span class="fn">↑<span class="fn">e</span> <span class="fn">j</span></span>) <span class="fn"><span class="fn">pb</span>.gen</span></span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑(<span class="fn">↑<span class="fn">e</span> <span class="fn">i</span></span>) <span class="fn"><span class="fn">pb</span>.gen</span></span></span>) <a href="../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn">↑(<span class="fn">↑<span class="fn">e</span> <span class="fn">i</span></span>) <span class="fn"><span class="fn">pb</span>.gen</span></span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑(<span class="fn">↑<span class="fn">e</span> <span class="fn">j</span></span>) <span class="fn"><span class="fn">pb</span>.gen</span></span></span>)</span>)</span></span></span></span></span></span></div></div><p>A variation of <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_powerBasis_eq_prod">Algebra.discr_powerBasis_eq_prod</a></code>.</p></div></div><div class="decl" id="Algebra.discr_powerBasis_eq_prod''"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L195-L221">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_powerBasis_eq_prod''"><span class="name">Algebra</span>.<span class="name">discr_powerBasis_eq_prod''</span></a></span><span class="decl_args">
+<span class="fn">(K : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../.././foundational_types.html">Type</a> z)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/Finiteness.html#Module.Finite">Module.Finite</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(pb : <span class="fn"><a href="../.././Mathlib/RingTheory/PowerBasis.html#PowerBasis">PowerBasis</a> <span class="fn">K</span> <span class="fn">L</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn"><span class="fn">pb</span>.dim</span></span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a> (<span class="fn"><span class="fn">L</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">K</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">E</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">K</span> <span class="fn">E</span></span>) (<span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">K</span> <span class="fn">↑<span class="fn"><span class="fn">pb</span>.basis</span></span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">(<span class="fn"><a href="../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">1</span></span>) <a href="../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <span class="fn">K</span> <span class="fn">L</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <span class="fn">K</span> <span class="fn">L</span></span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span>)</span> <a href="../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>)</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a>     <span class="fn"><a href="../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.prod">Finset.prod</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">i</span> =&gt
+      <span class="fn"><a href="../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.prod">Finset.prod</a> (<span class="fn"><a href="../.././Mathlib/Order/LocallyFinite.html#Finset.Ioi">Finset.Ioi</a> <span class="fn">i</span></span>) <span class="fn">fun <span class="fn">j</span> =&gt <span class="fn">(<span class="fn"><span class="fn">↑(<span class="fn">↑<span class="fn">e</span> <span class="fn">j</span></span>) <span class="fn"><span class="fn">pb</span>.gen</span></span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑(<span class="fn">↑<span class="fn">e</span> <span class="fn">i</span></span>) <span class="fn"><span class="fn">pb</span>.gen</span></span></span>) <a href="../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn">↑(<span class="fn">↑<span class="fn">e</span> <span class="fn">i</span></span>) <span class="fn"><span class="fn">pb</span>.gen</span></span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑(<span class="fn">↑<span class="fn">e</span> <span class="fn">j</span></span>) <span class="fn"><span class="fn">pb</span>.gen</span></span></span>)</span></span></span></span></span></span></span></div></div><p>A variation of <code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_powerBasis_eq_prod">Algebra.discr_powerBasis_eq_prod</a></code>.</p></div></div><div class="decl" id="Algebra.discr_powerBasis_eq_norm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L226-L284">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_powerBasis_eq_norm"><span class="name">Algebra</span>.<span class="name">discr_powerBasis_eq_norm</span></a></span><span class="decl_args">
+<span class="fn">(K : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/Finiteness.html#Module.Finite">Module.Finite</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(pb : <span class="fn"><a href="../.././Mathlib/RingTheory/PowerBasis.html#PowerBasis">PowerBasis</a> <span class="fn">K</span> <span class="fn">L</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">K</span> <span class="fn">↑<span class="fn"><span class="fn">pb</span>.basis</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">(<span class="fn"><a href="../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">1</span></span>) <a href="../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <span class="fn">K</span> <span class="fn">L</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <span class="fn">K</span> <span class="fn">L</span></span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span>)</span> <a href="../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>)</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a>     <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RingTheory/Norm.html#Algebra.norm">Algebra.norm</a> <span class="fn">K</span></span>) (<span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn"><span class="fn">pb</span>.gen</span></span>) (<span class="fn">↑<span class="fn">Polynomial.derivative</span> (<span class="fn"><a href="../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">K</span> <span class="fn"><span class="fn">pb</span>.gen</span></span>)</span>)</span>)</span></span></span></div></div><p>Formula for the discriminant of a power basis using the norm of the field extension.</p></div></div><div class="decl" id="Algebra.discr_isIntegral"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L293-L296">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_isIntegral"><span class="name">Algebra</span>.<span class="name">discr_isIntegral</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/Finiteness.html#Module.Finite">Module.Finite</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> z}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn"><span class="fn">ι</span> → <span class="fn">L</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> <span class="fn">R</span> (<span class="fn"><span class="fn">b</span> <span class="fn">i</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> <span class="fn">R</span> (<span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">K</span> <span class="fn">b</span></span>)</span></div></div><p>If <code>K</code> and <code>L</code> are fields and <code><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> R K L</code>, and <code>b : ι → L</code> satisfies
+<code> ∀ i, <a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> R (b i)</code>, then <code><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> R (discr K b)</code>.</p></div></div><div class="decl" id="Algebra.discr_eq_discr_of_toMatrix_coeff_isIntegral"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L302-L329">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_eq_discr_of_toMatrix_coeff_isIntegral"><span class="name">Algebra</span>.<span class="name">discr_eq_discr_of_toMatrix_coeff_isIntegral</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι' : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">ι'</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/NumberTheory/NumberField/Basic.html#NumberField">NumberField</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis.html#Basis">Basis</a> <span class="fn">ι</span> <a href="../.././Std/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">K</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basis.html#Basis">Basis</a> <span class="fn">ι'</span> <a href="../.././Std/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">K</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>) (<span class="fn">j</span> : <span class="fn">ι'</span>), <span class="fn"><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> <a href="../.././Init/Data/Int/Basic.html#Int">ℤ</a> (<span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Basis.html#Basis.toMatrix">Basis.toMatrix</a> <span class="fn">b</span> (<span class="fn">↑<span class="fn">b'</span></span>) <span class="fn">i</span> <span class="fn">j</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h' : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι'</span>) (<span class="fn">j</span> : <span class="fn">ι</span>), <span class="fn"><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> <a href="../.././Init/Data/Int/Basic.html#Int">ℤ</a> (<span class="fn"><a href="../.././Mathlib/LinearAlgebra/Matrix/Basis.html#Basis.toMatrix">Basis.toMatrix</a> <span class="fn">b'</span> (<span class="fn">↑<span class="fn">b</span></span>) <span class="fn">i</span> <span class="fn">j</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <a href="../.././Std/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">↑<span class="fn">b</span></span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <a href="../.././Std/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">↑<span class="fn">b'</span></span></span></span></div></div><p>If <code>b</code> and <code>b'</code> are <code>ℚ</code>-bases of a number field <code>K</code> such that
+<code>∀ i j, <a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> ℤ (b.toMatrix b' i j)</code> and <code>∀ i j, <a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> ℤ (b'.toMatrix b i j)</code> then
+<code><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">discr</a> ℚ b = <a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">discr</a> ℚ b'</code>.</p></div></div><div class="decl" id="Algebra.discr_mul_isIntegral_mem_adjoin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Discriminant.lean#L336-L375">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr_mul_isIntegral_mem_adjoin"><span class="name">Algebra</span>.<span class="name">discr_mul_isIntegral_mem_adjoin</span></a></span><span class="decl_args">
+<span class="fn">(K : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/Finiteness.html#Module.Finite">Module.Finite</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> z}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">K</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/IntegrallyClosed.html#IsIntegrallyClosed">IsIntegrallyClosed</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">R</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <span class="fn"><a href="../.././Mathlib/RingTheory/PowerBasis.html#PowerBasis">PowerBasis</a> <span class="fn">K</span> <span class="fn">L</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hint : <span class="fn"><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> <span class="fn">R</span> <span class="fn"><span class="fn">B</span>.gen</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">L</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hz : <span class="fn"><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> <span class="fn">R</span> <span class="fn">z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Discriminant.html#Algebra.discr">Algebra.discr</a> <span class="fn">K</span> <span class="fn">↑<span class="fn"><span class="fn">B</span>.basis</span></span></span> <a href="../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">z</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn"><span class="fn">B</span>.gen</span>}</span></span></span></div></div><p>Let <code>K</code> be the fraction field of an integrally closed domain <code>R</code> and let <code>L</code> be a finite
+separable extension of <code>K</code>. Let <code>B : <a href="../.././Mathlib/RingTheory/PowerBasis.html#PowerBasis">PowerBasis</a> K L</code> be such that <code><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> R B.gen</code>.
+Then for all, <code>z : L</code> that are integral over <code>R</code>, we have
+<code>(discr K B.basis) • z ∈ adjoin R ({B.gen} : set L)</code>.</p></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

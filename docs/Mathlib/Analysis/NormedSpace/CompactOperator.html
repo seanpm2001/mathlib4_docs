@@ -1,0 +1,1132 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.NormedSpace.CompactOperator</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.NormedSpace.CompactOperator";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">NormedSpace</span>.<span class="name">CompactOperator</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">NormedSpace</span>.<span class="name">CompactOperator</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html">Mathlib.Analysis.LocallyConvex.Bounded</a></li><li><a href="../../.././Mathlib/Topology/Algebra/Module/StrongTopology.html">Mathlib.Topology.Algebra.Module.StrongTopology</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.NormedSpace.CompactOperator" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator"><span class="name">IsCompactOperator</span></a></div><div class="nav_link"><a class="break_within" href="#isCompactOperator_zero"><span class="name">isCompactOperator_zero</span></a></div><div class="nav_link"><a class="break_within" href="#isCompactOperator_iff_exists_mem_nhds_image_subset_compact"><span class="name">isCompactOperator_iff_exists_mem_nhds_image_subset_compact</span></a></div><div class="nav_link"><a class="break_within" href="#isCompactOperator_iff_exists_mem_nhds_isCompact_closure_image"><span class="name">isCompactOperator_iff_exists_mem_nhds_isCompact_closure_image</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.image_subset_compact_of_isVonNBounded"><span class="name">IsCompactOperator</span>.<span class="name">image_subset_compact_of_isVonNBounded</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.isCompact_closure_image_of_isVonNBounded"><span class="name">IsCompactOperator</span>.<span class="name">isCompact_closure_image_of_isVonNBounded</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.image_subset_compact_of_bounded"><span class="name">IsCompactOperator</span>.<span class="name">image_subset_compact_of_bounded</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.isCompact_closure_image_of_bounded"><span class="name">IsCompactOperator</span>.<span class="name">isCompact_closure_image_of_bounded</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.image_ball_subset_compact"><span class="name">IsCompactOperator</span>.<span class="name">image_ball_subset_compact</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.image_closedBall_subset_compact"><span class="name">IsCompactOperator</span>.<span class="name">image_closedBall_subset_compact</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.isCompact_closure_image_ball"><span class="name">IsCompactOperator</span>.<span class="name">isCompact_closure_image_ball</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.isCompact_closure_image_closedBall"><span class="name">IsCompactOperator</span>.<span class="name">isCompact_closure_image_closedBall</span></a></div><div class="nav_link"><a class="break_within" href="#isCompactOperator_iff_image_ball_subset_compact"><span class="name">isCompactOperator_iff_image_ball_subset_compact</span></a></div><div class="nav_link"><a class="break_within" href="#isCompactOperator_iff_image_closedBall_subset_compact"><span class="name">isCompactOperator_iff_image_closedBall_subset_compact</span></a></div><div class="nav_link"><a class="break_within" href="#isCompactOperator_iff_isCompact_closure_image_ball"><span class="name">isCompactOperator_iff_isCompact_closure_image_ball</span></a></div><div class="nav_link"><a class="break_within" href="#isCompactOperator_iff_isCompact_closure_image_closedBall"><span class="name">isCompactOperator_iff_isCompact_closure_image_closedBall</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.smul"><span class="name">IsCompactOperator</span>.<span class="name">smul</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.add"><span class="name">IsCompactOperator</span>.<span class="name">add</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.neg"><span class="name">IsCompactOperator</span>.<span class="name">neg</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.sub"><span class="name">IsCompactOperator</span>.<span class="name">sub</span></a></div><div class="nav_link"><a class="break_within" href="#compactOperator"><span class="name">compactOperator</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.comp_clm"><span class="name">IsCompactOperator</span>.<span class="name">comp_clm</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.continuous_comp"><span class="name">IsCompactOperator</span>.<span class="name">continuous_comp</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.clm_comp"><span class="name">IsCompactOperator</span>.<span class="name">clm_comp</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.codRestrict"><span class="name">IsCompactOperator</span>.<span class="name">codRestrict</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.restrict"><span class="name">IsCompactOperator</span>.<span class="name">restrict</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.restrict'"><span class="name">IsCompactOperator</span>.<span class="name">restrict'</span></a></div><div class="nav_link"><a class="break_within" href="#IsCompactOperator.continuous"><span class="name">IsCompactOperator</span>.<span class="name">continuous</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.mkOfIsCompactOperator"><span class="name">ContinuousLinearMap</span>.<span class="name">mkOfIsCompactOperator</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.mkOfIsCompactOperator_to_linearMap"><span class="name">ContinuousLinearMap</span>.<span class="name">mkOfIsCompactOperator_to_linearMap</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.coe_mkOfIsCompactOperator"><span class="name">ContinuousLinearMap</span>.<span class="name">coe_mkOfIsCompactOperator</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.mkOfIsCompactOperator_mem_compactOperator"><span class="name">ContinuousLinearMap</span>.<span class="name">mkOfIsCompactOperator_mem_compactOperator</span></a></div><div class="nav_link"><a class="break_within" href="#isClosed_setOf_isCompactOperator"><span class="name">isClosed_setOf_isCompactOperator</span></a></div><div class="nav_link"><a class="break_within" href="#compactOperator_topologicalClosure"><span class="name">compactOperator_topologicalClosure</span></a></div><div class="nav_link"><a class="break_within" href="#isCompactOperator_of_tendsto"><span class="name">isCompactOperator_of_tendsto</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Compact-operators">Compact operators <a class="hover-link" href="#Compact-operators">#</a></h1><p>In this file we define compact linear operators between two topological vector spaces (TVS).</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a></code> : predicate for compact operators</li>
+</ul><h2 class="markdown-heading" id="Main-statements">Main statements <a class="hover-link" href="#Main-statements">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isCompactOperator_iff_isCompact_closure_image_ball">isCompactOperator_iff_isCompact_closure_image_ball</a></code> : the usual characterization of
+compact operators from a normed space to a T2 TVS.</li>
+<li><code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.comp_clm">IsCompactOperator.comp_clm</a></code> : precomposing a compact operator by a continuous linear map gives
+a compact operator</li>
+<li><code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.clm_comp">IsCompactOperator.clm_comp</a></code> : postcomposing a compact operator by a continuous linear map
+gives a compact operator</li>
+<li><code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.continuous">IsCompactOperator.continuous</a></code> : compact operators are automatically continuous</li>
+<li><code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isClosed_setOf_isCompactOperator">isClosed_setOf_isCompactOperator</a></code> : the set of compact operators is closed for the operator
+norm</li>
+</ul><h2 class="markdown-heading" id="Implementation-details">Implementation details <a class="hover-link" href="#Implementation-details">#</a></h2><p>We define <code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a></code> as a predicate, because the space of compact operators inherits all
+of its structure from the space of continuous linear maps (e.g we want to have the usual operator
+norm on compact operators).</p><p>The two natural options then would be to make it a predicate over linear maps or continuous linear
+maps. Instead we define it as a predicate over bare functions, although it really only makes sense
+for linear functions, because Lean is really good at finding coercions to bare functions (whereas
+coercing from continuous linear maps to linear maps often needs type ascriptions).</p><h2 class="markdown-heading" id="References">References <a class="hover-link" href="#References">#</a></h2><ul>
+<li>Bourbaki, <em>Spectral Theory</em>, chapters 3 to 5, to be published (2022)</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>Compact operator</p></div><div class="decl" id="IsCompactOperator"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L64-L66">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator"><span class="name">IsCompactOperator</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A compact operator between two topological vector spaces. This definition is usually
+given as "there exists a neighborhood of zero whose image is contained in a compact set",
+but we choose a definition which involves fewer existential quantifiers and replaces images
+with preimages.</p><p>We prove the equivalence in <code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isCompactOperator_iff_exists_mem_nhds_image_subset_compact">isCompactOperator_iff_exists_mem_nhds_image_subset_compact</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∃ <span class="fn">K</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/Data/Set/Image.html#Set.preimage">⁻¹'</a> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">0</span></span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-IsCompactOperator" class="instances-for-list"></ul></details></div></div><div class="decl" id="isCompactOperator_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L69-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isCompactOperator_zero"><span class="name">isCompactOperator_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="isCompactOperator_iff_exists_mem_nhds_image_subset_compact"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L81-L84">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isCompactOperator_iff_exists_mem_nhds_image_subset_compact"><span class="name">isCompactOperator_iff_exists_mem_nhds_image_subset_compact</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">f</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">V</span>, <span class="fn"><span class="fn"><span class="fn">V</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">0</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn">∃ <span class="fn">K</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn">V</span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">K</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="isCompactOperator_iff_exists_mem_nhds_isCompact_closure_image"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L87-L92">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isCompactOperator_iff_exists_mem_nhds_isCompact_closure_image"><span class="name">isCompactOperator_iff_exists_mem_nhds_isCompact_closure_image</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Separation.html#T2Space">T2Space</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">f</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">V</span>, <span class="fn"><span class="fn"><span class="fn">V</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">0</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#closure">closure</a> (<span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn">V</span></span>)</span>)</span></span></span></span></div></div></div></div><div class="decl" id="IsCompactOperator.image_subset_compact_of_isVonNBounded"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L103-L111">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.image_subset_compact_of_isVonNBounded"><span class="name">IsCompactOperator</span>.<span class="name">image_subset_compact_of_isVonNBounded</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">M₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜₁</span> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">K</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn">S</span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">K</span></span></span></span></div></div></div></div><div class="decl" id="IsCompactOperator.isCompact_closure_image_of_isVonNBounded"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L115-L119">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.isCompact_closure_image_of_isVonNBounded"><span class="name">IsCompactOperator</span>.<span class="name">isCompact_closure_image_of_isVonNBounded</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Separation.html#T2Space">T2Space</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">M₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><a href="../../.././Mathlib/Analysis/LocallyConvex/Bounded.html#Bornology.IsVonNBounded">Bornology.IsVonNBounded</a> <span class="fn">𝕜₁</span> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#closure">closure</a> (<span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn">S</span></span>)</span>)</span></div></div></div></div><div class="decl" id="IsCompactOperator.image_subset_compact_of_bounded"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L131-L135">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.image_subset_compact_of_bounded"><span class="name">IsCompactOperator</span>.<span class="name">image_subset_compact_of_bounded</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">M₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.Bounded">Metric.Bounded</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">K</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn">S</span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">K</span></span></span></span></div></div></div></div><div class="decl" id="IsCompactOperator.isCompact_closure_image_of_bounded"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L138-L142">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.isCompact_closure_image_of_bounded"><span class="name">IsCompactOperator</span>.<span class="name">isCompact_closure_image_of_bounded</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Separation.html#T2Space">T2Space</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">M₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hS : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.Bounded">Metric.Bounded</a> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#closure">closure</a> (<span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn">S</span></span>)</span>)</span></div></div></div></div><div class="decl" id="IsCompactOperator.image_ball_subset_compact"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L145-L147">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.image_ball_subset_compact"><span class="name">IsCompactOperator</span>.<span class="name">image_ball_subset_compact</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">K</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.ball">Metric.ball</a> <span class="fn">0</span> <span class="fn">r</span></span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">K</span></span></span></span></div></div></div></div><div class="decl" id="IsCompactOperator.image_closedBall_subset_compact"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L150-L153">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.image_closedBall_subset_compact"><span class="name">IsCompactOperator</span>.<span class="name">image_closedBall_subset_compact</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">K</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.closedBall">Metric.closedBall</a> <span class="fn">0</span> <span class="fn">r</span></span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">K</span></span></span></span></div></div></div></div><div class="decl" id="IsCompactOperator.isCompact_closure_image_ball"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L156-L159">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.isCompact_closure_image_ball"><span class="name">IsCompactOperator</span>.<span class="name">isCompact_closure_image_ball</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Separation.html#T2Space">T2Space</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#closure">closure</a> (<span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.ball">Metric.ball</a> <span class="fn">0</span> <span class="fn">r</span></span></span>)</span>)</span></div></div></div></div><div class="decl" id="IsCompactOperator.isCompact_closure_image_closedBall"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L162-L165">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.isCompact_closure_image_closedBall"><span class="name">IsCompactOperator</span>.<span class="name">isCompact_closure_image_closedBall</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Separation.html#T2Space">T2Space</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#closure">closure</a> (<span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.closedBall">Metric.closedBall</a> <span class="fn">0</span> <span class="fn">r</span></span></span>)</span>)</span></div></div></div></div><div class="decl" id="isCompactOperator_iff_image_ball_subset_compact"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L168-L173">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isCompactOperator_iff_image_ball_subset_compact"><span class="name">isCompactOperator_iff_image_ball_subset_compact</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">K</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.ball">Metric.ball</a> <span class="fn">0</span> <span class="fn">r</span></span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">K</span></span></span></span></span></div></div></div></div><div class="decl" id="isCompactOperator_iff_image_closedBall_subset_compact"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L176-L181">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isCompactOperator_iff_image_closedBall_subset_compact"><span class="name">isCompactOperator_iff_image_closedBall_subset_compact</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">K</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.closedBall">Metric.closedBall</a> <span class="fn">0</span> <span class="fn">r</span></span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">K</span></span></span></span></span></div></div></div></div><div class="decl" id="isCompactOperator_iff_isCompact_closure_image_ball"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L184-L189">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isCompactOperator_iff_isCompact_closure_image_ball"><span class="name">isCompactOperator_iff_isCompact_closure_image_ball</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Separation.html#T2Space">T2Space</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#closure">closure</a> (<span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.ball">Metric.ball</a> <span class="fn">0</span> <span class="fn">r</span></span></span>)</span>)</span></span></div></div></div></div><div class="decl" id="isCompactOperator_iff_isCompact_closure_image_closedBall"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L192-L197">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isCompactOperator_iff_isCompact_closure_image_closedBall"><span class="name">isCompactOperator_iff_isCompact_closure_image_closedBall</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#SeminormedRing">SeminormedRing</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Separation.html#T2Space">T2Space</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#closure">closure</a> (<span class="fn"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.closedBall">Metric.closedBall</a> <span class="fn">0</span> <span class="fn">r</span></span></span>)</span>)</span></span></div></div></div></div><div class="decl" id="IsCompactOperator.smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L211-L216">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.smul"><span class="name">IsCompactOperator</span>.<span class="name">smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#Monoid">Monoid</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Defs.html#DistribMulAction">DistribMulAction</a> <span class="fn">S</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">S</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> (<span class="fn"><span class="fn">c</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="IsCompactOperator.add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L219-L224">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.add"><span class="name">IsCompactOperator</span>.<span class="name">add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Monoid.html#ContinuousAdd">ContinuousAdd</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> (<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">g</span></span>)</span></div></div></div></div><div class="decl" id="IsCompactOperator.neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L227-L230">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.neg"><span class="name">IsCompactOperator</span>.<span class="name">neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₄ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₄</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₄</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#ContinuousNeg">ContinuousNeg</a> <span class="fn">M₄</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₄</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="IsCompactOperator.sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L233-L235">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.sub"><span class="name">IsCompactOperator</span>.<span class="name">sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₄ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₄</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₄</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₄</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₄</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₄</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> (<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">g</span></span>)</span></div></div></div></div><div class="decl" id="compactOperator"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L241-L246">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#compactOperator"><span class="name">compactOperator</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R₄ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R₄</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(σ₁₄ : <span class="fn"><span class="fn">R₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">R₄</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(M₁ : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="decl_args">
+<span class="fn">(M₄ : <a href="../../.././foundational_types.html">Type</a> u_4)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₄</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₄</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R₄</span> <span class="fn">M₄</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">R₄</span> <span class="fn">M₄</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₄</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R₄</span> (<span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₄</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">M₄</span></span>)</span></div></div><p>The submodule of compact continuous linear maps.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-compactOperator" class="instances-for-list"></ul></details></div></div><div class="decl" id="IsCompactOperator.comp_clm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L257-L262">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.comp_clm"><span class="name">IsCompactOperator</span>.<span class="name">comp_clm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">R₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">R₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₃ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₂</span> → <span class="fn">M₃</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">M₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> (<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">↑<span class="fn">g</span></span></span>)</span></div></div></div></div><div class="decl" id="IsCompactOperator.continuous_comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L265-L270">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.continuous_comp"><span class="name">IsCompactOperator</span>.<span class="name">continuous_comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₃ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">M₂</span> → <span class="fn">M₃</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> (<span class="fn"><span class="fn">g</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="IsCompactOperator.clm_comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L273-L276">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.clm_comp"><span class="name">IsCompactOperator</span>.<span class="name">clm_comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R₃ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₂₃ : <span class="fn"><span class="fn">R₂</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">R₃</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₃ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R₃</span> <span class="fn">M₃</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">M₂</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₂₃</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">M₃</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> (<span class="fn"><span class="fn">↑<span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="IsCompactOperator.codRestrict"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L287-L291">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.codRestrict"><span class="name">IsCompactOperator</span>.<span class="name">codRestrict</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R₂ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> → <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">f</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R₂</span> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hV : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">M₁</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">V</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_closed : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">V</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Function.html#Set.codRestrict">Set.codRestrict</a> <span class="fn">f</span> (<span class="fn">↑<span class="fn">V</span></span>) <span class="fn">hV</span></span>)</span></div></div></div></div><div class="decl" id="IsCompactOperator.restrict"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L311-L314">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.restrict"><span class="name">IsCompactOperator</span>.<span class="name">restrict</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R₁</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R₁</span> <span class="fn">M₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hV : <span class="fn">∀ (<span class="fn">v</span> : <span class="fn">M₁</span>), <span class="fn"><span class="fn"><span class="fn">v</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">V</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">v</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">V</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_closed : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">V</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.restrict">LinearMap.restrict</a> <span class="fn">f</span> <span class="fn">hV</span></span>)</span></span></div></div><p>If a compact operator preserves a closed submodule, its restriction to that submodule is
+compact.</p><p>Note that, following mathlib's convention in linear algebra, <code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.restrict">restrict</a></code> designates the restriction
+of an endomorphism <code>f : E →ₗ E</code> to an endomorphism <code>f' : ↥V →ₗ ↥V</code>. To prove that the restriction
+<code>f' : ↥U →ₛₗ ↥V</code> of a compact operator <code>f : E →ₛₗ F</code> is compact, apply
+<code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.codRestrict">IsCompactOperator.codRestrict</a></code> to <code>f ∘ U.subtypeL</code>, which is compact by
+<code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.comp_clm">IsCompactOperator.comp_clm</a></code>.</p></div></div><div class="decl" id="IsCompactOperator.restrict'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L325-L328">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.restrict'"><span class="name">IsCompactOperator</span>.<span class="name">restrict'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Basic.html#UniformSpace">UniformSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Separation.html#SeparatedSpace">SeparatedSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₂</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R₂</span> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hV : <span class="fn">∀ (<span class="fn">v</span> : <span class="fn">M₂</span>), <span class="fn"><span class="fn"><span class="fn">v</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">V</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">v</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">V</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hcomplete : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">V</span></span> }</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.restrict">LinearMap.restrict</a> <span class="fn">f</span> <span class="fn">hV</span></span>)</span></span></div></div><p>If a compact operator preserves a complete submodule, its restriction to that submodule is
+compact.</p><p>Note that, following mathlib's convention in linear algebra, <code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.restrict">restrict</a></code> designates the restriction
+of an endomorphism <code>f : E →ₗ E</code> to an endomorphism <code>f' : ↥V →ₗ ↥V</code>. To prove that the restriction
+<code>f' : ↥U →ₛₗ ↥V</code> of a compact operator <code>f : E →ₛₗ F</code> is compact, apply
+<code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.codRestrict">IsCompactOperator.codRestrict</a></code> to <code>f ∘ U.subtypeL</code>, which is compact by
+<code><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.comp_clm">IsCompactOperator.comp_clm</a></code>.</p></div></div><div class="decl" id="IsCompactOperator.continuous"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L341-L370">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator.continuous"><span class="name">IsCompactOperator</span>.<span class="name">continuous</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">↑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="ContinuousLinearMap.mkOfIsCompactOperator"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L374-L376">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#ContinuousLinearMap.mkOfIsCompactOperator"><span class="name">ContinuousLinearMap</span>.<span class="name">mkOfIsCompactOperator</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">M₂</span></span></div></div><p>Upgrade a compact <code><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">LinearMap</a></code> to a <code><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">ContinuousLinearMap</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#ContinuousLinearMap.mkOfIsCompactOperator">ContinuousLinearMap.mkOfIsCompactOperator</a> <span class="fn">hf</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap.mk">ContinuousLinearMap.mk</a> <span class="fn">f</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-ContinuousLinearMap.mkOfIsCompactOperator" class="instances-for-list"></ul></details></div></div><div class="decl" id="ContinuousLinearMap.mkOfIsCompactOperator_to_linearMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L380-L383">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#ContinuousLinearMap.mkOfIsCompactOperator_to_linearMap"><span class="name">ContinuousLinearMap</span>.<span class="name">mkOfIsCompactOperator_to_linearMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#ContinuousLinearMap.mkOfIsCompactOperator">ContinuousLinearMap.mkOfIsCompactOperator</a> <span class="fn">hf</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="ContinuousLinearMap.coe_mkOfIsCompactOperator"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L387-L389">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#ContinuousLinearMap.coe_mkOfIsCompactOperator"><span class="name">ContinuousLinearMap</span>.<span class="name">coe_mkOfIsCompactOperator</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#ContinuousLinearMap.mkOfIsCompactOperator">ContinuousLinearMap.mkOfIsCompactOperator</a> <span class="fn">hf</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="ContinuousLinearMap.mkOfIsCompactOperator_mem_compactOperator"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L392-L395">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#ContinuousLinearMap.mkOfIsCompactOperator_mem_compactOperator"><span class="name">ContinuousLinearMap</span>.<span class="name">mkOfIsCompactOperator_mem_compactOperator</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#RingHomIsometric">RingHomIsometric</a> <span class="fn">σ₁₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₛₗ[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#ContinuousLinearMap.mkOfIsCompactOperator">ContinuousLinearMap.mkOfIsCompactOperator</a> <span class="fn">hf</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#compactOperator">compactOperator</a> <span class="fn">σ₁₂</span> <span class="fn">M₁</span> <span class="fn">M₂</span></span></span></div></div></div></div><div class="decl" id="isClosed_setOf_isCompactOperator"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L402-L436">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isClosed_setOf_isCompactOperator"><span class="name">isClosed_setOf_isCompactOperator</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Basic.html#UniformSpace">UniformSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/UniformGroup.html#UniformAddGroup">UniformAddGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Separation.html#T2Space">T2Space</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">{<span class="fn">f</span> | <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span>}</span></span></div></div><p>The set of compact operators from a normed space to a complete topological vector space is
+closed.</p></div></div><div class="decl" id="compactOperator_topologicalClosure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L439-L445">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#compactOperator_topologicalClosure"><span class="name">compactOperator_topologicalClosure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Basic.html#UniformSpace">UniformSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/UniformGroup.html#UniformAddGroup">UniformAddGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Separation.html#T2Space">T2Space</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <span class="fn">𝕜₂</span> (<span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">M₂</span></span>)</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#Submodule.topologicalClosure">Submodule.topologicalClosure</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#compactOperator">compactOperator</a> <span class="fn">σ₁₂</span> <span class="fn">M₁</span> <span class="fn">M₂</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#compactOperator">compactOperator</a> <span class="fn">σ₁₂</span> <span class="fn">M₁</span> <span class="fn">M₂</span></span></span></div></div></div></div><div class="decl" id="isCompactOperator_of_tendsto"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/CompactOperator.lean#L448-L454">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#isCompactOperator_of_tendsto"><span class="name">isCompactOperator_of_tendsto</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₁ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜₂ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedField">NormedField</a> <span class="fn">𝕜₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ₁₂ : <span class="fn"><span class="fn">𝕜₁</span> <a href="../../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">𝕜₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜₁</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Basic.html#UniformSpace">UniformSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/UniformGroup.html#UniformAddGroup">UniformAddGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/ConstMulAction.html#ContinuousConstSMul">ContinuousConstSMul</a> <span class="fn">𝕜₂</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Separation.html#T2Space">T2Space</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">l</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">M₂</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→SL[</a><span class="fn">σ₁₂</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">M₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">F</span> <span class="fn">l</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">f</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hF : <span class="fn">∀ᶠ (i : <span class="fn">ι</span>) in <span class="fn">l</span>, <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑(<span class="fn"><span class="fn">F</span> <span class="fn">i</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/CompactOperator.html#IsCompactOperator">IsCompactOperator</a> <span class="fn">↑<span class="fn">f</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

@@ -1,0 +1,801 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.LinearAlgebra.AffineSpace.Ordered</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.LinearAlgebra.AffineSpace.Ordered";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">LinearAlgebra</span>.<span class="name">AffineSpace</span>.<span class="name">Ordered</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">LinearAlgebra</span>.<span class="name">AffineSpace</span>.<span class="name">Ordered</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Tactic/FieldSimp.html">Mathlib.Tactic.FieldSimp</a></li><li><a href="../../.././Mathlib/Algebra/Order/Invertible.html">Mathlib.Algebra.Order.Invertible</a></li><li><a href="../../.././Mathlib/Algebra/Order/Module.html">Mathlib.Algebra.Order.Module</a></li><li><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/MidpointZero.html">Mathlib.LinearAlgebra.AffineSpace.MidpointZero</a></li><li><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html">Mathlib.LinearAlgebra.AffineSpace.Slope</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.LinearAlgebra.AffineSpace.Ordered" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#lineMap_mono_left"><span class="name">lineMap_mono_left</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_strict_mono_left"><span class="name">lineMap_strict_mono_left</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_mono_right"><span class="name">lineMap_mono_right</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_strict_mono_right"><span class="name">lineMap_strict_mono_right</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_mono_endpoints"><span class="name">lineMap_mono_endpoints</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_strict_mono_endpoints"><span class="name">lineMap_strict_mono_endpoints</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_lt_lineMap_iff_of_lt"><span class="name">lineMap_lt_lineMap_iff_of_lt</span></a></div><div class="nav_link"><a class="break_within" href="#left_lt_lineMap_iff_lt"><span class="name">left_lt_lineMap_iff_lt</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_lt_left_iff_lt"><span class="name">lineMap_lt_left_iff_lt</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_lt_right_iff_lt"><span class="name">lineMap_lt_right_iff_lt</span></a></div><div class="nav_link"><a class="break_within" href="#right_lt_lineMap_iff_lt"><span class="name">right_lt_lineMap_iff_lt</span></a></div><div class="nav_link"><a class="break_within" href="#midpoint_le_midpoint"><span class="name">midpoint_le_midpoint</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_le_lineMap_iff_of_lt"><span class="name">lineMap_le_lineMap_iff_of_lt</span></a></div><div class="nav_link"><a class="break_within" href="#left_le_lineMap_iff_le"><span class="name">left_le_lineMap_iff_le</span></a></div><div class="nav_link"><a class="break_within" href="#left_le_midpoint"><span class="name">left_le_midpoint</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_le_left_iff_le"><span class="name">lineMap_le_left_iff_le</span></a></div><div class="nav_link"><a class="break_within" href="#midpoint_le_left"><span class="name">midpoint_le_left</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_le_right_iff_le"><span class="name">lineMap_le_right_iff_le</span></a></div><div class="nav_link"><a class="break_within" href="#midpoint_le_right"><span class="name">midpoint_le_right</span></a></div><div class="nav_link"><a class="break_within" href="#right_le_lineMap_iff_le"><span class="name">right_le_lineMap_iff_le</span></a></div><div class="nav_link"><a class="break_within" href="#right_le_midpoint"><span class="name">right_le_midpoint</span></a></div><div class="nav_link"><a class="break_within" href="#map_le_lineMap_iff_slope_le_slope_left"><span class="name">map_le_lineMap_iff_slope_le_slope_left</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_le_map_iff_slope_le_slope_left"><span class="name">lineMap_le_map_iff_slope_le_slope_left</span></a></div><div class="nav_link"><a class="break_within" href="#map_lt_lineMap_iff_slope_lt_slope_left"><span class="name">map_lt_lineMap_iff_slope_lt_slope_left</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_lt_map_iff_slope_lt_slope_left"><span class="name">lineMap_lt_map_iff_slope_lt_slope_left</span></a></div><div class="nav_link"><a class="break_within" href="#map_le_lineMap_iff_slope_le_slope_right"><span class="name">map_le_lineMap_iff_slope_le_slope_right</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_le_map_iff_slope_le_slope_right"><span class="name">lineMap_le_map_iff_slope_le_slope_right</span></a></div><div class="nav_link"><a class="break_within" href="#map_lt_lineMap_iff_slope_lt_slope_right"><span class="name">map_lt_lineMap_iff_slope_lt_slope_right</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_lt_map_iff_slope_lt_slope_right"><span class="name">lineMap_lt_map_iff_slope_lt_slope_right</span></a></div><div class="nav_link"><a class="break_within" href="#map_le_lineMap_iff_slope_le_slope"><span class="name">map_le_lineMap_iff_slope_le_slope</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_le_map_iff_slope_le_slope"><span class="name">lineMap_le_map_iff_slope_le_slope</span></a></div><div class="nav_link"><a class="break_within" href="#map_lt_lineMap_iff_slope_lt_slope"><span class="name">map_lt_lineMap_iff_slope_lt_slope</span></a></div><div class="nav_link"><a class="break_within" href="#lineMap_lt_map_iff_slope_lt_slope"><span class="name">lineMap_lt_map_iff_slope_lt_slope</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Ordered-modules-as-affine-spaces">Ordered modules as affine spaces <a class="hover-link" href="#Ordered-modules-as-affine-spaces">#</a></h1><p>In this file we prove some theorems about <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a></code> and <code>lineMap</code> in the case when the module <code>E</code>
+acting on the codomain <code>PE</code> of a function is an ordered module over its domain <code>k</code>. We also prove
+inequalities that can be used to link convexity of a function on an interval to monotonicity of the
+slope, see section docstring below for details.</p><h2 class="markdown-heading" id="Implementation-notes">Implementation notes <a class="hover-link" href="#Implementation-notes">#</a></h2><p>We do not introduce the notion of ordered affine spaces (yet?). Instead, we prove various theorems
+for an ordered module interpreted as an affine space.</p><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>affine space, ordered module, slope</p></div><div class="mod_doc"><h3 class="markdown-heading" id="Monotonicity-of-lineMap">Monotonicity of <code>lineMap</code> <a class="hover-link" href="#Monotonicity-of-lineMap">#</a></h3><p>In this section we prove that <code>lineMap a b r</code> is monotone (strictly or not) in its arguments if
+other arguments belong to specific domains.</p></div><div class="decl" id="lineMap_mono_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L54-L56">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_mono_left"><span class="name">lineMap_mono_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a'</span> <span class="fn">b</span></span>) <span class="fn">r</span></span></span></div></div></div></div><div class="decl" id="lineMap_strict_mono_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L59-L61">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_strict_mono_left"><span class="name">lineMap_strict_mono_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a'</span> <span class="fn">b</span></span>) <span class="fn">r</span></span></span></div></div></div></div><div class="decl" id="lineMap_mono_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L64-L66">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_mono_right"><span class="name">lineMap_mono_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b'</span></span>) <span class="fn">r</span></span></span></div></div></div></div><div class="decl" id="lineMap_strict_mono_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L69-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_strict_mono_right"><span class="name">lineMap_strict_mono_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b'</span></span>) <span class="fn">r</span></span></span></div></div></div></div><div class="decl" id="lineMap_mono_endpoints"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L74-L76">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_mono_endpoints"><span class="name">lineMap_mono_endpoints</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a'</span> <span class="fn">b'</span></span>) <span class="fn">r</span></span></span></div></div></div></div><div class="decl" id="lineMap_strict_mono_endpoints"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L79-L82">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_strict_mono_endpoints"><span class="name">lineMap_strict_mono_endpoints</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a'</span> <span class="fn">b'</span></span>) <span class="fn">r</span></span></span></div></div></div></div><div class="decl" id="lineMap_lt_lineMap_iff_of_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L85-L88">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_lt_lineMap_iff_of_lt"><span class="name">lineMap_lt_lineMap_iff_of_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r' : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r'</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="left_lt_lineMap_iff_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L91-L92">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#left_lt_lineMap_iff_lt"><span class="name">left_lt_lineMap_iff_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="lineMap_lt_left_iff_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L95-L96">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_lt_left_iff_lt"><span class="name">lineMap_lt_left_iff_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">a</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="lineMap_lt_right_iff_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L99-L100">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_lt_right_iff_lt"><span class="name">lineMap_lt_right_iff_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="right_lt_lineMap_iff_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L103-L104">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#right_lt_lineMap_iff_lt"><span class="name">right_lt_lineMap_iff_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#OrderedRing">OrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="midpoint_le_midpoint"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L114-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#midpoint_le_midpoint"><span class="name">midpoint_le_midpoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Ring/Defs.html#LinearOrderedRing">LinearOrderedRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Invertible.html#Invertible">Invertible</a> <span class="fn">2</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a' : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b' : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hb : <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Midpoint.html#midpoint">midpoint</a> <span class="fn">k</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Midpoint.html#midpoint">midpoint</a> <span class="fn">k</span> <span class="fn">a'</span> <span class="fn">b'</span></span></span></div></div></div></div><div class="decl" id="lineMap_le_lineMap_iff_of_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L130-L133">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_le_lineMap_iff_of_lt"><span class="name">lineMap_le_lineMap_iff_of_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r' : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r'</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="left_le_lineMap_iff_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L136-L137">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#left_le_lineMap_iff_le"><span class="name">left_le_lineMap_iff_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="left_le_midpoint"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L141-L142">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#left_le_midpoint"><span class="name">left_le_midpoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Midpoint.html#midpoint">midpoint</a> <span class="fn">k</span> <span class="fn">a</span> <span class="fn">b</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="lineMap_le_left_iff_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L145-L146">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_le_left_iff_le"><span class="name">lineMap_le_left_iff_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="midpoint_le_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L150-L151">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#midpoint_le_left"><span class="name">midpoint_le_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Midpoint.html#midpoint">midpoint</a> <span class="fn">k</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="lineMap_le_right_iff_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L154-L155">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_le_right_iff_le"><span class="name">lineMap_le_right_iff_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="midpoint_le_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L159-L160">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#midpoint_le_right"><span class="name">midpoint_le_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Midpoint.html#midpoint">midpoint</a> <span class="fn">k</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="right_le_lineMap_iff_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L163-L164">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#right_le_lineMap_iff_le"><span class="name">right_le_lineMap_iff_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="right_le_midpoint"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L168-L169">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#right_le_midpoint"><span class="name">right_le_midpoint</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Midpoint.html#midpoint">midpoint</a> <span class="fn">k</span> <span class="fn">a</span> <span class="fn">b</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Convexity-and-slope">Convexity and slope <a class="hover-link" href="#Convexity-and-slope">#</a></h3><p>Given an interval <code>[a, b]</code> and a point <code>c ∈ (a, b)</code>, <code>c = lineMap a b r</code>, there are a few ways to
+say that the point <code>(c, f c)</code> is above/below the segment <code>[(a, f a), (b, f b)]</code>:</p><ul>
+<li>compare <code>f c</code> to <code>lineMap (f a) (f b) r</code>;</li>
+<li>compare <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c</code> to <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b</code>;</li>
+<li>compare <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b</code> to <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b</code>;</li>
+<li>compare <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c</code> to <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b</code>.</li>
+</ul><p>In this section we prove equivalence of these four approaches. In order to make the statements more
+readable, we introduce local notation <code>c = lineMap a b r</code>. Then we prove lemmas like</p><pre><code>lemma <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#map_le_lineMap_iff_slope_le_slope_left">map_le_lineMap_iff_slope_le_slope_left</a> (h : 0 < r * (b - a)) :
+  f c ≤ lineMap (f a) (f b) r ↔ <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c ≤ <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b :=
+</code></pre><p>For each inequality between <code>f c</code> and <code>lineMap (f a) (f b) r</code> we provide 3 lemmas:</p><ul>
+<li><code>*_left</code> relates it to an inequality on <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c</code> and <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b</code>;</li>
+<li><code>*_right</code> relates it to an inequality on <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b</code> and <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b</code>;</li>
+<li>no-suffix version relates it to an inequality on <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c</code> and <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b</code>.</li>
+</ul><p>These inequalities can be used to restate <code>convexOn</code> in terms of monotonicity of the slope.</p></div><div class="decl" id="map_le_lineMap_iff_slope_le_slope_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L210-L217">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#map_le_lineMap_iff_slope_le_slope_left"><span class="name">map_le_lineMap_iff_slope_le_slope_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>a < c</code>, the point <code>(c, f c)</code> is non-strictly below the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c ≤ <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b</code>.</p></div></div><div class="decl" id="lineMap_le_map_iff_slope_le_slope_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L222-L224">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_le_map_iff_slope_le_slope_left"><span class="name">lineMap_le_map_iff_slope_le_slope_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>a < c</code>, the point <code>(c, f c)</code> is non-strictly above the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b ≤ <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c</code>.</p></div></div><div class="decl" id="map_lt_lineMap_iff_slope_lt_slope_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L229-L232">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#map_lt_lineMap_iff_slope_lt_slope_left"><span class="name">map_lt_lineMap_iff_slope_lt_slope_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>a < c</code>, the point <code>(c, f c)</code> is strictly below the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c < <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b</code>.</p></div></div><div class="decl" id="lineMap_lt_map_iff_slope_lt_slope_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L237-L239">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_lt_map_iff_slope_lt_slope_left"><span class="name">lineMap_lt_map_iff_slope_lt_slope_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>a < c</code>, the point <code>(c, f c)</code> is strictly above the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b < <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c</code>.</p></div></div><div class="decl" id="map_le_lineMap_iff_slope_le_slope_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L244-L251">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#map_le_lineMap_iff_slope_le_slope_right"><span class="name">map_le_lineMap_iff_slope_le_slope_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">r</span></span>) <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>) <span class="fn">b</span></span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>c < b</code>, the point <code>(c, f c)</code> is non-strictly below the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b ≤ <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b</code>.</p></div></div><div class="decl" id="lineMap_le_map_iff_slope_le_slope_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L256-L258">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_le_map_iff_slope_le_slope_right"><span class="name">lineMap_le_map_iff_slope_le_slope_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">r</span></span>) <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>) <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>c < b</code>, the point <code>(c, f c)</code> is non-strictly above the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b ≤ <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b</code>.</p></div></div><div class="decl" id="map_lt_lineMap_iff_slope_lt_slope_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L263-L266">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#map_lt_lineMap_iff_slope_lt_slope_right"><span class="name">map_lt_lineMap_iff_slope_lt_slope_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">r</span></span>) <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>) <span class="fn">b</span></span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>c < b</code>, the point <code>(c, f c)</code> is strictly below the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b < <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b</code>.</p></div></div><div class="decl" id="lineMap_lt_map_iff_slope_lt_slope_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L271-L273">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_lt_map_iff_slope_lt_slope_right"><span class="name">lineMap_lt_map_iff_slope_lt_slope_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">r</span></span>) <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> (<span class="fn"><span class="fn">b</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">a</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>) <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> <span class="fn">b</span></span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>c < b</code>, the point <code>(c, f c)</code> is strictly above the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b < <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a b</code>.</p></div></div><div class="decl" id="map_le_lineMap_iff_slope_le_slope"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L278-L281">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#map_le_lineMap_iff_slope_le_slope"><span class="name">map_le_lineMap_iff_slope_le_slope</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>) <span class="fn">b</span></span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>a < c < b</code>, the point <code>(c, f c)</code> is non-strictly below the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c ≤ <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b</code>.</p></div></div><div class="decl" id="lineMap_le_map_iff_slope_le_slope"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L286-L288">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_le_map_iff_slope_le_slope"><span class="name">lineMap_le_map_iff_slope_le_slope</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>) <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>a < c < b</code>, the point <code>(c, f c)</code> is non-strictly above the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b ≤ <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c</code>.</p></div></div><div class="decl" id="map_lt_lineMap_iff_slope_lt_slope"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L293-L296">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#map_lt_lineMap_iff_slope_lt_slope"><span class="name">map_lt_lineMap_iff_slope_lt_slope</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>) <span class="fn">b</span></span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>a < c < b</code>, the point <code>(c, f c)</code> is strictly below the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c < <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b</code>.</p></div></div><div class="decl" id="lineMap_lt_map_iff_slope_lt_slope"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AffineSpace/Ordered.lean#L301-L303">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/AffineSpace/Ordered.html#lineMap_lt_map_iff_slope_lt_slope"><span class="name">lineMap_lt_map_iff_slope_lt_slope</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Field/Defs.html#LinearOrderedField">LinearOrderedField</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Group/Defs.html#OrderedAddCommGroup">OrderedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <span class="fn">k</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">k</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">k</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <span class="fn">k</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hab : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>) (<span class="fn"><span class="fn">f</span> <span class="fn">b</span></span>)</span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>) <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> <span class="fn">f</span> <span class="fn">a</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/AffineMap.html#AffineMap.lineMap">AffineMap.lineMap</a> <span class="fn">a</span> <span class="fn">b</span></span>) <span class="fn">r</span></span>)</span></span></span></div></div><p>Given <code>c = lineMap a b r</code>, <code>a < c < b</code>, the point <code>(c, f c)</code> is strictly above the
+segment <code>[(a, f a), (b, f b)]</code> if and only if <code><a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f c b < <a href="../../.././Mathlib/LinearAlgebra/AffineSpace/Slope.html#slope">slope</a> f a c</code>.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

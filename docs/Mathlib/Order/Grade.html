@@ -1,0 +1,621 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Order.Grade</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Order.Grade";</script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Order</span>.<span class="name">Grade</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Order</span>.<span class="name">Grade</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/Data/Finset/Basic.html">Mathlib.Data.Finset.Basic</a></li><li><a href="../.././Mathlib/Data/Int/SuccPred.html">Mathlib.Data.Int.SuccPred</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Order.Grade" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#GradeOrder"><span class="name">GradeOrder</span></a></div><div class="nav_link"><a class="break_within" href="#GradeMinOrder"><span class="name">GradeMinOrder</span></a></div><div class="nav_link"><a class="break_within" href="#GradeMaxOrder"><span class="name">GradeMaxOrder</span></a></div><div class="nav_link"><a class="break_within" href="#GradeBoundedOrder"><span class="name">GradeBoundedOrder</span></a></div><div class="nav_link"><a class="break_within" href="#grade"><span class="name">grade</span></a></div><div class="nav_link"><a class="break_within" href="#Covby.grade"><span class="name">Covby</span>.<span class="name">grade</span></a></div><div class="nav_link"><a class="break_within" href="#grade_strictMono"><span class="name">grade_strictMono</span></a></div><div class="nav_link"><a class="break_within" href="#covby_iff_lt_covby_grade"><span class="name">covby_iff_lt_covby_grade</span></a></div><div class="nav_link"><a class="break_within" href="#IsMin.grade"><span class="name">IsMin</span>.<span class="name">grade</span></a></div><div class="nav_link"><a class="break_within" href="#isMin_grade_iff"><span class="name">isMin_grade_iff</span></a></div><div class="nav_link"><a class="break_within" href="#IsMax.grade"><span class="name">IsMax</span>.<span class="name">grade</span></a></div><div class="nav_link"><a class="break_within" href="#isMax_grade_iff"><span class="name">isMax_grade_iff</span></a></div><div class="nav_link"><a class="break_within" href="#grade_mono"><span class="name">grade_mono</span></a></div><div class="nav_link"><a class="break_within" href="#grade_injective"><span class="name">grade_injective</span></a></div><div class="nav_link"><a class="break_within" href="#grade_le_grade_iff"><span class="name">grade_le_grade_iff</span></a></div><div class="nav_link"><a class="break_within" href="#grade_lt_grade_iff"><span class="name">grade_lt_grade_iff</span></a></div><div class="nav_link"><a class="break_within" href="#grade_eq_grade_iff"><span class="name">grade_eq_grade_iff</span></a></div><div class="nav_link"><a class="break_within" href="#grade_ne_grade_iff"><span class="name">grade_ne_grade_iff</span></a></div><div class="nav_link"><a class="break_within" href="#grade_covby_grade_iff"><span class="name">grade_covby_grade_iff</span></a></div><div class="nav_link"><a class="break_within" href="#grade_bot"><span class="name">grade_bot</span></a></div><div class="nav_link"><a class="break_within" href="#grade_top"><span class="name">grade_top</span></a></div><div class="nav_link"><a class="break_within" href="#Preorder.toGradeBoundedOrder"><span class="name">Preorder</span>.<span class="name">toGradeBoundedOrder</span></a></div><div class="nav_link"><a class="break_within" href="#grade_self"><span class="name">grade_self</span></a></div><div class="nav_link"><a class="break_within" href="#OrderDual.gradeOrder"><span class="name">OrderDual</span>.<span class="name">gradeOrder</span></a></div><div class="nav_link"><a class="break_within" href="#OrderDual.gradeMinOrder"><span class="name">OrderDual</span>.<span class="name">gradeMinOrder</span></a></div><div class="nav_link"><a class="break_within" href="#OrderDual.gradeMaxOrder"><span class="name">OrderDual</span>.<span class="name">gradeMaxOrder</span></a></div><div class="nav_link"><a class="break_within" href="#instGradeBoundedOrderOrderDualOrderDualPreorderPreorder"><span class="name">instGradeBoundedOrderOrderDualOrderDualPreorderPreorder</span></a></div><div class="nav_link"><a class="break_within" href="#grade_toDual"><span class="name">grade_toDual</span></a></div><div class="nav_link"><a class="break_within" href="#grade_ofDual"><span class="name">grade_ofDual</span></a></div><div class="nav_link"><a class="break_within" href="#GradeOrder.liftLeft"><span class="name">GradeOrder</span>.<span class="name">liftLeft</span></a></div><div class="nav_link"><a class="break_within" href="#GradeMinOrder.liftLeft"><span class="name">GradeMinOrder</span>.<span class="name">liftLeft</span></a></div><div class="nav_link"><a class="break_within" href="#GradeMaxOrder.liftLeft"><span class="name">GradeMaxOrder</span>.<span class="name">liftLeft</span></a></div><div class="nav_link"><a class="break_within" href="#GradeBoundedOrder.liftLeft"><span class="name">GradeBoundedOrder</span>.<span class="name">liftLeft</span></a></div><div class="nav_link"><a class="break_within" href="#GradeOrder.liftRight"><span class="name">GradeOrder</span>.<span class="name">liftRight</span></a></div><div class="nav_link"><a class="break_within" href="#GradeMinOrder.liftRight"><span class="name">GradeMinOrder</span>.<span class="name">liftRight</span></a></div><div class="nav_link"><a class="break_within" href="#GradeMaxOrder.liftRight"><span class="name">GradeMaxOrder</span>.<span class="name">liftRight</span></a></div><div class="nav_link"><a class="break_within" href="#GradeBoundedOrder.liftRight"><span class="name">GradeBoundedOrder</span>.<span class="name">liftRight</span></a></div><div class="nav_link"><a class="break_within" href="#GradeOrder.finToNat"><span class="name">GradeOrder</span>.<span class="name">finToNat</span></a></div><div class="nav_link"><a class="break_within" href="#GradeMinOrder.finToNat"><span class="name">GradeMinOrder</span>.<span class="name">finToNat</span></a></div><div class="nav_link"><a class="break_within" href="#GradeOrder.natToInt"><span class="name">GradeOrder</span>.<span class="name">natToInt</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Graded-orders">Graded orders <a class="hover-link" href="#Graded-orders">#</a></h1><p>This file defines graded orders, also known as ranked orders.</p><p>A <code>𝕆</code>-graded order is an order <code>α</code> equipped with a distinguished "grade" function <code>α → 𝕆</code> which
+should be understood as giving the "height" of the elements. Usual graded orders are <code>ℕ</code>-graded,
+cograded orders are <code>ℕᵒᵈ</code>-graded, but we can also grade by <code>ℤ</code>, and polytopes are naturally
+<code><a href="../.././Init/Prelude.html#Fin">Fin</a> n</code>-graded.</p><p>Visually, <code><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> ℕ a</code> is the height of <code>a</code> in the Hasse diagram of <code>α</code>.</p><h2 class="markdown-heading" id="Main-declarations">Main declarations <a class="hover-link" href="#Main-declarations">#</a></h2><ul>
+<li><code><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a></code>: Graded order.</li>
+<li><code><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a></code>: Graded order where minimal elements have minimal grades.</li>
+<li><code><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder">GradeMaxOrder</a></code>: Graded order where maximal elements have maximal grades.</li>
+<li><code><a href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder">GradeBoundedOrder</a></code>: Graded order where minimal elements have minimal grades and maximal
+elements have maximal grades.</li>
+<li><code><a href="../.././Mathlib/Order/Grade.html#grade">grade</a></code>: The grade of an element. Because an order can admit several gradings, the first argument
+is the order we grade by.</li>
+</ul><h2 class="markdown-heading" id="How-to-grade-your-order">How to grade your order <a class="hover-link" href="#How-to-grade-your-order">#</a></h2><p>Here are the translations between common references and our <code><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a></code>:</p><ul>
+<li>[Stanley][stanley2012] defines a graded order of rank <code>n</code> as an order where all maximal chains
+have "length" <code>n</code> (so the number of elements of a chain is <code>n + 1</code>). This corresponds to
+<code><a href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder">GradeBoundedOrder</a> (Fin (n + 1)) α</code>.</li>
+<li>[Engel][engel1997]'s ranked orders are somewhere between <code><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> ℕ α</code> and
+<code><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> ℕ α</code>, in that he requires <code>∃ a, <a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> a ∧ <a href="../.././Mathlib/Order/Grade.html#grade">grade</a> ℕ a = 0</code> rather than
+<code>∀ a, <a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> a → <a href="../.././Mathlib/Order/Grade.html#grade">grade</a> ℕ a = 0</code>. He defines a graded order as an order where all minimal elements
+have grade <code>0</code> and all maximal elements have the same grade. This is roughly a less bundled
+version of <code><a href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder">GradeBoundedOrder</a> (Fin n) α</code>, assuming we discard orders with infinite chains.</li>
+</ul><h2 class="markdown-heading" id="Implementation-notes">Implementation notes <a class="hover-link" href="#Implementation-notes">#</a></h2><p>One possible definition of graded orders is as the bounded orders whose flags (maximal chains)
+all have the same finite length (see Stanley p. 99). However, this means that all graded orders must
+have minimal and maximal elements and that the grade is not data.</p><p>Instead, we define graded orders by their grade function, without talking about flags yet.</p><h2 class="markdown-heading" id="References">References <a class="hover-link" href="#References">#</a></h2><ul>
+<li>[Konrad Engel, <em>Sperner Theory</em>][engel1997]</li>
+<li>[Richard Stanley, <em>Enumerative Combinatorics</em>][stanley2012]</li>
+</ul></div><div class="decl" id="GradeOrder"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L68-L74">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeOrder"><span class="name">GradeOrder</span></a></span><span class="decl_args">
+<span class="fn">(𝕆 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Type</a> (maxu_1u_2)</div></div><ul class="structure_fields" id="GradeOrder.mk"><li id="GradeOrder.grade" class="structure_field"><div class="structure_field_doc"><p>The grading function.</p></div><div class="structure_field_info">grade : <span class="fn"><span class="fn">α</span> → <span class="fn">𝕆</span></span></div></li><li id="GradeOrder.grade_strictMono" class="structure_field"><div class="structure_field_doc"><p><code><a href="../.././Mathlib/Order/Grade.html#grade">grade</a></code> is strictly monotonic.</p></div><div class="structure_field_info">grade_strictMono : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">grade</span></span></div></li><li id="GradeOrder.covby_grade" class="structure_field"><div class="structure_field_doc"><p><code><a href="../.././Mathlib/Order/Grade.html#grade">grade</a></code> preserves <code><a href="../.././Mathlib/Order/Cover.html#Covby">Covby</a></code>.</p></div><div class="structure_field_info">covby_grade : <span class="fn">∀ ⦃<span class="fn">a </span>b : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">grade</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><span class="fn">grade</span> <span class="fn">b</span></span></span></span></span></div></li></ul><p>An <code>𝕆</code>-graded order is an order <code>α</code> equipped with a strictly monotone function
+<code><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> 𝕆 : α → 𝕆</code> which preserves order covering (<code><a href="../.././Mathlib/Order/Cover.html#Covby">Covby</a></code>).</p><details class="instances"><summary>Instances</summary><ul id="instances-list-GradeOrder" class="instances-list"></ul></details></div></div><div class="decl" id="GradeMinOrder"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L78-L80">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeMinOrder"><span class="name">GradeMinOrder</span></a></span><span class="decl_args">
+<span class="fn">(𝕆 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_extends">extends</span><span class="decl_parent">
+<span class="fn"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeOrder"><span class="name">GradeOrder</span></a></span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Type</a> (maxu_1u_2)</div></div><ul class="structure_fields" id="GradeMinOrder.mk"><li id="GradeMinOrder.is_min_grade" class="structure_field"><div class="structure_field_doc"><p>Minimal elements have minimal grades.</p></div><div class="structure_field_info">is_min_grade : <span class="fn">∀ ⦃<span class="fn">a</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.grade">GradeOrder.grade</a> <span class="fn">a</span></span>)</span></span></span></div></li></ul><p>A <code>𝕆</code>-graded order where minimal elements have minimal grades.</p><details class="instances"><summary>Instances</summary><ul id="instances-list-GradeMinOrder" class="instances-list"></ul></details></div></div><div class="decl" id="GradeMaxOrder"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L84-L86">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeMaxOrder"><span class="name">GradeMaxOrder</span></a></span><span class="decl_args">
+<span class="fn">(𝕆 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_extends">extends</span><span class="decl_parent">
+<span class="fn"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeOrder"><span class="name">GradeOrder</span></a></span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Type</a> (maxu_1u_2)</div></div><ul class="structure_fields" id="GradeMaxOrder.mk"><li id="GradeMaxOrder.is_max_grade" class="structure_field"><div class="structure_field_doc"><p>Maximal elements have maximal grades.</p></div><div class="structure_field_info">is_max_grade : <span class="fn">∀ ⦃<span class="fn">a</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.grade">GradeOrder.grade</a> <span class="fn">a</span></span>)</span></span></span></div></li></ul><p>A <code>𝕆</code>-graded order where maximal elements have maximal grades.</p><details class="instances"><summary>Instances</summary><ul id="instances-list-GradeMaxOrder" class="instances-list"></ul></details></div></div><div class="decl" id="GradeBoundedOrder"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L91-L92">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder"><span class="name">GradeBoundedOrder</span></a></span><span class="decl_args">
+<span class="fn">(𝕆 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_extends">extends</span><span class="decl_parent">
+<span class="fn"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeMinOrder"><span class="name">GradeMinOrder</span></a></span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../.././foundational_types.html">Type</a> (maxu_1u_2)</div></div><ul class="structure_fields" id="GradeBoundedOrder.mk"><li id="GradeBoundedOrder.is_max_grade" class="structure_field"><div class="structure_field_doc"><p>Maximal elements have maximal grades.</p></div><div class="structure_field_info">is_max_grade : <span class="fn">∀ ⦃<span class="fn">a</span> : <span class="fn">α</span>⦄, <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.grade">GradeOrder.grade</a> <span class="fn">a</span></span>)</span></span></span></div></li></ul><p>A <code>𝕆</code>-graded order where minimal elements have minimal grades and maximal elements have maximal
+grades.</p><details class="instances"><summary>Instances</summary><ul id="instances-list-GradeBoundedOrder" class="instances-list"></ul></details></div></div><div class="decl" id="grade"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L107-L108">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade"><span class="name">grade</span></a></span><span class="decl_args">
+<span class="fn">(𝕆 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">α</span> → <span class="fn">𝕆</span></span></div></div><p>The grade of an element in a graded order. Morally, this is the number of elements you need to
+go down by to get to <code>⊥</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">GradeOrder.grade</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-grade" class="instances-for-list"></ul></details></div></div><div class="decl" id="Covby.grade"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L111-L112">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#Covby.grade"><span class="name">Covby</span>.<span class="name">grade</span></a></span><span class="decl_args">
+<span class="fn">(𝕆 : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="grade_strictMono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L117-L118">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_strictMono"><span class="name">grade_strictMono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span></span>)</span></div></div></div></div><div class="decl" id="covby_iff_lt_covby_grade"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L121-L123">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#covby_iff_lt_covby_grade"><span class="name">covby_iff_lt_covby_grade</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">b</span></span></span></span></span></div></div></div></div><div class="decl" id="IsMin.grade"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L132-L133">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#IsMin.grade"><span class="name">IsMin</span>.<span class="name">grade</span></a></span><span class="decl_args">
+<span class="fn">(𝕆 : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span>)</span></div></div></div></div><div class="decl" id="isMin_grade_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L139-L140">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#isMin_grade_iff"><span class="name">isMin_grade_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span>)</span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="IsMax.grade"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L149-L150">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#IsMax.grade"><span class="name">IsMax</span>.<span class="name">grade</span></a></span><span class="decl_args">
+<span class="fn">(𝕆 : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder">GradeMaxOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">a</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span>)</span></div></div></div></div><div class="decl" id="isMax_grade_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L156-L157">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#isMax_grade_iff"><span class="name">isMax_grade_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder">GradeMaxOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span>)</span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="grade_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L165-L166">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_mono"><span class="name">grade_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#PartialOrder">PartialOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#Monotone">Monotone</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span></span>)</span></div></div></div></div><div class="decl" id="grade_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L174-L175">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_injective"><span class="name">grade_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span></span>)</span></div></div></div></div><div class="decl" id="grade_le_grade_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L179-L180">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_le_grade_iff"><span class="name">grade_le_grade_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">b</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="grade_lt_grade_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L184-L185">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_lt_grade_iff"><span class="name">grade_lt_grade_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">b</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="grade_eq_grade_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L189-L190">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_eq_grade_iff"><span class="name">grade_eq_grade_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">b</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="grade_ne_grade_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L193-L194">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_ne_grade_iff"><span class="name">grade_ne_grade_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">b</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="grade_covby_grade_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L197-L198">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_covby_grade_iff"><span class="name">grade_covby_grade_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">b</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span></span></div></div></div></div><div class="decl" id="grade_bot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L212-L213">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_bot"><span class="name">grade_bot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#PartialOrder">PartialOrder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/BoundedOrder.html#OrderBot">OrderBot</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/BoundedOrder.html#OrderBot">OrderBot</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <a href="../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span></div></div></div></div><div class="decl" id="grade_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L217-L218">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_top"><span class="name">grade_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#PartialOrder">PartialOrder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/BoundedOrder.html#OrderTop">OrderTop</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/BoundedOrder.html#OrderTop">OrderTop</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder">GradeMaxOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Instances">Instances <a class="hover-link" href="#Instances">#</a></h3></div><div class="decl" id="Preorder.toGradeBoundedOrder"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L227-L233">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#Preorder.toGradeBoundedOrder"><span class="name">Preorder</span>.<span class="name">toGradeBoundedOrder</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder">GradeBoundedOrder</a> <span class="fn">α</span> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Preorder.toGradeBoundedOrder</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder.mk">GradeBoundedOrder.mk</a> <span class="fn">(_ : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">x</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">x</span></span></span></span>)</span></span></span></li></ul></details></div></div><div class="decl" id="grade_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L237-L238">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_self"><span class="name">grade_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">α</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">a</span></span></div></div></div></div><div class="mod_doc"><h4 class="markdown-heading" id="Dual">Dual <a class="hover-link" href="#Dual">#</a></h4></div><div class="decl" id="OrderDual.gradeOrder"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L243-L247">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#OrderDual.gradeOrder"><span class="name">OrderDual</span>.<span class="name">gradeOrder</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn"><span class="fn">𝕆</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span> <span class="fn"><span class="fn">α</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="OrderDual.gradeMinOrder"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L249-L250">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#OrderDual.gradeMinOrder"><span class="name">OrderDual</span>.<span class="name">gradeMinOrder</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder">GradeMaxOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> <span class="fn"><span class="fn">𝕆</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span> <span class="fn"><span class="fn">α</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">OrderDual.gradeMinOrder</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let src := <span class="fn">OrderDual.gradeOrder</span>;
+  <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder.mk">GradeMinOrder.mk</a> <span class="fn">(_ : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn"><span class="fn">α</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">x</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">x</span></span>)</span></span></span>)</span></span></span></span></li></ul></details></div></div><div class="decl" id="OrderDual.gradeMaxOrder"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L252-L253">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#OrderDual.gradeMaxOrder"><span class="name">OrderDual</span>.<span class="name">gradeMaxOrder</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder">GradeMaxOrder</a> <span class="fn"><span class="fn">𝕆</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span> <span class="fn"><span class="fn">α</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">OrderDual.gradeMaxOrder</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let src := <span class="fn">OrderDual.gradeOrder</span>;
+  <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder.mk">GradeMaxOrder.mk</a> <span class="fn">(_ : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn"><span class="fn">α</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">x</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">x</span></span>)</span></span></span>)</span></span></span></span></li></ul></details></div></div><div class="decl" id="instGradeBoundedOrderOrderDualOrderDualPreorderPreorder"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L255-L256">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#instGradeBoundedOrderOrderDualOrderDualPreorderPreorder"><span class="name">instGradeBoundedOrderOrderDualOrderDualPreorderPreorder</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder">GradeBoundedOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder">GradeBoundedOrder</a> <span class="fn"><span class="fn">𝕆</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span> <span class="fn"><span class="fn">α</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="grade_toDual"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L259-L260">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_toDual"><span class="name">grade_toDual</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn"><span class="fn">𝕆</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span> (<span class="fn">↑<span class="fn">OrderDual.toDual</span> <span class="fn">a</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">OrderDual.toDual</span> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> <span class="fn">a</span></span>)</span></span></div></div></div></div><div class="decl" id="grade_ofDual"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L264-L265">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#grade_ofDual"><span class="name">grade_ofDual</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn">α</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> (<span class="fn">↑<span class="fn">OrderDual.ofDual</span> <span class="fn">a</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">OrderDual.ofDual</span> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn"><span class="fn">𝕆</span><a href="../.././Mathlib/Order/Basic.html#OrderDual">ᵒᵈ</a></span> <span class="fn">a</span></span>)</span></span></div></div></div></div><div class="mod_doc"><h4 class="markdown-heading" id="Lifting-a-graded-order">Lifting a graded order <a class="hover-link" href="#Lifting-a-graded-order">#</a></h4></div><div class="decl" id="GradeOrder.liftLeft"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L273-L278">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeOrder.liftLeft"><span class="name">GradeOrder</span>.<span class="name">liftLeft</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ℙ : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">ℙ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕆</span> → <span class="fn">ℙ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcovby : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">𝕆</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">ℙ</span> <span class="fn">α</span></span></div></div><p>Lifts a graded order along a strictly monotone function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-GradeOrder.liftLeft" class="instances-for-list"></ul></details></div></div><div class="decl" id="GradeMinOrder.liftLeft"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L284-L286">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeMinOrder.liftLeft"><span class="name">GradeMinOrder</span>.<span class="name">liftLeft</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ℙ : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">ℙ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕆</span> → <span class="fn">ℙ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcovby : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">𝕆</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmin : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">𝕆</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> <span class="fn">ℙ</span> <span class="fn">α</span></span></div></div><p>Lifts a graded order along a strictly monotone function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder.liftLeft">GradeMinOrder.liftLeft</a> <span class="fn">f</span> <span class="fn">hf</span> <span class="fn">hcovby</span> <span class="fn">hmin</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let src := <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.liftLeft">GradeOrder.liftLeft</a> <span class="fn">f</span> <span class="fn">hf</span> <span class="fn">hcovby</span></span>;
+  <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder.mk">GradeMinOrder.mk</a> <span class="fn">(_ : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">x</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> (<span class="fn"><span class="fn">f</span> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.grade">GradeOrder.grade</a> <span class="fn">x</span></span>)</span>)</span></span></span>)</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-GradeMinOrder.liftLeft" class="instances-for-list"></ul></details></div></div><div class="decl" id="GradeMaxOrder.liftLeft"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L292-L294">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeMaxOrder.liftLeft"><span class="name">GradeMaxOrder</span>.<span class="name">liftLeft</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ℙ : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">ℙ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder">GradeMaxOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕆</span> → <span class="fn">ℙ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcovby : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">𝕆</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmax : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">𝕆</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder">GradeMaxOrder</a> <span class="fn">ℙ</span> <span class="fn">α</span></span></div></div><p>Lifts a graded order along a strictly monotone function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder.liftLeft">GradeMaxOrder.liftLeft</a> <span class="fn">f</span> <span class="fn">hf</span> <span class="fn">hcovby</span> <span class="fn">hmax</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let src := <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.liftLeft">GradeOrder.liftLeft</a> <span class="fn">f</span> <span class="fn">hf</span> <span class="fn">hcovby</span></span>;
+  <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder.mk">GradeMaxOrder.mk</a> <span class="fn">(_ : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">x</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><span class="fn">f</span> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.grade">GradeOrder.grade</a> <span class="fn">x</span></span>)</span>)</span></span></span>)</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-GradeMaxOrder.liftLeft" class="instances-for-list"></ul></details></div></div><div class="decl" id="GradeBoundedOrder.liftLeft"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L300-L303">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder.liftLeft"><span class="name">GradeBoundedOrder</span>.<span class="name">liftLeft</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ℙ : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">ℙ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder">GradeBoundedOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕆</span> → <span class="fn">ℙ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcovby : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">𝕆</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmin : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">𝕆</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmax : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">𝕆</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder">GradeBoundedOrder</a> <span class="fn">ℙ</span> <span class="fn">α</span></span></div></div><p>Lifts a graded order along a strictly monotone function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-GradeBoundedOrder.liftLeft" class="instances-for-list"></ul></details></div></div><div class="decl" id="GradeOrder.liftRight"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L309-L314">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeOrder.liftRight"><span class="name">GradeOrder</span>.<span class="name">liftRight</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcovby : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span></div></div><p>Lifts a graded order along a strictly monotone function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-GradeOrder.liftRight" class="instances-for-list"></ul></details></div></div><div class="decl" id="GradeMinOrder.liftRight"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L320-L322">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeMinOrder.liftRight"><span class="name">GradeMinOrder</span>.<span class="name">liftRight</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> <span class="fn">𝕆</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcovby : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmin : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span></div></div><p>Lifts a graded order along a strictly monotone function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder.liftRight">GradeMinOrder.liftRight</a> <span class="fn">f</span> <span class="fn">hf</span> <span class="fn">hcovby</span> <span class="fn">hmin</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let src := <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.liftRight">GradeOrder.liftRight</a> <span class="fn">f</span> <span class="fn">hf</span> <span class="fn">hcovby</span></span>;
+  <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder.mk">GradeMinOrder.mk</a> <span class="fn">(_ : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">x</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> (<span class="fn"><span class="fn">f</span> <span class="fn">x</span></span>)</span>)</span></span></span>)</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-GradeMinOrder.liftRight" class="instances-for-list"></ul></details></div></div><div class="decl" id="GradeMaxOrder.liftRight"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L328-L330">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeMaxOrder.liftRight"><span class="name">GradeMaxOrder</span>.<span class="name">liftRight</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder">GradeMaxOrder</a> <span class="fn">𝕆</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcovby : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmax : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder">GradeMaxOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span></div></div><p>Lifts a graded order along a strictly monotone function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder.liftRight">GradeMaxOrder.liftRight</a> <span class="fn">f</span> <span class="fn">hf</span> <span class="fn">hcovby</span> <span class="fn">hmax</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let src := <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.liftRight">GradeOrder.liftRight</a> <span class="fn">f</span> <span class="fn">hf</span> <span class="fn">hcovby</span></span>;
+  <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMaxOrder.mk">GradeMaxOrder.mk</a> <span class="fn">(_ : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">x</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><a href="../.././Mathlib/Order/Grade.html#grade">grade</a> <span class="fn">𝕆</span> (<span class="fn"><span class="fn">f</span> <span class="fn">x</span></span>)</span>)</span></span></span>)</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-GradeMaxOrder.liftRight" class="instances-for-list"></ul></details></div></div><div class="decl" id="GradeBoundedOrder.liftRight"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L336-L339">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder.liftRight"><span class="name">GradeBoundedOrder</span>.<span class="name">liftRight</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕆 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">𝕆</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder">GradeBoundedOrder</a> <span class="fn">𝕆</span> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">β</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcovby : <span class="fn">∀ (<span class="fn">a </span>b : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">b</span></span> → <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn"><span class="fn">f</span> <span class="fn">b</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmin : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmax : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><span class="fn">f</span> <span class="fn">a</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeBoundedOrder">GradeBoundedOrder</a> <span class="fn">𝕆</span> <span class="fn">α</span></span></div></div><p>Lifts a graded order along a strictly monotone function.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-GradeBoundedOrder.liftRight" class="instances-for-list"></ul></details></div></div><div class="mod_doc"><h4 class="markdown-heading" id="Fin-n-graded-to-ℕ-graded-to-ℤ-graded"><code><a href="../.././Init/Prelude.html#Fin">Fin</a> n</code>-graded to <code>ℕ</code>-graded to <code>ℤ</code>-graded <a class="hover-link" href="#Fin-n-graded-to-ℕ-graded-to-ℤ-graded">#</a></h4></div><div class="decl" id="GradeOrder.finToNat"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L349-L350">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeOrder.finToNat"><span class="name">GradeOrder</span>.<span class="name">finToNat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> (<span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>) <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">α</span></span></div></div><p>A <code><a href="../.././Init/Prelude.html#Fin">Fin</a> n</code>-graded order is also <code>ℕ</code>-graded. We do not mark this an instance because <code>n</code> is not
+inferrable.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.finToNat">GradeOrder.finToNat</a> <span class="fn">n</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.liftLeft">GradeOrder.liftLeft</a> <span class="fn">Fin.val</span> <span class="fn">(_ : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">Fin.val</span></span>)</span> <span class="fn">(_ : <span class="fn">∀ (<span class="fn">x </span>x_1 : <span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">x_1</span></span> → <span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">↑<span class="fn">x_1</span></span></span></span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-GradeOrder.finToNat" class="instances-for-list"></ul></details></div></div><div class="decl" id="GradeMinOrder.finToNat"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L357-L362">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeMinOrder.finToNat"><span class="name">GradeMinOrder</span>.<span class="name">finToNat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> (<span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>) <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder">GradeMinOrder</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">α</span></span></div></div><p>A <code><a href="../.././Init/Prelude.html#Fin">Fin</a> n</code>-graded order is also <code>ℕ</code>-graded. We do not mark this an instance because <code>n</code> is not
+inferrable.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder.finToNat">GradeMinOrder.finToNat</a> <span class="fn">n</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeMinOrder.liftLeft">GradeMinOrder.liftLeft</a> <span class="fn">Fin.val</span> <span class="fn">(_ : <span class="fn"><a href="../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">Fin.val</span></span>)</span> <span class="fn">(_ : <span class="fn">∀ (<span class="fn">x </span>x_1 : <span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">x_1</span></span> → <span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../.././Mathlib/Order/Cover.html#Covby">⋖</a> <span class="fn">↑<span class="fn">x_1</span></span></span></span></span>)</span>
+    <span class="fn">(_ : <span class="fn">∀ (<span class="fn">a</span> : <span class="fn"><a href="../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">n</span></span>), <span class="fn"><span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">a</span></span> → <span class="fn"><a href="../.././Mathlib/Order/Max.html#IsMin">IsMin</a> <span class="fn">↑<span class="fn">a</span></span></span></span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-GradeMinOrder.finToNat" class="instances-for-list"></ul></details></div></div><div class="decl" id="GradeOrder.natToInt"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/Grade.lean#L365-L366">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Order/Grade.html#GradeOrder.natToInt"><span class="name">GradeOrder</span>.<span class="name">natToInt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Init/Algebra/Order.html#Preorder">Preorder</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <a href="../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder">GradeOrder</a> <a href="../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">α</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">GradeOrder.natToInt</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Order/Grade.html#GradeOrder.liftLeft">GradeOrder.liftLeft</a> (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">↑<span class="fn">x</span></span></span>) <a href="../.././Mathlib/Data/Int/Basic.html#Int.coe_nat_strictMono">Int.coe_nat_strictMono</a> <a href="../.././Mathlib/Order/Grade.html#GradeOrder.natToInt.proof_1">GradeOrder.natToInt.proof_1</a></span></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

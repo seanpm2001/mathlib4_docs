@@ -1,0 +1,840 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="stylesheet" href="../../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../../.././favicon.ico"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.MeasureTheory.Function.ConditionalExpectation.Basic</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.MeasureTheory.Function.ConditionalExpectation.Basic";</script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">MeasureTheory</span>.<span class="name">Function</span>.<span class="name">ConditionalExpectation</span>.<span class="name">Basic</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">MeasureTheory</span>.<span class="name">Function</span>.<span class="name">ConditionalExpectation</span>.<span class="name">Basic</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL1.html">Mathlib.MeasureTheory.Function.ConditionalExpectation.CondexpL1</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.MeasureTheory.Function.ConditionalExpectation.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_def"><span class="name">MeasureTheory</span>.<span class="name">condexp_def</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp"><span class="name">MeasureTheory</span>.<span class="name">condexp</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.«term_[_|_]»"><span class="name">MeasureTheory</span>.<span class="name">«term_[_|_]»</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_of_not_le"><span class="name">MeasureTheory</span>.<span class="name">condexp_of_not_le</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_of_not_sigmaFinite"><span class="name">MeasureTheory</span>.<span class="name">condexp_of_not_sigmaFinite</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_of_sigmaFinite"><span class="name">MeasureTheory</span>.<span class="name">condexp_of_sigmaFinite</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_of_stronglyMeasurable"><span class="name">MeasureTheory</span>.<span class="name">condexp_of_stronglyMeasurable</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_const"><span class="name">MeasureTheory</span>.<span class="name">condexp_const</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_ae_eq_condexpL1"><span class="name">MeasureTheory</span>.<span class="name">condexp_ae_eq_condexpL1</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_ae_eq_condexpL1Clm"><span class="name">MeasureTheory</span>.<span class="name">condexp_ae_eq_condexpL1Clm</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_undef"><span class="name">MeasureTheory</span>.<span class="name">condexp_undef</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_zero"><span class="name">MeasureTheory</span>.<span class="name">condexp_zero</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.stronglyMeasurable_condexp"><span class="name">MeasureTheory</span>.<span class="name">stronglyMeasurable_condexp</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_congr_ae"><span class="name">MeasureTheory</span>.<span class="name">condexp_congr_ae</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_of_aestronglyMeasurable'"><span class="name">MeasureTheory</span>.<span class="name">condexp_of_aestronglyMeasurable'</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.integrable_condexp"><span class="name">MeasureTheory</span>.<span class="name">integrable_condexp</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.set_integral_condexp"><span class="name">MeasureTheory</span>.<span class="name">set_integral_condexp</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.integral_condexp"><span class="name">MeasureTheory</span>.<span class="name">integral_condexp</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.ae_eq_condexp_of_forall_set_integral_eq"><span class="name">MeasureTheory</span>.<span class="name">ae_eq_condexp_of_forall_set_integral_eq</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_bot'"><span class="name">MeasureTheory</span>.<span class="name">condexp_bot'</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_bot_ae_eq"><span class="name">MeasureTheory</span>.<span class="name">condexp_bot_ae_eq</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_bot"><span class="name">MeasureTheory</span>.<span class="name">condexp_bot</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_add"><span class="name">MeasureTheory</span>.<span class="name">condexp_add</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_finset_sum"><span class="name">MeasureTheory</span>.<span class="name">condexp_finset_sum</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_smul"><span class="name">MeasureTheory</span>.<span class="name">condexp_smul</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_neg"><span class="name">MeasureTheory</span>.<span class="name">condexp_neg</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_sub"><span class="name">MeasureTheory</span>.<span class="name">condexp_sub</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_condexp_of_le"><span class="name">MeasureTheory</span>.<span class="name">condexp_condexp_of_le</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_mono"><span class="name">MeasureTheory</span>.<span class="name">condexp_mono</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_nonneg"><span class="name">MeasureTheory</span>.<span class="name">condexp_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.condexp_nonpos"><span class="name">MeasureTheory</span>.<span class="name">condexp_nonpos</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.tendsto_condexpL1_of_dominated_convergence"><span class="name">MeasureTheory</span>.<span class="name">tendsto_condexpL1_of_dominated_convergence</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.tendsto_condexp_unique"><span class="name">MeasureTheory</span>.<span class="name">tendsto_condexp_unique</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Conditional-expectation">Conditional expectation <a class="hover-link" href="#Conditional-expectation">#</a></h1><p>We build the conditional expectation of an integrable function <code>f</code> with value in a Banach space
+with respect to a measure <code>μ</code> (defined on a measurable space structure <code>m0</code>) and a measurable space
+structure <code>m</code> with <code>hm : m ≤ m0</code> (a sub-sigma-algebra). This is an <code>m</code>-strongly measurable
+function <code>μ[f|hm]</code> which is integrable and verifies <code>∫ x in s, μ[f|hm] x ∂μ = ∫ x in s, f x ∂μ</code>
+for all <code>m</code>-measurable sets <code>s</code>. It is unique as an element of <code>L¹</code>.</p><p>The construction is done in four steps:</p><ul>
+<li>Define the conditional expectation of an <code>L²</code> function, as an element of <code>L²</code>. This is the
+orthogonal projection on the subspace of almost everywhere <code>m</code>-measurable functions.</li>
+<li>Show that the conditional expectation of the indicator of a measurable set with finite measure
+is integrable and define a map <code><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> α → (E →L[ℝ] (α →₁[μ] E))</code> which to a set associates a linear
+map. That linear map sends <code>x ∈ E</code> to the conditional expectation of the indicator of the set
+with value <code>x</code>.</li>
+<li>Extend that map to <code>condexpL1Clm : (α →₁[μ] E) →L[ℝ] (α →₁[μ] E)</code>. This is done using the same
+construction as the Bochner integral (see the file <code>MeasureTheory/Integral/SetToL1</code>).</li>
+<li>Define the conditional expectation of a function <code>f : α → E</code>, which is an integrable function
+<code>α → E</code> equal to 0 if <code>f</code> is not integrable, and equal to an <code>m</code>-measurable representative of
+<code>condexpL1Clm</code> applied to <code>[f]</code>, the equivalence class of <code>f</code> in <code>L¹</code>.</li>
+</ul><p>The first step is done in <code>MeasureTheory.Function.ConditionalExpectation.CondexpL2</code>, the two
+next steps in <code>MeasureTheory.Function.ConditionalExpectation.CondexpL1</code> and the final step is
+performed in this file.</p><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><p>The conditional expectation and its properties</p><ul>
+<li><code><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">condexp</a> (m : <a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> α) (μ : <a href="../../../.././Init/WF.html#Measure">Measure</a> α) (f : α → E)</code>: conditional expectation of <code>f</code>
+with respect to <code>m</code>.</li>
+<li><code><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.integrable_condexp">integrable_condexp</a></code> : <code><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">condexp</a></code> is integrable.</li>
+<li><code><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.stronglyMeasurable_condexp">stronglyMeasurable_condexp</a></code> : <code><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">condexp</a></code> is <code>m</code>-strongly-measurable.</li>
+<li><code><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.set_integral_condexp">set_integral_condexp</a> (hf : Integrable f μ) (hs : MeasurableSet[m] s)</code> : if <code>m ≤ m0</code> (the
+σ-algebra over which the measure is defined), then the conditional expectation verifies
+<code>∫ x in s, <a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">condexp</a> m μ f x ∂μ = ∫ x in s, f x ∂μ</code> for any <code>m</code>-measurable set <code>s</code>.</li>
+</ul><p>While <code><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">condexp</a></code> is function-valued, we also define <code>condexpL1</code> with value in <code>L1</code> and a continuous
+linear map <code>condexpL1Clm</code> from <code>L1</code> to <code>L1</code>. <code><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">condexp</a></code> should be used in most cases.</p><p>Uniqueness of the conditional expectation</p><ul>
+<li><code><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.ae_eq_condexp_of_forall_set_integral_eq">ae_eq_condexp_of_forall_set_integral_eq</a></code>: an a.e. <code>m</code>-measurable function which verifies the
+equality of integrals is a.e. equal to <code><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">condexp</a></code>.</li>
+</ul><h2 class="markdown-heading" id="Notations">Notations <a class="hover-link" href="#Notations">#</a></h2><p>For a measure <code>μ</code> defined on a measurable space structure <code>m0</code>, another measurable space structure
+<code>m</code> with <code>hm : m ≤ m0</code> (a sub-σ-algebra) and a function <code>f</code>, we define the notation</p><ul>
+<li><code>μ[f|m] = <a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">condexp</a> m μ f</code>.</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>conditional expectation, conditional expected value</p></div><div class="decl" id="MeasureTheory.condexp_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L90-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_def"><span class="name">MeasureTheory</span>.<span class="name">condexp_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">if hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span> then
+    <span class="fn">if h : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm</span></span>)</span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span></span> then
+      <span class="fn">if <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.StronglyMeasurable">MeasureTheory.StronglyMeasurable</a> <span class="fn">f</span></span> then <span class="fn">f</span>
+      else
+        <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/AEMeasurable.html#MeasureTheory.AEStronglyMeasurable'.mk">MeasureTheory.AEStronglyMeasurable'.mk</a> <span class="fn">↑<span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL1.html#MeasureTheory.condexpL1">MeasureTheory.condexpL1</a> <span class="fn">hm</span> <span class="fn">μ</span> <span class="fn">f</span></span>)</span></span>
+          <span class="fn">(_ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/AEMeasurable.html#MeasureTheory.AEStronglyMeasurable'">MeasureTheory.AEStronglyMeasurable'</a> <span class="fn">m</span> (<span class="fn">↑<span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL1.html#MeasureTheory.condexpL1">MeasureTheory.condexpL1</a> <span class="fn">hm</span> <span class="fn">μ</span> <span class="fn">f</span></span>)</span></span>) <span class="fn">μ</span></span>)</span></span></span>
+    else <span class="fn">0</span></span>
+  else <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L90-L103">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp"><span class="name">MeasureTheory</span>.<span class="name">condexp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span></div></div><p>Conditional expectation of a function. It is defined as 0 if any one of the following conditions
+is true:</p><ul>
+<li><code>m</code> is not a sub-σ-algebra of <code>m0</code>,</li>
+<li><code>μ</code> is not σ-finite with respect to <code>m</code>,</li>
+<li><code>f</code> is not integrable.</li>
+</ul><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">@<a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a></a> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.wrapped._@.Mathlib.MeasureTheory.Function.ConditionalExpectation.Basic._hyg.107">MeasureTheory.wrapped✝</a>.1</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MeasureTheory.condexp" class="instances-for-list"></ul></details></div></div><div class="decl" id="MeasureTheory.«term_[_|_]»"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L107-L107">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.«term_[_|_]»"><span class="name">MeasureTheory</span>.<span class="name">«term_[_|_]»</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././Init/Prelude.html#Lean.TrailingParserDescr">Lean.TrailingParserDescr</a></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MeasureTheory.«term_[_|_]»" class="instances-for-list"></ul></details></div></div><div class="decl" id="MeasureTheory.condexp_of_not_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L109-L109">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_of_not_le"><span class="name">MeasureTheory</span>.<span class="name">condexp_of_not_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm_not : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_of_not_sigmaFinite"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L112-L113">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_of_not_sigmaFinite"><span class="name">MeasureTheory</span>.<span class="name">condexp_of_not_sigmaFinite</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hμm_not : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_of_sigmaFinite"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L116-L126">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_of_sigmaFinite"><span class="name">MeasureTheory</span>.<span class="name">condexp_of_sigmaFinite</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hμm : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm</span></span>)</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span> then
+    <span class="fn">if <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.StronglyMeasurable">MeasureTheory.StronglyMeasurable</a> <span class="fn">f</span></span> then <span class="fn">f</span>
+    else
+      <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/AEMeasurable.html#MeasureTheory.AEStronglyMeasurable'.mk">MeasureTheory.AEStronglyMeasurable'.mk</a> <span class="fn">↑<span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL1.html#MeasureTheory.condexpL1">MeasureTheory.condexpL1</a> <span class="fn">hm</span> <span class="fn">μ</span> <span class="fn">f</span></span>)</span></span>
+        <span class="fn">(_ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/AEMeasurable.html#MeasureTheory.AEStronglyMeasurable'">MeasureTheory.AEStronglyMeasurable'</a> <span class="fn">m</span> (<span class="fn">↑<span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL1.html#MeasureTheory.condexpL1">MeasureTheory.condexpL1</a> <span class="fn">hm</span> <span class="fn">μ</span> <span class="fn">f</span></span>)</span></span>) <span class="fn">μ</span></span>)</span></span></span>
+  else <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_of_stronglyMeasurable"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L129-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_of_stronglyMeasurable"><span class="name">MeasureTheory</span>.<span class="name">condexp_of_stronglyMeasurable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hμm : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm</span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.StronglyMeasurable">MeasureTheory.StronglyMeasurable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfi : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L134-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_const"><span class="name">MeasureTheory</span>.<span class="name">condexp_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <span class="fn">F'</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsFiniteMeasure">MeasureTheory.IsFiniteMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">c</span></span></span>) <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">c</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_ae_eq_condexpL1"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L139-L151">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_ae_eq_condexpL1"><span class="name">MeasureTheory</span>.<span class="name">condexp_ae_eq_condexpL1</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hμm : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm</span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn">↑<span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL1.html#MeasureTheory.condexpL1">MeasureTheory.condexpL1</a> <span class="fn">hm</span> <span class="fn">μ</span> <span class="fn">f</span></span>)</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_ae_eq_condexpL1Clm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L155-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_ae_eq_condexpL1Clm"><span class="name">MeasureTheory</span>.<span class="name">condexp_ae_eq_condexpL1Clm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm</span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a>   <span class="fn">↑<span class="fn">↑(<span class="fn">↑(<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL1.html#MeasureTheory.condexpL1Clm">MeasureTheory.condexpL1Clm</a> <span class="fn">F'</span> <span class="fn">hm</span> <span class="fn">μ</span></span>) (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable.toL1">MeasureTheory.Integrable.toL1</a> <span class="fn">f</span> <span class="fn">hf</span></span>)</span>)</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_undef"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L162-L168">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_undef"><span class="name">MeasureTheory</span>.<span class="name">condexp_undef</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L172-L179">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_zero"><span class="name">MeasureTheory</span>.<span class="name">condexp_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">0</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="MeasureTheory.stronglyMeasurable_condexp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L182-L192">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.stronglyMeasurable_condexp"><span class="name">MeasureTheory</span>.<span class="name">stronglyMeasurable_condexp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.StronglyMeasurable">MeasureTheory.StronglyMeasurable</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_congr_ae"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L195-L203">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_congr_ae"><span class="name">MeasureTheory</span>.<span class="name">condexp_congr_ae</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">f</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">g</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_of_aestronglyMeasurable'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L206-L210">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_of_aestronglyMeasurable'"><span class="name">MeasureTheory</span>.<span class="name">condexp_of_aestronglyMeasurable'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hμm : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm</span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/AEMeasurable.html#MeasureTheory.AEStronglyMeasurable'">MeasureTheory.AEStronglyMeasurable'</a> <span class="fn">m</span> <span class="fn">f</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfi : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn">f</span></span></div></div></div></div><div class="decl" id="MeasureTheory.integrable_condexp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L213-L219">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.integrable_condexp"><span class="name">MeasureTheory</span>.<span class="name">integrable_condexp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="MeasureTheory.set_integral_condexp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L224-L227">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.set_integral_condexp"><span class="name">MeasureTheory</span>.<span class="name">set_integral_condexp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm</span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span></span></div></div><p>The integral of the conditional expectation <code>μ[f|hm]</code> over an <code>m</code>-measurable set is equal to
+the integral of <code>f</code> on that set.</p></div></div><div class="decl" id="MeasureTheory.integral_condexp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L230-L234">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.integral_condexp"><span class="name">MeasureTheory</span>.<span class="name">integral_condexp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[hμm : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm</span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∫ (x : <span class="fn">α</span>), <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∫ (x : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.ae_eq_condexp_of_forall_set_integral_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L240-L248">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.ae_eq_condexp_of_forall_set_integral_eq"><span class="name">MeasureTheory</span>.<span class="name">ae_eq_condexp_of_forall_set_integral_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm</span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg_int_finite : <span class="fn">∀ (<span class="fn">s</span> : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>), <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <a href="../../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span> → <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Integral/IntegrableOn.html#MeasureTheory.IntegrableOn">MeasureTheory.IntegrableOn</a> <span class="fn">g</span> <span class="fn">s</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg_eq : <span class="fn">∀ (<span class="fn">s</span> : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>), <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <a href="../../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span> → <span class="fn"><span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgm : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/AEMeasurable.html#MeasureTheory.AEStronglyMeasurable'">MeasureTheory.AEStronglyMeasurable'</a> <span class="fn">m</span> <span class="fn">g</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">g</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span></span></div></div><p><strong>Uniqueness of the conditional expectation</strong>
+If a function is a.e. <code>m</code>-measurable, verifies an integrability condition and has same integral
+as <code>f</code> on all <code>m</code>-measurable sets, then it is a.e. equal to <code>μ[f|hm]</code>.</p></div></div><div class="decl" id="MeasureTheory.condexp_bot'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L251-L271">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_bot'"><span class="name">MeasureTheory</span>.<span class="name">condexp_bot'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hμ : <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <a href="../../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><span class="fn">(<span class="fn"><a href="../../../.././Mathlib/Data/Real/ENNReal.html#ENNReal.toReal">ENNReal.toReal</a> (<span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">Set.univ</span></span>)</span>)<a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">∫ (x : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span></span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_bot_ae_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L274-L280">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_bot_ae_eq"><span class="name">MeasureTheory</span>.<span class="name">condexp_bot_ae_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <a href="../../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn">fun <span class="fn">x</span> =&gt
+  <span class="fn"><span class="fn">(<span class="fn"><a href="../../../.././Mathlib/Data/Real/ENNReal.html#ENNReal.toReal">ENNReal.toReal</a> (<span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">Set.univ</span></span>)</span>)<a href="../../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">∫ (x : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span></span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_bot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L283-L284">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_bot"><span class="name">MeasureTheory</span>.<span class="name">condexp_bot</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsProbabilityMeasure">MeasureTheory.IsProbabilityMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <a href="../../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">∫ (x : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L287-L297">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_add"><span class="name">MeasureTheory</span>.<span class="name">condexp_add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> (<span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">g</span></span>)</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a>   <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">g</span></span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_finset_sum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L300-L307">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_finset_sum"><span class="name">MeasureTheory</span>.<span class="name">condexp_finset_sum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">i</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> (<span class="fn"><a href="../../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">s</span> <span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">i</span></span></span></span>)</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a>   <span class="fn"><a href="../../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">s</span> <span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L310-L320">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_smul"><span class="name">MeasureTheory</span>.<span class="name">condexp_smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> (<span class="fn"><span class="fn">c</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">f</span></span>)</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn"><span class="fn">c</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L323-L328">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_neg"><span class="name">MeasureTheory</span>.<span class="name">condexp_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> (<span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">f</span></span>)</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn"><a href="../../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L331-L334">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_sub"><span class="name">MeasureTheory</span>.<span class="name">condexp_sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> (<span class="fn"><span class="fn">f</span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">g</span></span>)</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a>   <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">g</span></span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_condexp_of_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L337-L351">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_condexp_of_le"><span class="name">MeasureTheory</span>.<span class="name">condexp_condexp_of_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m₁ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m₂ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm₁₂ : <span class="fn"><span class="fn">m₁</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hm₂ : <span class="fn"><span class="fn">m₂</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm₂</span></span>)</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m₁</span> <span class="fn">μ</span> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m₂</span> <span class="fn">μ</span> <span class="fn">f</span></span>)</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m₁</span> <span class="fn">μ</span> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L354-L363">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_mono"><span class="name">MeasureTheory</span>.<span class="name">condexp_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Order/Lattice.html#NormedLatticeAddCommGroup">NormedLatticeAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><span class="fn">f</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">≤ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">]</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">≤ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">]</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">g</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L366-L371">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_nonneg"><span class="name">MeasureTheory</span>.<span class="name">condexp_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Order/Lattice.html#NormedLatticeAddCommGroup">NormedLatticeAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">0</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">≤ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">]</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">≤ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">]</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.condexp_nonpos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L374-L379">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp_nonpos"><span class="name">MeasureTheory</span>.<span class="name">condexp_nonpos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Order/Lattice.html#NormedLatticeAddCommGroup">NormedLatticeAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Order/SMul.html#OrderedSMul">OrderedSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn">f</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">≤ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">]</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">≤ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyLE">]</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="MeasureTheory.tendsto_condexpL1_of_dominated_convergence"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L385-L391">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.tendsto_condexpL1_of_dominated_convergence"><span class="name">MeasureTheory</span>.<span class="name">tendsto_condexpL1_of_dominated_convergence</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.SigmaFinite">MeasureTheory.SigmaFinite</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.Measure.trim">MeasureTheory.Measure.trim</a> <span class="fn">μ</span> <span class="fn">hm</span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{fs : <span class="fn"><a href="../../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(bound_fs : <span class="fn"><span class="fn">α</span> → <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfs_meas : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> (<span class="fn"><span class="fn">fs</span> <span class="fn">n</span></span>) <span class="fn">μ</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_int_bound_fs : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">bound_fs</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfs_bound : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn">∀ᵐ (x : <span class="fn">α</span>) ∂<span class="fn">μ</span>, <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">fs</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">bound_fs</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfs : <span class="fn">∀ᵐ (x : <span class="fn">α</span>) ∂<span class="fn">μ</span>, <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">fs</span> <span class="fn">n</span> <span class="fn">x</span></span></span>) <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><span class="fn">f</span> <span class="fn">x</span></span>)</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL1.html#MeasureTheory.condexpL1">MeasureTheory.condexpL1</a> <span class="fn">hm</span> <span class="fn">μ</span> (<span class="fn"><span class="fn">fs</span> <span class="fn">n</span></span>)</span></span>) <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL1.html#MeasureTheory.condexpL1">MeasureTheory.condexpL1</a> <span class="fn">hm</span> <span class="fn">μ</span> <span class="fn">f</span></span>)</span>)</span></div></div><p><strong>Lebesgue dominated convergence theorem</strong>: sufficient conditions under which almost
+everywhere convergence of a sequence of functions implies the convergence of their image by
+<code>condexpL1</code>.</p></div></div><div class="decl" id="MeasureTheory.tendsto_condexp_unique"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.lean#L398-L422">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.tendsto_condexp_unique"><span class="name">MeasureTheory</span>.<span class="name">tendsto_condexp_unique</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F' : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m0 : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(fs : <span class="fn"><a href="../../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(gs : <span class="fn"><a href="../../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">α</span> → <span class="fn">F'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfs_int : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> (<span class="fn"><span class="fn">fs</span> <span class="fn">n</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgs_int : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> (<span class="fn"><span class="fn">gs</span> <span class="fn">n</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfs : <span class="fn">∀ᵐ (x : <span class="fn">α</span>) ∂<span class="fn">μ</span>, <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">fs</span> <span class="fn">n</span> <span class="fn">x</span></span></span>) <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><span class="fn">f</span> <span class="fn">x</span></span>)</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgs : <span class="fn">∀ᵐ (x : <span class="fn">α</span>) ∂<span class="fn">μ</span>, <span class="fn"><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">gs</span> <span class="fn">n</span> <span class="fn">x</span></span></span>) <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><span class="fn">g</span> <span class="fn">x</span></span>)</span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(bound_fs : <span class="fn"><span class="fn">α</span> → <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_int_bound_fs : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">bound_fs</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(bound_gs : <span class="fn"><span class="fn">α</span> → <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_int_bound_gs : <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">bound_gs</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfs_bound : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn">∀ᵐ (x : <span class="fn">α</span>) ∂<span class="fn">μ</span>, <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">fs</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">bound_fs</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hgs_bound : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn">∀ᵐ (x : <span class="fn">α</span>) ∂<span class="fn">μ</span>, <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">gs</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">bound_gs</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> (<span class="fn"><span class="fn">fs</span> <span class="fn">n</span></span>)</span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> (<span class="fn"><span class="fn">gs</span> <span class="fn">n</span></span>)</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">f</span></span> <a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn"><a href="../../../.././Mathlib/MeasureTheory/Function/ConditionalExpectation/Basic.html#MeasureTheory.condexp">MeasureTheory.condexp</a> <span class="fn">m</span> <span class="fn">μ</span> <span class="fn">g</span></span></span></div></div><p>If two sequences of functions have a.e. equal conditional expectations at each step, converge
+and verify dominated convergence hypotheses, then the conditional expectations of their limits are
+a.e. equal.</p></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

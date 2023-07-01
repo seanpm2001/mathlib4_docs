@@ -1,0 +1,174 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Data.MvPolynomial.PDeriv</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Data.MvPolynomial.PDeriv";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Data</span>.<span class="name">MvPolynomial</span>.<span class="name">PDeriv</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Data</span>.<span class="name">MvPolynomial</span>.<span class="name">PDeriv</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Data/MvPolynomial/Derivation.html">Mathlib.Data.MvPolynomial.Derivation</a></li><li><a href="../../.././Mathlib/Data/MvPolynomial/Variables.html">Mathlib.Data.MvPolynomial.Variables</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Data.MvPolynomial.PDeriv" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv"><span class="name">MvPolynomial</span>.<span class="name">pderiv</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv_def"><span class="name">MvPolynomial</span>.<span class="name">pderiv_def</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv_monomial"><span class="name">MvPolynomial</span>.<span class="name">pderiv_monomial</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv_C"><span class="name">MvPolynomial</span>.<span class="name">pderiv_C</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv_one"><span class="name">MvPolynomial</span>.<span class="name">pderiv_one</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv_X"><span class="name">MvPolynomial</span>.<span class="name">pderiv_X</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv_X_self"><span class="name">MvPolynomial</span>.<span class="name">pderiv_X_self</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv_X_of_ne"><span class="name">MvPolynomial</span>.<span class="name">pderiv_X_of_ne</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv_eq_zero_of_not_mem_vars"><span class="name">MvPolynomial</span>.<span class="name">pderiv_eq_zero_of_not_mem_vars</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv_monomial_single"><span class="name">MvPolynomial</span>.<span class="name">pderiv_monomial_single</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv_mul"><span class="name">MvPolynomial</span>.<span class="name">pderiv_mul</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.pderiv_C_mul"><span class="name">MvPolynomial</span>.<span class="name">pderiv_C_mul</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Partial-derivatives-of-polynomials">Partial derivatives of polynomials <a class="hover-link" href="#Partial-derivatives-of-polynomials">#</a></h1><p>This file defines the notion of the formal <em>partial derivative</em> of a polynomial,
+the derivative with respect to a single variable.
+This derivative is not connected to the notion of derivative from analysis.
+It is based purely on the polynomial exponents and coefficients.</p><h2 class="markdown-heading" id="Main-declarations">Main declarations <a class="hover-link" href="#Main-declarations">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> i p</code> : the partial derivative of <code>p</code> with respect to <code>i</code>, as a bundled
+derivation of <code><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> σ R</code>.</li>
+</ul><h2 class="markdown-heading" id="Notation">Notation <a class="hover-link" href="#Notation">#</a></h2><p>As in other polynomial files, we typically use the notation:</p><ul>
+<li>
+<p><code>σ : Type _</code> (indexing the variables)</p>
+</li>
+<li>
+<p><code>R : Type _</code> <code>[CommRing R]</code> (the coefficients)</p>
+</li>
+<li>
+<p><code>s : σ →₀ ℕ</code>, a function from <code>σ</code> to <code>ℕ</code> which is zero away from a finite set.
+This will give rise to a monomial in <code><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> σ R</code> which mathematicians might call <code>X^s</code></p>
+</li>
+<li>
+<p><code>a : R</code></p>
+</li>
+<li>
+<p><code>i : σ</code>, with corresponding monomial <code>X i</code>, often denoted <code>X_i</code> by mathematicians</p>
+</li>
+<li>
+<p><code>p : <a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> σ R</code></p>
+</li>
+</ul></div><div class="decl" id="MvPolynomial.pderiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L64-L66">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv"><span class="name">MvPolynomial</span>.<span class="name">pderiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">σ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Derivation/Basic.html#Derivation">Derivation</a> <span class="fn">R</span> (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>) (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></div></div><p><code><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">pderiv</a> i p</code> is the partial derivative of <code>p</code> with respect to <code>i</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Derivation.html#MvPolynomial.mkDerivation">MvPolynomial.mkDerivation</a> <span class="fn">R</span> (<span class="fn"><a href="../../.././Mathlib/Data/Pi/Algebra.html#Pi.single">Pi.single</a> <span class="fn">i</span> <span class="fn">1</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MvPolynomial.pderiv" class="instances-for-list"></ul></details></div></div><div class="decl" id="MvPolynomial.pderiv_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L69-L70">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv_def"><span class="name">MvPolynomial</span>.<span class="name">pderiv_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">σ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">σ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Derivation.html#MvPolynomial.mkDerivation">MvPolynomial.mkDerivation</a> <span class="fn">R</span> (<span class="fn"><a href="../../.././Mathlib/Data/Pi/Algebra.html#Pi.single">Pi.single</a> <span class="fn">i</span> <span class="fn">1</span></span>)</span></span></div></div></div></div><div class="decl" id="MvPolynomial.pderiv_monomial"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L74-L82">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv_monomial"><span class="name">MvPolynomial</span>.<span class="name">pderiv_monomial</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><span class="fn">σ</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">σ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.monomial">MvPolynomial.monomial</a> <span class="fn">s</span></span>) <span class="fn">a</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.monomial">MvPolynomial.monomial</a> (<span class="fn"><span class="fn">s</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.single">Finsupp.single</a> <span class="fn">i</span> <span class="fn">1</span></span></span>)</span>) (<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑(<span class="fn">↑<span class="fn">s</span> <span class="fn">i</span></span>)</span></span>)</span></span></div></div></div></div><div class="decl" id="MvPolynomial.pderiv_C"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L85-L86">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv_C"><span class="name">MvPolynomial</span>.<span class="name">pderiv_C</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">σ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) (<span class="fn">↑<span class="fn">MvPolynomial.C</span> <span class="fn">a</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="MvPolynomial.pderiv_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L90-L90">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv_one"><span class="name">MvPolynomial</span>.<span class="name">pderiv_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">σ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="MvPolynomial.pderiv_X"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L94-L96">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv_X"><span class="name">MvPolynomial</span>.<span class="name">pderiv_X</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">σ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">σ</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">σ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.X">MvPolynomial.X</a> <span class="fn">j</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Pi/Algebra.html#Pi.single">Pi.single</a> <span class="fn">i</span> <span class="fn">1</span> <span class="fn">j</span></span></span></div></div></div></div><div class="decl" id="MvPolynomial.pderiv_X_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L101-L101">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv_X_self"><span class="name">MvPolynomial</span>.<span class="name">pderiv_X_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">σ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.X">MvPolynomial.X</a> <span class="fn">i</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="MvPolynomial.pderiv_X_of_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L106-L107">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv_X_of_ne"><span class="name">MvPolynomial</span>.<span class="name">pderiv_X_of_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">σ</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{j : <span class="fn">σ</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">j</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.X">MvPolynomial.X</a> <span class="fn">j</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="MvPolynomial.pderiv_eq_zero_of_not_mem_vars"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L111-L113">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv_eq_zero_of_not_mem_vars"><span class="name">MvPolynomial</span>.<span class="name">pderiv_eq_zero_of_not_mem_vars</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">σ</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Variables.html#MvPolynomial.vars">MvPolynomial.vars</a> <span class="fn">f</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="MvPolynomial.pderiv_monomial_single"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L116-L117">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv_monomial_single"><span class="name">MvPolynomial</span>.<span class="name">pderiv_monomial_single</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">σ</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.monomial">MvPolynomial.monomial</a> (<span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.single">Finsupp.single</a> <span class="fn">i</span> <span class="fn">n</span></span>)</span>) <span class="fn">a</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.monomial">MvPolynomial.monomial</a> (<span class="fn"><a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp.single">Finsupp.single</a> <span class="fn">i</span> (<span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span>)</span>)</span>) (<span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">n</span></span></span>)</span></span></div></div></div></div><div class="decl" id="MvPolynomial.pderiv_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L120-L122">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv_mul"><span class="name">MvPolynomial</span>.<span class="name">pderiv_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">σ</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) (<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">g</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) <span class="fn">g</span></span></span></span></span></div></div></div></div><div class="decl" id="MvPolynomial.pderiv_C_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Data/MvPolynomial/PDeriv.lean#L126-L127">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv_C_mul"><span class="name">MvPolynomial</span>.<span class="name">pderiv_C_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">σ</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) (<span class="fn"><span class="fn">↑<span class="fn">MvPolynomial.C</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">MvPolynomial.C</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/PDeriv.html#MvPolynomial.pderiv">MvPolynomial.pderiv</a> <span class="fn">i</span></span>) <span class="fn">f</span></span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

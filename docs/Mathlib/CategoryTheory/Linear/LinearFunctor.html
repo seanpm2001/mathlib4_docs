@@ -1,0 +1,330 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.CategoryTheory.Linear.LinearFunctor</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.CategoryTheory.Linear.LinearFunctor";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">CategoryTheory</span>.<span class="name">Linear</span>.<span class="name">LinearFunctor</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">CategoryTheory</span>.<span class="name">Linear</span>.<span class="name">LinearFunctor</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html">Mathlib.CategoryTheory.Linear.Basic</a></li><li><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html">Mathlib.CategoryTheory.Preadditive.AdditiveFunctor</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.CategoryTheory.Linear.LinearFunctor" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.Linear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">Linear</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.map_smul"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">map_smul</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.instLinearIdInstAdditiveId"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">instLinearIdInstAdditiveId</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.instLinearCompInstAdditiveComp"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">instLinearCompInstAdditiveComp</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.mapLinearMap_apply"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">mapLinearMap_apply</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.mapLinearMap"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">mapLinearMap</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.coe_mapLinearMap"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">coe_mapLinearMap</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.inducedFunctorLinear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">inducedFunctorLinear</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.fullSubcategoryInclusionLinear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">fullSubcategoryInclusionLinear</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.natLinear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">natLinear</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.intLinear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">intLinear</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.ratLinear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">ratLinear</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Equivalence.inverseLinear"><span class="name">CategoryTheory</span>.<span class="name">Equivalence</span>.<span class="name">inverseLinear</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Linear-Functors">Linear Functors <a class="hover-link" href="#Linear-Functors">#</a></h1><p>An additive functor between two <code>R</code>-linear categories is called <em>linear</em>
+if the induced map on hom types is a morphism of <code>R</code>-modules.</p><h1 class="markdown-heading" id="Implementation-details">Implementation details <a class="hover-link" href="#Implementation-details">#</a></h1><p><code><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">Functor.Linear</a></code> is a <code>Prop</code>-valued class, defined by saying that
+for every two objects <code>X</code> and <code>Y</code>, the map
+<code>F.map : (X ⟶ Y) → (F.obj X ⟶ F.obj Y)</code> is a morphism of <code>R</code>-modules.</p></div><div class="decl" id="CategoryTheory.Functor.Linear"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L34-L37">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">Linear</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><ul class="structure_fields" id="CategoryTheory.Functor.Linear.mk"><li id="CategoryTheory.Functor.Linear.map_smul" class="structure_field"><div class="structure_field_doc"><p>the functor induces a linear map on morphisms</p></div><div class="structure_field_info">map_smul : <span class="fn"><a href="../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn">∀ {<span class="fn">X </span>Y : <span class="fn">C</span>} (<span class="fn">f</span> : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>) (<span class="fn">r</span> : <span class="fn">R</span>), <span class="fn"><span class="fn"><span class="fn">F</span>.map (<span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">F</span>.map <span class="fn">f</span></span></span></span></span>) <a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#_auto._@.Mathlib.CategoryTheory.Linear.LinearFunctor._hyg.19">_auto✝</a></span></div></li></ul><p>An additive functor <code>F</code> is <code>R</code>-linear provided <code>F.map</code> is an <code>R</code>-module morphism.</p><details class="instances"><summary>Instances</summary><ul id="instances-list-CategoryTheory.Functor.Linear" class="instances-list"></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.map_smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L51-L52">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.map_smul"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">map_smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_5}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">F</span>.map (<span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">F</span>.map <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.instLinearIdInstAdditiveId"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L55-L55">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.instLinearIdInstAdditiveId"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">instLinearIdInstAdditiveId</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.id">𝟭</a> <span class="fn">C</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.instLinearIdInstAdditiveId">@<a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.instLinearIdInstAdditiveId">CategoryTheory.Functor.instLinearIdInstAdditiveId</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.instLinearIdInstAdditiveId.proof_1">@<a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.instLinearIdInstAdditiveId.proof_1">CategoryTheory.Functor.instLinearIdInstAdditiveId.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.instLinearCompInstAdditiveComp"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L57-L58">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.instLinearCompInstAdditiveComp"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">instLinearCompInstAdditiveComp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_6}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><span class="fn">D</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">E</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> (<span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.comp">⋙</a> <span class="fn">G</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.instLinearCompInstAdditiveComp">@<a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.instLinearCompInstAdditiveComp">CategoryTheory.Functor.instLinearCompInstAdditiveComp</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.instLinearCompInstAdditiveComp.proof_1">@<a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.instLinearCompInstAdditiveComp.proof_1">CategoryTheory.Functor.instLinearCompInstAdditiveComp.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.mapLinearMap_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L63-L63">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.mapLinearMap_apply"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">mapLinearMap_apply</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ (<span class="fn">a</span> : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>), <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.mapLinearMap">CategoryTheory.Functor.mapLinearMap</a> <span class="fn">R</span> <span class="fn">F</span></span>) <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Hom/Group.html#ZeroHom.toFun">ZeroHom.toFun</a> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.mapAddHom">CategoryTheory.Functor.mapAddHom</a> <span class="fn">F</span></span>)</span>) <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.mapLinearMap"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L64-L65">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.mapLinearMap"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">mapLinearMap</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>) <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn"><span class="fn"><span class="fn">F</span>.obj <span class="fn">X</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><span class="fn">F</span>.obj <span class="fn">Y</span></span></span></span></div></div><p><code>F.<a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.mapLinearMap">mapLinearMap</a></code> is an <code>R</code>-linear map whose underlying function is <code>F.map</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-CategoryTheory.Functor.mapLinearMap" class="instances-for-list"></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.coe_mapLinearMap"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L68-L68">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.coe_mapLinearMap"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">coe_mapLinearMap</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_5)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.mapLinearMap">CategoryTheory.Functor.mapLinearMap</a> <span class="fn">R</span> <span class="fn">F</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">F</span>.map</span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.inducedFunctorLinear"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L78-L78">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.inducedFunctorLinear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">inducedFunctorLinear</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> → <span class="fn">D</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/FullSubcategory.html#CategoryTheory.inducedFunctor">CategoryTheory.inducedFunctor</a> <span class="fn">F</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.inducedFunctorLinear">CategoryTheory.Functor.inducedFunctorLinear</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.inducedFunctorLinear.proof_1">CategoryTheory.Functor.inducedFunctorLinear.proof_1</a></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.fullSubcategoryInclusionLinear"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L83-L84">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.fullSubcategoryInclusionLinear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">fullSubcategoryInclusionLinear</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(Z : <span class="fn"><span class="fn">C</span> → <a href="../../.././foundational_types.html">Prop</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/FullSubcategory.html#CategoryTheory.fullSubcategoryInclusion">CategoryTheory.fullSubcategoryInclusion</a> <span class="fn">Z</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.fullSubcategoryInclusionLinear">CategoryTheory.Functor.fullSubcategoryInclusionLinear</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.fullSubcategoryInclusionLinear.proof_1">CategoryTheory.Functor.fullSubcategoryInclusionLinear.proof_1</a></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.natLinear"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L92-L93">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.natLinear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">natLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">F</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.natLinear">@<a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.natLinear">CategoryTheory.Functor.natLinear</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.natLinear.proof_1">@<a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.natLinear.proof_1">CategoryTheory.Functor.natLinear.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.intLinear"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L96-L97">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.intLinear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">intLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a> <span class="fn">F</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.intLinear">@<a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.intLinear">CategoryTheory.Functor.intLinear</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.intLinear.proof_1">@<a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.intLinear.proof_1">CategoryTheory.Functor.intLinear.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.ratLinear"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L102-L103">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.ratLinear"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">ratLinear</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <a href="../../.././Std/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <a href="../../.././Std/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <a href="../../.././Std/Data/Rat/Basic.html#Rat">ℚ</a> <span class="fn">F</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.ratLinear">@<a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.ratLinear">CategoryTheory.Functor.ratLinear</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.ratLinear.proof_1">@<a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.ratLinear.proof_1">CategoryTheory.Functor.ratLinear.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Equivalence.inverseLinear"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Linear/LinearFunctor.lean#L115-L119">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Equivalence.inverseLinear"><span class="name">CategoryTheory</span>.<span class="name">Equivalence</span>.<span class="name">inverseLinear</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/Basic.html#CategoryTheory.Linear">CategoryTheory.Linear</a> <span class="fn">R</span> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Equivalence.html#CategoryTheory.Equivalence">≌</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn"><span class="fn">e</span>.functor</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> <span class="fn"><span class="fn">e</span>.functor</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Functor.Linear">CategoryTheory.Functor.Linear</a> <span class="fn">R</span> <span class="fn"><span class="fn">e</span>.inverse</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Equivalence.inverseLinear">CategoryTheory.Equivalence.inverseLinear</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/CategoryTheory/Linear/LinearFunctor.html#CategoryTheory.Equivalence.inverseLinear.proof_1">CategoryTheory.Equivalence.inverseLinear.proof_1</a></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

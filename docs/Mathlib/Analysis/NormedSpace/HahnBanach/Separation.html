@@ -1,0 +1,299 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="stylesheet" href="../../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../../.././favicon.ico"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.NormedSpace.HahnBanach.Separation</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.NormedSpace.HahnBanach.Separation";</script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">NormedSpace</span>.<span class="name">HahnBanach</span>.<span class="name">Separation</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">NormedSpace</span>.<span class="name">HahnBanach</span>.<span class="name">Separation</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Analysis/Convex/Gauge.html">Mathlib.Analysis.Convex.Gauge</a></li><li><a href="../../../.././Mathlib/Analysis/Convex/Cone/Basic.html">Mathlib.Analysis.Convex.Cone.Basic</a></li><li><a href="../../../.././Mathlib/Topology/Algebra/Module/FiniteDimension.html">Mathlib.Topology.Algebra.Module.FiniteDimension</a></li><li><a href="../../../.././Mathlib/Topology/Algebra/Module/LocallyConvex.html">Mathlib.Topology.Algebra.Module.LocallyConvex</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.NormedSpace.HahnBanach.Separation" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#separate_convex_open_set"><span class="name">separate_convex_open_set</span></a></div><div class="nav_link"><a class="break_within" href="#geometric_hahn_banach_open"><span class="name">geometric_hahn_banach_open</span></a></div><div class="nav_link"><a class="break_within" href="#geometric_hahn_banach_open_point"><span class="name">geometric_hahn_banach_open_point</span></a></div><div class="nav_link"><a class="break_within" href="#geometric_hahn_banach_point_open"><span class="name">geometric_hahn_banach_point_open</span></a></div><div class="nav_link"><a class="break_within" href="#geometric_hahn_banach_open_open"><span class="name">geometric_hahn_banach_open_open</span></a></div><div class="nav_link"><a class="break_within" href="#geometric_hahn_banach_compact_closed"><span class="name">geometric_hahn_banach_compact_closed</span></a></div><div class="nav_link"><a class="break_within" href="#geometric_hahn_banach_closed_compact"><span class="name">geometric_hahn_banach_closed_compact</span></a></div><div class="nav_link"><a class="break_within" href="#geometric_hahn_banach_point_closed"><span class="name">geometric_hahn_banach_point_closed</span></a></div><div class="nav_link"><a class="break_within" href="#geometric_hahn_banach_closed_point"><span class="name">geometric_hahn_banach_closed_point</span></a></div><div class="nav_link"><a class="break_within" href="#geometric_hahn_banach_point_point"><span class="name">geometric_hahn_banach_point_point</span></a></div><div class="nav_link"><a class="break_within" href="#iInter_halfspaces_eq"><span class="name">iInter_halfspaces_eq</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Separation-Hahn-Banach-theorem">Separation Hahn-Banach theorem <a class="hover-link" href="#Separation-Hahn-Banach-theorem">#</a></h1><p>In this file we prove the geometric Hahn-Banach theorem. For any two disjoint convex sets, there
+exists a continuous linear functional separating them, geometrically meaning that we can intercalate
+a plane between them.</p><p>We provide many variations to stricten the result under more assumptions on the convex sets:</p><ul>
+<li><code><a href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_open">geometric_hahn_banach_open</a></code>: One set is open. Weak separation.</li>
+<li><code><a href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_open_point">geometric_hahn_banach_open_point</a></code>, <code><a href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_point_open">geometric_hahn_banach_point_open</a></code>: One set is open, the
+other is a singleton. Weak separation.</li>
+<li><code><a href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_open_open">geometric_hahn_banach_open_open</a></code>: Both sets are open. Semistrict separation.</li>
+<li><code><a href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_compact_closed">geometric_hahn_banach_compact_closed</a></code>, <code><a href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_closed_compact">geometric_hahn_banach_closed_compact</a></code>: One set is closed,
+the other one is compact. Strict separation.</li>
+<li><code><a href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_point_closed">geometric_hahn_banach_point_closed</a></code>, <code><a href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_closed_point">geometric_hahn_banach_closed_point</a></code>: One set is closed, the
+other one is a singleton. Strict separation.</li>
+<li><code><a href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_point_point">geometric_hahn_banach_point_point</a></code>: Both sets are singletons. Strict separation.</li>
+</ul><h2 class="markdown-heading" id="TODO">TODO <a class="hover-link" href="#TODO">#</a></h2><ul>
+<li>Eidelheit's theorem</li>
+<li><code><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> ℝ s → <a href="../../../.././Mathlib/Topology/Basic.html#interior">interior</a> (closure s) ⊆ s</code></li>
+</ul></div><div class="decl" id="separate_convex_open_set"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean#L50-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#separate_convex_open_set"><span class="name">separate_convex_open_set</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₀ : <span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx₀ : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">x₀</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">f</span>, <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x₀</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">1</span></span></span></span></span></span></div></div><p>Given a set <code>s</code> which is a convex neighbourhood of <code>0</code> and a point <code>x₀</code> outside of it, there is
+a continuous linear functional <code>f</code> separating <code>x₀</code> and <code>s</code>, in the sense that it sends <code>x₀</code> to 1 and
+all of <code>s</code> to values strictly below <code>1</code>.</p></div></div><div class="decl" id="geometric_hahn_banach_open"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean#L87-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_open"><span class="name">geometric_hahn_banach_open</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(disj : <span class="fn"><a href="../../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> <span class="fn">s</span> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">f</span> <span class="fn">u</span>, <span class="fn">(<span class="fn">∀ (<span class="fn">a</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">u</span></span></span></span>) <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span> → <span class="fn"><span class="fn">u</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">b</span></span></span></span></span></span></span></div></div><p>A version of the <strong>Hahn-Banach theorem</strong>: given disjoint convex sets <code>s</code>, <code>t</code> where <code>s</code> is open,
+there is a continuous linear functional which separates them.</p></div></div><div class="decl" id="geometric_hahn_banach_open_point"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean#L118-L122">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_open_point"><span class="name">geometric_hahn_banach_open_point</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(disj : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">f</span>, <span class="fn">∀ (<span class="fn">a</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span></span></span></span></span></div></div></div></div><div class="decl" id="geometric_hahn_banach_point_open"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean#L125-L128">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_point_open"><span class="name">geometric_hahn_banach_point_open</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ht₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(disj : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">f</span>, <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">b</span></span></span></span></span></span></div></div></div></div><div class="decl" id="geometric_hahn_banach_open_open"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean#L131-L149">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_open_open"><span class="name">geometric_hahn_banach_open_open</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht₃ : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(disj : <span class="fn"><a href="../../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> <span class="fn">s</span> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">f</span> <span class="fn">u</span>, <span class="fn">(<span class="fn">∀ (<span class="fn">a</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">u</span></span></span></span>) <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span> → <span class="fn"><span class="fn">u</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">b</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="geometric_hahn_banach_compact_closed"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean#L156-L169">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_compact_closed"><span class="name">geometric_hahn_banach_compact_closed</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/LocallyConvex.html#LocallyConvexSpace">LocallyConvexSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(disj : <span class="fn"><a href="../../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> <span class="fn">s</span> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">f</span> <span class="fn">u</span> <span class="fn">v</span>, <span class="fn">(<span class="fn">∀ (<span class="fn">a</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">u</span></span></span></span>) <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">u</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">v</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span> → <span class="fn"><span class="fn">v</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">b</span></span></span></span></span></span></span></span></div></div><p>A version of the <strong>Hahn-Banach theorem</strong>: given disjoint convex sets <code>s</code>, <code>t</code> where <code>s</code> is
+compact and <code>t</code> is closed, there is a continuous linear functional which strongly separates them.</p></div></div><div class="decl" id="geometric_hahn_banach_closed_compact"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean#L175-L179">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_closed_compact"><span class="name">geometric_hahn_banach_closed_compact</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/LocallyConvex.html#LocallyConvexSpace">LocallyConvexSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(disj : <span class="fn"><a href="../../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> <span class="fn">s</span> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">f</span> <span class="fn">u</span> <span class="fn">v</span>, <span class="fn">(<span class="fn">∀ (<span class="fn">a</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">u</span></span></span></span>) <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">u</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">v</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span> → <span class="fn"><span class="fn">v</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">b</span></span></span></span></span></span></span></span></div></div><p>A version of the <strong>Hahn-Banach theorem</strong>: given disjoint convex sets <code>s</code>, <code>t</code> where <code>s</code> is
+closed, and <code>t</code> is compact, there is a continuous linear functional which strongly separates them.</p></div></div><div class="decl" id="geometric_hahn_banach_point_closed"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean#L182-L187">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_point_closed"><span class="name">geometric_hahn_banach_point_closed</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{t : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/LocallyConvex.html#LocallyConvexSpace">LocallyConvexSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ht₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ht₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">t</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(disj : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">f</span> <span class="fn">u</span>, <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">u</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">b</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">t</span></span> → <span class="fn"><span class="fn">u</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">b</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="geometric_hahn_banach_closed_point"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean#L190-L195">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_closed_point"><span class="name">geometric_hahn_banach_closed_point</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/LocallyConvex.html#LocallyConvexSpace">LocallyConvexSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(disj : <span class="fn"><a href="../../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">f</span> <span class="fn">u</span>, <span class="fn">(<span class="fn">∀ (<span class="fn">a</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">a</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">u</span></span></span></span>) <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">u</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span></span></span></span></div></div></div></div><div class="decl" id="geometric_hahn_banach_point_point"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean#L199-L204">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#geometric_hahn_banach_point_point"><span class="name">geometric_hahn_banach_point_point</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/LocallyConvex.html#LocallyConvexSpace">LocallyConvexSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Separation.html#T1Space">T1Space</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hxy : <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">f</span>, <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">y</span></span></span></span></div></div><p>See also <code>NormedSpace.eq_iff_forall_dual_eq</code>.</p></div></div><div class="decl" id="iInter_halfspaces_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/HahnBanach/Separation.lean#L208-L215">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Analysis/NormedSpace/HahnBanach/Separation.html#iInter_halfspaces_eq"><span class="name">iInter_halfspaces_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Group/Basic.html#TopologicalAddGroup">TopologicalAddGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/MulAction.html#ContinuousSMul">ContinuousSMul</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/Algebra/Module/LocallyConvex.html#LocallyConvexSpace">LocallyConvexSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Basic.html#Convex">Convex</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><a href="../../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">⋂ (l : <span class="fn"><span class="fn">E</span> <a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a><a href="../../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>), <span class="fn">{<span class="fn">x</span> | <span class="fn">∃ <span class="fn">y</span>, <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn">↑<span class="fn">l</span> <span class="fn">x</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">l</span> <span class="fn">y</span></span></span></span></span>}</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">s</span></span></div></div><p>A closed convex set is the intersection of the halfspaces containing it.</p></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

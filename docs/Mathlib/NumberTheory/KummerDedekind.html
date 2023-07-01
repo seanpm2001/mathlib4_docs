@@ -1,0 +1,352 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.NumberTheory.KummerDedekind</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.NumberTheory.KummerDedekind";</script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">NumberTheory</span>.<span class="name">KummerDedekind</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">NumberTheory</span>.<span class="name">KummerDedekind</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/RingTheory/IsAdjoinRoot.html">Mathlib.RingTheory.IsAdjoinRoot</a></li><li><a href="../.././Mathlib/RingTheory/DedekindDomain/Ideal.html">Mathlib.RingTheory.DedekindDomain.Ideal</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.NumberTheory.KummerDedekind" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#conductor"><span class="name">conductor</span></a></div><div class="nav_link"><a class="break_within" href="#conductor_eq_of_eq"><span class="name">conductor_eq_of_eq</span></a></div><div class="nav_link"><a class="break_within" href="#conductor_subset_adjoin"><span class="name">conductor_subset_adjoin</span></a></div><div class="nav_link"><a class="break_within" href="#mem_conductor_iff"><span class="name">mem_conductor_iff</span></a></div><div class="nav_link"><a class="break_within" href="#conductor_eq_top_of_adjoin_eq_top"><span class="name">conductor_eq_top_of_adjoin_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#conductor_eq_top_of_powerBasis"><span class="name">conductor_eq_top_of_powerBasis</span></a></div><div class="nav_link"><a class="break_within" href="#prod_mem_ideal_map_of_mem_conductor"><span class="name">prod_mem_ideal_map_of_mem_conductor</span></a></div><div class="nav_link"><a class="break_within" href="#comap_map_eq_map_adjoin_of_coprime_conductor"><span class="name">comap_map_eq_map_adjoin_of_coprime_conductor</span></a></div><div class="nav_link"><a class="break_within" href="#quotAdjoinEquivQuotMap"><span class="name">quotAdjoinEquivQuotMap</span></a></div><div class="nav_link"><a class="break_within" href="#quotAdjoinEquivQuotMap_apply_mk"><span class="name">quotAdjoinEquivQuotMap_apply_mk</span></a></div><div class="nav_link"><a class="break_within" href="#KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk"><span class="name">KummerDedekind</span>.<span class="name">normalizedFactorsMapEquivNormalizedFactorsMinPolyMk</span></a></div><div class="nav_link"><a class="break_within" href="#KummerDedekind.multiplicity_factors_map_eq_multiplicity"><span class="name">KummerDedekind</span>.<span class="name">multiplicity_factors_map_eq_multiplicity</span></a></div><div class="nav_link"><a class="break_within" href="#KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map"><span class="name">KummerDedekind</span>.<span class="name">normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map</span></a></div><div class="nav_link"><a class="break_within" href="#KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly"><span class="name">KummerDedekind</span>.<span class="name">Ideal</span>.<span class="name">irreducible_map_of_irreducible_minpoly</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Kummer-Dedekind-theorem">Kummer-Dedekind theorem <a class="hover-link" href="#Kummer-Dedekind-theorem">#</a></h1><p>This file proves the monogenic version of the Kummer-Dedekind theorem on the splitting of prime
+ideals in an extension of the ring of integers. This states that if <code>I</code> is a prime ideal of
+Dedekind domain <code>R</code> and <code>S = R[α]</code> for some <code>α</code> that is integral over <code>R</code> with minimal polynomial
+<code>f</code>, then the prime factorisations of <code>I * S</code> and <code>f mod I</code> have the same shape, i.e. they have the
+same number of prime factors, and each prime factors of <code>I * S</code> can be paired with a prime factor
+of <code>f mod I</code> in a way that ensures multiplicities match (in fact, this pairing can be made explicit
+with a formula).</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk">normalizedFactorsMapEquivNormalizedFactorsMinPolyMk</a></code> : The bijection in the
+Kummer-Dedekind theorem. This is the pairing between the prime factors of <code>I * S</code> and the prime
+factors of <code>f mod I</code>.</li>
+</ul><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><ul>
+<li><code>normalized_factors_ideal_map_eq_normalized_factors_min_poly_mk_map</code> : The Kummer-Dedekind
+theorem.</li>
+<li><code><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly">Ideal.irreducible_map_of_irreducible_minpoly</a></code> : <code>I.map (algebraMap R S)</code> is irreducible if
+<code>(map (Ideal.Quotient.mk I) (minpoly R pb.gen))</code> is irreducible, where <code>pb</code> is a power basis
+of <code>S</code> over <code>R</code>.</li>
+</ul><h2 class="markdown-heading" id="TODO">TODO <a class="hover-link" href="#TODO">#</a></h2><ul>
+<li>
+<p>Prove the Kummer-Dedekind theorem in full generality.</p>
+</li>
+<li>
+<p>Prove the converse of <code><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly">Ideal.irreducible_map_of_irreducible_minpoly</a></code>.</p>
+</li>
+<li>
+<p>Prove that <code><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk">normalizedFactorsMapEquivNormalizedFactorsMinPolyMk</a></code> can be expressed as
+<code><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk">normalizedFactorsMapEquivNormalizedFactorsMinPolyMk</a> g = ⟨I, G(α)⟩</code> for <code>g</code> a prime
+factor of <code>f mod I</code> and <code>G</code> a lift of <code>g</code> to <code>R[X]</code>.</p>
+</li>
+</ul><h2 class="markdown-heading" id="References">References <a class="hover-link" href="#References">#</a></h2><ul>
+<li>[J. Neukirch, <em>Algebraic Number Theory</em>][Neukirch1992]</li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>kummer, dedekind, kummer dedekind, dedekind-kummer, dedekind kummer</p></div><div class="decl" id="conductor"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L67-L71">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor"><span class="name">conductor</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">S</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">S</span></span></div></div><p>Let <code>S / R</code> be a ring extension and <code>x : S</code>, then the conductor of <code>R<x></code> is the
+biggest ideal of <code>S</code> contained in <code>R<x></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-conductor" class="instances-for-list"></ul></details></div></div><div class="decl" id="conductor_eq_of_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L76-L77">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor_eq_of_eq"><span class="name">conductor_eq_of_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">S</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">y</span>}</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">y</span></span></span></div></div></div></div><div class="decl" id="conductor_subset_adjoin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L80-L81">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor_subset_adjoin"><span class="name">conductor_subset_adjoin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span> <a href="../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span>)</span></span></div></div></div></div><div class="decl" id="mem_conductor_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L84-L85">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#mem_conductor_iff"><span class="name">mem_conductor_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">S</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">y</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">b</span> : <span class="fn">S</span>), <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">b</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span></span></span></div></div></div></div><div class="decl" id="conductor_eq_top_of_adjoin_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L88-L89">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor_eq_top_of_adjoin_eq_top"><span class="name">conductor_eq_top_of_adjoin_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span></div></div></div></div><div class="decl" id="conductor_eq_top_of_powerBasis"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L92-L93">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor_eq_top_of_powerBasis"><span class="name">conductor_eq_top_of_powerBasis</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(pb : <span class="fn"><a href="../.././Mathlib/RingTheory/PowerBasis.html#PowerBasis">PowerBasis</a> <span class="fn">R</span> <span class="fn">S</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn"><span class="fn">pb</span>.gen</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span></div></div></div></div><div class="decl" id="prod_mem_ideal_map_of_mem_conductor"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L100-L128">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#prod_mem_ideal_map_of_mem_conductor"><span class="name">prod_mem_ideal_map_of_mem_conductor</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn">R</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">S</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.comap">Ideal.comap</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) (<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hz' : <span class="fn"><span class="fn">z</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) <span class="fn">I</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) <span class="fn">p</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">z</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a>   <span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span> }</span> <span class="fn">S</span></span>)</span> <a href="../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span> }</span></span>) <span class="fn">I</span></span>)</span></span></span></div></div><p>This technical lemma tell us that if <code>C</code> is the conductor of <code>R<x></code> and <code>I</code> is an ideal of <code>R</code>
+then <code>p * (I * S) ⊆ I * R<x></code> for any <code>p</code> in <code>C ∩ R</code></p></div></div><div class="decl" id="comap_map_eq_map_adjoin_of_coprime_conductor"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L132-L166">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#comap_map_eq_map_adjoin_of_coprime_conductor"><span class="name">comap_map_eq_map_adjoin_of_coprime_conductor</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.comap">Ideal.comap</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) (<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span> <a href="../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">I</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_alg : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span> }</span> <span class="fn">S</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.comap">Ideal.comap</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span> }</span> <span class="fn">S</span></span>) (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) <span class="fn">I</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span> }</span></span>) <span class="fn">I</span></span></span></div></div><p>A technical result telling us that <code>(I * S) ∩ R<x> = I * R<x></code> for any ideal <code>I</code> of <code>R</code>.</p></div></div><div class="decl" id="quotAdjoinEquivQuotMap"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L171-L204">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#quotAdjoinEquivQuotMap"><span class="name">quotAdjoinEquivQuotMap</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.comap">Ideal.comap</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) (<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span> <a href="../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">I</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_alg : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span> }</span> <span class="fn">S</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span> }</span> <a href="../.././Mathlib/Algebra/Quotient.html#HasQuotient.Quotient">⧸</a> <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span> }</span></span>) <span class="fn">I</span></span></span> <a href="../.././Mathlib/Algebra/Ring/Equiv.html#RingEquiv">≃+*</a>   <span class="fn"><span class="fn">S</span> <a href="../.././Mathlib/Algebra/Quotient.html#HasQuotient.Quotient">⧸</a> <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) <span class="fn">I</span></span></span></span></div></div><p>The canonical morphism of rings from <code>R<x> ⧸ (I*R<x>)</code> to <code>S ⧸ (I*S)</code> is an isomorphism
+when <code>I</code> and <code>(conductor R x) ∩ R</code> are coprime.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-quotAdjoinEquivQuotMap" class="instances-for-list"></ul></details></div></div><div class="decl" id="quotAdjoinEquivQuotMap_apply_mk"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L210-L213">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#quotAdjoinEquivQuotMap_apply_mk"><span class="name">quotAdjoinEquivQuotMap_apply_mk</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.comap">Ideal.comap</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) (<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span> <a href="../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">I</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_alg : <span class="fn"><a href="../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span> }</span> <span class="fn">S</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#quotAdjoinEquivQuotMap">quotAdjoinEquivQuotMap</a> <span class="fn">hx</span> <span class="fn">h_alg</span></span>)
+    (<span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Quotient.html#Ideal.Quotient.mk">Ideal.Quotient.mk</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Algebra.adjoin">Algebra.adjoin</a> <span class="fn">R</span> <span class="fn">{<span class="fn">x</span>}</span></span></span> }</span></span>) <span class="fn">I</span></span>)</span>) <span class="fn">a</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Quotient.html#Ideal.Quotient.mk">Ideal.Quotient.mk</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) <span class="fn">I</span></span>)</span>) <span class="fn">↑<span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L231-L252">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk"><span class="name">KummerDedekind</span>.<span class="name">normalizedFactorsMapEquivNormalizedFactorsMinPolyMk</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/IntegrallyClosed.html#IsIntegrallyClosed">IsIntegrallyClosed</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/DedekindDomain/Basic.html#IsDedekindDomain">IsDedekindDomain</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hI : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal.IsMaximal">Ideal.IsMaximal</a> <span class="fn">I</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hI' : <span class="fn"><span class="fn">I</span> <a href="../.././Init/Core.html#Ne">≠</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.comap">Ideal.comap</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) (<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span> <a href="../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">I</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx' : <span class="fn"><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">{<span class="fn">J</span> | <span class="fn"><span class="fn">J</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid.normalizedFactors">UniqueFactorizationMonoid.normalizedFactors</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) <span class="fn">I</span></span>)</span></span>}</span></span> <a href="../.././Mathlib/Logic/Equiv/Defs.html#Equiv">≃</a>   <span class="fn">↑<span class="fn">{<span class="fn">d</span> | <span class="fn"><span class="fn">d</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid.normalizedFactors">UniqueFactorizationMonoid.normalizedFactors</a> (<span class="fn"><a href="../.././Mathlib/Data/Polynomial/Eval.html#Polynomial.map">Polynomial.map</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Quotient.html#Ideal.Quotient.mk">Ideal.Quotient.mk</a> <span class="fn">I</span></span>) (<span class="fn"><a href="../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span>)</span></span>}</span></span></span></div></div><p>The first half of the <strong>Kummer-Dedekind Theorem</strong> in the monogenic case, stating that the prime
+factors of <code>I*S</code> are in bijection with those of the minimal polynomial of the generator of <code>S</code>
+over <code>R</code>, taken <code>mod I</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk" class="instances-for-list"></ul></details></div></div><div class="decl" id="KummerDedekind.multiplicity_factors_map_eq_multiplicity"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L257-L265">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#KummerDedekind.multiplicity_factors_map_eq_multiplicity"><span class="name">KummerDedekind</span>.<span class="name">multiplicity_factors_map_eq_multiplicity</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/IntegrallyClosed.html#IsIntegrallyClosed">IsIntegrallyClosed</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/DedekindDomain/Basic.html#IsDedekindDomain">IsDedekindDomain</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hI : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal.IsMaximal">Ideal.IsMaximal</a> <span class="fn">I</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hI' : <span class="fn"><span class="fn">I</span> <a href="../.././Init/Core.html#Ne">≠</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.comap">Ideal.comap</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) (<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span> <a href="../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">I</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx' : <span class="fn"><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{J : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">S</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hJ : <span class="fn"><span class="fn">J</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid.normalizedFactors">UniqueFactorizationMonoid.normalizedFactors</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) <span class="fn">I</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Multiplicity.html#multiplicity">multiplicity</a> <span class="fn">J</span> (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) <span class="fn">I</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Mathlib/RingTheory/Multiplicity.html#multiplicity">multiplicity</a>
+    (<span class="fn">↑(<span class="fn">↑(<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk">KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk</a> <span class="fn">hI</span> <span class="fn">hI'</span> <span class="fn">hx</span> <span class="fn">hx'</span></span>)
+        <span class="fn">{ <span class="fn">val</span> := <span class="fn">J</span>, <span class="fn">property</span> := <span class="fn">hJ</span> }</span></span>)</span>)
+    (<span class="fn"><a href="../.././Mathlib/Data/Polynomial/Eval.html#Polynomial.map">Polynomial.map</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Quotient.html#Ideal.Quotient.mk">Ideal.Quotient.mk</a> <span class="fn">I</span></span>) (<span class="fn"><a href="../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span>)</span></span></div></div><p>The second half of the <strong>Kummer-Dedekind Theorem</strong> in the monogenic case, stating that the
+bijection <code>FactorsEquiv'</code> defined in the first half preserves multiplicities.</p></div></div><div class="decl" id="KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L269-L310">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map"><span class="name">KummerDedekind</span>.<span class="name">normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/IntegrallyClosed.html#IsIntegrallyClosed">IsIntegrallyClosed</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/DedekindDomain/Basic.html#IsDedekindDomain">IsDedekindDomain</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hI : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal.IsMaximal">Ideal.IsMaximal</a> <span class="fn">I</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hI' : <span class="fn"><span class="fn">I</span> <a href="../.././Init/Core.html#Ne">≠</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.comap">Ideal.comap</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) (<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span> <a href="../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">I</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx' : <span class="fn"><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid.normalizedFactors">UniqueFactorizationMonoid.normalizedFactors</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) <span class="fn">I</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Mathlib/Data/Multiset/Basic.html#Multiset.map">Multiset.map</a> (<span class="fn">fun <span class="fn">f</span> =&gt <span class="fn">↑(<span class="fn">↑<span class="fn">(<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk">KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk</a> <span class="fn">hI</span> <span class="fn">hI'</span> <span class="fn">hx</span> <span class="fn">hx'</span></span>).symm</span> <span class="fn">f</span></span>)</span></span>)
+    (<span class="fn"><a href="../.././Mathlib/Data/Multiset/Basic.html#Multiset.attach">Multiset.attach</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid.normalizedFactors">UniqueFactorizationMonoid.normalizedFactors</a> (<span class="fn"><a href="../.././Mathlib/Data/Polynomial/Eval.html#Polynomial.map">Polynomial.map</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Quotient.html#Ideal.Quotient.mk">Ideal.Quotient.mk</a> <span class="fn">I</span></span>) (<span class="fn"><a href="../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span>)</span>)</span>)</span></span></div></div><p>The <strong>Kummer-Dedekind Theorem</strong>.</p></div></div><div class="decl" id="KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/NumberTheory/KummerDedekind.lean#L313-L339">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/NumberTheory/KummerDedekind.html#KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly"><span class="name">KummerDedekind</span>.<span class="name">Ideal</span>.<span class="name">irreducible_map_of_irreducible_minpoly</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{S : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">S</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{I : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/IntegrallyClosed.html#IsIntegrallyClosed">IsIntegrallyClosed</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/RingTheory/DedekindDomain/Basic.html#IsDedekindDomain">IsDedekindDomain</a> <span class="fn">S</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <span class="fn">R</span> <span class="fn">S</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hI : <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal.IsMaximal">Ideal.IsMaximal</a> <span class="fn">I</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hI' : <span class="fn"><span class="fn">I</span> <a href="../.././Init/Core.html#Ne">≠</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.comap">Ideal.comap</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) (<span class="fn"><a href="../.././Mathlib/NumberTheory/KummerDedekind.html#conductor">conductor</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span> <a href="../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn">I</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx' : <span class="fn"><a href="../.././Mathlib/RingTheory/IntegralClosure.html#IsIntegral">IsIntegral</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../.././Mathlib/Algebra/Associated.html#Irreducible">Irreducible</a> (<span class="fn"><a href="../.././Mathlib/Data/Polynomial/Eval.html#Polynomial.map">Polynomial.map</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Quotient.html#Ideal.Quotient.mk">Ideal.Quotient.mk</a> <span class="fn">I</span></span>) (<span class="fn"><a href="../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">R</span> <span class="fn">x</span></span>)</span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Algebra/Associated.html#Irreducible">Irreducible</a> (<span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#Ideal.map">Ideal.map</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">R</span> <span class="fn">S</span></span>) <span class="fn">I</span></span>)</span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

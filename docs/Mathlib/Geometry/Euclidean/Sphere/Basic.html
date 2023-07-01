@@ -1,0 +1,739 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../../.././style.css"></link><link rel="stylesheet" href="../../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../../.././favicon.ico"></link><link rel="prefetch" href="../../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Geometry.Euclidean.Sphere.Basic</title><script defer="true" src="../../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../../.././";</script><script>const MODULE_NAME="Mathlib.Geometry.Euclidean.Sphere.Basic";</script><script type="module" src="../../../.././search.js"></script><script type="module" src="../../../.././how-about.js"></script><script type="module" src="../../../.././instances.js"></script><script type="module" src="../../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Geometry</span>.<span class="name">Euclidean</span>.<span class="name">Sphere</span>.<span class="name">Basic</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Geometry</span>.<span class="name">Euclidean</span>.<span class="name">Sphere</span>.<span class="name">Basic</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../../.././Init.html">Init</a></li><li><a href="../../../.././Mathlib/Analysis/Convex/StrictConvexBetween.html">Mathlib.Analysis.Convex.StrictConvexBetween</a></li><li><a href="../../../.././Mathlib/Geometry/Euclidean/Basic.html">Mathlib.Geometry.Euclidean.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Geometry.Euclidean.Sphere.Basic" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.ext"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">ext</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.ext_iff"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">ext_iff</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.instNonemptySphere"><span class="name">EuclideanGeometry</span>.<span class="name">instNonemptySphere</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.instCoeSphereSet"><span class="name">EuclideanGeometry</span>.<span class="name">instCoeSphereSet</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.instMembershipSphere"><span class="name">EuclideanGeometry</span>.<span class="name">instMembershipSphere</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.mk_center"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">mk_center</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.mk_radius"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">mk_radius</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.mk_center_radius"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">mk_center_radius</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.coe_mk"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">coe_mk</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.mem_coe"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">mem_coe</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.mem_coe'"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">mem_coe'</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.mem_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">mem_sphere</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.mem_sphere'"><span class="name">EuclideanGeometry</span>.<span class="name">mem_sphere'</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.subset_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">subset_sphere</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.dist_of_mem_subset_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">dist_of_mem_subset_sphere</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.dist_of_mem_subset_mk_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">dist_of_mem_subset_mk_sphere</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.ne_iff"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">ne_iff</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.center_eq_iff_eq_of_mem"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">center_eq_iff_eq_of_mem</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.center_ne_iff_ne_of_mem"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">center_ne_iff_ne_of_mem</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.dist_center_eq_dist_center_of_mem_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">dist_center_eq_dist_center_of_mem_sphere</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.dist_center_eq_dist_center_of_mem_sphere'"><span class="name">EuclideanGeometry</span>.<span class="name">dist_center_eq_dist_center_of_mem_sphere'</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Cospherical"><span class="name">EuclideanGeometry</span>.<span class="name">Cospherical</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.cospherical_def"><span class="name">EuclideanGeometry</span>.<span class="name">cospherical_def</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.cospherical_iff_exists_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">cospherical_iff_exists_sphere</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Sphere.cospherical"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">cospherical</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Cospherical.subset"><span class="name">EuclideanGeometry</span>.<span class="name">Cospherical</span>.<span class="name">subset</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.cospherical_empty"><span class="name">EuclideanGeometry</span>.<span class="name">cospherical_empty</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.cospherical_singleton"><span class="name">EuclideanGeometry</span>.<span class="name">cospherical_singleton</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.cospherical_pair"><span class="name">EuclideanGeometry</span>.<span class="name">cospherical_pair</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Concyclic"><span class="name">EuclideanGeometry</span>.<span class="name">Concyclic</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Concyclic.subset"><span class="name">EuclideanGeometry</span>.<span class="name">Concyclic</span>.<span class="name">subset</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.concyclic_empty"><span class="name">EuclideanGeometry</span>.<span class="name">concyclic_empty</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.concyclic_singleton"><span class="name">EuclideanGeometry</span>.<span class="name">concyclic_singleton</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.concyclic_pair"><span class="name">EuclideanGeometry</span>.<span class="name">concyclic_pair</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Cospherical.affineIndependent"><span class="name">EuclideanGeometry</span>.<span class="name">Cospherical</span>.<span class="name">affineIndependent</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Cospherical.affineIndependent_of_mem_of_ne"><span class="name">EuclideanGeometry</span>.<span class="name">Cospherical</span>.<span class="name">affineIndependent_of_mem_of_ne</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.Cospherical.affineIndependent_of_ne"><span class="name">EuclideanGeometry</span>.<span class="name">Cospherical</span>.<span class="name">affineIndependent_of_ne</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.inner_vsub_vsub_of_mem_sphere_of_mem_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">inner_vsub_vsub_of_mem_sphere_of_mem_sphere</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.eq_of_mem_sphere_of_mem_sphere_of_mem_of_finrank_eq_two"><span class="name">EuclideanGeometry</span>.<span class="name">eq_of_mem_sphere_of_mem_sphere_of_mem_of_finrank_eq_two</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.eq_of_mem_sphere_of_mem_sphere_of_finrank_eq_two"><span class="name">EuclideanGeometry</span>.<span class="name">eq_of_mem_sphere_of_mem_sphere_of_finrank_eq_two</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.inner_pos_or_eq_of_dist_le_radius"><span class="name">EuclideanGeometry</span>.<span class="name">inner_pos_or_eq_of_dist_le_radius</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.inner_nonneg_of_dist_le_radius"><span class="name">EuclideanGeometry</span>.<span class="name">inner_nonneg_of_dist_le_radius</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.inner_pos_of_dist_lt_radius"><span class="name">EuclideanGeometry</span>.<span class="name">inner_pos_of_dist_lt_radius</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.wbtw_of_collinear_of_dist_center_le_radius"><span class="name">EuclideanGeometry</span>.<span class="name">wbtw_of_collinear_of_dist_center_le_radius</span></a></div><div class="nav_link"><a class="break_within" href="#EuclideanGeometry.sbtw_of_collinear_of_dist_center_lt_radius"><span class="name">EuclideanGeometry</span>.<span class="name">sbtw_of_collinear_of_dist_center_lt_radius</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Spheres">Spheres <a class="hover-link" href="#Spheres">#</a></h1><p>This file defines and proves basic results about spheres and cospherical sets of points in
+Euclidean affine spaces.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li>
+<p><code><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a></code> bundles a <code><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.center">center</a></code> and a <code><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.radius">radius</a></code>.</p>
+</li>
+<li>
+<p><code><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a></code> is the property of a set of points being equidistant from some
+point.</p>
+</li>
+<li>
+<p><code><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Concyclic">EuclideanGeometry.Concyclic</a></code> is the property of a set of points being cospherical and
+coplanar.</p>
+</li>
+</ul></div><div class="decl" id="EuclideanGeometry.Sphere.ext"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L45-L45">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.ext"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">ext</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ {<span class="fn">inst</span> : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>} (<span class="fn">x </span>y : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">x</span>.center</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">y</span>.center</span></span> → <span class="fn"><span class="fn"><span class="fn"><span class="fn">x</span>.radius</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">y</span>.radius</span></span> → <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">y</span></span></span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.Sphere.ext_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L45-L45">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.ext_iff"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">ext_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ {<span class="fn">inst</span> : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>} (<span class="fn">x </span>y : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">y</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">x</span>.center</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">y</span>.center</span></span> <a href="../../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">x</span>.radius</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">y</span>.radius</span></span></span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.Sphere"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L46-L48">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span></a></span><span class="decl_args">
+<span class="fn">(P : <a href="../../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Type</a> u_1</div></div><ul class="structure_fields" id="EuclideanGeometry.Sphere.mk"><li id="EuclideanGeometry.Sphere.center" class="structure_field"><div class="structure_field_info">center : <span class="fn">P</span></div></li><li id="EuclideanGeometry.Sphere.radius" class="structure_field"><div class="structure_field_info">radius : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></div></li></ul><p>A <code><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">Sphere</a> P</code> bundles a <code><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.center">center</a></code> and <code><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.radius">radius</a></code>. This definition does not require the radius to
+be positive; that should be given as a hypothesis to lemmas that require it.</p><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-EuclideanGeometry.Sphere" class="instances-for-list"></ul></details></div></div><div class="decl" id="EuclideanGeometry.instNonemptySphere"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L57-L58">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.instNonemptySphere"><span class="name">EuclideanGeometry</span>.<span class="name">instNonemptySphere</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Prelude.html#Nonempty">Nonempty</a> (<span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.instNonemptySphere">@<a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.instNonemptySphere">EuclideanGeometry.instNonemptySphere</a></a> <a href="../../../.././Init/Prelude.html#Eq">=</a> <a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.instNonemptySphere.proof_1">@<a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.instNonemptySphere.proof_1">EuclideanGeometry.instNonemptySphere.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="EuclideanGeometry.instCoeSphereSet"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L60-L61">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.instCoeSphereSet"><span class="name">EuclideanGeometry</span>.<span class="name">instCoeSphereSet</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Coe.html#Coe">Coe</a> (<span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>) (<span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">EuclideanGeometry.instCoeSphereSet</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">coe</span> := <span class="fn">fun <span class="fn">s</span> =&gt <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.sphere">Metric.sphere</a> <span class="fn"><span class="fn">s</span>.center</span> <span class="fn"><span class="fn">s</span>.radius</span></span></span> }</span></span></li></ul></details></div></div><div class="decl" id="EuclideanGeometry.instMembershipSphere"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L63-L64">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.instMembershipSphere"><span class="name">EuclideanGeometry</span>.<span class="name">instMembershipSphere</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Init/Prelude.html#Membership">Membership</a> <span class="fn">P</span> (<span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">EuclideanGeometry.instMembershipSphere</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">mem</span> := <span class="fn">fun <span class="fn">p</span> <span class="fn">s</span> =&gt <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.sphere">Metric.sphere</a> <span class="fn"><span class="fn">s</span>.center</span> <span class="fn"><span class="fn">s</span>.radius</span></span></span></span> }</span></span></li></ul></details></div></div><div class="decl" id="EuclideanGeometry.Sphere.mk_center"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L66-L67">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.mk_center"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">mk_center</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">P</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">{ <span class="fn">center</span> := <span class="fn">c</span>, <span class="fn">radius</span> := <span class="fn">r</span> }</span>.center</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">c</span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.Sphere.mk_radius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L70-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.mk_radius"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">mk_radius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">P</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">{ <span class="fn">center</span> := <span class="fn">c</span>, <span class="fn">radius</span> := <span class="fn">r</span> }</span>.radius</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">r</span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.Sphere.mk_center_radius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L75-L76">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.mk_center_radius"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">mk_center_radius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">{ <span class="fn">center</span> := <span class="fn"><span class="fn">s</span>.center</span>, <span class="fn">radius</span> := <span class="fn"><span class="fn">s</span>.radius</span> }</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">s</span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.Sphere.coe_mk"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L85-L86">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.coe_mk"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">coe_mk</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(c : <span class="fn">P</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.sphere">Metric.sphere</a> <span class="fn"><span class="fn">{ <span class="fn">center</span> := <span class="fn">c</span>, <span class="fn">radius</span> := <span class="fn">r</span> }</span>.center</span> <span class="fn"><span class="fn">{ <span class="fn">center</span> := <span class="fn">c</span>, <span class="fn">radius</span> := <span class="fn">r</span> }</span>.radius</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.sphere">Metric.sphere</a> <span class="fn">c</span> <span class="fn">r</span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.Sphere.mem_coe"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L90-L91">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.mem_coe"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">mem_coe</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.sphere">Metric.sphere</a> <span class="fn"><span class="fn">s</span>.center</span> <span class="fn"><span class="fn">s</span>.radius</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.Sphere.mem_coe'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L95-L96">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.mem_coe'"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">mem_coe'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p</span> <span class="fn"><span class="fn">s</span>.center</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">s</span>.radius</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.mem_sphere"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L98-L99">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.mem_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">mem_sphere</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p</span> <span class="fn"><span class="fn">s</span>.center</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">s</span>.radius</span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.mem_sphere'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L102-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.mem_sphere'"><span class="name">EuclideanGeometry</span>.<span class="name">mem_sphere'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn"><span class="fn">s</span>.center</span> <span class="fn">p</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">s</span>.radius</span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.subset_sphere"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L106-L107">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.subset_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">subset_sphere</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ps : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">ps</span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.sphere">Metric.sphere</a> <span class="fn"><span class="fn">s</span>.center</span> <span class="fn"><span class="fn">s</span>.radius</span></span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ (<span class="fn">p</span> : <span class="fn">P</span>), <span class="fn"><span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">ps</span></span> → <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span></span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.dist_of_mem_subset_sphere"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L110-L112">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.dist_of_mem_subset_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">dist_of_mem_subset_sphere</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ps : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">ps</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hps : <span class="fn"><span class="fn">ps</span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.sphere">Metric.sphere</a> <span class="fn"><span class="fn">s</span>.center</span> <span class="fn"><span class="fn">s</span>.radius</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p</span> <span class="fn"><span class="fn">s</span>.center</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">s</span>.radius</span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.dist_of_mem_subset_mk_sphere"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L115-L117">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.dist_of_mem_subset_mk_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">dist_of_mem_subset_mk_sphere</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ps : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">ps</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hps : <span class="fn"><span class="fn">ps</span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.sphere">Metric.sphere</a> <span class="fn"><span class="fn">{ <span class="fn">center</span> := <span class="fn">c</span>, <span class="fn">radius</span> := <span class="fn">r</span> }</span>.center</span> <span class="fn"><span class="fn">{ <span class="fn">center</span> := <span class="fn">c</span>, <span class="fn">radius</span> := <span class="fn">r</span> }</span>.radius</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p</span> <span class="fn">c</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">r</span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.Sphere.ne_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L120-L122">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.ne_iff"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">ne_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₁ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₂ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">s₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">s₂</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">s₁</span>.center</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn"><span class="fn">s₂</span>.center</span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">s₁</span>.radius</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn"><span class="fn">s₂</span>.radius</span></span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.Sphere.center_eq_iff_eq_of_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L125-L129">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.center_eq_iff_eq_of_mem"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">center_eq_iff_eq_of_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₁ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₂ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn">P</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">s₁</span>.center</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">s₂</span>.center</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">s₁</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">s₂</span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.Sphere.center_ne_iff_ne_of_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L132-L134">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.center_ne_iff_ne_of_mem"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">center_ne_iff_ne_of_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₁ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₂ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn">P</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">s₁</span>.center</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn"><span class="fn">s₂</span>.center</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">s₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">s₂</span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.dist_center_eq_dist_center_of_mem_sphere"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L137-L139">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.dist_center_eq_dist_center_of_mem_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">dist_center_eq_dist_center_of_mem_sphere</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂ : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p₁</span> <span class="fn"><span class="fn">s</span>.center</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p₂</span> <span class="fn"><span class="fn">s</span>.center</span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.dist_center_eq_dist_center_of_mem_sphere'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L142-L144">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.dist_center_eq_dist_center_of_mem_sphere'"><span class="name">EuclideanGeometry</span>.<span class="name">dist_center_eq_dist_center_of_mem_sphere'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂ : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn"><span class="fn">s</span>.center</span> <span class="fn">p₁</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn"><span class="fn">s</span>.center</span> <span class="fn">p₂</span></span></span></div></div></div></div><div class="decl" id="EuclideanGeometry.Cospherical"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L150-L151">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical"><span class="name">EuclideanGeometry</span>.<span class="name">Cospherical</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ps : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><p>A set of points is cospherical if they are equidistant from some
+point. In two dimensions, this is the same thing as being
+concyclic.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <span class="fn">ps</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∃ <span class="fn">center</span> <span class="fn">radius</span>, <span class="fn">∀ (<span class="fn">p</span> : <span class="fn">P</span>), <span class="fn"><span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">ps</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p</span> <span class="fn">center</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">radius</span></span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-EuclideanGeometry.Cospherical" class="instances-for-list"></ul></details></div></div><div class="decl" id="EuclideanGeometry.cospherical_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L155-L157">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.cospherical_def"><span class="name">EuclideanGeometry</span>.<span class="name">cospherical_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ps : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <span class="fn">ps</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">center</span> <span class="fn">radius</span>, <span class="fn">∀ (<span class="fn">p</span> : <span class="fn">P</span>), <span class="fn"><span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">ps</span></span> → <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p</span> <span class="fn">center</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">radius</span></span></span></span></span></span></div></div><p>The definition of <code><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">Cospherical</a></code>.</p></div></div><div class="decl" id="EuclideanGeometry.cospherical_iff_exists_sphere"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L161-L167">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.cospherical_iff_exists_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">cospherical_iff_exists_sphere</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ps : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <span class="fn">ps</span></span> <a href="../../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">s</span>, <span class="fn"><span class="fn">ps</span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.sphere">Metric.sphere</a> <span class="fn"><span class="fn">s</span>.center</span> <span class="fn"><span class="fn">s</span>.radius</span></span></span></span></span></div></div><p>A set of points is cospherical if and only if they lie in some sphere.</p></div></div><div class="decl" id="EuclideanGeometry.Sphere.cospherical"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L171-L172">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere.cospherical"><span class="name">EuclideanGeometry</span>.<span class="name">Sphere</span>.<span class="name">cospherical</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> (<span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.sphere">Metric.sphere</a> <span class="fn"><span class="fn">s</span>.center</span> <span class="fn"><span class="fn">s</span>.radius</span></span>)</span></div></div><p>The set of points in a sphere is cospherical.</p></div></div><div class="decl" id="EuclideanGeometry.Cospherical.subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L176-L179">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical.subset"><span class="name">EuclideanGeometry</span>.<span class="name">Cospherical</span>.<span class="name">subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ps₁ : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ps₂ : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">ps₁</span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">ps₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <span class="fn">ps₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <span class="fn">ps₁</span></span></div></div><p>A subset of a cospherical set is cospherical.</p></div></div><div class="decl" id="EuclideanGeometry.cospherical_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L183-L185">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.cospherical_empty"><span class="name">EuclideanGeometry</span>.<span class="name">cospherical_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <a href="../../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span></div></div><p>The empty set is cospherical.</p></div></div><div class="decl" id="EuclideanGeometry.cospherical_singleton"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L189-L191">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.cospherical_singleton"><span class="name">EuclideanGeometry</span>.<span class="name">cospherical_singleton</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn">P</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <span class="fn">{<span class="fn">p</span>}</span></span></div></div><p>A single point is cospherical.</p></div></div><div class="decl" id="EuclideanGeometry.cospherical_pair"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L201-L205">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.cospherical_pair"><span class="name">EuclideanGeometry</span>.<span class="name">cospherical_pair</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p₁ : <span class="fn">P</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <span class="fn">P</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <span class="fn">{<span class="fn">p₁</span>, <span class="fn">p₂</span>}</span></span></div></div><p>Two points are cospherical.</p></div></div><div class="decl" id="EuclideanGeometry.Concyclic"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L210-L212">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Concyclic"><span class="name">EuclideanGeometry</span>.<span class="name">Concyclic</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ps : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../../.././foundational_types.html">Prop</a></div></div><ul class="structure_fields" id="EuclideanGeometry.Concyclic.mk"><li id="EuclideanGeometry.Concyclic.Cospherical" class="structure_field"><div class="structure_field_info">Cospherical : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <span class="fn">ps</span></span></div></li><li id="EuclideanGeometry.Concyclic.Coplanar" class="structure_field"><div class="structure_field_info">Coplanar : <span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.html#Coplanar">Coplanar</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">ps</span></span></div></li></ul><p>A set of points is concyclic if it is cospherical and coplanar. (Most results are stated
+directly in terms of <code><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">Cospherical</a></code> instead of using <code><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Concyclic">Concyclic</a></code>.)</p><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-EuclideanGeometry.Concyclic" class="instances-for-list"></ul></details></div></div><div class="decl" id="EuclideanGeometry.Concyclic.subset"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L216-L217">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Concyclic.subset"><span class="name">EuclideanGeometry</span>.<span class="name">Concyclic</span>.<span class="name">subset</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ps₁ : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ps₂ : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">ps₁</span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">ps₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Concyclic">EuclideanGeometry.Concyclic</a> <span class="fn">ps₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Concyclic">EuclideanGeometry.Concyclic</a> <span class="fn">ps₁</span></span></div></div><p>A subset of a concyclic set is concyclic.</p></div></div><div class="decl" id="EuclideanGeometry.concyclic_empty"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L221-L222">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.concyclic_empty"><span class="name">EuclideanGeometry</span>.<span class="name">concyclic_empty</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Concyclic">EuclideanGeometry.Concyclic</a> <a href="../../../.././Init/Core.html#EmptyCollection.emptyCollection">∅</a></span></div></div><p>The empty set is concyclic.</p></div></div><div class="decl" id="EuclideanGeometry.concyclic_singleton"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L226-L227">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.concyclic_singleton"><span class="name">EuclideanGeometry</span>.<span class="name">concyclic_singleton</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn">P</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Concyclic">EuclideanGeometry.Concyclic</a> <span class="fn">{<span class="fn">p</span>}</span></span></div></div><p>A single point is concyclic.</p></div></div><div class="decl" id="EuclideanGeometry.concyclic_pair"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L231-L232">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.concyclic_pair"><span class="name">EuclideanGeometry</span>.<span class="name">concyclic_pair</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p₁ : <span class="fn">P</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₂ : <span class="fn">P</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Concyclic">EuclideanGeometry.Concyclic</a> <span class="fn">{<span class="fn">p₁</span>, <span class="fn">p₂</span>}</span></span></div></div><p>Two points are concyclic.</p></div></div><div class="decl" id="EuclideanGeometry.Cospherical.affineIndependent"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L242-L276">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical.affineIndependent"><span class="name">EuclideanGeometry</span>.<span class="name">Cospherical</span>.<span class="name">affineIndependent</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><span class="fn"><a href="../../../.././Init/Prelude.html#Fin">Fin</a> <span class="fn">3</span></span> → <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hps : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Data/Set/Image.html#Set.range">Set.range</a> <span class="fn">p</span></span> <a href="../../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hpi : <span class="fn"><a href="../../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/AffineSpace/Independent.html#AffineIndependent">AffineIndependent</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">p</span></span></div></div><p>Any three points in a cospherical set are affinely independent.</p></div></div><div class="decl" id="EuclideanGeometry.Cospherical.affineIndependent_of_mem_of_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L280-L286">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical.affineIndependent_of_mem_of_ne"><span class="name">EuclideanGeometry</span>.<span class="name">Cospherical</span>.<span class="name">affineIndependent_of_mem_of_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₃ : <span class="fn">P</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₃ : <span class="fn"><span class="fn">p₃</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁₂ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">p₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁₃ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">p₃</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂₃ : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">p₃</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/AffineSpace/Independent.html#AffineIndependent">AffineIndependent</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">![<span class="fn">p₁</span>, <span class="fn">p₂</span>, <span class="fn">p₃</span>]</span></span></div></div><p>Any three points in a cospherical set are affinely independent.</p></div></div><div class="decl" id="EuclideanGeometry.Cospherical.affineIndependent_of_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L290-L294">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical.affineIndependent_of_ne"><span class="name">EuclideanGeometry</span>.<span class="name">Cospherical</span>.<span class="name">affineIndependent_of_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₃ : <span class="fn">P</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Cospherical">EuclideanGeometry.Cospherical</a> <span class="fn">{<span class="fn">p₁</span>, <span class="fn">p₂</span>, <span class="fn">p₃</span>}</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁₂ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">p₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁₃ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">p₃</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂₃ : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">p₃</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/AffineSpace/Independent.html#AffineIndependent">AffineIndependent</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">![<span class="fn">p₁</span>, <span class="fn">p₂</span>, <span class="fn">p₃</span>]</span></span></div></div><p>The three points of a cospherical set are affinely independent.</p></div></div><div class="decl" id="EuclideanGeometry.inner_vsub_vsub_of_mem_sphere_of_mem_sphere"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L301-L305">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.inner_vsub_vsub_of_mem_sphere_of_mem_sphere"><span class="name">EuclideanGeometry</span>.<span class="name">inner_vsub_vsub_of_mem_sphere_of_mem_sphere</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₁ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₂ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp₁s₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂s₁ : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₁s₂ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂s₂ : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> (<span class="fn"><span class="fn"><span class="fn">s₂</span>.center</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#VSub.vsub">-ᵥ</a> <span class="fn"><span class="fn">s₁</span>.center</span></span>) (<span class="fn"><span class="fn">p₂</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#VSub.vsub">-ᵥ</a> <span class="fn">p₁</span></span>)</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div><p>Suppose that <code>p₁</code> and <code>p₂</code> lie in spheres <code>s₁</code> and <code>s₂</code>. Then the vector between the centers
+of those spheres is orthogonal to that between <code>p₁</code> and <code>p₂</code>; this is a version of
+<code>inner_vsub_vsub_of_dist_eq_of_dist_eq</code> for bundled spheres. (In two dimensions, this says that
+the diagonals of a kite are orthogonal.)</p></div></div><div class="decl" id="EuclideanGeometry.eq_of_mem_sphere_of_mem_sphere_of_mem_of_finrank_eq_two"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L311-L317">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.eq_of_mem_sphere_of_mem_sphere_of_mem_of_finrank_eq_two"><span class="name">EuclideanGeometry</span>.<span class="name">eq_of_mem_sphere_of_mem_sphere_of_mem_of_finrank_eq_two</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/AffineSpace/AffineSubspace.html#AffineSubspace">AffineSubspace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/AffineSpace/AffineSubspace.html#AffineSubspace.direction">AffineSubspace.direction</a> <span class="fn">s</span></span></span> }</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hd : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/AffineSpace/AffineSubspace.html#AffineSubspace.direction">AffineSubspace.direction</a> <span class="fn">s</span></span></span> }</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₁ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₂ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn">P</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs₁ : <span class="fn"><span class="fn"><span class="fn">s₁</span>.center</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs₂ : <span class="fn"><span class="fn"><span class="fn">s₂</span>.center</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₁s : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂s : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hps : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">p₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₁s₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂s₁ : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hps₁ : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₁s₂ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂s₂ : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hps₂ : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p₁</span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p₂</span></span></span></div></div><p>Two spheres intersect in at most two points in a two-dimensional subspace containing their
+centers; this is a version of <code>eq_of_dist_eq_of_dist_eq_of_mem_of_finrank_eq_two</code> for bundled
+spheres.</p></div></div><div class="decl" id="EuclideanGeometry.eq_of_mem_sphere_of_mem_sphere_of_finrank_eq_two"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L322-L327">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.eq_of_mem_sphere_of_mem_sphere_of_finrank_eq_two"><span class="name">EuclideanGeometry</span>.<span class="name">eq_of_mem_sphere_of_mem_sphere_of_finrank_eq_two</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hd : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">2</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₁ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s₂ : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn">P</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><span class="fn">s₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">p₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₁s₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂s₁ : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hps₁ : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₁s₂ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂s₂ : <span class="fn"><span class="fn">p₂</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hps₂ : <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p₁</span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">p</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p₂</span></span></span></div></div><p>Two spheres intersect in at most two points in two-dimensional space; this is a version of
+<code>eq_of_dist_eq_of_dist_eq_of_finrank_eq_two</code> for bundled spheres.</p></div></div><div class="decl" id="EuclideanGeometry.inner_pos_or_eq_of_dist_le_radius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L332-L357">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.inner_pos_or_eq_of_dist_le_radius"><span class="name">EuclideanGeometry</span>.<span class="name">inner_pos_or_eq_of_dist_le_radius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂ : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p₂</span> <span class="fn"><span class="fn">s</span>.center</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">s</span>.radius</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> (<span class="fn"><span class="fn">p₁</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#VSub.vsub">-ᵥ</a> <span class="fn">p₂</span></span>) (<span class="fn"><span class="fn">p₁</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#VSub.vsub">-ᵥ</a> <span class="fn"><span class="fn">s</span>.center</span></span>)</span></span> <a href="../../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p₂</span></span></span></div></div><p>Given a point on a sphere and a point not outside it, the inner product between the
+difference of those points and the radius vector is positive unless the points are equal.</p></div></div><div class="decl" id="EuclideanGeometry.inner_nonneg_of_dist_le_radius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L362-L366">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.inner_nonneg_of_dist_le_radius"><span class="name">EuclideanGeometry</span>.<span class="name">inner_nonneg_of_dist_le_radius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂ : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p₂</span> <span class="fn"><span class="fn">s</span>.center</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">s</span>.radius</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> (<span class="fn"><span class="fn">p₁</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#VSub.vsub">-ᵥ</a> <span class="fn">p₂</span></span>) (<span class="fn"><span class="fn">p₁</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#VSub.vsub">-ᵥ</a> <span class="fn"><span class="fn">s</span>.center</span></span>)</span></span></div></div><p>Given a point on a sphere and a point not outside it, the inner product between the
+difference of those points and the radius vector is nonnegative.</p></div></div><div class="decl" id="EuclideanGeometry.inner_pos_of_dist_lt_radius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L371-L376">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.inner_pos_of_dist_lt_radius"><span class="name">EuclideanGeometry</span>.<span class="name">inner_pos_of_dist_lt_radius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂ : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p₂</span> <span class="fn"><span class="fn">s</span>.center</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">s</span>.radius</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#Inner.inner">inner</a> (<span class="fn"><span class="fn">p₁</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#VSub.vsub">-ᵥ</a> <span class="fn">p₂</span></span>) (<span class="fn"><span class="fn">p₁</span> <a href="../../../.././Mathlib/Algebra/Group/Defs.html#VSub.vsub">-ᵥ</a> <span class="fn"><span class="fn">s</span>.center</span></span>)</span></span></div></div><p>Given a point on a sphere and a point inside it, the inner product between the difference of
+those points and the radius vector is positive.</p></div></div><div class="decl" id="EuclideanGeometry.wbtw_of_collinear_of_dist_center_le_radius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L381-L384">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.wbtw_of_collinear_of_dist_center_le_radius"><span class="name">EuclideanGeometry</span>.<span class="name">wbtw_of_collinear_of_dist_center_le_radius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₃ : <span class="fn">P</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.html#Collinear">Collinear</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">{<span class="fn">p₁</span>, <span class="fn">p₂</span>, <span class="fn">p₃</span>}</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂ : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p₂</span> <span class="fn"><span class="fn">s</span>.center</span></span> <a href="../../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">s</span>.radius</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₃ : <span class="fn"><span class="fn">p₃</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₁p₃ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">p₃</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Between.html#Wbtw">Wbtw</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">p₁</span> <span class="fn">p₂</span> <span class="fn">p₃</span></span></div></div><p>Given three collinear points, two on a sphere and one not outside it, the one not outside it
+is weakly between the other two points.</p></div></div><div class="decl" id="EuclideanGeometry.sbtw_of_collinear_of_dist_center_lt_radius"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Geometry/Euclidean/Sphere/Basic.lean#L389-L392">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.sbtw_of_collinear_of_dist_center_lt_radius"><span class="name">EuclideanGeometry</span>.<span class="name">sbtw_of_collinear_of_dist_center_lt_radius</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{P : <a href="../../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/InnerProductSpace/Basic.html#InnerProductSpace">InnerProductSpace</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../../.././Mathlib/Analysis/Normed/Group/AddTorsor.html#NormedAddTorsor">NormedAddTorsor</a> <span class="fn">V</span> <span class="fn">P</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../../.././Mathlib/Geometry/Euclidean/Sphere/Basic.html#EuclideanGeometry.Sphere">EuclideanGeometry.Sphere</a> <span class="fn">P</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn">P</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₃ : <span class="fn">P</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../../.././Mathlib/LinearAlgebra/AffineSpace/FiniteDimensional.html#Collinear">Collinear</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">{<span class="fn">p₁</span>, <span class="fn">p₂</span>, <span class="fn">p₃</span>}</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₂ : <span class="fn"><span class="fn"><a href="../../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> <span class="fn">p₂</span> <span class="fn"><span class="fn">s</span>.center</span></span> <a href="../../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">s</span>.radius</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₃ : <span class="fn"><span class="fn">p₃</span> <a href="../../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp₁p₃ : <span class="fn"><span class="fn">p₁</span> <a href="../../../.././Init/Core.html#Ne">≠</a> <span class="fn">p₃</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../../.././Mathlib/Analysis/Convex/Between.html#Sbtw">Sbtw</a> <a href="../../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">p₁</span> <span class="fn">p₂</span> <span class="fn">p₃</span></span></div></div><p>Given three collinear points, two on a sphere and one inside it, the one inside it is
+strictly between the other two points.</p></div></div></main>
+<nav class="nav"><iframe src="../../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

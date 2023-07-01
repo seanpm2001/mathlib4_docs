@@ -1,0 +1,697 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Lie.OfAssociative</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Lie.OfAssociative";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Lie</span>.<span class="name">OfAssociative</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Lie</span>.<span class="name">OfAssociative</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Algebra/Lie/Basic.html">Mathlib.Algebra.Lie.Basic</a></li><li><a href="../../.././Mathlib/Algebra/Lie/Subalgebra.html">Mathlib.Algebra.Lie.Subalgebra</a></li><li><a href="../../.././Mathlib/Algebra/Lie/Submodule.html">Mathlib.Algebra.Lie.Submodule</a></li><li><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html">Mathlib.Algebra.Algebra.Subalgebra.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Lie.OfAssociative" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Ring.instBracket"><span class="name">Ring</span>.<span class="name">instBracket</span></a></div><div class="nav_link"><a class="break_within" href="#Ring.lie_def"><span class="name">Ring</span>.<span class="name">lie_def</span></a></div><div class="nav_link"><a class="break_within" href="#commute_iff_lie_eq"><span class="name">commute_iff_lie_eq</span></a></div><div class="nav_link"><a class="break_within" href="#Commute.lie_eq"><span class="name">Commute</span>.<span class="name">lie_eq</span></a></div><div class="nav_link"><a class="break_within" href="#LieRing.ofAssociativeRing"><span class="name">LieRing</span>.<span class="name">ofAssociativeRing</span></a></div><div class="nav_link"><a class="break_within" href="#LieRing.of_associative_ring_bracket"><span class="name">LieRing</span>.<span class="name">of_associative_ring_bracket</span></a></div><div class="nav_link"><a class="break_within" href="#LieRing.lie_apply"><span class="name">LieRing</span>.<span class="name">lie_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LieRingModule.ofAssociativeModule"><span class="name">LieRingModule</span>.<span class="name">ofAssociativeModule</span></a></div><div class="nav_link"><a class="break_within" href="#lie_eq_smul"><span class="name">lie_eq_smul</span></a></div><div class="nav_link"><a class="break_within" href="#LieAlgebra.ofAssociativeAlgebra"><span class="name">LieAlgebra</span>.<span class="name">ofAssociativeAlgebra</span></a></div><div class="nav_link"><a class="break_within" href="#LieModule.ofAssociativeModule"><span class="name">LieModule</span>.<span class="name">ofAssociativeModule</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.lieRingModule"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">lieRingModule</span></a></div><div class="nav_link"><a class="break_within" href="#Module.End.lieModule"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">lieModule</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.toLieHom"><span class="name">AlgHom</span>.<span class="name">toLieHom</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.instCoeAlgHomToCommSemiringToSemiringToSemiringLieHomOfAssociativeRingOfAssociativeAlgebraOfAssociativeRingOfAssociativeAlgebra"><span class="name">AlgHom</span>.<span class="name">instCoeAlgHomToCommSemiringToSemiringToSemiringLieHomOfAssociativeRingOfAssociativeAlgebraOfAssociativeRingOfAssociativeAlgebra</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.coe_toLieHom"><span class="name">AlgHom</span>.<span class="name">coe_toLieHom</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.toLieHom_apply"><span class="name">AlgHom</span>.<span class="name">toLieHom_apply</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.toLieHom_id"><span class="name">AlgHom</span>.<span class="name">toLieHom_id</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.toLieHom_comp"><span class="name">AlgHom</span>.<span class="name">toLieHom_comp</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.toLieHom_injective"><span class="name">AlgHom</span>.<span class="name">toLieHom_injective</span></a></div><div class="nav_link"><a class="break_within" href="#LieModule.toEndomorphism_apply_apply"><span class="name">LieModule</span>.<span class="name">toEndomorphism_apply_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LieModule.toEndomorphism"><span class="name">LieModule</span>.<span class="name">toEndomorphism</span></a></div><div class="nav_link"><a class="break_within" href="#LieAlgebra.ad"><span class="name">LieAlgebra</span>.<span class="name">ad</span></a></div><div class="nav_link"><a class="break_within" href="#LieAlgebra.ad_apply"><span class="name">LieAlgebra</span>.<span class="name">ad_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LieModule.toEndomorphism_module_end"><span class="name">LieModule</span>.<span class="name">toEndomorphism_module_end</span></a></div><div class="nav_link"><a class="break_within" href="#LieSubalgebra.toEndomorphism_eq"><span class="name">LieSubalgebra</span>.<span class="name">toEndomorphism_eq</span></a></div><div class="nav_link"><a class="break_within" href="#LieSubalgebra.toEndomorphism_mk"><span class="name">LieSubalgebra</span>.<span class="name">toEndomorphism_mk</span></a></div><div class="nav_link"><a class="break_within" href="#LieSubmodule.coe_map_toEndomorphism_le"><span class="name">LieSubmodule</span>.<span class="name">coe_map_toEndomorphism_le</span></a></div><div class="nav_link"><a class="break_within" href="#LieSubmodule.toEndomorphism_comp_subtype_mem"><span class="name">LieSubmodule</span>.<span class="name">toEndomorphism_comp_subtype_mem</span></a></div><div class="nav_link"><a class="break_within" href="#LieSubmodule.toEndomorphism_restrict_eq_toEndomorphism"><span class="name">LieSubmodule</span>.<span class="name">toEndomorphism_restrict_eq_toEndomorphism</span></a></div><div class="nav_link"><a class="break_within" href="#LieAlgebra.ad_eq_lmul_left_sub_lmul_right"><span class="name">LieAlgebra</span>.<span class="name">ad_eq_lmul_left_sub_lmul_right</span></a></div><div class="nav_link"><a class="break_within" href="#LieSubalgebra.ad_comp_incl_eq"><span class="name">LieSubalgebra</span>.<span class="name">ad_comp_incl_eq</span></a></div><div class="nav_link"><a class="break_within" href="#lieSubalgebraOfSubalgebra"><span class="name">lieSubalgebraOfSubalgebra</span></a></div><div class="nav_link"><a class="break_within" href="#LinearEquiv.lieConj"><span class="name">LinearEquiv</span>.<span class="name">lieConj</span></a></div><div class="nav_link"><a class="break_within" href="#LinearEquiv.lieConj_apply"><span class="name">LinearEquiv</span>.<span class="name">lieConj_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LinearEquiv.lieConj_symm"><span class="name">LinearEquiv</span>.<span class="name">lieConj_symm</span></a></div><div class="nav_link"><a class="break_within" href="#AlgEquiv.toLieEquiv"><span class="name">AlgEquiv</span>.<span class="name">toLieEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#AlgEquiv.toLieEquiv_apply"><span class="name">AlgEquiv</span>.<span class="name">toLieEquiv_apply</span></a></div><div class="nav_link"><a class="break_within" href="#AlgEquiv.toLieEquiv_symm_apply"><span class="name">AlgEquiv</span>.<span class="name">toLieEquiv_symm_apply</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Lie-algebras-of-associative-algebras">Lie algebras of associative algebras <a class="hover-link" href="#Lie-algebras-of-associative-algebras">#</a></h1><p>This file defines the Lie algebra structure that arises on an associative algebra via the ring
+commutator.</p><p>Since the linear endomorphisms of a Lie algebra form an associative algebra, one can define the
+adjoint action as a morphism of Lie algebras from a Lie algebra to its linear endomorphisms. We
+make such a definition in this file.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ofAssociativeAlgebra">LieAlgebra.ofAssociativeAlgebra</a></code></li>
+<li><code>LieAlgebra.ofAssociativeAlgebraHom</code></li>
+<li><code><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a></code></li>
+<li><code><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ad">LieAlgebra.ad</a></code></li>
+<li><code><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LinearEquiv.lieConj">LinearEquiv.lieConj</a></code></li>
+<li><code><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgEquiv.toLieEquiv">AlgEquiv.toLieEquiv</a></code></li>
+</ul><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>lie algebra, ring commutator, adjoint action</p></div><div class="decl" id="Ring.instBracket"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L51-L52">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#Ring.instBracket"><span class="name">Ring</span>.<span class="name">instBracket</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket">Bracket</a> <span class="fn">A</span> <span class="fn">A</span></span></div></div><p>The bracket operation for rings is the ring commutator, which captures the extent to which a
+ring is commutative. It is identically zero exactly when the ring is commutative.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Ring.instBracket</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">bracket</span> := <span class="fn">fun <span class="fn">x</span> <span class="fn">y</span> =&gt <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span></span></span> }</span></span></li></ul></details></div></div><div class="decl" id="Ring.lie_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L54-L55">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#Ring.lie_def"><span class="name">Ring</span>.<span class="name">lie_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn">x</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn">y</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="commute_iff_lie_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L60-L61">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#commute_iff_lie_eq"><span class="name">commute_iff_lie_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> <span class="fn">x</span> <span class="fn">y</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn">x</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn">y</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="Commute.lie_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L64-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#Commute.lie_eq"><span class="name">Commute</span>.<span class="name">lie_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> <span class="fn">x</span> <span class="fn">y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn">x</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn">y</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="LieRing.ofAssociativeRing"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L71-L76">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieRing.ofAssociativeRing"><span class="name">LieRing</span>.<span class="name">ofAssociativeRing</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">A</span></span></div></div><p>An associative ring gives rise to a Lie ring by taking the bracket to be the ring commutator.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="LieRing.of_associative_ring_bracket"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L79-L80">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieRing.of_associative_ring_bracket"><span class="name">LieRing</span>.<span class="name">of_associative_ring_bracket</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn">x</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn">y</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="LieRing.lie_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L84-L85">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieRing.lie_apply"><span class="name">LieRing</span>.<span class="name">lie_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">α</span> → <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">α</span> → <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">α</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn"><span class="fn">α</span> → <span class="fn">A</span></span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn"><span class="fn">α</span> → <span class="fn">A</span></span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a></a> <span class="fn">LieRingModule.toBracket</span> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn"><span class="fn">f</span> <span class="fn">a</span></span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn"><span class="fn">g</span> <span class="fn">a</span></span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a></span></span></div></div></div></div><div class="decl" id="LieRingModule.ofAssociativeModule"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L105-L109">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieRingModule.ofAssociativeModule"><span class="name">LieRingModule</span>.<span class="name">ofAssociativeModule</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">A</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRingModule">LieRingModule</a> <span class="fn">A</span> <span class="fn">M</span></span></div></div><p>We can regard a module over an associative ring <code>A</code> as a Lie ring module over <code>A</code> with Lie
+bracket equal to its ring commutator.</p><p>Note that this cannot be a global instance because it would create a diamond when <code>M = A</code>,
+specifically we can build two mathematically-different <code>bracket A A</code>s:</p><ol>
+<li><code>@Ring.bracket A _</code> which says <code>⁅a, b⁆ = a * b - b * a</code></li>
+<li><code>(@LieRingModule.<a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieRingModule.ofAssociativeModule">ofAssociativeModule</a> A _ A _ _).toBracket</code> which says <code>⁅a, b⁆ = a • b</code>
+(and thus <code>⁅a, b⁆ = a * b</code>)</li>
+</ol><p>See note [reducible non-instances]</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-LieRingModule.ofAssociativeModule" class="instances-for-list"></ul></details></div></div><div class="decl" id="lie_eq_smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L114-L115">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#lie_eq_smul"><span class="name">lie_eq_smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">A</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn">a</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn">m</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">m</span></span></span></div></div></div></div><div class="decl" id="LieAlgebra.ofAssociativeAlgebra"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L126-L129">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ofAssociativeAlgebra"><span class="name">LieAlgebra</span>.<span class="name">ofAssociativeAlgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div><p>An associative algebra gives rise to a Lie algebra by taking the bracket to be the ring
+commutator.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">LieAlgebra.ofAssociativeAlgebra</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra.mk">LieAlgebra.mk</a> <span class="fn">(_ : <span class="fn">∀ (<span class="fn">t</span> : <span class="fn">R</span>) (<span class="fn">x </span>y : <span class="fn">A</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn">x</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn"><span class="fn">t</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">t</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn">x</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn">y</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a></span></span></span></span>)</span></span></span></li></ul></details></div></div><div class="decl" id="LieModule.ofAssociativeModule"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L143-L145">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.ofAssociativeModule"><span class="name">LieModule</span>.<span class="name">ofAssociativeModule</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">A</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieModule">LieModule</a> <span class="fn">R</span> <span class="fn">A</span> <span class="fn">M</span></span></div></div><p>A representation of an associative algebra <code>A</code> is also a representation of <code>A</code>, regarded as a
+Lie algebra via the ring commutator.</p><p>See the comment at <code><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieRingModule.ofAssociativeModule">LieRingModule.ofAssociativeModule</a></code> for why the possibility <code>M = A</code> means
+this cannot be a global instance.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">LieModule.ofAssociativeModule</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">smul_lie</span> := <span class="fn">(_ : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">R</span>) (<span class="fn">y</span> : <span class="fn">A</span>) (<span class="fn">z</span> : <span class="fn">M</span>), <span class="fn"><span class="fn">(<span class="fn"><span class="fn">x</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span>) <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">y</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">z</span></span></span></span></span>)</span>,
+    <span class="fn">lie_smul</span> := <span class="fn">(_ : <span class="fn">∀ (<span class="fn">r</span> : <span class="fn">R</span>) (<span class="fn">a</span> : <span class="fn">A</span>) (<span class="fn">m</span> : <span class="fn">M</span>), <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">m</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">a</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">m</span></span></span></span></span>)</span> }</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-LieModule.ofAssociativeModule" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.End.lieRingModule"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L148-L149">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#Module.End.lieRingModule"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">lieRingModule</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRingModule">LieRingModule</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>) <span class="fn">M</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Module.End.lieRingModule</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">LieRingModule.ofAssociativeModule</span></span></li></ul></details></div></div><div class="decl" id="Module.End.lieModule"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L152-L153">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#Module.End.lieModule"><span class="name">Module</span>.<span class="name">End</span>.<span class="name">lieModule</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieModule">LieModule</a> <span class="fn">R</span> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>) <span class="fn">M</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Module.End.lieModule</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">LieModule.ofAssociativeModule</span></span></li></ul></details></div></div><div class="decl" id="AlgHom.toLieHom"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L166-L168">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom"><span class="name">AlgHom</span>.<span class="name">toLieHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieHom">→ₗ⁅</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieHom">⁆</a> <span class="fn">B</span></span></div></div><p>The map <code><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ofAssociativeAlgebra">ofAssociativeAlgebra</a></code> associating a Lie algebra to an associative algebra is
+functorial.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-AlgHom.toLieHom" class="instances-for-list"></ul></details></div></div><div class="decl" id="AlgHom.instCoeAlgHomToCommSemiringToSemiringToSemiringLieHomOfAssociativeRingOfAssociativeAlgebraOfAssociativeRingOfAssociativeAlgebra"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L171-L172">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.instCoeAlgHomToCommSemiringToSemiringToSemiringLieHomOfAssociativeRingOfAssociativeAlgebraOfAssociativeRingOfAssociativeAlgebra"><span class="name">AlgHom</span>.<span class="name">instCoeAlgHomToCommSemiringToSemiringToSemiringLieHomOfAssociativeRingOfAssociativeAlgebraOfAssociativeRingOfAssociativeAlgebra</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Coe.html#Coe">Coe</a> (<span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>) (<span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieHom">→ₗ⁅</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieHom">⁆</a> <span class="fn">B</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">AlgHom.instCoeAlgHomToCommSemiringToSemiringToSemiringLieHomOfAssociativeRingOfAssociativeAlgebraOfAssociativeRingOfAssociativeAlgebra</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">coe</span> := <span class="fn">AlgHom.toLieHom</span> }</span></span></li></ul></details></div></div><div class="decl" id="AlgHom.coe_toLieHom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L182-L183">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.coe_toLieHom"><span class="name">AlgHom</span>.<span class="name">coe_toLieHom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom">AlgHom.toLieHom</a> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="AlgHom.toLieHom_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L186-L187">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom_apply"><span class="name">AlgHom</span>.<span class="name">toLieHom_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom">AlgHom.toLieHom</a> <span class="fn">f</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="AlgHom.toLieHom_id"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L191-L192">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom_id"><span class="name">AlgHom</span>.<span class="name">toLieHom_id</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom">AlgHom.toLieHom</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom.id">AlgHom.id</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">LieHom.id</span></span></div></div></div></div><div class="decl" id="AlgHom.toLieHom_comp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L196-L197">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom_comp"><span class="name">AlgHom</span>.<span class="name">toLieHom_comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> w₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">C</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">B</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">C</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom">AlgHom.toLieHom</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom.comp">AlgHom.comp</a> <span class="fn">g</span> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieHom.comp">LieHom.comp</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom">AlgHom.toLieHom</a> <span class="fn">g</span></span>) (<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom">AlgHom.toLieHom</a> <span class="fn">f</span></span>)</span></span></div></div></div></div><div class="decl" id="AlgHom.toLieHom_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L200-L201">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom_injective"><span class="name">AlgHom</span>.<span class="name">toLieHom_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">B</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom">AlgHom.toLieHom</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgHom.toLieHom">AlgHom.toLieHom</a> <span class="fn">g</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div></div></div><div class="decl" id="LieModule.toEndomorphism_apply_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L221-L221">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism_apply_apply"><span class="name">LieModule</span>.<span class="name">toEndomorphism_apply_apply</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRingModule">LieRingModule</a> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieModule">LieModule</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">L</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>) <span class="fn">x</span></span>) <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn">x</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn">m</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a></span></span></div></div></div></div><div class="decl" id="LieModule.toEndomorphism"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L222-L229">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism"><span class="name">LieModule</span>.<span class="name">toEndomorphism</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRingModule">LieRingModule</a> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieModule">LieModule</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieHom">→ₗ⁅</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieHom">⁆</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span></span></div></div><p>A Lie module yields a Lie algebra morphism into the linear endomorphisms of the module.</p><p>See also <code>LieModule.toModuleHom</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-LieModule.toEndomorphism" class="instances-for-list"></ul></details></div></div><div class="decl" id="LieAlgebra.ad"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L233-L234">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ad"><span class="name">LieAlgebra</span>.<span class="name">ad</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">L</span> <a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieHom">→ₗ⁅</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieHom">⁆</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">L</span></span></span></div></div><p>The adjoint action of a Lie algebra on itself.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ad">LieAlgebra.ad</a> <span class="fn">R</span> <span class="fn">L</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">L</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-LieAlgebra.ad" class="instances-for-list"></ul></details></div></div><div class="decl" id="LieAlgebra.ad_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L238-L239">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ad_apply"><span class="name">LieAlgebra</span>.<span class="name">ad_apply</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">L</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">L</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ad">LieAlgebra.ad</a> <span class="fn">R</span> <span class="fn">L</span></span>) <span class="fn">x</span></span>) <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁅</a><span class="fn">x</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">,</a> <span class="fn">y</span><a href="../../.././Mathlib/Data/Bracket.html#Bracket.bracket">⁆</a></span></span></div></div></div></div><div class="decl" id="LieModule.toEndomorphism_module_end"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L243-L244">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism_module_end"><span class="name">LieModule</span>.<span class="name">toEndomorphism_module_end</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M</span></span>) <span class="fn">M</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">LieHom.id</span></span></div></div></div></div><div class="decl" id="LieSubalgebra.toEndomorphism_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L247-L249">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieSubalgebra.toEndomorphism_eq"><span class="name">LieSubalgebra</span>.<span class="name">toEndomorphism_eq</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRingModule">LieRingModule</a> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieModule">LieModule</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Subalgebra.html#LieSubalgebra">LieSubalgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span> }</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span> }</span> <span class="fn">M</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>) <span class="fn">↑<span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="LieSubalgebra.toEndomorphism_mk"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L253-L255">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieSubalgebra.toEndomorphism_mk"><span class="name">LieSubalgebra</span>.<span class="name">toEndomorphism_mk</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="decl_args">
+<span class="fn">(M : <a href="../../.././foundational_types.html">Type</a> w)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRingModule">LieRingModule</a> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieModule">LieModule</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Subalgebra.html#LieSubalgebra">LieSubalgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">L</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span> }</span> <span class="fn">M</span></span>) <span class="fn">{ <span class="fn">val</span> := <span class="fn">x</span>, <span class="fn">property</span> := <span class="fn">hx</span> }</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>) <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="LieSubmodule.coe_map_toEndomorphism_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L266-L269">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieSubmodule.coe_map_toEndomorphism_le"><span class="name">LieSubmodule</span>.<span class="name">coe_map_toEndomorphism_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRingModule">LieRingModule</a> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieModule">LieModule</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Submodule.html#LieSubmodule">LieSubmodule</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">L</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#Submodule.map">Submodule.map</a> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>) <span class="fn">x</span></span>) <span class="fn">↑<span class="fn">N</span></span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">N</span></span></span></div></div></div></div><div class="decl" id="LieSubmodule.toEndomorphism_comp_subtype_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L274-L276">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieSubmodule.toEndomorphism_comp_subtype_mem"><span class="name">LieSubmodule</span>.<span class="name">toEndomorphism_comp_subtype_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRingModule">LieRingModule</a> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieModule">LieModule</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(N : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Submodule.html#LieSubmodule">LieSubmodule</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">L</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">↑<span class="fn">N</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap.comp">LinearMap.comp</a> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>) <span class="fn">x</span></span>) (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule.subtype">Submodule.subtype</a> <span class="fn">↑<span class="fn">N</span></span></span>)</span>) <span class="fn">{ <span class="fn">val</span> := <span class="fn">m</span>, <span class="fn">property</span> := <span class="fn">hm</span> }</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">↑<span class="fn">N</span></span></span></div></div></div></div><div class="decl" id="LieSubmodule.toEndomorphism_restrict_eq_toEndomorphism"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L280-L282">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieSubmodule.toEndomorphism_restrict_eq_toEndomorphism"><span class="name">LieSubmodule</span>.<span class="name">toEndomorphism_restrict_eq_toEndomorphism</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRingModule">LieRingModule</a> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieModule">LieModule</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(N : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Submodule.html#LieSubmodule">LieSubmodule</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">L</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Init/Prelude.html#optParam">optParam</a>
+  (<span class="fn">∀ (<span class="fn">m</span> : <span class="fn">M</span>) (<span class="fn">hm</span> : <span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">↑<span class="fn">N</span></span></span>),
+    <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap.comp">LinearMap.comp</a> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>) <span class="fn">x</span></span>) (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule.subtype">Submodule.subtype</a> <span class="fn">↑<span class="fn">N</span></span></span>)</span>) <span class="fn">{ <span class="fn">val</span> := <span class="fn">m</span>, <span class="fn">property</span> := <span class="fn">hm</span> }</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">↑<span class="fn">N</span></span></span></span>)
+  <span class="fn">(_ :
+    <span class="fn">∀ (<span class="fn">m</span> : <span class="fn">M</span>) (<span class="fn">hm</span> : <span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">↑<span class="fn">N</span></span></span>),
+      <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap.comp">LinearMap.comp</a> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>) <span class="fn">x</span></span>) (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule.subtype">Submodule.subtype</a> <span class="fn">↑<span class="fn">N</span></span></span>)</span>) <span class="fn">{ <span class="fn">val</span> := <span class="fn">m</span>, <span class="fn">property</span> := <span class="fn">hm</span> }</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">↑<span class="fn">N</span></span></span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.restrict">LinearMap.restrict</a> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">M</span></span>) <span class="fn">x</span></span>) <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieModule.toEndomorphism">LieModule.toEndomorphism</a> <span class="fn">R</span> <span class="fn">L</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">↑<span class="fn">N</span></span></span> }</span></span>) <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="LieAlgebra.ad_eq_lmul_left_sub_lmul_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L289-L291">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ad_eq_lmul_left_sub_lmul_right"><span class="name">LieAlgebra</span>.<span class="name">ad_eq_lmul_left_sub_lmul_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ad">LieAlgebra.ad</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Bilinear.html#LinearMap.mulLeft">LinearMap.mulLeft</a> <span class="fn">R</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Bilinear.html#LinearMap.mulRight">LinearMap.mulRight</a> <span class="fn">R</span></span></span></span></div></div></div></div><div class="decl" id="LieSubalgebra.ad_comp_incl_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L294-L298">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieSubalgebra.ad_comp_incl_eq"><span class="name">LieSubalgebra</span>.<span class="name">ad_comp_incl_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieRing">LieRing</a> <span class="fn">L</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieAlgebra">LieAlgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Subalgebra.html#LieSubalgebra">LieSubalgebra</a> <span class="fn">R</span> <span class="fn">L</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap.comp">LinearMap.comp</a> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ad">LieAlgebra.ad</a> <span class="fn">R</span> <span class="fn">L</span></span>) <span class="fn">↑<span class="fn">x</span></span></span>) <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Subalgebra.html#LieSubalgebra.incl">LieSubalgebra.incl</a> <span class="fn">K</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap.comp">LinearMap.comp</a> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Subalgebra.html#LieSubalgebra.incl">LieSubalgebra.incl</a> <span class="fn">K</span></span>)</span>) (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LieAlgebra.ad">LieAlgebra.ad</a> <span class="fn">R</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span> }</span></span>) <span class="fn">x</span></span>)</span></span></div></div></div></div><div class="decl" id="lieSubalgebraOfSubalgebra"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L304-L312">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#lieSubalgebraOfSubalgebra"><span class="name">lieSubalgebraOfSubalgebra</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> v)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A' : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Subalgebra.html#LieSubalgebra">LieSubalgebra</a> <span class="fn">R</span> <span class="fn">A</span></span></div></div><p>A subalgebra of an associative algebra is a Lie subalgebra of the associated Lie algebra.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-lieSubalgebraOfSubalgebra" class="instances-for-list"></ul></details></div></div><div class="decl" id="LinearEquiv.lieConj"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L324-L329">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LinearEquiv.lieConj"><span class="name">LinearEquiv</span>.<span class="name">lieConj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/Equiv.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv.html#LinearEquiv">]</a> <span class="fn">M₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M₁</span></span> <a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieEquiv">≃ₗ⁅</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieEquiv">⁆</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M₂</span></span></span></div></div><p>A linear equivalence of two modules induces a Lie algebra equivalence of their endomorphisms.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-LinearEquiv.lieConj" class="instances-for-list"></ul></details></div></div><div class="decl" id="LinearEquiv.lieConj_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L333-L334">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LinearEquiv.lieConj_apply"><span class="name">LinearEquiv</span>.<span class="name">lieConj_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/Equiv.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv.html#LinearEquiv">]</a> <span class="fn">M₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#Module.End">Module.End</a> <span class="fn">R</span> <span class="fn">M₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LinearEquiv.lieConj">LinearEquiv.lieConj</a> <span class="fn">e</span></span>) <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearEquiv.conj">LinearEquiv.conj</a> <span class="fn">e</span></span>) <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="LinearEquiv.lieConj_symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L338-L339">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LinearEquiv.lieConj_symm"><span class="name">LinearEquiv</span>.<span class="name">lieConj_symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₁ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M₂ : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">M₁</span> <a href="../../.././Mathlib/Algebra/Module/Equiv.html#LinearEquiv">≃ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/Equiv.html#LinearEquiv">]</a> <span class="fn">M₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieEquiv.symm">LieEquiv.symm</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LinearEquiv.lieConj">LinearEquiv.lieConj</a> <span class="fn">e</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#LinearEquiv.lieConj">LinearEquiv.lieConj</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Equiv.html#LinearEquiv.symm">LinearEquiv.symm</a> <span class="fn">e</span></span>)</span></span></div></div></div></div><div class="decl" id="AlgEquiv.toLieEquiv"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L353-L358">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgEquiv.toLieEquiv"><span class="name">AlgEquiv</span>.<span class="name">toLieEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A₁ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A₂ : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">A₁</span> <a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">≃ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">]</a> <span class="fn">A₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">A₁</span> <a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieEquiv">≃ₗ⁅</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieEquiv">⁆</a> <span class="fn">A₂</span></span></div></div><p>An equivalence of associative algebras is an equivalence of associated Lie algebras.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-AlgEquiv.toLieEquiv" class="instances-for-list"></ul></details></div></div><div class="decl" id="AlgEquiv.toLieEquiv_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L362-L363">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgEquiv.toLieEquiv_apply"><span class="name">AlgEquiv</span>.<span class="name">toLieEquiv_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A₁ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A₂ : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">A₁</span> <a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">≃ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">]</a> <span class="fn">A₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">A₁</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgEquiv.toLieEquiv">AlgEquiv.toLieEquiv</a> <span class="fn">e</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">e</span> <span class="fn">x</span></span></span></div></div></div></div><div class="decl" id="AlgEquiv.toLieEquiv_symm_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Lie/OfAssociative.lean#L367-L368">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgEquiv.toLieEquiv_symm_apply"><span class="name">AlgEquiv</span>.<span class="name">toLieEquiv_symm_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A₁ : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A₂ : <a href="../../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A₂</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A₁</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A₂</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">A₁</span> <a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">≃ₐ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv">]</a> <span class="fn">A₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">A₂</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/Basic.html#LieEquiv.symm">LieEquiv.symm</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Lie/OfAssociative.html#AlgEquiv.toLieEquiv">AlgEquiv.toLieEquiv</a> <span class="fn">e</span></span>)</span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Equiv.html#AlgEquiv.symm">AlgEquiv.symm</a> <span class="fn">e</span></span>) <span class="fn">x</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

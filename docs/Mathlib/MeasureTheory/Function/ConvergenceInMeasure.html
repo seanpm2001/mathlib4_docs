@@ -1,0 +1,559 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.MeasureTheory.Function.ConvergenceInMeasure</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.MeasureTheory.Function.ConvergenceInMeasure";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">MeasureTheory</span>.<span class="name">Function</span>.<span class="name">ConvergenceInMeasure</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">MeasureTheory</span>.<span class="name">Function</span>.<span class="name">ConvergenceInMeasure</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/MeasureTheory/Function/Egorov.html">Mathlib.MeasureTheory.Function.Egorov</a></li><li><a href="../../.././Mathlib/MeasureTheory/Function/LpSpace.html">Mathlib.MeasureTheory.Function.LpSpace</a></li><li><a href="../../.././Mathlib/Analysis/SpecialFunctions/Pow/Real.html">Mathlib.Analysis.SpecialFunctions.Pow.Real</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.MeasureTheory.Function.ConvergenceInMeasure" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.TendstoInMeasure"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.tendstoInMeasure_iff_norm"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_iff_norm</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.TendstoInMeasure.congr'"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">congr'</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.TendstoInMeasure.congr"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">congr</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.TendstoInMeasure.congr_left"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">congr_left</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.TendstoInMeasure.congr_right"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">congr_right</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.tendstoInMeasure_of_tendsto_ae_of_stronglyMeasurable"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_ae_of_stronglyMeasurable</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.tendstoInMeasure_of_tendsto_ae"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_ae</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.ExistsSeqTendstoAe.exists_nat_measure_lt_two_inv"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">exists_nat_measure_lt_two_inv</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">seqTendstoAeSeqAux</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">seqTendstoAeSeq</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq_succ"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">seqTendstoAeSeq_succ</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq_spec"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">seqTendstoAeSeq_spec</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq_strictMono"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">seqTendstoAeSeq_strictMono</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.TendstoInMeasure.exists_seq_tendsto_ae"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">exists_seq_tendsto_ae</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.TendstoInMeasure.exists_seq_tendstoInMeasure_atTop"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">exists_seq_tendstoInMeasure_atTop</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.TendstoInMeasure.exists_seq_tendsto_ae'"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">exists_seq_tendsto_ae'</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.TendstoInMeasure.aeMeasurable"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">aeMeasurable</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.tendstoInMeasure_of_tendsto_snorm_of_stronglyMeasurable"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_snorm_of_stronglyMeasurable</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.tendstoInMeasure_of_tendsto_snorm_of_ne_top"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_snorm_of_ne_top</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.tendstoInMeasure_of_tendsto_snorm_top"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_snorm_top</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.tendstoInMeasure_of_tendsto_snorm"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_snorm</span></a></div><div class="nav_link"><a class="break_within" href="#MeasureTheory.tendstoInMeasure_of_tendsto_Lp"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_Lp</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Convergence-in-measure">Convergence in measure <a class="hover-link" href="#Convergence-in-measure">#</a></h1><p>We define convergence in measure which is one of the many notions of convergence in probability.
+A sequence of functions <code>f</code> is said to converge in measure to some function <code>g</code>
+if for all <code>ε > 0</code>, the measure of the set <code>{x | ε ≤ dist (f i x) (g x)}</code> tends to 0 as <code>i</code>
+converges along some given filter <code>l</code>.</p><p>Convergence in measure is most notably used in the formulation of the weak law of large numbers
+and is also useful in theorems such as the Vitali convergence theorem. This file provides some
+basic lemmas for working with convergence in measure and establishes some relations between
+convergence in measure and other notions of convergence.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> (μ : <a href="../../.././Init/WF.html#Measure">Measure</a> α) (f : ι → α → E) (g : α → E)</code>: <code>f</code> converges
+in <code>μ</code>-measure to <code>g</code>.</li>
+</ul><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_ae">MeasureTheory.tendstoInMeasure_of_tendsto_ae</a></code>: convergence almost everywhere in a finite
+measure space implies convergence in measure.</li>
+<li><code><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure.exists_seq_tendsto_ae">MeasureTheory.TendstoInMeasure.exists_seq_tendsto_ae</a></code>: if <code>f</code> is a sequence of functions
+which converges in measure to <code>g</code>, then <code>f</code> has a subsequence which convergence almost
+everywhere to <code>g</code>.</li>
+<li><code><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_snorm">MeasureTheory.tendstoInMeasure_of_tendsto_snorm</a></code>: convergence in Lp implies convergence
+in measure.</li>
+</ul></div><div class="decl" id="MeasureTheory.TendstoInMeasure"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L56-L58">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist">Dist</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">{<span class="fn">x</span> : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>} → <span class="fn"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span> → <span class="fn">(<span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>) → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span> → <span class="fn">(<span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>) → <a href="../../.././foundational_types.html">Prop</a></span></span></span></span></span></div></div><p>A sequence of functions <code>f</code> is said to converge in measure to some function <code>g</code> if for all
+<code>ε > 0</code>, the measure of the set <code>{x | ε ≤ dist (f i x) (g x)}</code> tends to 0 as <code>i</code> converges along
+some given filter <code>l</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">∀ (<span class="fn">ε</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">ε</span></span> → <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">i</span> =&gt <span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn">ε</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span> <span class="fn">x</span></span>) (<span class="fn"><span class="fn">g</span> <span class="fn">x</span></span>)</span></span>}</span></span></span>) <span class="fn">l</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">0</span></span>)</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MeasureTheory.TendstoInMeasure" class="instances-for-list"></ul></details></div></div><div class="decl" id="MeasureTheory.tendstoInMeasure_iff_norm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L61-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_iff_norm"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_iff_norm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#SeminormedAddCommGroup">SeminormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">g</span></span> <a href="../../.././Init/Core.html#Iff">↔</a>   <span class="fn">∀ (<span class="fn">ε</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">ε</span></span> → <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">i</span> =&gt <span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn">ε</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">i</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span>}</span></span></span>) <span class="fn">l</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">0</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.TendstoInMeasure.congr'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L72-L84">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure.congr'"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">congr'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist">Dist</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f' : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g' : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h_left : <span class="fn">∀ᶠ (i : <span class="fn">ι</span>) in <span class="fn">l</span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">i</span></span> <a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn"><span class="fn">f'</span> <span class="fn">i</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_right : <span class="fn"><span class="fn">g</span> <a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn">g'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_tendsto : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f'</span> <span class="fn">l</span> <span class="fn">g'</span></span></div></div></div></div><div class="decl" id="MeasureTheory.TendstoInMeasure.congr"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L87-L89">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure.congr"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">congr</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist">Dist</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f' : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g' : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h_left : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">i</span></span> <a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn"><span class="fn">f'</span> <span class="fn">i</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_right : <span class="fn"><span class="fn">g</span> <a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn">g'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_tendsto : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f'</span> <span class="fn">l</span> <span class="fn">g'</span></span></div></div></div></div><div class="decl" id="MeasureTheory.TendstoInMeasure.congr_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L92-L94">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure.congr_left"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">congr_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist">Dist</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f' : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">i</span></span> <a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn"><span class="fn">f'</span> <span class="fn">i</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_tendsto : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f'</span> <span class="fn">l</span> <span class="fn">g</span></span></div></div></div></div><div class="decl" id="MeasureTheory.TendstoInMeasure.congr_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L97-L99">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure.congr_right"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">congr_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist">Dist</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g' : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">g</span> <a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn">g'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_tendsto : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">g'</span></span></div></div></div></div><div class="decl" id="MeasureTheory.tendstoInMeasure_of_tendsto_ae_of_stronglyMeasurable"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L111-L128">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_ae_of_stronglyMeasurable"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_ae_of_stronglyMeasurable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsFiniteMeasure">MeasureTheory.IsFiniteMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.StronglyMeasurable">MeasureTheory.StronglyMeasurable</a> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.StronglyMeasurable">MeasureTheory.StronglyMeasurable</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn">∀ᵐ (x : <span class="fn">α</span>) ∂<span class="fn">μ</span>, <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span>) <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><span class="fn">g</span> <span class="fn">x</span></span>)</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">Filter.atTop</span> <span class="fn">g</span></span></div></div><p>Auxiliary lemma for <code><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_ae">tendstoInMeasure_of_tendsto_ae</a></code>.</p></div></div><div class="decl" id="MeasureTheory.tendstoInMeasure_of_tendsto_ae"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L132-L142">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_ae"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_ae</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsFiniteMeasure">MeasureTheory.IsFiniteMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) <span class="fn">μ</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn">∀ᵐ (x : <span class="fn">α</span>) ∂<span class="fn">μ</span>, <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span>) <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><span class="fn">g</span> <span class="fn">x</span></span>)</span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">Filter.atTop</span> <span class="fn">g</span></span></div></div><p>Convergence a.e. implies convergence in measure in a finite measure space.</p></div></div><div class="decl" id="MeasureTheory.ExistsSeqTendstoAe.exists_nat_measure_lt_two_inv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L150-L154">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.exists_nat_measure_lt_two_inv"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">exists_nat_measure_lt_two_inv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">Filter.atTop</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">N</span>, <span class="fn">∀ (<span class="fn">m</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">N</span></span> → <span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn"><span class="fn"><span class="fn">2</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> (<span class="fn"><span class="fn">f</span> <span class="fn">m</span> <span class="fn">x</span></span>) (<span class="fn"><span class="fn">g</span> <span class="fn">x</span></span>)</span></span>}</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">2</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L160-L161">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">seqTendstoAeSeqAux</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">Filter.atTop</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Nat">ℕ</a></div></div><p>Given a sequence of functions <code>f</code> which converges in measure to <code>g</code>,
+<code><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux">seqTendstoAeSeqAux</a></code> is a sequence such that
+<code>∀ m ≥ <a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux">seqTendstoAeSeqAux</a> n, μ {x | 2⁻¹ ^ n ≤ dist (f m x) (g x)} ≤ 2⁻¹ ^ n</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux">MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux</a> <span class="fn">hfg</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Init/Classical.html#Classical.choose">Classical.choose</a> <span class="fn">(_ : <span class="fn">∃ <span class="fn">N</span>, <span class="fn">∀ (<span class="fn">m</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">N</span></span> → <span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn"><span class="fn"><span class="fn">2</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> (<span class="fn"><span class="fn">f</span> <span class="fn">m</span> <span class="fn">x</span></span>) (<span class="fn"><span class="fn">g</span> <span class="fn">x</span></span>)</span></span>}</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">2</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux" class="instances-for-list"></ul></details></div></div><div class="decl" id="MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L165-L167">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">seqTendstoAeSeq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">Filter.atTop</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span></div></div><p>Transformation of <code><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux">seqTendstoAeSeqAux</a></code> to makes sure it is strictly monotone.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq">MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq</a> <span class="fn">hfg</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux">MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux</a> <span class="fn">hfg</span> <span class="fn">0</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq" class="instances-for-list"></ul></details></div></div><div class="decl" id="MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq_succ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L170-L173">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq_succ"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">seqTendstoAeSeq_succ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">Filter.atTop</span> <span class="fn">g</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq">MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq</a> <span class="fn">hfg</span> (<span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Init/Prelude.html#Max.max">max</a> (<span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux">MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeqAux</a> <span class="fn">hfg</span> (<span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span>)
+    (<span class="fn"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq">MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq</a> <span class="fn">hfg</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span></span></div></div></div></div><div class="decl" id="MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq_spec"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L176-L182">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq_spec"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">seqTendstoAeSeq_spec</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">Filter.atTop</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq">MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq</a> <span class="fn">hfg</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn"><span class="fn"><span class="fn">2</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Dist.dist">dist</a> (<span class="fn"><span class="fn">f</span> <span class="fn">k</span> <span class="fn">x</span></span>) (<span class="fn"><span class="fn">g</span> <span class="fn">x</span></span>)</span></span>}</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">2</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq_strictMono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L185-L189">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq_strictMono"><span class="name">MeasureTheory</span>.<span class="name">ExistsSeqTendstoAe</span>.<span class="name">seqTendstoAeSeq_strictMono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">Filter.atTop</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> (<span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq">MeasureTheory.ExistsSeqTendstoAe.seqTendstoAeSeq</a> <span class="fn">hfg</span></span>)</span></div></div></div></div><div class="decl" id="MeasureTheory.TendstoInMeasure.exists_seq_tendsto_ae"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L196-L245">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure.exists_seq_tendsto_ae"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">exists_seq_tendsto_ae</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">Filter.atTop</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">ns</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/Monotone/Basic.html#StrictMono">StrictMono</a> <span class="fn">ns</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ᵐ (x : <span class="fn">α</span>) ∂<span class="fn">μ</span>, <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><span class="fn">f</span> (<span class="fn"><span class="fn">ns</span> <span class="fn">i</span></span>) <span class="fn">x</span></span></span>) <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><span class="fn">g</span> <span class="fn">x</span></span>)</span>)</span></span></span></span></div></div><p>If <code>f</code> is a sequence of functions which converges in measure to <code>g</code>, then there exists a
+subsequence of <code>f</code> which converges a.e. to <code>g</code>.</p></div></div><div class="decl" id="MeasureTheory.TendstoInMeasure.exists_seq_tendstoInMeasure_atTop"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L248-L252">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure.exists_seq_tendstoInMeasure_atTop"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">exists_seq_tendstoInMeasure_atTop</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">u</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Bases.html#Filter.IsCountablyGenerated">Filter.IsCountablyGenerated</a> <span class="fn">u</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">u</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">ns</span>, <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> (<span class="fn"><span class="fn">ns</span> <span class="fn">n</span></span>)</span></span>) <span class="fn">Filter.atTop</span> <span class="fn">g</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.TendstoInMeasure.exists_seq_tendsto_ae'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L255-L260">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure.exists_seq_tendsto_ae'"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">exists_seq_tendsto_ae'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#MetricSpace">MetricSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">u</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Bases.html#Filter.IsCountablyGenerated">Filter.IsCountablyGenerated</a> <span class="fn">u</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">u</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">ns</span>, <span class="fn">∀ᵐ (x : <span class="fn">α</span>) ∂<span class="fn">μ</span>, <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><span class="fn">f</span> (<span class="fn"><span class="fn">ns</span> <span class="fn">i</span></span>) <span class="fn">x</span></span></span>) <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><span class="fn">g</span> <span class="fn">x</span></span>)</span>)</span></span></span></div></div></div></div><div class="decl" id="MeasureTheory.TendstoInMeasure.aeMeasurable"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L269-L273">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure.aeMeasurable"><span class="name">MeasureTheory</span>.<span class="name">TendstoInMeasure</span>.<span class="name">aeMeasurable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.NeBot">Filter.NeBot</a> <span class="fn">u</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Bases.html#Filter.IsCountablyGenerated">Filter.IsCountablyGenerated</a> <span class="fn">u</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">ι</span>), <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_tendsto : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">u</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> <span class="fn">g</span></span></div></div></div></div><div class="decl" id="MeasureTheory.tendstoInMeasure_of_tendsto_snorm_of_stronglyMeasurable"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L286-L307">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_snorm_of_stronglyMeasurable"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_snorm_of_stronglyMeasurable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Core.html#Ne">≠</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">ι</span>), <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.StronglyMeasurable">MeasureTheory.StronglyMeasurable</a> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.StronglyMeasurable">MeasureTheory.StronglyMeasurable</a> <span class="fn">g</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/LpSeminorm.html#MeasureTheory.snorm">MeasureTheory.snorm</a> (<span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">g</span></span>) <span class="fn">p</span> <span class="fn">μ</span></span></span>) <span class="fn">l</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">0</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">g</span></span></div></div><p>This lemma is superceded by <code><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_snorm">MeasureTheory.tendstoInMeasure_of_tendsto_snorm</a></code> where we
+allow <code>p = ∞</code> and only require <code>AEStronglyMeasurable</code>.</p></div></div><div class="decl" id="MeasureTheory.tendstoInMeasure_of_tendsto_snorm_of_ne_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L312-L321">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_snorm_of_ne_top"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_snorm_of_ne_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp_ne_top : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Core.html#Ne">≠</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">ι</span>), <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) <span class="fn">μ</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">g</span> <span class="fn">μ</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/LpSeminorm.html#MeasureTheory.snorm">MeasureTheory.snorm</a> (<span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">g</span></span>) <span class="fn">p</span> <span class="fn">μ</span></span></span>) <span class="fn">l</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">0</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">g</span></span></div></div><p>This lemma is superceded by <code><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_snorm">MeasureTheory.tendstoInMeasure_of_tendsto_snorm</a></code> where we
+allow <code>p = ∞</code>.</p></div></div><div class="decl" id="MeasureTheory.tendstoInMeasure_of_tendsto_snorm_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L326-L345">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_snorm_top"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_snorm_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/LpSeminorm.html#MeasureTheory.snorm">MeasureTheory.snorm</a> (<span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">g</span></span>) <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a> <span class="fn">μ</span></span></span>) <span class="fn">l</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">0</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">g</span></span></div></div><p>See also <code><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_snorm">MeasureTheory.tendstoInMeasure_of_tendsto_snorm</a></code> which work for general
+Lp-convergence for all <code>p ≠ 0</code>.</p></div></div><div class="decl" id="MeasureTheory.tendstoInMeasure_of_tendsto_snorm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L349-L355">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_snorm"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_snorm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp_ne_zero : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">ι</span>), <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) <span class="fn">μ</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">g</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/LpSeminorm.html#MeasureTheory.snorm">MeasureTheory.snorm</a> (<span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">g</span></span>) <span class="fn">p</span> <span class="fn">μ</span></span></span>) <span class="fn">l</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">0</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">l</span> <span class="fn">g</span></span></div></div><p>Convergence in Lp implies convergence in measure.</p></div></div><div class="decl" id="MeasureTheory.tendstoInMeasure_of_tendsto_Lp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Function/ConvergenceInMeasure.lean#L359-L363">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.tendstoInMeasure_of_tendsto_Lp"><span class="name">MeasureTheory</span>.<span class="name">tendstoInMeasure_of_tendsto_Lp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <a href="../../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hp : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">p</span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">ι</span> → <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/LpSpace.html#MeasureTheory.Lp">MeasureTheory.Lp</a> <span class="fn">E</span> <span class="fn">p</span></span></span> }</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/LpSpace.html#MeasureTheory.Lp">MeasureTheory.Lp</a> <span class="fn">E</span> <span class="fn">p</span></span></span> }</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> <span class="fn">f</span> <span class="fn">l</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">g</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/ConvergenceInMeasure.html#MeasureTheory.TendstoInMeasure">MeasureTheory.TendstoInMeasure</a> <span class="fn">μ</span> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn">↑<span class="fn">↑(<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>)</span></span></span>) <span class="fn">l</span> <span class="fn">↑<span class="fn">↑<span class="fn">g</span></span></span></span></div></div><p>Convergence in Lp implies convergence in measure.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

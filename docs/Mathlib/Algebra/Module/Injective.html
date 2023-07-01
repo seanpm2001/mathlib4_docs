@@ -1,0 +1,991 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Algebra.Module.Injective</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Algebra.Module.Injective";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Module</span>.<span class="name">Injective</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Algebra</span>.<span class="name">Module</span>.<span class="name">Injective</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Data/TypeMax.html">Mathlib.Data.TypeMax</a></li><li><a href="../../.././Mathlib/LinearAlgebra/LinearPMap.html">Mathlib.LinearAlgebra.LinearPMap</a></li><li><a href="../../.././Mathlib/CategoryTheory/Preadditive/Injective.html">Mathlib.CategoryTheory.Preadditive.Injective</a></li><li><a href="../../.././Mathlib/RingTheory/Ideal/Basic.html">Mathlib.RingTheory.Ideal.Basic</a></li><li><a href="../../.././Mathlib/Algebra/Category/ModuleCat/EpiMono.html">Mathlib.Algebra.Category.ModuleCat.EpiMono</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Algebra.Module.Injective" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Module.Injective"><span class="name">Module</span>.<span class="name">Injective</span></a></div><div class="nav_link"><a class="break_within" href="#Module.injective_object_of_injective_module"><span class="name">Module</span>.<span class="name">injective_object_of_injective_module</span></a></div><div class="nav_link"><a class="break_within" href="#Module.injective_module_of_injective_object"><span class="name">Module</span>.<span class="name">injective_module_of_injective_object</span></a></div><div class="nav_link"><a class="break_within" href="#Module.injective_iff_injective_object"><span class="name">Module</span>.<span class="name">injective_iff_injective_object</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer"><span class="name">Module</span>.<span class="name">Baer</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOf"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOf.ext"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span>.<span class="name">ext</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOf.ext_iff"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span>.<span class="name">ext_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.instInfExtensionOf"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">instInfExtensionOf</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.instSemilatticeInfExtensionOf"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">instSemilatticeInfExtensionOf</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.chain_linearPMap_of_chain_extensionOf"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">chain_linearPMap_of_chain_extensionOf</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOf.max"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span>.<span class="name">max</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOf.le_max"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span>.<span class="name">le_max</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOf.inhabited"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span>.<span class="name">inhabited</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.extensionOfMax"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">extensionOfMax</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.extensionOfMax_is_max"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">extensionOfMax_is_max</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.supExtensionOfMaxSingleton"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">supExtensionOfMaxSingleton</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.fst"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">fst</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.snd"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">snd</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.eqn"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">eqn</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.ideal"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">ideal</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.idealTo"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">idealTo</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extendIdealTo</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_is_extension"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extendIdealTo_is_extension</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_wd'"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extendIdealTo_wd'</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_wd"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extendIdealTo_wd</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_eq"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extendIdealTo_eq</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.extensionToFun"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extensionToFun</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.ExtensionOfMaxAdjoin.extensionToFun_wd"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extensionToFun_wd</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.extensionOfMaxAdjoin"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">extensionOfMaxAdjoin</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.extensionOfMax_le"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">extensionOfMax_le</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.extensionOfMax_to_submodule_eq_top"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">extensionOfMax_to_submodule_eq_top</span></a></div><div class="nav_link"><a class="break_within" href="#Module.Baer.injective"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">injective</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Injective-modules">Injective modules <a class="hover-link" href="#Injective-modules">#</a></h1><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Injective">Module.Injective</a></code>: an <code>R</code>-module <code>Q</code> is injective if and only if every injective <code>R</code>-linear
+map descends to a linear map to <code>Q</code>, i.e. in the following diagram, if <code>f</code> is injective then there
+is an <code>R</code>-linear map <code>h : Y ⟶  Q</code> such that <code>g = h ∘ f</code>
+<pre><code>X --- f ---> Y
+|
+| g
+v
+Q
+</code></pre>
+</li>
+<li><code><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a></code>: an <code>R</code>-module <code>Q</code> satisfies Baer's criterion if any <code>R</code>-linear map from an
+<code><a href="../../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> R</code> extends to an <code>R</code>-linear map <code>R ⟶  Q</code></li>
+</ul><h2 class="markdown-heading" id="Main-statements">Main statements <a class="hover-link" href="#Main-statements">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.injective">Module.Baer.injective</a></code>: an <code>R</code>-module is injective if it is Baer.</li>
+</ul></div><div class="decl" id="Module.Injective"><div class="class"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L60-L63">source</a></div><div class="decl_header"><span class="decl_kind">class</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Injective"><span class="name">Module</span>.<span class="name">Injective</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><ul class="structure_fields" id="Module.Injective.mk"><li id="Module.Injective.out" class="structure_field"><div class="structure_field_info">out : <span class="fn">∀ (<span class="fn">X </span>Y : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>) [<span class="fn">inst</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">X</span></span>] [<span class="fn">inst_1</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Y</span></span>] [<span class="fn">inst_2</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">X</span></span>] [<span class="fn">inst_3</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Y</span></span>]
+  (<span class="fn">f</span> : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Y</span></span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">f</span></span></span> → <span class="fn">∀ (<span class="fn">g</span> : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>), <span class="fn">∃ <span class="fn">h</span>, <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">X</span>), <span class="fn"><span class="fn">↑<span class="fn">h</span> (<span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">g</span> <span class="fn">x</span></span></span></span></span></span></span></span></div></li></ul><p>An <code>R</code>-module <code>Q</code> is injective if and only if every injective <code>R</code>-linear map descends to a linear
+map to <code>Q</code>, i.e. in the following diagram, if <code>f</code> is injective then there is an <code>R</code>-linear map
+<code>h : Y ⟶ Q</code> such that <code>g = h ∘ f</code></p><pre><code>X --- f ---> Y
+|
+| g
+v
+Q
+</code></pre><details class="instances"><summary>Instances</summary><ul id="instances-list-Module.Injective" class="instances-list"></ul></details></div></div><div class="decl" id="Module.injective_object_of_injective_module"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L67-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.injective_object_of_injective_module"><span class="name">Module</span>.<span class="name">injective_object_of_injective_module</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Injective">Module.Injective</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Injective.html#CategoryTheory.Injective">CategoryTheory.Injective</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Category/ModuleCat/Basic.html#ModuleCat.mk">ModuleCat.mk</a> <span class="fn">Q</span></span>)</span></div></div></div></div><div class="decl" id="Module.injective_module_of_injective_object"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L74-L82">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.injective_module_of_injective_object"><span class="name">Module</span>.<span class="name">injective_module_of_injective_object</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Injective.html#CategoryTheory.Injective">CategoryTheory.Injective</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Category/ModuleCat/Basic.html#ModuleCat.mk">ModuleCat.mk</a> <span class="fn">Q</span></span>)</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Injective">Module.Injective</a> <span class="fn">R</span> <span class="fn">Q</span></span></div></div></div></div><div class="decl" id="Module.injective_iff_injective_object"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L85-L89">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.injective_iff_injective_object"><span class="name">Module</span>.<span class="name">injective_iff_injective_object</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Injective">Module.Injective</a> <span class="fn">R</span> <span class="fn">Q</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Injective.html#CategoryTheory.Injective">CategoryTheory.Injective</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Category/ModuleCat/Basic.html#ModuleCat.mk">ModuleCat.mk</a> <span class="fn">Q</span></span>)</span></span></div></div></div></div><div class="decl" id="Module.Baer"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L94-L95">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer"><span class="name">Module</span>.<span class="name">Baer</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>An <code>R</code>-module <code>Q</code> satisfies Baer's criterion if any <code>R</code>-linear map from an <code><a href="../../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> R</code> extends to
+an <code>R</code>-linear map <code>R ⟶ Q</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">∀ (<span class="fn">I</span> : <span class="fn"><a href="../../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">R</span></span>) (<span class="fn">g</span> : <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Category/ModuleCat/Basic.html#ModuleCat.of">ModuleCat.of</a> <span class="fn">R</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">I</span></span> }</span></span>)</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>),
+    <span class="fn">∃ <span class="fn">g'</span>, <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">R</span>) (<span class="fn">mem</span> : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">I</span></span>), <span class="fn"><span class="fn">↑<span class="fn">g'</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">g</span> <span class="fn">{ <span class="fn">val</span> := <span class="fn">x</span>, <span class="fn">property</span> := <span class="fn">mem</span> }</span></span></span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.ExtensionOf"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L108-L110">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_extends">extends</span><span class="decl_parent">
+<span class="fn"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/LinearPMap.html#LinearPMap"><span class="name">LinearPMap</span></a></span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a> (maxuv)</div></div><ul class="structure_fields" id="Module.Baer.ExtensionOf.mk"><li id="Module.Baer.ExtensionOf.le" class="structure_field"><div class="structure_field_info">le : <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.range">LinearMap.range</a> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">toLinearPMap</span>.domain</span></span></div></li><li id="Module.Baer.ExtensionOf.is_extension" class="structure_field"><div class="structure_field_info">is_extension : <span class="fn">∀ (<span class="fn">m</span> : <span class="fn">M</span>), <span class="fn"><span class="fn">↑<span class="fn">f</span> <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">toLinearPMap</span> <span class="fn">{ <span class="fn">val</span> := <span class="fn">↑<span class="fn">i</span> <span class="fn">m</span></span>, <span class="fn">property</span> := <span class="fn"><span class="fn">le</span> (<span class="fn">↑<span class="fn">i</span> <span class="fn">m</span></span>) <span class="fn">(_ : <span class="fn">∃ <span class="fn">y</span>, <span class="fn"><span class="fn">↑<span class="fn">i</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">i</span> <span class="fn">m</span></span></span></span>)</span></span> }</span></span></span></span></div></li></ul><p>If we view <code>M</code> as a submodule of <code>N</code> via the injective linear map <code>i : M ↪ N</code>, then a submodule
+between <code>M</code> and <code>N</code> is a submodule <code>N'</code> of <code>N</code>. To prove Baer's criterion, we need to consider
+pairs of <code>(N', f')</code> such that <code>M ≤ N' ≤ N</code> and <code>f'</code> extends <code>f</code>.</p><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer.ExtensionOf" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.ExtensionOf.ext"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L119-L126">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf.ext"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span>.<span class="name">ext</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(domain_eq : <span class="fn"><span class="fn"><span class="fn">a</span>.domain</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">b</span>.domain</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(to_fun_eq : <span class="fn">∀ ⦃<span class="fn">x</span> : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">a</span>.domain</span></span> }</span>⦄ ⦃<span class="fn">y</span> : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">b</span>.domain</span></span> }</span>⦄, <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">y</span></span></span> → <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">a</span>.toLinearPMap</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn"><span class="fn">b</span>.toLinearPMap</span> <span class="fn">y</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div></div></div><div class="decl" id="Module.Baer.ExtensionOf.ext_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L130-L134">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf.ext_iff"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span>.<span class="name">ext_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{b : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">x</span>, <span class="fn">∀ ⦃<span class="fn">x</span> : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">a</span>.domain</span></span> }</span>⦄ ⦃<span class="fn">y</span> : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">b</span>.domain</span></span> }</span>⦄, <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">y</span></span></span> → <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">a</span>.toLinearPMap</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn"><span class="fn">b</span>.toLinearPMap</span> <span class="fn">y</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="Module.Baer.instInfExtensionOf"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L140-L150">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.instInfExtensionOf"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">instInfExtensionOf</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Basic.html#Inf">Inf</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Module.Baer.instSemilatticeInfExtensionOf"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L152-L166">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.instSemilatticeInfExtensionOf"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">instSemilatticeInfExtensionOf</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Lattice.html#SemilatticeInf">SemilatticeInf</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Module.Baer.chain_linearPMap_of_chain_extensionOf"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L170-L174">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.chain_linearPMap_of_chain_extensionOf"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">chain_linearPMap_of_chain_extensionOf</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hchain : <span class="fn"><a href="../../.././Mathlib/Order/Chain.html#IsChain">IsChain</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Chain.html#IsChain">IsChain</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) (<span class="fn">(<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><span class="fn">x</span>.toLinearPMap</span></span>) <a href="../../.././Mathlib/Init/Set.html#Set.image">''</a> <span class="fn">c</span></span>)</span></div></div></div></div><div class="decl" id="Module.Baer.ExtensionOf.max"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L179-L199">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf.max"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span>.<span class="name">max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hchain : <span class="fn"><a href="../../.././Mathlib/Order/Chain.html#IsChain">IsChain</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hnonempty : <span class="fn"><a href="../../.././Mathlib/Data/Set/Basic.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span></div></div><p>The maximal element of every nonempty chain of <code>extension_of i f</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer.ExtensionOf.max" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.ExtensionOf.le_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L203-L207">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf.le_max"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span>.<span class="name">le_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hchain : <span class="fn"><a href="../../.././Mathlib/Order/Chain.html#IsChain">IsChain</a> (<span class="fn">fun <span class="fn">x</span> <span class="fn">x_1</span> =&gt <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">x_1</span></span></span>) <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hnonempty : <span class="fn"><a href="../../.././Mathlib/Data/Set/Basic.html#Set.Nonempty">Set.Nonempty</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf.max">Module.Baer.ExtensionOf.max</a> <span class="fn">hchain</span> <span class="fn">hnonempty</span></span></span></div></div></div></div><div class="decl" id="Module.Baer.ExtensionOf.inhabited"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L213-L234">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf.inhabited"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOf</span>.<span class="name">inhabited</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Inhabited">Inhabited</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="Module.Baer.extensionOfMax"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L240-L242">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">extensionOfMax</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span></div></div><p>Since every nonempty chain has a maximal element, by Zorn's lemma, there is a maximal
+<code>extension_of i f</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Std/Logic.html#Exists.choose">Exists.choose</a> <span class="fn">(_ : <span class="fn">∃ <span class="fn">m</span>, <span class="fn">∀ (<span class="fn">a</span> : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>), <span class="fn"><span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">m</span></span></span></span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer.extensionOfMax" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.extensionOfMax_is_max"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L246-L249">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax_is_max"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">extensionOfMax_is_max</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">a</span></span> → <span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="Module.Baer.supExtensionOfMaxSingleton"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L256-L257">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.supExtensionOfMaxSingleton"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">supExtensionOfMaxSingleton</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(y : <span class="fn">N</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R</span> <span class="fn">N</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.supExtensionOfMaxSingleton">Module.Baer.supExtensionOfMaxSingleton</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span>).toLinearPMap</span>.domain</span> <a href="../../.././Mathlib/Order/Basic.html#Sup.sup">⊔</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Span.html#Submodule.span">Submodule.span</a> <span class="fn">R</span> <span class="fn">{<span class="fn">y</span>}</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer.supExtensionOfMaxSingleton" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.fst"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L274-L276">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.fst"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">fst</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">N</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.supExtensionOfMaxSingleton">Module.Baer.supExtensionOfMaxSingleton</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">y</span></span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span>).toLinearPMap</span>.domain</span></span> }</span></div></div><p>If <code>x ∈ M ⊔ ⟨y⟩</code>, then <code>x = m + r • y</code>, <code><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.fst">fst</a></code> pick an arbitrary such <code>m</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.fst">Module.Baer.ExtensionOfMaxAdjoin.fst</a> <span class="fn">i</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Std/Logic.html#Exists.choose">Exists.choose</a> <span class="fn">(_ : <span class="fn">∃ <span class="fn">a</span> <span class="fn">b</span>, <span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span></span></span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer.ExtensionOfMaxAdjoin.fst" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.snd"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L281-L282">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.snd"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">snd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">N</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.supExtensionOfMaxSingleton">Module.Baer.supExtensionOfMaxSingleton</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">y</span></span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">R</span></div></div><p>If <code>x ∈ M ⊔ ⟨y⟩</code>, then <code>x = m + r • y</code>, <code><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.snd">snd</a></code> pick an arbitrary such <code>r</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.snd">Module.Baer.ExtensionOfMaxAdjoin.snd</a> <span class="fn">i</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Std/Logic.html#Exists.choose">Exists.choose</a> <span class="fn">(_ : <span class="fn">∃ <span class="fn">b</span>, <span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Std/Logic.html#Exists.choose">Exists.choose</a> <span class="fn">(_ : <span class="fn">∃ <span class="fn">a</span> <span class="fn">b</span>, <span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span></span></span></span>)</span></span>)</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span></span></span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer.ExtensionOfMaxAdjoin.snd" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.eqn"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L286-L288">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.eqn"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">eqn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">N</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.supExtensionOfMaxSingleton">Module.Baer.supExtensionOfMaxSingleton</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">y</span></span></span> }</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.fst">Module.Baer.ExtensionOfMaxAdjoin.fst</a> <span class="fn">i</span> <span class="fn">x</span></span>)</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.snd">Module.Baer.ExtensionOfMaxAdjoin.snd</a> <span class="fn">i</span> <span class="fn">x</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.ideal"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L296-L297">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.ideal"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">ideal</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(y : <span class="fn">N</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> <span class="fn">R</span></span></div></div><p>The ideal <code>I = {r | r • y ∈ N}</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.ideal">Module.Baer.ExtensionOfMaxAdjoin.ideal</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#Submodule.comap">Submodule.comap</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.smulRight">LinearMap.smulRight</a> <span class="fn">LinearMap.id</span> <span class="fn">y</span></span>) <span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span>).toLinearPMap</span>.domain</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer.ExtensionOfMaxAdjoin.ideal" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.idealTo"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L302-L313">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.idealTo"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">idealTo</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(y : <span class="fn">N</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Category/ModuleCat/Basic.html#ModuleCat.of">ModuleCat.of</a> <span class="fn">R</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.ideal">Module.Baer.ExtensionOfMaxAdjoin.ideal</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">y</span></span></span> }</span></span>)</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span></div></div><p>A linear map <code>I ⟶ Q</code> by <code>x ↦ f' (x • y)</code> where <code>f'</code> is the maximal extension</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer.ExtensionOfMaxAdjoin.idealTo" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L319-L320">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extendIdealTo</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">N</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">R</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span></div></div><p>Since we assumed <code>Q</code> being Baer, the linear map <code>x ↦ f' (x • y) : I ⟶ Q</code> extends to <code>R ⟶ Q</code>,
+call this extended map <code>φ</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_is_extension"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L324-L327">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_is_extension"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extendIdealTo_is_extension</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">N</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(mem : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.ideal">Module.Baer.ExtensionOfMaxAdjoin.ideal</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">y</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo">Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">y</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.idealTo">Module.Baer.ExtensionOfMaxAdjoin.idealTo</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">y</span></span>) <span class="fn">{ <span class="fn">val</span> := <span class="fn">x</span>, <span class="fn">property</span> := <span class="fn">mem</span> }</span></span></span></div></div></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_wd'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L331-L340">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_wd'"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extendIdealTo_wd'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">N</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(eq1 : <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo">Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">y</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_wd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L344-L349">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_wd"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extendIdealTo_wd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">N</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r' : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(eq1 : <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">r'</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo">Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">y</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo">Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">y</span></span>) <span class="fn">r'</span></span></span></div></div></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L353-L358">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo_eq"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extendIdealTo_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">N</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span>).toLinearPMap</span>.domain</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo">Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">y</span></span>) <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">↑<span class="fn">(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span>).toLinearPMap</span> <span class="fn">{ <span class="fn">val</span> := <span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span>, <span class="fn">property</span> := <span class="fn">hr</span> }</span></span></span></div></div></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.extensionToFun"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L364-L367">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extensionToFun"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extensionToFun</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">N</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.supExtensionOfMaxSingleton">Module.Baer.supExtensionOfMaxSingleton</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">y</span></span></span> }</span> → <span class="fn">Q</span></span></div></div><p>We can finally define a linear map <code>M ⊔ ⟨y⟩ ⟶ Q</code> by <code>x + r • y ↦ f x + φ r</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer.ExtensionOfMaxAdjoin.extensionToFun" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.ExtensionOfMaxAdjoin.extensionToFun_wd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L371-L392">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extensionToFun_wd"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">ExtensionOfMaxAdjoin</span>.<span class="name">extensionToFun_wd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">N</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.supExtensionOfMaxSingleton">Module.Baer.supExtensionOfMaxSingleton</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">y</span></span></span> }</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span>).toLinearPMap</span>.domain</span></span> }</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(eq1 : <span class="fn"><span class="fn">↑<span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">y</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extensionToFun">Module.Baer.ExtensionOfMaxAdjoin.extensionToFun</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">↑<span class="fn">(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span>).toLinearPMap</span> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo">Module.Baer.ExtensionOfMaxAdjoin.extendIdealTo</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">y</span></span>) <span class="fn">r</span></span></span></span></div></div></div></div><div class="decl" id="Module.Baer.extensionOfMaxAdjoin"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L397-L428">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMaxAdjoin"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">extensionOfMaxAdjoin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(y : <span class="fn">N</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.ExtensionOf">Module.Baer.ExtensionOf</a> <span class="fn">i</span> <span class="fn">f</span></span></div></div><p>The linear map <code>M ⊔ ⟨y⟩ ⟶ Q</code> by <code>x + r • y ↦ f x + φ r</code> is an extension of <code>f</code></p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Module.Baer.extensionOfMaxAdjoin" class="instances-for-list"></ul></details></div></div><div class="decl" id="Module.Baer.extensionOfMax_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L432-L438">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax_le"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">extensionOfMax_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">N</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMaxAdjoin">Module.Baer.extensionOfMaxAdjoin</a> <span class="fn">i</span> <span class="fn">f</span> <span class="fn">h</span> <span class="fn">y</span></span></span></div></div></div></div><div class="decl" id="Module.Baer.extensionOfMax_to_submodule_eq_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L442-L448">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax_to_submodule_eq_top"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">extensionOfMax_to_submodule_eq_top</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././foundational_types.html">Type</a> (maxuv)}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">N</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">N</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">M</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">Q</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Basic.html#Fact">Fact</a> (<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">↑<span class="fn">i</span></span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.extensionOfMax">Module.Baer.extensionOfMax</a> <span class="fn">i</span> <span class="fn">f</span></span>).toLinearPMap</span>.domain</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span></div></div></div></div><div class="decl" id="Module.Baer.injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Algebra/Module/Injective.lean#L454-L467">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer.injective"><span class="name">Module</span>.<span class="name">Baer</span>.<span class="name">injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Q : <a href="../../.././Mathlib/Data/TypeMax.html#TypeMax">TypeMax</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">Q</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">R</span> <span class="fn">Q</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Baer">Module.Baer</a> <span class="fn">R</span> <span class="fn">Q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Injective.html#Module.Injective">Module.Injective</a> <span class="fn">R</span> <span class="fn">Q</span></span></div></div><p><strong>Baer's criterion</strong> for injective module : a Baer module is an injective module, i.e. if every
+linear map from an ideal can be extended, then the module is injective.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

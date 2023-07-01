@@ -1,0 +1,388 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.NormedSpace.Complemented</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.NormedSpace.Complemented";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">NormedSpace</span>.<span class="name">Complemented</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">NormedSpace</span>.<span class="name">Complemented</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Analysis/NormedSpace/Banach.html">Mathlib.Analysis.NormedSpace.Banach</a></li><li><a href="../../.././Mathlib/Analysis/NormedSpace/FiniteDimension.html">Mathlib.Analysis.NormedSpace.FiniteDimension</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.NormedSpace.Complemented" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.ker_closedComplemented_of_finiteDimensional_range"><span class="name">ContinuousLinearMap</span>.<span class="name">ker_closedComplemented_of_finiteDimensional_range</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl"><span class="name">ContinuousLinearMap</span>.<span class="name">equivProdOfSurjectiveOfIsCompl</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.coe_equivProdOfSurjectiveOfIsCompl"><span class="name">ContinuousLinearMap</span>.<span class="name">coe_equivProdOfSurjectiveOfIsCompl</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl_toLinearEquiv"><span class="name">ContinuousLinearMap</span>.<span class="name">equivProdOfSurjectiveOfIsCompl_toLinearEquiv</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl_apply"><span class="name">ContinuousLinearMap</span>.<span class="name">equivProdOfSurjectiveOfIsCompl_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Subspace.prodEquivOfClosedCompl"><span class="name">Subspace</span>.<span class="name">prodEquivOfClosedCompl</span></a></div><div class="nav_link"><a class="break_within" href="#Subspace.linearProjOfClosedCompl"><span class="name">Subspace</span>.<span class="name">linearProjOfClosedCompl</span></a></div><div class="nav_link"><a class="break_within" href="#Subspace.coe_prodEquivOfClosedCompl"><span class="name">Subspace</span>.<span class="name">coe_prodEquivOfClosedCompl</span></a></div><div class="nav_link"><a class="break_within" href="#Subspace.coe_prodEquivOfClosedCompl_symm"><span class="name">Subspace</span>.<span class="name">coe_prodEquivOfClosedCompl_symm</span></a></div><div class="nav_link"><a class="break_within" href="#Subspace.coe_continuous_linearProjOfClosedCompl"><span class="name">Subspace</span>.<span class="name">coe_continuous_linearProjOfClosedCompl</span></a></div><div class="nav_link"><a class="break_within" href="#Subspace.coe_continuous_linearProjOfClosedCompl'"><span class="name">Subspace</span>.<span class="name">coe_continuous_linearProjOfClosedCompl'</span></a></div><div class="nav_link"><a class="break_within" href="#Subspace.closedComplemented_of_closed_compl"><span class="name">Subspace</span>.<span class="name">closedComplemented_of_closed_compl</span></a></div><div class="nav_link"><a class="break_within" href="#Subspace.closedComplemented_iff_has_closed_compl"><span class="name">Subspace</span>.<span class="name">closedComplemented_iff_has_closed_compl</span></a></div><div class="nav_link"><a class="break_within" href="#Subspace.closedComplemented_of_quotient_finiteDimensional"><span class="name">Subspace</span>.<span class="name">closedComplemented_of_quotient_finiteDimensional</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Complemented-subspaces-of-normed-vector-spaces">Complemented subspaces of normed vector spaces <a class="hover-link" href="#Complemented-subspaces-of-normed-vector-spaces">#</a></h1><p>A submodule <code>p</code> of a topological module <code>E</code> over <code>R</code> is called <em>complemented</em> if there exists
+a continuous linear projection <code>f : E →ₗ[R] p</code>, <code>∀ x : p, f x = x</code>. We prove that for
+a closed subspace of a normed space this condition is equivalent to existence of a closed
+subspace <code>q</code> such that <code>p ⊓ q = ⊥</code>, <code>p ⊔ q = ⊤</code>. We also prove that a subspace of finite codimension
+is always a complemented subspace.</p><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>complemented subspace, normed vector space</p></div><div class="decl" id="ContinuousLinearMap.ker_closedComplemented_of_finiteDimensional_range"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L42-L46">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#ContinuousLinearMap.ker_closedComplemented_of_finiteDimensional_range"><span class="name">ContinuousLinearMap</span>.<span class="name">ker_closedComplemented_of_finiteDimensional_range</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">𝕜</span> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.range">LinearMap.range</a> <span class="fn">f</span></span></span> }</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#Submodule.ClosedComplemented">Submodule.ClosedComplemented</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L56-L59">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl"><span class="name">ContinuousLinearMap</span>.<span class="name">equivProdOfSurjectiveOfIsCompl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> (<span class="fn"><span class="fn">F</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">G</span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">G</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.range">LinearMap.range</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.range">LinearMap.range</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> <span class="fn">f</span></span>) (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> <span class="fn">g</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">≃L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">]</a> <span class="fn"><span class="fn">F</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">G</span></span></span></div></div><p>If <code>f : E →L[R] F</code> and <code>g : E →L[R] G</code> are two surjective linear maps and
+their kernels are complement of each other, then <code>x ↦ (f x, g x)</code> defines
+a linear equivalence <code>E ≃L[R] F × G</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl" class="instances-for-list"></ul></details></div></div><div class="decl" id="ContinuousLinearMap.coe_equivProdOfSurjectiveOfIsCompl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L63-L65">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#ContinuousLinearMap.coe_equivProdOfSurjectiveOfIsCompl"><span class="name">ContinuousLinearMap</span>.<span class="name">coe_equivProdOfSurjectiveOfIsCompl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> (<span class="fn"><span class="fn">F</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">G</span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">G</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.range">LinearMap.range</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.range">LinearMap.range</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> <span class="fn">f</span></span>) (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> <span class="fn">g</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl">ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">hf</span> <span class="fn">hg</span> <span class="fn">hfg</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap.prod">ContinuousLinearMap.prod</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span></div></div></div></div><div class="decl" id="ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl_toLinearEquiv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L69-L72">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl_toLinearEquiv"><span class="name">ContinuousLinearMap</span>.<span class="name">equivProdOfSurjectiveOfIsCompl_toLinearEquiv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> (<span class="fn"><span class="fn">F</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">G</span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">G</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.range">LinearMap.range</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.range">LinearMap.range</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> <span class="fn">f</span></span>) (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> <span class="fn">g</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl">ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">hf</span> <span class="fn">hg</span> <span class="fn">hfg</span></span>).toLinearEquiv</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Projection.html#LinearMap.equivProdOfSurjectiveOfIsCompl">LinearMap.equivProdOfSurjectiveOfIsCompl</a> (<span class="fn">↑<span class="fn">f</span></span>) (<span class="fn">↑<span class="fn">g</span></span>) <span class="fn">hf</span> <span class="fn">hg</span> <span class="fn">hfg</span></span></span></div></div></div></div><div class="decl" id="ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L76-L78">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl_apply"><span class="name">ContinuousLinearMap</span>.<span class="name">equivProdOfSurjectiveOfIsCompl_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> (<span class="fn"><span class="fn">F</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">G</span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">G</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.range">LinearMap.range</a> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.range">LinearMap.range</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> <span class="fn">f</span></span>) (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> <span class="fn">g</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl">ContinuousLinearMap.equivProdOfSurjectiveOfIsCompl</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">hf</span> <span class="fn">hg</span> <span class="fn">hfg</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span>, <span class="fn">↑<span class="fn">g</span> <span class="fn">x</span></span>)</span></span></div></div></div></div><div class="decl" id="Subspace.prodEquivOfClosedCompl"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L89-L93">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.prodEquivOfClosedCompl"><span class="name">Subspace</span>.<span class="name">prodEquivOfClosedCompl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">p</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">q</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">p</span></span> }</span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">q</span></span> }</span></span>) <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">≃L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv">]</a> <span class="fn">E</span></span></div></div><p>If <code>q</code> is a closed complement of a closed subspace <code>p</code>, then <code>p × q</code> is continuously
+isomorphic to <code>E</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Subspace.prodEquivOfClosedCompl" class="instances-for-list"></ul></details></div></div><div class="decl" id="Subspace.linearProjOfClosedCompl"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L97-L99">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.linearProjOfClosedCompl"><span class="name">Subspace</span>.<span class="name">linearProjOfClosedCompl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(q : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">p</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">q</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">p</span></span> }</span></span></div></div><p>Projection to a closed submodule along a closed complement.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Subspace.linearProjOfClosedCompl" class="instances-for-list"></ul></details></div></div><div class="decl" id="Subspace.coe_prodEquivOfClosedCompl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L105-L107">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.coe_prodEquivOfClosedCompl"><span class="name">Subspace</span>.<span class="name">coe_prodEquivOfClosedCompl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">p</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">q</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.prodEquivOfClosedCompl">Subspace.prodEquivOfClosedCompl</a> <span class="fn">p</span> <span class="fn">q</span> <span class="fn">h</span> <span class="fn">hp</span> <span class="fn">hq</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Projection.html#Submodule.prodEquivOfIsCompl">Submodule.prodEquivOfIsCompl</a> <span class="fn">p</span> <span class="fn">q</span> <span class="fn">h</span></span>)</span></span></div></div></div></div><div class="decl" id="Subspace.coe_prodEquivOfClosedCompl_symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L111-L113">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.coe_prodEquivOfClosedCompl_symm"><span class="name">Subspace</span>.<span class="name">coe_prodEquivOfClosedCompl_symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">p</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">q</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearEquiv.symm">ContinuousLinearEquiv.symm</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.prodEquivOfClosedCompl">Subspace.prodEquivOfClosedCompl</a> <span class="fn">p</span> <span class="fn">q</span> <span class="fn">h</span> <span class="fn">hp</span> <span class="fn">hq</span></span>)</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Module/Equiv.html#LinearEquiv.symm">LinearEquiv.symm</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Projection.html#Submodule.prodEquivOfIsCompl">Submodule.prodEquivOfIsCompl</a> <span class="fn">p</span> <span class="fn">q</span> <span class="fn">h</span></span>)</span>)</span></span></div></div></div></div><div class="decl" id="Subspace.coe_continuous_linearProjOfClosedCompl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L117-L119">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.coe_continuous_linearProjOfClosedCompl"><span class="name">Subspace</span>.<span class="name">coe_continuous_linearProjOfClosedCompl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">p</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">q</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.linearProjOfClosedCompl">Subspace.linearProjOfClosedCompl</a> <span class="fn">p</span> <span class="fn">q</span> <span class="fn">h</span> <span class="fn">hp</span> <span class="fn">hq</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Projection.html#Submodule.linearProjOfIsCompl">Submodule.linearProjOfIsCompl</a> <span class="fn">p</span> <span class="fn">q</span> <span class="fn">h</span></span></span></div></div></div></div><div class="decl" id="Subspace.coe_continuous_linearProjOfClosedCompl'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L123-L125">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.coe_continuous_linearProjOfClosedCompl'"><span class="name">Subspace</span>.<span class="name">coe_continuous_linearProjOfClosedCompl'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">p</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">q</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.linearProjOfClosedCompl">Subspace.linearProjOfClosedCompl</a> <span class="fn">p</span> <span class="fn">q</span> <span class="fn">h</span> <span class="fn">hp</span> <span class="fn">hq</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Projection.html#Submodule.linearProjOfIsCompl">Submodule.linearProjOfIsCompl</a> <span class="fn">p</span> <span class="fn">q</span> <span class="fn">h</span></span>)</span></span></div></div></div></div><div class="decl" id="Subspace.closedComplemented_of_closed_compl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L128-L130">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.closedComplemented_of_closed_compl"><span class="name">Subspace</span>.<span class="name">closedComplemented_of_closed_compl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">p</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">q</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#Submodule.ClosedComplemented">Submodule.ClosedComplemented</a> <span class="fn">p</span></span></div></div></div></div><div class="decl" id="Subspace.closedComplemented_iff_has_closed_compl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L133-L137">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.closedComplemented_iff_has_closed_compl"><span class="name">Subspace</span>.<span class="name">closedComplemented_iff_has_closed_compl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#Submodule.ClosedComplemented">Submodule.ClosedComplemented</a> <span class="fn">p</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">p</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn">∃ <span class="fn">q</span> <span class="fn">x</span>, <span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> <span class="fn">p</span> <span class="fn">q</span></span></span></span></span></div></div></div></div><div class="decl" id="Subspace.closedComplemented_of_quotient_finiteDimensional"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/NormedSpace/Complemented.lean#L140-L144">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/NormedSpace/Complemented.html#Subspace.closedComplemented_of_quotient_finiteDimensional"><span class="name">Subspace</span>.<span class="name">closedComplemented_of_quotient_finiteDimensional</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Subspace">Subspace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">𝕜</span> (<span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Algebra/Quotient.html#HasQuotient.Quotient">⧸</a> <span class="fn">p</span></span>)</span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsClosed">IsClosed</a> <span class="fn">↑<span class="fn">p</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#Submodule.ClosedComplemented">Submodule.ClosedComplemented</a> <span class="fn">p</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

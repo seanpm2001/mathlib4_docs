@@ -1,0 +1,571 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Combinatorics.SimpleGraph.AdjMatrix</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Combinatorics.SimpleGraph.AdjMatrix";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Combinatorics</span>.<span class="name">SimpleGraph</span>.<span class="name">AdjMatrix</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Combinatorics</span>.<span class="name">SimpleGraph</span>.<span class="name">AdjMatrix</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html">Mathlib.Combinatorics.SimpleGraph.Basic</a></li><li><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Connectivity.html">Mathlib.Combinatorics.SimpleGraph.Connectivity</a></li><li><a href="../../.././Mathlib/LinearAlgebra/Matrix/Symmetric.html">Mathlib.LinearAlgebra.Matrix.Symmetric</a></li><li><a href="../../.././Mathlib/LinearAlgebra/Matrix/Trace.html">Mathlib.LinearAlgebra.Matrix.Trace</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Combinatorics.SimpleGraph.AdjMatrix" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Matrix.IsAdjMatrix"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.IsAdjMatrix.apply_diag_ne"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">apply_diag_ne</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.IsAdjMatrix.apply_ne_one_iff"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">apply_ne_one_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.IsAdjMatrix.apply_ne_zero_iff"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">apply_ne_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.IsAdjMatrix.toGraph_Adj"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">toGraph_Adj</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.IsAdjMatrix.toGraph"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">toGraph</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.IsAdjMatrix.instDecidableRelAdjToGraph"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">instDecidableRelAdjToGraph</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.compl"><span class="name">Matrix</span>.<span class="name">compl</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.compl_apply_diag"><span class="name">Matrix</span>.<span class="name">compl_apply_diag</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.compl_apply"><span class="name">Matrix</span>.<span class="name">compl_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.isSymm_compl"><span class="name">Matrix</span>.<span class="name">isSymm_compl</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.isAdjMatrix_compl"><span class="name">Matrix</span>.<span class="name">isAdjMatrix_compl</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.IsAdjMatrix.compl"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">compl</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.IsAdjMatrix.toGraph_compl_eq"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">toGraph_compl_eq</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.adjMatrix_apply"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_apply</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.transpose_adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">transpose_adjMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.isSymm_adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">isSymm_adjMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.isAdjMatrix_adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">isAdjMatrix_adjMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.toGraph_adjMatrix_eq"><span class="name">SimpleGraph</span>.<span class="name">toGraph_adjMatrix_eq</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.adjMatrix_dotProduct"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_dotProduct</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.dotProduct_adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">dotProduct_adjMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.adjMatrix_mulVec_apply"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_mulVec_apply</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.adjMatrix_vecMul_apply"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_vecMul_apply</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.adjMatrix_mul_apply"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_mul_apply</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.mul_adjMatrix_apply"><span class="name">SimpleGraph</span>.<span class="name">mul_adjMatrix_apply</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.trace_adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">trace_adjMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.adjMatrix_mul_self_apply_self"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_mul_self_apply_self</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.adjMatrix_mulVec_const_apply"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_mulVec_const_apply</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.adjMatrix_mulVec_const_apply_of_regular"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_mulVec_const_apply_of_regular</span></a></div><div class="nav_link"><a class="break_within" href="#SimpleGraph.adjMatrix_pow_apply_eq_card_walk"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_pow_apply_eq_card_walk</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.IsAdjMatrix.adjMatrix_toGraph_eq"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">adjMatrix_toGraph_eq</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Adjacency-Matrices">Adjacency Matrices <a class="hover-link" href="#Adjacency-Matrices">#</a></h1><p>This module defines the adjacency matrix of a graph, and provides theorems connecting graph
+properties to computational properties of the matrix.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li>
+<p><code><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a></code>: <code>A : <a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> V V α</code> is qualified as an "adjacency matrix" if
+(1) every entry of <code>A</code> is <code>0</code> or <code>1</code>,
+(2) <code>A</code> is symmetric,
+(3) every diagonal entry of <code>A</code> is <code>0</code>.</p>
+</li>
+<li>
+<p><code>Matrix.IsAdjMatrix.to_graph</code>: for <code>A : <a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> V V α</code> and <code>h : A.<a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">IsAdjMatrix</a></code>,
+<code>h.to_graph</code> is the simple graph induced by <code>A</code>.</p>
+</li>
+<li>
+<p><code><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl">Matrix.compl</a></code>: for <code>A : <a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> V V α</code>, <code>A.<a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl">compl</a></code> is supposed to be
+the adjacency matrix of the complement graph of the graph induced by <code>A</code>.</p>
+</li>
+<li>
+<p><code><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a></code>: the adjacency matrix of a <code><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a></code>.</p>
+</li>
+<li>
+<p><code><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix_pow_apply_eq_card_walk">SimpleGraph.adjMatrix_pow_apply_eq_card_walk</a></code>: each entry of the <code>n</code>th power of
+a graph's adjacency matrix counts the number of length-<code>n</code> walks between the corresponding
+pair of vertices.</p>
+</li>
+</ul></div><div class="decl" id="Matrix.IsAdjMatrix"><div class="structure"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L56-L59">source</a></div><div class="decl_header"><span class="decl_kind">structure</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><ul class="structure_fields" id="Matrix.IsAdjMatrix.mk"><li id="Matrix.IsAdjMatrix.zero_or_one" class="structure_field"><div class="structure_field_info">zero_or_one : <span class="fn"><a href="../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn">∀ (<span class="fn">i </span>j : <span class="fn">V</span>), <span class="fn"><span class="fn"><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span></span>) <a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#_auto._@.Mathlib.Combinatorics.SimpleGraph.AdjMatrix._hyg.17">_auto✝</a></span></div></li><li id="Matrix.IsAdjMatrix.symm" class="structure_field"><div class="structure_field_info">symm : <span class="fn"><a href="../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Symmetric.html#Matrix.IsSymm">Matrix.IsSymm</a> <span class="fn">A</span></span>) <a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#_auto._@.Mathlib.Combinatorics.SimpleGraph.AdjMatrix._hyg.51">_auto✝</a></span></div></li><li id="Matrix.IsAdjMatrix.apply_diag" class="structure_field"><div class="structure_field_info">apply_diag : <span class="fn"><a href="../../.././Init/Meta.html#autoParam">autoParam</a> (<span class="fn">∀ (<span class="fn">i</span> : <span class="fn">V</span>), <span class="fn"><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span>) <a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#_auto._@.Mathlib.Combinatorics.SimpleGraph.AdjMatrix._hyg.79">_auto✝</a></span></div></li></ul><p><code>A : <a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> V V α</code> is qualified as an "adjacency matrix" if
+(1) every entry of <code>A</code> is <code>0</code> or <code>1</code>,
+(2) <code>A</code> is symmetric,
+(3) every diagonal entry of <code>A</code> is <code>0</code>.</p><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Matrix.IsAdjMatrix" class="instances-for-list"></ul></details></div></div><div class="decl" id="Matrix.IsAdjMatrix.apply_diag_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L67-L68">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.apply_diag_ne"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">apply_diag_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="Matrix.IsAdjMatrix.apply_ne_one_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L72-L73">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.apply_ne_one_iff"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">apply_ne_one_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="Matrix.IsAdjMatrix.apply_ne_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L77-L78">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.apply_ne_zero_iff"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">apply_ne_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="Matrix.IsAdjMatrix.toGraph_Adj"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L83-L83">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.toGraph_Adj"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">toGraph_Adj</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.Adj">SimpleGraph.Adj</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.toGraph">Matrix.IsAdjMatrix.toGraph</a> <span class="fn">h</span></span>) <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> (<span class="fn"><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></div></div></div></div><div class="decl" id="Matrix.IsAdjMatrix.toGraph"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L84-L87">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.toGraph"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">toGraph</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span></div></div><p>For <code>A : <a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> V V α</code> and <code>h : <a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">IsAdjMatrix</a> A</code>,
+<code>h.<a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.toGraph">toGraph</a></code> is the simple graph whose adjacency matrix is <code>A</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.toGraph">Matrix.IsAdjMatrix.toGraph</a> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.mk">SimpleGraph.mk</a> <span class="fn">fun <span class="fn">i</span> <span class="fn">j</span> =&gt <span class="fn"><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Matrix.IsAdjMatrix.toGraph" class="instances-for-list"></ul></details></div></div><div class="decl" id="Matrix.IsAdjMatrix.instDecidableRelAdjToGraph"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L90-L93">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.instDecidableRelAdjToGraph"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">instDecidableRelAdjToGraph</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.toGraph">Matrix.IsAdjMatrix.toGraph</a> <span class="fn">h</span></span>).Adj</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.instDecidableRelAdjToGraph">Matrix.IsAdjMatrix.instDecidableRelAdjToGraph</a> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#id">id</a> <span class="fn">inferInstance</span></span></span></li></ul></details></div></div><div class="decl" id="Matrix.compl"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L99-L100">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl"><span class="name">Matrix</span>.<span class="name">compl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span></div></div><p>For <code>A : <a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> V V α</code>, <code>A.<a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl">compl</a></code> is supposed to be the adjacency matrix of
+the complement graph of the graph induced by <code>A.<a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">adjMatrix</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl">Matrix.compl</a> <span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">j</span></span> then <span class="fn">0</span> else <span class="fn">if <span class="fn"><span class="fn"><span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> then <span class="fn">1</span> else <span class="fn">0</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Matrix.compl" class="instances-for-list"></ul></details></div></div><div class="decl" id="Matrix.compl_apply_diag"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L108-L108">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl_apply_diag"><span class="name">Matrix</span>.<span class="name">compl_apply_diag</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl">Matrix.compl</a> <span class="fn">A</span> <span class="fn">i</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.compl_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L112-L114">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl_apply"><span class="name">Matrix</span>.<span class="name">compl_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl">Matrix.compl</a> <span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl">Matrix.compl</a> <span class="fn">A</span> <span class="fn">i</span> <span class="fn">j</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span></div></div></div></div><div class="decl" id="Matrix.isSymm_compl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L118-L120">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.isSymm_compl"><span class="name">Matrix</span>.<span class="name">isSymm_compl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Symmetric.html#Matrix.IsSymm">Matrix.IsSymm</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Symmetric.html#Matrix.IsSymm">Matrix.IsSymm</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl">Matrix.compl</a> <span class="fn">A</span></span>)</span></div></div></div></div><div class="decl" id="Matrix.isAdjMatrix_compl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L124-L125">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.isAdjMatrix_compl"><span class="name">Matrix</span>.<span class="name">isAdjMatrix_compl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Symmetric.html#Matrix.IsSymm">Matrix.IsSymm</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl">Matrix.compl</a> <span class="fn">A</span></span>)</span></div></div></div></div><div class="decl" id="Matrix.IsAdjMatrix.compl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L133-L134">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.compl"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">compl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl">Matrix.compl</a> <span class="fn">A</span></span>)</span></div></div></div></div><div class="decl" id="Matrix.IsAdjMatrix.toGraph_compl_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L137-L140">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.toGraph_compl_eq"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">toGraph_compl_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> <span class="fn">A</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.toGraph">Matrix.IsAdjMatrix.toGraph</a> <span class="fn">(_ : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.compl">Matrix.compl</a> <span class="fn">A</span></span>)</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.toGraph">Matrix.IsAdjMatrix.toGraph</a> <span class="fn">h</span></span>)<a href="../../.././Mathlib/Order/Basic.html#HasCompl.compl">ᶜ</a></span></span></div></div></div></div><div class="decl" id="SimpleGraph.adjMatrix"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L159-L160">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span></div></div><p><code><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">adjMatrix</a> G α</code> is the matrix <code>A</code> such that <code>A i j = (1 : α)</code> if <code>i</code> and <code>j</code> are
+adjacent in the simple graph <code>G</code>, and otherwise <code>A i j = 0</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">Matrix.of</span> <span class="fn">fun <span class="fn">i</span> <span class="fn">j</span> =&gt <span class="fn">if <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.Adj">SimpleGraph.Adj</a> <span class="fn">G</span> <span class="fn">i</span> <span class="fn">j</span></span> then <span class="fn">1</span> else <span class="fn">0</span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-SimpleGraph.adjMatrix" class="instances-for-list"></ul></details></div></div><div class="decl" id="SimpleGraph.adjMatrix_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L167-L169">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix_apply"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(v : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn">V</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span> <span class="fn">v</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.Adj">SimpleGraph.Adj</a> <span class="fn">G</span> <span class="fn">v</span> <span class="fn">w</span></span> then <span class="fn">1</span> else <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.transpose_adjMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L173-L175">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.transpose_adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">transpose_adjMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.transpose">Matrix.transpose</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.isSymm_adjMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L179-L180">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.isSymm_adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">isSymm_adjMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Symmetric.html#Matrix.IsSymm">Matrix.IsSymm</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>)</span></div></div></div></div><div class="decl" id="SimpleGraph.isAdjMatrix_adjMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L187-L188">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.isAdjMatrix_adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">isAdjMatrix_adjMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#Zero">Zero</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>)</span></div></div><p>The adjacency matrix of <code>G</code> is an adjacency matrix.</p></div></div><div class="decl" id="SimpleGraph.toGraph_adjMatrix_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L192-L196">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.toGraph_adjMatrix_eq"><span class="name">SimpleGraph</span>.<span class="name">toGraph_adjMatrix_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.toGraph">Matrix.IsAdjMatrix.toGraph</a> <span class="fn">(_ : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>)</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">G</span></span></div></div><p>The graph induced by the adjacency matrix of <code>G</code> is <code>G</code> itself.</p></div></div><div class="decl" id="SimpleGraph.adjMatrix_dotProduct"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L202-L204">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix_dotProduct"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_dotProduct</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(v : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(vec : <span class="fn"><span class="fn">V</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.dotProduct">Matrix.dotProduct</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span> <span class="fn">v</span></span>) <span class="fn">vec</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.neighborFinset">SimpleGraph.neighborFinset</a> <span class="fn">G</span> <span class="fn">v</span></span>) <span class="fn">fun <span class="fn">u</span> =&gt <span class="fn"><span class="fn">vec</span> <span class="fn">u</span></span></span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.dotProduct_adjMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L208-L210">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.dotProduct_adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">dotProduct_adjMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(v : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(vec : <span class="fn"><span class="fn">V</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.dotProduct">Matrix.dotProduct</a> <span class="fn">vec</span> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span> <span class="fn">v</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.neighborFinset">SimpleGraph.neighborFinset</a> <span class="fn">G</span> <span class="fn">v</span></span>) <span class="fn">fun <span class="fn">u</span> =&gt <span class="fn"><span class="fn">vec</span> <span class="fn">u</span></span></span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.adjMatrix_mulVec_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L214-L216">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix_mulVec_apply"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_mulVec_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(v : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(vec : <span class="fn"><span class="fn">V</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.mulVec">Matrix.mulVec</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>) <span class="fn">vec</span> <span class="fn">v</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.neighborFinset">SimpleGraph.neighborFinset</a> <span class="fn">G</span> <span class="fn">v</span></span>) <span class="fn">fun <span class="fn">u</span> =&gt <span class="fn"><span class="fn">vec</span> <span class="fn">u</span></span></span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.adjMatrix_vecMul_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L220-L224">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix_vecMul_apply"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_vecMul_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(v : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(vec : <span class="fn"><span class="fn">V</span> → <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.vecMul">Matrix.vecMul</a> <span class="fn">vec</span> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>) <span class="fn">v</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.neighborFinset">SimpleGraph.neighborFinset</a> <span class="fn">G</span> <span class="fn">v</span></span>) <span class="fn">fun <span class="fn">u</span> =&gt <span class="fn"><span class="fn">vec</span> <span class="fn">u</span></span></span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.adjMatrix_mul_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L228-L230">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix_mul_apply"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_mul_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.mul">Matrix.mul</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>) <span class="fn">M</span> <span class="fn">v</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.neighborFinset">SimpleGraph.neighborFinset</a> <span class="fn">G</span> <span class="fn">v</span></span>) <span class="fn">fun <span class="fn">u</span> =&gt <span class="fn"><span class="fn">M</span> <span class="fn">u</span> <span class="fn">w</span></span></span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.mul_adjMatrix_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L234-L236">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.mul_adjMatrix_apply"><span class="name">SimpleGraph</span>.<span class="name">mul_adjMatrix_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(M : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.mul">Matrix.mul</a> <span class="fn">M</span> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>) <span class="fn">v</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.neighborFinset">SimpleGraph.neighborFinset</a> <span class="fn">G</span> <span class="fn">w</span></span>) <span class="fn">fun <span class="fn">u</span> =&gt <span class="fn"><span class="fn">M</span> <span class="fn">v</span> <span class="fn">u</span></span></span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.trace_adjMatrix"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L242-L243">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.trace_adjMatrix"><span class="name">SimpleGraph</span>.<span class="name">trace_adjMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#One">One</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Trace.html#Matrix.trace">Matrix.trace</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="SimpleGraph.adjMatrix_mul_self_apply_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L248-L249">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix_mul_self_apply_self"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_mul_self_apply_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#NonAssocSemiring">NonAssocSemiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.mul">Matrix.mul</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>) (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>) <span class="fn">i</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.degree">SimpleGraph.degree</a> <span class="fn">G</span> <span class="fn">i</span></span>)</span></span></div></div></div></div><div class="decl" id="SimpleGraph.adjMatrix_mulVec_const_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L255-L256">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix_mulVec_const_apply"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_mulVec_const_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">V</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.mulVec">Matrix.mulVec</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>) (<span class="fn"><a href="../../.././Init/Prelude.html#Function.const">Function.const</a> <span class="fn">V</span> <span class="fn">a</span></span>) <span class="fn">v</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.degree">SimpleGraph.degree</a> <span class="fn">G</span> <span class="fn">v</span></span>)</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.adjMatrix_mulVec_const_apply_of_regular"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L259-L261">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix_mulVec_const_apply_of_regular"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_mulVec_const_apply_of_regular</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">α</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hd : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph.IsRegularOfDegree">SimpleGraph.IsRegularOfDegree</a> <span class="fn">G</span> <span class="fn">d</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn">V</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.mulVec">Matrix.mulVec</a> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>) (<span class="fn"><a href="../../.././Init/Prelude.html#Function.const">Function.const</a> <span class="fn">V</span> <span class="fn">a</span></span>) <span class="fn">v</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="SimpleGraph.adjMatrix_pow_apply_eq_card_walk"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L264-L282">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix_pow_apply_eq_card_walk"><span class="name">SimpleGraph</span>.<span class="name">adjMatrix_pow_apply_eq_card_walk</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Basic.html#SimpleGraph">SimpleGraph</a> <span class="fn">V</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableRel">DecidableRel</a> <span class="fn"><span class="fn">G</span>.Adj</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(u : <span class="fn">V</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<a href="../../.././Init/Prelude.html#HPow.hPow"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></a>) (<span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>) <span class="fn">instHPow</span> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> <span class="fn">G</span></span>) <span class="fn">n</span> <span class="fn">u</span> <span class="fn">v</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> <span class="fn">↑<span class="fn">{<span class="fn">p</span> | <span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/Connectivity.html#SimpleGraph.Walk.length">SimpleGraph.Walk.length</a> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">n</span></span>}</span></span></span>)</span></span></div></div></div></div><div class="decl" id="Matrix.IsAdjMatrix.adjMatrix_toGraph_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Combinatorics/SimpleGraph/AdjMatrix.lean#L295-L297">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.adjMatrix_toGraph_eq"><span class="name">Matrix</span>.<span class="name">IsAdjMatrix</span>.<span class="name">adjMatrix_toGraph_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/GroupWithZero/Defs.html#MulZeroOneClass">MulZeroOneClass</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial.html#Nontrivial">Nontrivial</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">V</span> <span class="fn">V</span> <span class="fn">α</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix">Matrix.IsAdjMatrix</a> <span class="fn">A</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#SimpleGraph.adjMatrix">SimpleGraph.adjMatrix</a> <span class="fn">α</span> (<span class="fn"><a href="../../.././Mathlib/Combinatorics/SimpleGraph/AdjMatrix.html#Matrix.IsAdjMatrix.toGraph">Matrix.IsAdjMatrix.toGraph</a> <span class="fn">h</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">A</span></span></div></div><p>If <code>A</code> is qualified as an adjacency matrix,
+then the adjacency matrix of the graph induced by <code>A</code> is itself.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

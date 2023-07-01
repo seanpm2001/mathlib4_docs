@@ -1,0 +1,977 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.CategoryTheory.Abelian.Homology</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.CategoryTheory.Abelian.Homology";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">Homology</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">Homology</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Algebra/Homology/Additive.html">Mathlib.Algebra.Homology.Additive</a></li><li><a href="../../.././Mathlib/CategoryTheory/Abelian/Pseudoelements.html">Mathlib.CategoryTheory.Abelian.Pseudoelements</a></li><li><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Images.html">Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images</a></li><li><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.html">Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.CategoryTheory.Abelian.Homology" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Abelian.homologyC"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">homologyC</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Abelian.homologyK"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">homologyK</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Abelian.homologyCToK"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">homologyCToK</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Abelian.instMonoHomologyCHomologyKHomologyCToK"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">instMonoHomologyCHomologyKHomologyCToK</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Abelian.instEpiHomologyCHomologyKHomologyCToK"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">instEpiHomologyCHomologyKHomologyCToK</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Abelian.instIsIsoHomologyCHomologyKHomologyCToK"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">instIsIsoHomologyCHomologyKHomologyCToK</span></a></div><div class="nav_link"><a class="break_within" href="#homologyIsoKernelDesc"><span class="name">homologyIsoKernelDesc</span></a></div><div class="nav_link"><a class="break_within" href="#homology.π'"><span class="name">homology</span>.<span class="name">π'</span></a></div><div class="nav_link"><a class="break_within" href="#homology.ι"><span class="name">homology</span>.<span class="name">ι</span></a></div><div class="nav_link"><a class="break_within" href="#homology.desc'"><span class="name">homology</span>.<span class="name">desc'</span></a></div><div class="nav_link"><a class="break_within" href="#homology.lift"><span class="name">homology</span>.<span class="name">lift</span></a></div><div class="nav_link"><a class="break_within" href="#homology.π'_desc'_assoc"><span class="name">homology</span>.<span class="name">π'_desc'_assoc</span></a></div><div class="nav_link"><a class="break_within" href="#homology.π'_desc'"><span class="name">homology</span>.<span class="name">π'_desc'</span></a></div><div class="nav_link"><a class="break_within" href="#homology.lift_ι_assoc"><span class="name">homology</span>.<span class="name">lift_ι_assoc</span></a></div><div class="nav_link"><a class="break_within" href="#homology.lift_ι"><span class="name">homology</span>.<span class="name">lift_ι</span></a></div><div class="nav_link"><a class="break_within" href="#homology.condition_π'_assoc"><span class="name">homology</span>.<span class="name">condition_π'_assoc</span></a></div><div class="nav_link"><a class="break_within" href="#homology.condition_π'"><span class="name">homology</span>.<span class="name">condition_π'</span></a></div><div class="nav_link"><a class="break_within" href="#homology.condition_ι_assoc"><span class="name">homology</span>.<span class="name">condition_ι_assoc</span></a></div><div class="nav_link"><a class="break_within" href="#homology.condition_ι"><span class="name">homology</span>.<span class="name">condition_ι</span></a></div><div class="nav_link"><a class="break_within" href="#homology.hom_from_ext"><span class="name">homology</span>.<span class="name">hom_from_ext</span></a></div><div class="nav_link"><a class="break_within" href="#homology.hom_to_ext"><span class="name">homology</span>.<span class="name">hom_to_ext</span></a></div><div class="nav_link"><a class="break_within" href="#homology.π'_ι_assoc"><span class="name">homology</span>.<span class="name">π'_ι_assoc</span></a></div><div class="nav_link"><a class="break_within" href="#homology.π'_ι"><span class="name">homology</span>.<span class="name">π'_ι</span></a></div><div class="nav_link"><a class="break_within" href="#homology.π'_eq_π_assoc"><span class="name">homology</span>.<span class="name">π'_eq_π_assoc</span></a></div><div class="nav_link"><a class="break_within" href="#homology.π'_eq_π"><span class="name">homology</span>.<span class="name">π'_eq_π</span></a></div><div class="nav_link"><a class="break_within" href="#homology.π'_map_assoc"><span class="name">homology</span>.<span class="name">π'_map_assoc</span></a></div><div class="nav_link"><a class="break_within" href="#homology.π'_map"><span class="name">homology</span>.<span class="name">π'_map</span></a></div><div class="nav_link"><a class="break_within" href="#homology.map_eq_desc'_lift_left"><span class="name">homology</span>.<span class="name">map_eq_desc'_lift_left</span></a></div><div class="nav_link"><a class="break_within" href="#homology.map_eq_lift_desc'_left"><span class="name">homology</span>.<span class="name">map_eq_lift_desc'_left</span></a></div><div class="nav_link"><a class="break_within" href="#homology.map_eq_desc'_lift_right"><span class="name">homology</span>.<span class="name">map_eq_desc'_lift_right</span></a></div><div class="nav_link"><a class="break_within" href="#homology.map_eq_lift_desc'_right"><span class="name">homology</span>.<span class="name">map_eq_lift_desc'_right</span></a></div><div class="nav_link"><a class="break_within" href="#homology.map_ι_assoc"><span class="name">homology</span>.<span class="name">map_ι_assoc</span></a></div><div class="nav_link"><a class="break_within" href="#homology.map_ι"><span class="name">homology</span>.<span class="name">map_ι</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.homologyIso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">homologyIso</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.Functor.homologyFunctorIso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">homologyFunctorIso</span></a></div></nav><main>
+<div class="mod_doc"><p>The object <code><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> f g w</code>, where <code>w : f ≫ g = 0</code>, can be identified with either a
+cokernel or a kernel. The isomorphism with a cokernel is <code><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homologyIsoCokernelLift">homologyIsoCokernelLift</a></code>, which
+was obtained elsewhere. In the case of an abelian category, this file shows the isomorphism
+with a kernel as well.</p><p>We use these isomorphisms to obtain the analogous api for <code><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a></code>:</p><ul>
+<li><code><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a></code> is the map from <code><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> f g w</code> into the cokernel of <code>f</code>.</li>
+<li><code><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a></code> is the map from <code>kernel g</code> to <code><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> f g w</code>.</li>
+<li><code><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.desc'">homology.desc'</a></code> constructs a morphism from <code><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> f g w</code>, when it is viewed as a cokernel.</li>
+<li><code><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift">homology.lift</a></code> constructs a morphism to <code><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> f g w</code>, when it is viewed as a kernel.</li>
+<li>Various small lemmas are proved as well, mimicking the API for (co)kernels.
+With these definitions and lemmas, the isomorphisms between homology and a (co)kernel need not
+be used directly.</li>
+</ul></div><div class="decl" id="CategoryTheory.Abelian.homologyC"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L50-L51">source</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyC"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">homologyC</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">A</span></div></div><p>The cokernel of <code>kernel.<a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift">lift</a> g f w</code>. This is isomorphic to <code><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> f g w</code>.
+See <code><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homologyIsoCokernelLift">homologyIsoCokernelLift</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyC">CategoryTheory.Abelian.homologyC</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel">CategoryTheory.Limits.cokernel</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-CategoryTheory.Abelian.homologyC" class="instances-for-list"></ul></details></div></div><div class="decl" id="CategoryTheory.Abelian.homologyK"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L56-L57">source</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyK"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">homologyK</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">A</span></div></div><p>The kernel of <code>cokernel.desc f g w</code>. This is isomorphic to <code><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> f g w</code>.
+See <code><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homologyIsoKernelDesc">homologyIsoKernelDesc</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyK">CategoryTheory.Abelian.homologyK</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel">CategoryTheory.Limits.kernel</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-CategoryTheory.Abelian.homologyK" class="instances-for-list"></ul></details></div></div><div class="decl" id="CategoryTheory.Abelian.homologyCToK"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L63-L64">source</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyCToK"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">homologyCToK</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyC">CategoryTheory.Abelian.homologyC</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyK">CategoryTheory.Abelian.homologyK</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span></div></div><p>The canonical map from <code><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyC">homologyC</a></code> to <code><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyK">homologyK</a></code>.
+This is an isomorphism, and it is used in obtaining the API for <code><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> f g w</code>
+in the bottom of this file.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-CategoryTheory.Abelian.homologyCToK" class="instances-for-list"></ul></details></div></div><div class="decl" id="CategoryTheory.Abelian.instMonoHomologyCHomologyKHomologyCToK"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L69-L83">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instMonoHomologyCHomologyKHomologyCToK"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">instMonoHomologyCHomologyKHomologyCToK</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Mono">CategoryTheory.Mono</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyCToK">CategoryTheory.Abelian.homologyCToK</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instMonoHomologyCHomologyKHomologyCToK">@<a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instMonoHomologyCHomologyKHomologyCToK">CategoryTheory.Abelian.instMonoHomologyCHomologyKHomologyCToK</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instMonoHomologyCHomologyKHomologyCToK.proof_1">@<a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instMonoHomologyCHomologyKHomologyCToK.proof_1">CategoryTheory.Abelian.instMonoHomologyCHomologyKHomologyCToK.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Abelian.instEpiHomologyCHomologyKHomologyCToK"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L85-L101">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instEpiHomologyCHomologyKHomologyCToK"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">instEpiHomologyCHomologyKHomologyCToK</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Epi">CategoryTheory.Epi</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyCToK">CategoryTheory.Abelian.homologyCToK</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instEpiHomologyCHomologyKHomologyCToK">@<a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instEpiHomologyCHomologyKHomologyCToK">CategoryTheory.Abelian.instEpiHomologyCHomologyKHomologyCToK</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instEpiHomologyCHomologyKHomologyCToK.proof_1">@<a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instEpiHomologyCHomologyKHomologyCToK.proof_1">CategoryTheory.Abelian.instEpiHomologyCHomologyKHomologyCToK.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="CategoryTheory.Abelian.instIsIsoHomologyCHomologyKHomologyCToK"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L103-L104">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instIsIsoHomologyCHomologyKHomologyCToK"><span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">instIsIsoHomologyCHomologyKHomologyCToK</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.IsIso">CategoryTheory.IsIso</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyCToK">CategoryTheory.Abelian.homologyCToK</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instIsIsoHomologyCHomologyKHomologyCToK">@<a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instIsIsoHomologyCHomologyKHomologyCToK">CategoryTheory.Abelian.instIsIsoHomologyCHomologyKHomologyCToK</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instIsIsoHomologyCHomologyKHomologyCToK.proof_1">@<a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.instIsIsoHomologyCHomologyKHomologyCToK.proof_1">CategoryTheory.Abelian.instIsIsoHomologyCHomologyKHomologyCToK.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="homologyIsoKernelDesc"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L109-L110">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homologyIsoKernelDesc"><span class="name">homologyIsoKernelDesc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel">CategoryTheory.Limits.kernel</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>)</span></span></div></div><p>The homology associated to <code>f</code> and <code>g</code> is isomorphic to a kernel.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homologyIsoKernelDesc">homologyIsoKernelDesc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homologyIsoCokernelLift">homologyIsoCokernelLift</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso.trans">≪≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.asIso">CategoryTheory.asIso</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Abelian.homologyCToK">CategoryTheory.Abelian.homologyCToK</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-homologyIsoKernelDesc" class="instances-for-list"></ul></details></div></div><div class="decl" id="homology.π'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L117-L118">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'"><span class="name">homology</span>.<span class="name">π'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel">CategoryTheory.Limits.kernel</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span></div></div><p>The canonical map from the kernel of <code>g</code> to the homology of <code>f</code> and <code>g</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span>)</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homologyIsoCokernelLift">homologyIsoCokernelLift</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>).inv</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-homology.π'" class="instances-for-list"></ul></details></div></div><div class="decl" id="homology.ι"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L122-L123">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι"><span class="name">homology</span>.<span class="name">ι</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel">CategoryTheory.Limits.cokernel</a> <span class="fn">f</span></span></span></div></div><p>The canonical map from the homology of <code>f</code> and <code>g</code> to the cokernel of <code>f</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homologyIsoKernelDesc">homologyIsoKernelDesc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>).hom</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-homology.ι" class="instances-for-list"></ul></details></div></div><div class="decl" id="homology.desc'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L127-L128">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.desc'"><span class="name">homology</span>.<span class="name">desc'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel">CategoryTheory.Limits.kernel</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">e</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">W</span></span></div></div><p>Obtain a morphism from the homology, given a morphism from the kernel.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.desc'">homology.desc'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span> <span class="fn">e</span> <span class="fn">he</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homologyIsoCokernelLift">homologyIsoCokernelLift</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>).hom</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>     <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span>) <span class="fn">e</span> <span class="fn">he</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-homology.desc'" class="instances-for-list"></ul></details></div></div><div class="decl" id="homology.lift"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L132-L133">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift"><span class="name">homology</span>.<span class="name">lift</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel">CategoryTheory.Limits.cokernel</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><span class="fn"><span class="fn">e</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span></div></div><p>Obtain a moprhism to the homology, given a morphism to the kernel.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift">homology.lift</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span> <span class="fn">e</span> <span class="fn">he</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>) <span class="fn">e</span> <span class="fn">he</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homologyIsoKernelDesc">homologyIsoKernelDesc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span>).inv</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-homology.lift" class="instances-for-list"></ul></details></div></div><div class="decl" id="homology.π'_desc'_assoc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L136-L136">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'_desc'_assoc"><span class="name">homology</span>.<span class="name">π'_desc'_assoc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel">CategoryTheory.Limits.kernel</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">e</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.desc'">homology.desc'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span> <span class="fn">e</span> <span class="fn">he</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">e</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span></div></div></div></div><div class="decl" id="homology.π'_desc'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L137-L140">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'_desc'"><span class="name">homology</span>.<span class="name">π'_desc'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel">CategoryTheory.Limits.kernel</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">e</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.desc'">homology.desc'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span> <span class="fn">e</span> <span class="fn">he</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">e</span></span></div></div></div></div><div class="decl" id="homology.lift_ι_assoc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L143-L143">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift_ι_assoc"><span class="name">homology</span>.<span class="name">lift_ι_assoc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel">CategoryTheory.Limits.cokernel</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><span class="fn"><span class="fn">e</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel">CategoryTheory.Limits.cokernel</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift">homology.lift</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span> <span class="fn">e</span> <span class="fn">he</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">e</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span></div></div></div></div><div class="decl" id="homology.lift_ι"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L144-L147">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift_ι"><span class="name">homology</span>.<span class="name">lift_ι</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel">CategoryTheory.Limits.cokernel</a> <span class="fn">f</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(he : <span class="fn"><span class="fn"><span class="fn">e</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift">homology.lift</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span> <span class="fn">e</span> <span class="fn">he</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">e</span></span></div></div></div></div><div class="decl" id="homology.condition_π'_assoc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L150-L150">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.condition_π'_assoc"><span class="name">homology</span>.<span class="name">condition_π'_assoc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">0</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span></div></div></div></div><div class="decl" id="homology.condition_π'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L151-L153">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.condition_π'"><span class="name">homology</span>.<span class="name">condition_π'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="homology.condition_ι_assoc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L156-L156">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.condition_ι_assoc"><span class="name">homology</span>.<span class="name">condition_ι_assoc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">Z</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">0</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span></div></div></div></div><div class="decl" id="homology.condition_ι"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L157-L159">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.condition_ι"><span class="name">homology</span>.<span class="name">condition_ι</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="homology.hom_from_ext"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L163-L172">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.hom_from_ext"><span class="name">homology</span>.<span class="name">hom_from_ext</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">b</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div></div></div><div class="decl" id="homology.hom_to_ext"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L176-L184">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.hom_to_ext"><span class="name">homology</span>.<span class="name">hom_to_ext</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(b : <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">a</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">b</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">a</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">b</span></span></div></div></div></div><div class="decl" id="homology.π'_ι_assoc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L187-L187">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'_ι_assoc"><span class="name">homology</span>.<span class="name">π'_ι_assoc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel">CategoryTheory.Limits.cokernel</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span></span></div></div></div></div><div class="decl" id="homology.π'_ι"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L188-L190">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'_ι"><span class="name">homology</span>.<span class="name">π'_ι</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="homology.π'_eq_π_assoc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L193-L193">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'_eq_π_assoc"><span class="name">homology</span>.<span class="name">π'_eq_π_assoc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Subobject/Limits.html#CategoryTheory.Limits.kernelSubobjectIso">CategoryTheory.Limits.kernelSubobjectIso</a> <span class="fn">g</span></span>).hom</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology.π">homology.π</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span></div></div></div></div><div class="decl" id="homology.π'_eq_π"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L194-L199">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'_eq_π"><span class="name">homology</span>.<span class="name">π'_eq_π</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Subobject/Limits.html#CategoryTheory.Limits.kernelSubobjectIso">CategoryTheory.Limits.kernelSubobjectIso</a> <span class="fn">g</span></span>).hom</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology.π">homology.π</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span></span></div></div></div></div><div class="decl" id="homology.π'_map_assoc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L206-L206">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'_map_assoc"><span class="name">homology</span>.<span class="name">π'_map_assoc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z' : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f' : <span class="fn"><span class="fn">X'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g' : <span class="fn"><span class="fn">Y'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w' : <span class="fn"><span class="fn"><span class="fn">f'</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">β</span>.left</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology">homology</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology.map">homology.map</a> <span class="fn">w</span> <span class="fn">w'</span> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">h</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.map">CategoryTheory.Limits.kernel.map</a> <span class="fn">g</span> <span class="fn">g'</span> <span class="fn"><span class="fn">α</span>.right</span> <span class="fn"><span class="fn">β</span>.right</span> <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn">g</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn">β</span>.right</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g'</span></span></span>)</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span></span></div></div></div></div><div class="decl" id="homology.π'_map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L207-L235">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'_map"><span class="name">homology</span>.<span class="name">π'_map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z' : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f' : <span class="fn"><span class="fn">X'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g' : <span class="fn"><span class="fn">Y'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w' : <span class="fn"><span class="fn"><span class="fn">f'</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">β</span>.left</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology.map">homology.map</a> <span class="fn">w</span> <span class="fn">w'</span> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">h</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.map">CategoryTheory.Limits.kernel.map</a> <span class="fn">g</span> <span class="fn">g'</span> <span class="fn"><span class="fn">α</span>.right</span> <span class="fn"><span class="fn">β</span>.right</span> <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn">g</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn">β</span>.right</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g'</span></span></span>)</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.π'">homology.π'</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span></span></span></span></div></div></div></div><div class="decl" id="homology.map_eq_desc'_lift_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L239-L253">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.map_eq_desc'_lift_left"><span class="name">homology</span>.<span class="name">map_eq_desc'_lift_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z' : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f' : <span class="fn"><span class="fn">X'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g' : <span class="fn"><span class="fn">Y'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w' : <span class="fn"><span class="fn"><span class="fn">f'</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">β</span>.left</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology.map">homology.map</a> <span class="fn">w</span> <span class="fn">w'</span> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.desc'">homology.desc'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span>
+    (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift">homology.lift</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span> (<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">β</span>.left</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>)
+      <span class="fn">(_ :
+        <span class="fn"><span class="fn">(<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">β</span>.left</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>) <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>             <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>           <span class="fn">0</span></span>)</span></span>)
+    <span class="fn">(_ :
+      <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>           <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift">homology.lift</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span> (<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">β</span>.left</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>)
+            <span class="fn">(_ :
+              <span class="fn"><span class="fn">(<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">β</span>.left</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>) <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>                   <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>                 <span class="fn">0</span></span>)</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>         <span class="fn">0</span></span>)</span></span></span></div></div></div></div><div class="decl" id="homology.map_eq_lift_desc'_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L256-L272">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.map_eq_lift_desc'_left"><span class="name">homology</span>.<span class="name">map_eq_lift_desc'_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z' : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f' : <span class="fn"><span class="fn">X'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g' : <span class="fn"><span class="fn">Y'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w' : <span class="fn"><span class="fn"><span class="fn">f'</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">β</span>.left</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology.map">homology.map</a> <span class="fn">w</span> <span class="fn">w'</span> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift">homology.lift</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span>
+    (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.desc'">homology.desc'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span> (<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">β</span>.left</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>)
+      <span class="fn">(_ :
+        <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>             <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">β</span>.left</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>           <span class="fn">0</span></span>)</span></span>)
+    <span class="fn">(_ :
+      <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.desc'">homology.desc'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span> (<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">β</span>.left</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>)
+            <span class="fn">(_ :
+              <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>                   <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">β</span>.left</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>                 <span class="fn">0</span></span>)</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>           <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>         <span class="fn">0</span></span>)</span></span></span></div></div></div></div><div class="decl" id="homology.map_eq_desc'_lift_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L275-L286">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.map_eq_desc'_lift_right"><span class="name">homology</span>.<span class="name">map_eq_desc'_lift_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z' : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f' : <span class="fn"><span class="fn">X'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g' : <span class="fn"><span class="fn">Y'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w' : <span class="fn"><span class="fn"><span class="fn">f'</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">β</span>.left</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology.map">homology.map</a> <span class="fn">w</span> <span class="fn">w'</span> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.desc'">homology.desc'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span>
+    (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift">homology.lift</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span> (<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>)
+      <span class="fn">(_ :
+        <span class="fn"><span class="fn">(<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>) <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>             <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>           <span class="fn">0</span></span>)</span></span>)
+    <span class="fn">(_ :
+      <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>           <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift">homology.lift</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span> (<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>)
+            <span class="fn">(_ :
+              <span class="fn"><span class="fn">(<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>) <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>                   <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>                 <span class="fn">0</span></span>)</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>         <span class="fn">0</span></span>)</span></span></span></div></div></div></div><div class="decl" id="homology.map_eq_lift_desc'_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L289-L305">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.map_eq_lift_desc'_right"><span class="name">homology</span>.<span class="name">map_eq_lift_desc'_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z' : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f' : <span class="fn"><span class="fn">X'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g' : <span class="fn"><span class="fn">Y'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w' : <span class="fn"><span class="fn"><span class="fn">f'</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">β</span>.left</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology.map">homology.map</a> <span class="fn">w</span> <span class="fn">w'</span> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">h</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.lift">homology.lift</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span>
+    (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.desc'">homology.desc'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span> (<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>)
+      <span class="fn">(_ :
+        <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>             <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>           <span class="fn">0</span></span>)</span></span>)
+    <span class="fn">(_ :
+      <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.desc'">homology.desc'</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span> (<span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span>)
+            <span class="fn">(_ :
+              <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.lift">CategoryTheory.Limits.kernel.lift</a> <span class="fn">g</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>                   <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel.ι">CategoryTheory.Limits.kernel.ι</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f'</span></span></span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>                 <span class="fn">0</span></span>)</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a>           <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.desc">CategoryTheory.Limits.cokernel.desc</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>         <span class="fn">0</span></span>)</span></span></span></div></div></div></div><div class="decl" id="homology.map_ι_assoc"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L308-L308">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.map_ι_assoc"><span class="name">homology</span>.<span class="name">map_ι_assoc</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z' : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f' : <span class="fn"><span class="fn">X'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g' : <span class="fn"><span class="fn">Y'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w' : <span class="fn"><span class="fn"><span class="fn">f'</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">β</span>.left</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel">CategoryTheory.Limits.cokernel</a> <span class="fn">f'</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology.map">homology.map</a> <span class="fn">w</span> <span class="fn">w'</span> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">h</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.map">CategoryTheory.Limits.cokernel.map</a> <span class="fn">f</span> <span class="fn">f'</span> <span class="fn"><span class="fn">α</span>.left</span> <span class="fn"><span class="fn">β</span>.left</span> <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn">β</span>.left</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">α</span>.left</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">f'</span></span></span>)</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">h</span></span></span></span></div></div></div></div><div class="decl" id="homology.map_ι"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L309-L316">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.map_ι"><span class="name">homology</span>.<span class="name">map_ι</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><span class="fn">Y</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{X' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y' : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Z' : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f' : <span class="fn"><span class="fn">X'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g' : <span class="fn"><span class="fn">Y'</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Z'</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w' : <span class="fn"><span class="fn"><span class="fn">f'</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">g'</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">f'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g</span></span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Arrow.html#CategoryTheory.Arrow.mk">CategoryTheory.Arrow.mk</a> <span class="fn">g'</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><span class="fn">α</span>.right</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">β</span>.left</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ImageToKernel.html#homology.map">homology.map</a> <span class="fn">w</span> <span class="fn">w'</span> <span class="fn">α</span> <span class="fn">β</span> <span class="fn">h</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f'</span> <span class="fn">g'</span> <span class="fn">w'</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#homology.ι">homology.ι</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">w</span></span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.map">CategoryTheory.Limits.cokernel.map</a> <span class="fn">f</span> <span class="fn">f'</span> <span class="fn"><span class="fn">α</span>.left</span> <span class="fn"><span class="fn">β</span>.left</span> <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn">f</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn"><span class="fn">β</span>.left</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">α</span>.left</span> <a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.CategoryStruct.comp">≫</a> <span class="fn">f'</span></span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.Functor.homologyIso"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L329-L342">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Functor.homologyIso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">homologyIso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">B</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Finite.html#CategoryTheory.Limits.PreservesFiniteLimits">CategoryTheory.Limits.PreservesFiniteLimits</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Finite.html#CategoryTheory.Limits.PreservesFiniteColimits">CategoryTheory.Limits.PreservesFiniteColimits</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(C : <span class="fn"><a href="../../.././Mathlib/Algebra/Homology/HomologicalComplex.html#HomologicalComplex">HomologicalComplex</a> <span class="fn">A</span> <span class="fn">c</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">ι</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">F</span>.obj (<span class="fn"><a href="../../.././Mathlib/Algebra/Homology/Homology.html#HomologicalComplex.homology">HomologicalComplex.homology</a> <span class="fn">C</span> <span class="fn">j</span></span>)</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a>   <span class="fn"><a href="../../.././Mathlib/Algebra/Homology/Homology.html#HomologicalComplex.homology">HomologicalComplex.homology</a> (<span class="fn">(<span class="fn"><a href="../../.././Mathlib/Algebra/Homology/Additive.html#CategoryTheory.Functor.mapHomologicalComplex">CategoryTheory.Functor.mapHomologicalComplex</a> <span class="fn">F</span> <span class="fn">c</span></span>).obj <span class="fn">C</span></span>) <span class="fn">j</span></span></span></div></div><p>When <code>F</code> is an exact additive functor, <code>F(Hᵢ(X)) ≅ Hᵢ(F(X))</code> for <code>X</code> a complex.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-CategoryTheory.Functor.homologyIso" class="instances-for-list"></ul></details></div></div><div class="decl" id="CategoryTheory.Functor.homologyFunctorIso"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Homology.lean#L346-L367">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Functor.homologyFunctorIso"><span class="name">CategoryTheory</span>.<span class="name">Functor</span>.<span class="name">homologyFunctorIso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><a href="../../.././Mathlib/Algebra/Homology/ComplexShape.html#ComplexShape">ComplexShape</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">B</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">A</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">B</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.html#CategoryTheory.Functor.Additive">CategoryTheory.Functor.Additive</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Finite.html#CategoryTheory.Limits.PreservesFiniteLimits">CategoryTheory.Limits.PreservesFiniteLimits</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Finite.html#CategoryTheory.Limits.PreservesFiniteColimits">CategoryTheory.Limits.PreservesFiniteColimits</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/Homology.html#homologyFunctor">homologyFunctor</a> <span class="fn">A</span> <span class="fn">c</span> <span class="fn">i</span></span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.comp">⋙</a> <span class="fn">F</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Homology/Additive.html#CategoryTheory.Functor.mapHomologicalComplex">CategoryTheory.Functor.mapHomologicalComplex</a> <span class="fn">F</span> <span class="fn">c</span></span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.comp">⋙</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Homology/Homology.html#homologyFunctor">homologyFunctor</a> <span class="fn">B</span> <span class="fn">c</span> <span class="fn">i</span></span></span></span></div></div><p>If <code>F</code> is an exact additive functor, then <code>F</code> commutes with <code>Hᵢ</code> (up to natural isomorphism).</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Functor.homologyFunctorIso">CategoryTheory.Functor.homologyFunctorIso</a> <span class="fn">F</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/CategoryTheory/NatIso.html#CategoryTheory.NatIso.ofComponents">CategoryTheory.NatIso.ofComponents</a> <span class="fn">fun <span class="fn">X</span> =&gt <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Homology.html#CategoryTheory.Functor.homologyIso">CategoryTheory.Functor.homologyIso</a> <span class="fn">F</span> <span class="fn">X</span> <span class="fn">i</span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-CategoryTheory.Functor.homologyFunctorIso" class="instances-for-list"></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

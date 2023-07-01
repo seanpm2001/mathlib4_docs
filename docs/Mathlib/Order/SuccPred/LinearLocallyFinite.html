@@ -1,0 +1,505 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Order.SuccPred.LinearLocallyFinite</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Order.SuccPred.LinearLocallyFinite";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Order</span>.<span class="name">SuccPred</span>.<span class="name">LinearLocallyFinite</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Order</span>.<span class="name">SuccPred</span>.<span class="name">LinearLocallyFinite</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Order/LocallyFinite.html">Mathlib.Order.LocallyFinite</a></li><li><a href="../../.././Mathlib/Data/Countable/Basic.html">Mathlib.Data.Countable.Basic</a></li><li><a href="../../.././Mathlib/Logic/Encodable/Basic.html">Mathlib.Logic.Encodable.Basic</a></li><li><a href="../../.././Mathlib/Order/Hom/Basic.html">Mathlib.Order.Hom.Basic</a></li><li><a href="../../.././Mathlib/Order/SuccPred/Basic.html">Mathlib.Order.SuccPred.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Order.SuccPred.LinearLocallyFinite" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#LinearLocallyFiniteOrder.succFn"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">succFn</span></a></div><div class="nav_link"><a class="break_within" href="#LinearLocallyFiniteOrder.succFn_spec"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">succFn_spec</span></a></div><div class="nav_link"><a class="break_within" href="#LinearLocallyFiniteOrder.le_succFn"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">le_succFn</span></a></div><div class="nav_link"><a class="break_within" href="#LinearLocallyFiniteOrder.isGLB_Ioc_of_isGLB_Ioi"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">isGLB_Ioc_of_isGLB_Ioi</span></a></div><div class="nav_link"><a class="break_within" href="#LinearLocallyFiniteOrder.isMax_of_succFn_le"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">isMax_of_succFn_le</span></a></div><div class="nav_link"><a class="break_within" href="#LinearLocallyFiniteOrder.succFn_le_of_lt"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">succFn_le_of_lt</span></a></div><div class="nav_link"><a class="break_within" href="#LinearLocallyFiniteOrder.le_of_lt_succFn"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">le_of_lt_succFn</span></a></div><div class="nav_link"><a class="break_within" href="#LinearLocallyFiniteOrder.instSuccOrderToPreorderToPartialOrderToSemilatticeInfToLatticeInstDistribLattice"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">instSuccOrderToPreorderToPartialOrderToSemilatticeInfToLatticeInstDistribLattice</span></a></div><div class="nav_link"><a class="break_within" href="#LinearLocallyFiniteOrder.instPredOrderToPreorderToPartialOrderToSemilatticeInfToLatticeInstDistribLattice"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">instPredOrderToPreorderToPartialOrderToSemilatticeInfToLatticeInstDistribLattice</span></a></div><div class="nav_link"><a class="break_within" href="#LinearLocallyFiniteOrder.isSuccArchimedean"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">isSuccArchimedean</span></a></div><div class="nav_link"><a class="break_within" href="#LinearOrder.isPredArchimedean_of_isSuccArchimedean"><span class="name">LinearOrder</span>.<span class="name">isPredArchimedean_of_isSuccArchimedean</span></a></div><div class="nav_link"><a class="break_within" href="#toZ"><span class="name">toZ</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_of_ge"><span class="name">toZ_of_ge</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_of_lt"><span class="name">toZ_of_lt</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_of_eq"><span class="name">toZ_of_eq</span></a></div><div class="nav_link"><a class="break_within" href="#iterate_succ_toZ"><span class="name">iterate_succ_toZ</span></a></div><div class="nav_link"><a class="break_within" href="#iterate_pred_toZ"><span class="name">iterate_pred_toZ</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_nonneg"><span class="name">toZ_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_neg"><span class="name">toZ_neg</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_iterate_succ_le"><span class="name">toZ_iterate_succ_le</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_iterate_pred_ge"><span class="name">toZ_iterate_pred_ge</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_iterate_succ_of_not_isMax"><span class="name">toZ_iterate_succ_of_not_isMax</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_iterate_pred_of_not_isMin"><span class="name">toZ_iterate_pred_of_not_isMin</span></a></div><div class="nav_link"><a class="break_within" href="#le_of_toZ_le"><span class="name">le_of_toZ_le</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_mono"><span class="name">toZ_mono</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_le_iff"><span class="name">toZ_le_iff</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_iterate_succ"><span class="name">toZ_iterate_succ</span></a></div><div class="nav_link"><a class="break_within" href="#toZ_iterate_pred"><span class="name">toZ_iterate_pred</span></a></div><div class="nav_link"><a class="break_within" href="#injective_toZ"><span class="name">injective_toZ</span></a></div><div class="nav_link"><a class="break_within" href="#orderIsoRangeToZOfLinearSuccPredArch"><span class="name">orderIsoRangeToZOfLinearSuccPredArch</span></a></div><div class="nav_link"><a class="break_within" href="#countable_of_linear_succ_pred_arch"><span class="name">countable_of_linear_succ_pred_arch</span></a></div><div class="nav_link"><a class="break_within" href="#orderIsoIntOfLinearSuccPredArch"><span class="name">orderIsoIntOfLinearSuccPredArch</span></a></div><div class="nav_link"><a class="break_within" href="#orderIsoNatOfLinearSuccPredArch"><span class="name">orderIsoNatOfLinearSuccPredArch</span></a></div><div class="nav_link"><a class="break_within" href="#orderIsoRangeOfLinearSuccPredArch"><span class="name">orderIsoRangeOfLinearSuccPredArch</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Linear-locally-finite-orders">Linear locally finite orders <a class="hover-link" href="#Linear-locally-finite-orders">#</a></h1><p>We prove that a <code><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a></code> which is a <code><a href="../../.././Mathlib/Order/LocallyFinite.html#LocallyFiniteOrder">LocallyFiniteOrder</a></code> also verifies</p><ul>
+<li><code><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a></code></li>
+<li><code><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a></code></li>
+<li><code><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a></code></li>
+<li><code><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsPredArchimedean">IsPredArchimedean</a></code></li>
+<li><code><a href="../../.././Mathlib/Data/Countable/Defs.html#Countable">Countable</a></code></li>
+</ul><p>Furthermore, we show that there is an <code><a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">OrderIso</a></code> between such an order and a subset of <code>ℤ</code>.</p><h2 class="markdown-heading" id="Main-definitions">Main definitions <a class="hover-link" href="#Main-definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> i0 i</code>: in a linear order on which we can define predecessors and successors and which is
+succ-archimedean, we can assign a unique integer <code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> i0 i</code> to each element <code>i : ι</code> while
+respecting the order, starting from <code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> i0 i0 = 0</code>.</li>
+</ul><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><p>Instances about linear locally finite orders:</p><ul>
+<li><code>LinearLocallyFiniteOrder.<a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a></code>: a linear locally finite order has a successor function.</li>
+<li><code>LinearLocallyFiniteOrder.<a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a></code>: a linear locally finite order has a predecessor
+function.</li>
+<li><code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.isSuccArchimedean">LinearLocallyFiniteOrder.isSuccArchimedean</a></code>: a linear locally finite order is
+succ-archimedean.</li>
+<li><code>LinearOrder.pred_archimedean_of_succ_archimedean</code>: a succ-archimedean linear order is also
+pred-archimedean.</li>
+<li><code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#countable_of_linear_succ_pred_arch">countable_of_linear_succ_pred_arch</a></code> : a succ-archimedean linear order is countable.</li>
+</ul><p>About <code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a></code>:</p><ul>
+<li><code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#orderIsoRangeToZOfLinearSuccPredArch">orderIsoRangeToZOfLinearSuccPredArch</a></code>: <code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a></code> defines an <code><a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">OrderIso</a></code> between <code>ι</code> and its
+range.</li>
+<li><code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#orderIsoNatOfLinearSuccPredArch">orderIsoNatOfLinearSuccPredArch</a></code>: if the order has a bot but no top, <code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a></code> defines an
+<code><a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">OrderIso</a></code> between <code>ι</code> and <code>ℕ</code>.</li>
+<li><code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#orderIsoIntOfLinearSuccPredArch">orderIsoIntOfLinearSuccPredArch</a></code>: if the order has neither bot nor top, <code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a></code> defines an
+<code><a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">OrderIso</a></code> between <code>ι</code> and <code>ℤ</code>.</li>
+<li><code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#orderIsoRangeOfLinearSuccPredArch">orderIsoRangeOfLinearSuccPredArch</a></code>: if the order has both a bot and a top, <code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a></code> gives an
+<code><a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">OrderIso</a></code> between <code>ι</code> and <code><a href="../../.././Mathlib/Data/Finset/Basic.html#Finset.range">Finset.range</a> ((toZ ⊥ ⊤).toNat + 1)</code>.</li>
+</ul></div><div class="decl" id="LinearLocallyFiniteOrder.succFn"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L68-L69">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.succFn"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">succFn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">ι</span></div></div><p>Successor in a linear order. This defines a true successor only when <code>i</code> is isolated from above,
+i.e. when <code>i</code> is not the greatest lower bound of <code>(i, ∞)</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.succFn">LinearLocallyFiniteOrder.succFn</a> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Std/Logic.html#Exists.choose">Exists.choose</a> <span class="fn">(_ : <span class="fn">∃ <span class="fn">j</span>, <span class="fn"><a href="../../.././Mathlib/Order/Bounds/Basic.html#IsGLB">IsGLB</a> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">i</span></span>) <span class="fn">j</span></span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-LinearLocallyFiniteOrder.succFn" class="instances-for-list"></ul></details></div></div><div class="decl" id="LinearLocallyFiniteOrder.succFn_spec"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L72-L73">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.succFn_spec"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">succFn_spec</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Bounds/Basic.html#IsGLB">IsGLB</a> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">i</span></span>) (<span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.succFn">LinearLocallyFiniteOrder.succFn</a> <span class="fn">i</span></span>)</span></div></div></div></div><div class="decl" id="LinearLocallyFiniteOrder.le_succFn"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L76-L78">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.le_succFn"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">le_succFn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.succFn">LinearLocallyFiniteOrder.succFn</a> <span class="fn">i</span></span></span></div></div></div></div><div class="decl" id="LinearLocallyFiniteOrder.isGLB_Ioc_of_isGLB_Ioi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L81-L88">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.isGLB_Ioc_of_isGLB_Ioi"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">isGLB_Ioc_of_isGLB_Ioi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{j : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hij_lt : <span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">j</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Order/Bounds/Basic.html#IsGLB">IsGLB</a> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">i</span></span>) <span class="fn">k</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Bounds/Basic.html#IsGLB">IsGLB</a> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioc">Set.Ioc</a> <span class="fn">i</span> <span class="fn">j</span></span>) <span class="fn">k</span></span></div></div></div></div><div class="decl" id="LinearLocallyFiniteOrder.isMax_of_succFn_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L91-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.isMax_of_succFn_le"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">isMax_of_succFn_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/LocallyFinite.html#LocallyFiniteOrder">LocallyFiniteOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.succFn">LinearLocallyFiniteOrder.succFn</a> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Max.html#IsMax">IsMax</a> <span class="fn">i</span></span></div></div></div></div><div class="decl" id="LinearLocallyFiniteOrder.succFn_le_of_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L106-L109">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.succFn_le_of_lt"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">succFn_le_of_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">ι</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hij : <span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">j</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.succFn">LinearLocallyFiniteOrder.succFn</a> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">j</span></span></div></div></div></div><div class="decl" id="LinearLocallyFiniteOrder.le_of_lt_succFn"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L112-L116">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.le_of_lt_succFn"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">le_of_lt_succFn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(j : <span class="fn">ι</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hij : <span class="fn"><span class="fn">j</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.succFn">LinearLocallyFiniteOrder.succFn</a> <span class="fn">i</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">j</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">i</span></span></div></div></div></div><div class="decl" id="LinearLocallyFiniteOrder.instSuccOrderToPreorderToPartialOrderToSemilatticeInfToLatticeInstDistribLattice"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L119-L124">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.instSuccOrderToPreorderToPartialOrderToSemilatticeInfToLatticeInstDistribLattice"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">instSuccOrderToPreorderToPartialOrderToSemilatticeInfToLatticeInstDistribLattice</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/LocallyFinite.html#LocallyFiniteOrder">LocallyFiniteOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details></div></div><div class="decl" id="LinearLocallyFiniteOrder.instPredOrderToPreorderToPartialOrderToSemilatticeInfToLatticeInstDistribLattice"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L126-L127">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.instPredOrderToPreorderToPartialOrderToSemilatticeInfToLatticeInstDistribLattice"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">instPredOrderToPreorderToPartialOrderToSemilatticeInfToLatticeInstDistribLattice</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/LocallyFinite.html#LocallyFiniteOrder">LocallyFiniteOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">LinearLocallyFiniteOrder.instPredOrderToPreorderToPartialOrderToSemilatticeInfToLatticeInstDistribLattice</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">inferInstance</span></span></li></ul></details></div></div><div class="decl" id="LinearLocallyFiniteOrder.isSuccArchimedean"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L131-L160">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.isSuccArchimedean"><span class="name">LinearLocallyFiniteOrder</span>.<span class="name">isSuccArchimedean</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/LocallyFinite.html#LocallyFiniteOrder">LocallyFiniteOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.isSuccArchimedean">@<a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.isSuccArchimedean">LinearLocallyFiniteOrder.isSuccArchimedean</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.isSuccArchimedean.proof_1">@<a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearLocallyFiniteOrder.isSuccArchimedean.proof_1">LinearLocallyFiniteOrder.isSuccArchimedean.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="LinearOrder.isPredArchimedean_of_isSuccArchimedean"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L163-L182">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearOrder.isPredArchimedean_of_isSuccArchimedean"><span class="name">LinearOrder</span>.<span class="name">isPredArchimedean_of_isSuccArchimedean</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsPredArchimedean">IsPredArchimedean</a> <span class="fn">ι</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearOrder.isPredArchimedean_of_isSuccArchimedean">@<a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearOrder.isPredArchimedean_of_isSuccArchimedean">LinearOrder.isPredArchimedean_of_isSuccArchimedean</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearOrder.isPredArchimedean_of_isSuccArchimedean.proof_1">@<a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#LinearOrder.isPredArchimedean_of_isSuccArchimedean.proof_1">LinearOrder.isPredArchimedean_of_isSuccArchimedean.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="toZ"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L195-L197">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ"><span class="name">toZ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i0 : <span class="fn">ι</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a></div></div><p><code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a></code> numbers elements of <code>ι</code> according to their order, starting from <code>i0</code>. We prove in
+<code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#orderIsoRangeToZOfLinearSuccPredArch">orderIsoRangeToZOfLinearSuccPredArch</a></code> that this defines an <code><a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">OrderIso</a></code> between <code>ι</code> and
+the range of <code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">if hi : <span class="fn"><span class="fn">i0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">i</span></span> then <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.find">Nat.find</a> <span class="fn">(_ : <span class="fn">∃ <span class="fn">n</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.succ</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i</span></span></span>)</span></span>)</span> else <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.find">Nat.find</a> <span class="fn">(_ : <span class="fn">∃ <span class="fn">n</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.pred</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i</span></span></span>)</span></span>)</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-toZ" class="instances-for-list"></ul></details></div></div><div class="decl" id="toZ_of_ge"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L200-L201">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_of_ge"><span class="name">toZ_of_ge</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn">i0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.find">Nat.find</a> <span class="fn">(_ : <span class="fn">∃ <span class="fn">n</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.succ</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i</span></span></span>)</span></span>)</span></span></div></div></div></div><div class="decl" id="toZ_of_lt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L204-L205">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_of_lt"><span class="name">toZ_of_lt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">i0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.find">Nat.find</a> <span class="fn">(_ : <span class="fn">∃ <span class="fn">n</span>, <span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.pred</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i</span></span></span>)</span></span>)</span></span></span></div></div></div></div><div class="decl" id="toZ_of_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L209-L213">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_of_eq"><span class="name">toZ_of_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">i0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="iterate_succ_toZ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L216-L218">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#iterate_succ_toZ"><span class="name">iterate_succ_toZ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn">i0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.succ</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn"><a href="../../.././Init/Data/Int/Basic.html#Int.toNat">Int.toNat</a> (<span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">i</span></span>)</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i</span></span></div></div></div></div><div class="decl" id="iterate_pred_toZ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L221-L223">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#iterate_pred_toZ"><span class="name">iterate_pred_toZ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">i0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.pred</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn"><a href="../../.././Init/Data/Int/Basic.html#Int.toNat">Int.toNat</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">i</span></span></span>)</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">i</span></span></div></div></div></div><div class="decl" id="toZ_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L226-L228">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_nonneg"><span class="name">toZ_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn">i0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">i</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">i</span></span></span></div></div></div></div><div class="decl" id="toZ_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L231-L238">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_neg"><span class="name">toZ_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hi : <span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">i0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="toZ_iterate_succ_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L241-L244">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_iterate_succ_le"><span class="name">toZ_iterate_succ_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> (<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.succ</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span>)</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="toZ_iterate_pred_ge"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L247-L254">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_iterate_pred_ge"><span class="name">toZ_iterate_pred_ge</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> (<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.pred</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span>)</span></span></div></div></div></div><div class="decl" id="toZ_iterate_succ_of_not_isMax"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L257-L266">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_iterate_succ_of_not_isMax"><span class="name">toZ_iterate_succ_of_not_isMax</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(hn : <span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../.././Mathlib/Order/Max.html#IsMax">IsMax</a> (<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.succ</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> (<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.succ</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="toZ_iterate_pred_of_not_isMin"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L269-L287">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_iterate_pred_of_not_isMin"><span class="name">toZ_iterate_pred_of_not_isMin</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(hn : <span class="fn"><a href="../../.././Init/Prelude.html#Not">¬</a><span class="fn"><a href="../../.././Mathlib/Order/Max.html#IsMin">IsMin</a> (<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.pred</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> (<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.pred</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">↑<span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="le_of_toZ_le"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L290-L298">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#le_of_toZ_le"><span class="name">le_of_toZ_le</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{j : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h_le : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">j</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">j</span></span></div></div></div></div><div class="decl" id="toZ_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L301-L347">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_mono"><span class="name">toZ_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{j : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h_le : <span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">j</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">j</span></span></span></div></div></div></div><div class="decl" id="toZ_le_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L350-L351">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_le_iff"><span class="name">toZ_le_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn">ι</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(j : <span class="fn">ι</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> <span class="fn">j</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">j</span></span></span></div></div></div></div><div class="decl" id="toZ_iterate_succ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L354-L355">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_iterate_succ"><span class="name">toZ_iterate_succ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Max.html#NoMaxOrder">NoMaxOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> (<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.succ</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="toZ_iterate_pred"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L358-L359">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ_iterate_pred"><span class="name">toZ_iterate_pred</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Max.html#NoMinOrder">NoMinOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span> (<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">Order.pred</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">i0</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">↑<span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="injective_toZ"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L362-L363">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#injective_toZ"><span class="name">injective_toZ</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{i0 : <span class="fn">ι</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> (<span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <span class="fn">i0</span></span>)</span></div></div></div></div><div class="decl" id="orderIsoRangeToZOfLinearSuccPredArch"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L373-L376">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#orderIsoRangeToZOfLinearSuccPredArch"><span class="name">orderIsoRangeToZOfLinearSuccPredArch</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hι : <span class="fn"><a href="../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">ι</span> <a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">≃o</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/Set/Image.html#Set.range">Set.range</a> (<span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> (<span class="fn"><a href="../../.././Mathlib/Logic/Nonempty.html#Nonempty.some">Nonempty.some</a> <span class="fn">hι</span></span>)</span>)</span>)</span></span></div></div><p><code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a></code> defines an <code><a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">OrderIso</a></code> between <code>ι</code> and its range.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-orderIsoRangeToZOfLinearSuccPredArch" class="instances-for-list"></ul></details></div></div><div class="decl" id="countable_of_linear_succ_pred_arch"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L380-L383">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#countable_of_linear_succ_pred_arch"><span class="name">countable_of_linear_succ_pred_arch</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Countable/Defs.html#Countable">Countable</a> <span class="fn">ι</span></span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#countable_of_linear_succ_pred_arch">@<a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#countable_of_linear_succ_pred_arch">countable_of_linear_succ_pred_arch</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#countable_of_linear_succ_pred_arch.proof_1">@<a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#countable_of_linear_succ_pred_arch.proof_1">countable_of_linear_succ_pred_arch.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="orderIsoIntOfLinearSuccPredArch"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L387-L407">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#orderIsoIntOfLinearSuccPredArch"><span class="name">orderIsoIntOfLinearSuccPredArch</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Max.html#NoMaxOrder">NoMaxOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Max.html#NoMinOrder">NoMinOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[hι : <span class="fn"><a href="../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">ι</span> <a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">≃o</a> <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a></span></div></div><p>If the order has neither bot nor top, <code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a></code> defines an <code><a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">OrderIso</a></code> between <code>ι</code> and <code>ℤ</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-orderIsoIntOfLinearSuccPredArch" class="instances-for-list"></ul></details></div></div><div class="decl" id="orderIsoNatOfLinearSuccPredArch"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L411-L424">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#orderIsoNatOfLinearSuccPredArch"><span class="name">orderIsoNatOfLinearSuccPredArch</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Max.html#NoMaxOrder">NoMaxOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/BoundedOrder.html#OrderBot">OrderBot</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">ι</span> <a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">≃o</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span></div></div><p>If the order has a bot but no top, <code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a></code> defines an <code><a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">OrderIso</a></code> between <code>ι</code> and <code>ℕ</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-orderIsoNatOfLinearSuccPredArch" class="instances-for-list"></ul></details></div></div><div class="decl" id="orderIsoRangeOfLinearSuccPredArch"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Order/SuccPred/LinearLocallyFinite.lean#L429-L451">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#orderIsoRangeOfLinearSuccPredArch"><span class="name">orderIsoRangeOfLinearSuccPredArch</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Init/Algebra/Order.html#LinearOrder">LinearOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#SuccOrder">SuccOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#PredOrder">PredOrder</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/SuccPred/Basic.html#IsSuccArchimedean">IsSuccArchimedean</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/BoundedOrder.html#OrderBot">OrderBot</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/BoundedOrder.html#OrderTop">OrderTop</a> <span class="fn">ι</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">ι</span> <a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">≃o</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Finset/Basic.html#Finset.range">Finset.range</a> (<span class="fn"><span class="fn"><a href="../../.././Init/Data/Int/Basic.html#Int.toNat">Int.toNat</a> (<span class="fn"><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span></span> }</span></span></div></div><p>If the order has both a bot and a top, <code><a href="../../.././Mathlib/Order/SuccPred/LinearLocallyFinite.html#toZ">toZ</a></code> gives an <code><a href="../../.././Mathlib/Order/Hom/Basic.html#OrderIso">OrderIso</a></code> between <code>ι</code> and
+<code><a href="../../.././Mathlib/Data/Finset/Basic.html#Finset.range">Finset.range</a> n</code> for some <code>n</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-orderIsoRangeOfLinearSuccPredArch" class="instances-for-list"></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

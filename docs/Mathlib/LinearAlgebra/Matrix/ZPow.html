@@ -1,0 +1,756 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.LinearAlgebra.Matrix.ZPow</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.LinearAlgebra.Matrix.ZPow";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">LinearAlgebra</span>.<span class="name">Matrix</span>.<span class="name">ZPow</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">LinearAlgebra</span>.<span class="name">Matrix</span>.<span class="name">ZPow</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/LinearAlgebra/Matrix/NonsingularInverse.html">Mathlib.LinearAlgebra.Matrix.NonsingularInverse</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.LinearAlgebra.Matrix.ZPow" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Matrix.instDivInvMonoidMatrix"><span class="name">Matrix</span>.<span class="name">instDivInvMonoidMatrix</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.inv_pow'"><span class="name">Matrix</span>.<span class="name">inv_pow'</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.pow_sub'"><span class="name">Matrix</span>.<span class="name">pow_sub'</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.pow_inv_comm'"><span class="name">Matrix</span>.<span class="name">pow_inv_comm'</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.one_zpow"><span class="name">Matrix</span>.<span class="name">one_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zero_zpow"><span class="name">Matrix</span>.<span class="name">zero_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zero_zpow_eq"><span class="name">Matrix</span>.<span class="name">zero_zpow_eq</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.inv_zpow"><span class="name">Matrix</span>.<span class="name">inv_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_neg_one"><span class="name">Matrix</span>.<span class="name">zpow_neg_one</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_coe_nat"><span class="name">Matrix</span>.<span class="name">zpow_coe_nat</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_neg_coe_nat"><span class="name">Matrix</span>.<span class="name">zpow_neg_coe_nat</span></a></div><div class="nav_link"><a class="break_within" href="#IsUnit.det_zpow"><span class="name">IsUnit</span>.<span class="name">det_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.isUnit_det_zpow_iff"><span class="name">Matrix</span>.<span class="name">isUnit_det_zpow_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_neg"><span class="name">Matrix</span>.<span class="name">zpow_neg</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.inv_zpow'"><span class="name">Matrix</span>.<span class="name">inv_zpow'</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_add_one"><span class="name">Matrix</span>.<span class="name">zpow_add_one</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_sub_one"><span class="name">Matrix</span>.<span class="name">zpow_sub_one</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_add"><span class="name">Matrix</span>.<span class="name">zpow_add</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_add_of_nonpos"><span class="name">Matrix</span>.<span class="name">zpow_add_of_nonpos</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_add_of_nonneg"><span class="name">Matrix</span>.<span class="name">zpow_add_of_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_one_add"><span class="name">Matrix</span>.<span class="name">zpow_one_add</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.SemiconjBy.zpow_right"><span class="name">Matrix</span>.<span class="name">SemiconjBy</span>.<span class="name">zpow_right</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.Commute.zpow_right"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">zpow_right</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.Commute.zpow_left"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">zpow_left</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.Commute.zpow_zpow"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">zpow_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.Commute.zpow_self"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">zpow_self</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.Commute.self_zpow"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">self_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.Commute.zpow_zpow_self"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">zpow_zpow_self</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_bit0"><span class="name">Matrix</span>.<span class="name">zpow_bit0</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_add_one_of_ne_neg_one"><span class="name">Matrix</span>.<span class="name">zpow_add_one_of_ne_neg_one</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_bit1"><span class="name">Matrix</span>.<span class="name">zpow_bit1</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_mul"><span class="name">Matrix</span>.<span class="name">zpow_mul</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_mul'"><span class="name">Matrix</span>.<span class="name">zpow_mul'</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.coe_units_zpow"><span class="name">Matrix</span>.<span class="name">coe_units_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_ne_zero_of_isUnit_det"><span class="name">Matrix</span>.<span class="name">zpow_ne_zero_of_isUnit_det</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_sub"><span class="name">Matrix</span>.<span class="name">zpow_sub</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.Commute.mul_zpow"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">mul_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_bit0'"><span class="name">Matrix</span>.<span class="name">zpow_bit0'</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_bit1'"><span class="name">Matrix</span>.<span class="name">zpow_bit1'</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.zpow_neg_mul_zpow_self"><span class="name">Matrix</span>.<span class="name">zpow_neg_mul_zpow_self</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.one_div_pow"><span class="name">Matrix</span>.<span class="name">one_div_pow</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.one_div_zpow"><span class="name">Matrix</span>.<span class="name">one_div_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.transpose_zpow"><span class="name">Matrix</span>.<span class="name">transpose_zpow</span></a></div><div class="nav_link"><a class="break_within" href="#Matrix.conjTranspose_zpow"><span class="name">Matrix</span>.<span class="name">conjTranspose_zpow</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Integer-powers-of-square-matrices">Integer powers of square matrices <a class="hover-link" href="#Integer-powers-of-square-matrices">#</a></h1><p>In this file, we define integer power of matrices, relying on
+the nonsingular inverse definition for negative powers.</p><h2 class="markdown-heading" id="Implementation-details">Implementation details <a class="hover-link" href="#Implementation-details">#</a></h2><p>The main definition is a direct recursive call on the integer inductive type,
+as provided by the <code><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivInvMonoid.Pow">DivInvMonoid.Pow</a></code> default implementation.
+The lemma names are taken from <code>Algebra.group_with_zero.power</code>.</p><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>matrix inverse, matrix powers</p></div><div class="decl" id="Matrix.instDivInvMonoidMatrix"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L39-L40">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.instDivInvMonoidMatrix"><span class="name">Matrix</span>.<span class="name">instDivInvMonoidMatrix</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivInvMonoid">DivInvMonoid</a> (<span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn">Matrix.instDivInvMonoidMatrix</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let src :=
+    <span class="fn">let_fun this := <span class="fn">inferInstance</span>;
+    <span class="fn">this</span></span>;
+  <span class="fn">let src_1 :=
+    <span class="fn">let_fun this := <span class="fn">inferInstance</span>;
+    <span class="fn">this</span></span>;
+  <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#DivInvMonoid.mk">DivInvMonoid.mk</a> <span class="fn">zpowRec</span></span></span></span></span></li></ul></details></div></div><div class="decl" id="Matrix.inv_pow'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L45-L48">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.inv_pow'"><span class="name">Matrix</span>.<span class="name">inv_pow'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">A</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)<a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></div></div></div></div><div class="decl" id="Matrix.pow_sub'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L51-L55">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.pow_sub'"><span class="name">Matrix</span>.<span class="name">pow_sub'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.mul">Matrix.mul</a> (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span>) <span class="fn">(<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)<a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span></div></div></div></div><div class="decl" id="Matrix.pow_inv_comm'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L58-L72">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.pow_inv_comm'"><span class="name">Matrix</span>.<span class="name">pow_inv_comm'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.mul">Matrix.mul</a> (<span class="fn"><span class="fn"><span class="fn">A</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span>) (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.mul">Matrix.mul</a> (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>) (<span class="fn"><span class="fn"><span class="fn">A</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span>)</span></span></div></div></div></div><div class="decl" id="Matrix.one_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L82-L84">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.one_zpow"><span class="name">Matrix</span>.<span class="name">one_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="Matrix.zero_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L87-L92">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zero_zpow"><span class="name">Matrix</span>.<span class="name">zero_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(z : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">z</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> → <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="Matrix.zero_zpow_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L95-L98">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zero_zpow_eq"><span class="name">Matrix</span>.<span class="name">zero_zpow_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> then <span class="fn">1</span> else <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="Matrix.inv_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L101-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.inv_zpow"><span class="name">Matrix</span>.<span class="name">inv_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">A</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)<a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_neg_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L107-L109">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_neg_one"><span class="name">Matrix</span>.<span class="name">zpow_neg_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">1</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">A</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_coe_nat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L112-L113">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_coe_nat"><span class="name">Matrix</span>.<span class="name">zpow_coe_nat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">↑<span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_neg_coe_nat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L117-L120">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_neg_coe_nat"><span class="name">Matrix</span>.<span class="name">zpow_neg_coe_nat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">↑<span class="fn">n</span></span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)<a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></div></div></div></div><div class="decl" id="IsUnit.det_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L123-L126">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#IsUnit.det_zpow"><span class="name">IsUnit</span>.<span class="name">det_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)</span>)</span></div></div></div></div><div class="decl" id="Matrix.isUnit_det_zpow_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L129-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.isUnit_det_zpow_iff"><span class="name">Matrix</span>.<span class="name">isUnit_det_zpow_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">z</span></span>)</span>)</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span> <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_neg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L139-L144">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_neg"><span class="name">Matrix</span>.<span class="name">zpow_neg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)<a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></div></div></div></div><div class="decl" id="Matrix.inv_zpow'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L147-L148">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.inv_zpow'"><span class="name">Matrix</span>.<span class="name">inv_zpow'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">A</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">n</span></span>)</span></span></div></div></div></div><div class="decl" id="Matrix.zpow_add_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L151-L160">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_add_one"><span class="name">Matrix</span>.<span class="name">zpow_add_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">A</span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_sub_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L163-L167">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_sub_one"><span class="name">Matrix</span>.<span class="name">zpow_sub_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">A</span><a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L170-L174">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_add"><span class="name">Matrix</span>.<span class="name">zpow_add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_add_of_nonpos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L177-L183">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_add_of_nonpos"><span class="name">Matrix</span>.<span class="name">zpow_add_of_nonpos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_add_of_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L186-L190">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_add_of_nonneg"><span class="name">Matrix</span>.<span class="name">zpow_add_of_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">m</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hn : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_one_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L193-L194">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_one_add"><span class="name">Matrix</span>.<span class="name">zpow_one_add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">i</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">i</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.SemiconjBy.zpow_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L197-L213">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.SemiconjBy.zpow_right"><span class="name">Matrix</span>.<span class="name">SemiconjBy</span>.<span class="name">zpow_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">X</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hy : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">Y</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Semiconj.html#SemiconjBy">SemiconjBy</a> <span class="fn">A</span> <span class="fn">X</span> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Semiconj.html#SemiconjBy">SemiconjBy</a> <span class="fn">A</span> (<span class="fn"><span class="fn">X</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span>) (<span class="fn"><span class="fn">Y</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span>)</span></div></div></div></div><div class="decl" id="Matrix.Commute.zpow_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L216-L221">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.Commute.zpow_right"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">zpow_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> <span class="fn">A</span> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> <span class="fn">A</span> (<span class="fn"><span class="fn">B</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span>)</span></div></div></div></div><div class="decl" id="Matrix.Commute.zpow_left"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L224-L225">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.Commute.zpow_left"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">zpow_left</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> <span class="fn">A</span> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span>) <span class="fn">B</span></span></div></div></div></div><div class="decl" id="Matrix.Commute.zpow_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L228-L229">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.Commute.zpow_zpow"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">zpow_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> <span class="fn">A</span> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span>) (<span class="fn"><span class="fn">B</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)</span></div></div></div></div><div class="decl" id="Matrix.Commute.zpow_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L232-L233">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.Commute.zpow_self"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">zpow_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>) <span class="fn">A</span></span></div></div></div></div><div class="decl" id="Matrix.Commute.self_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L236-L237">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.Commute.self_zpow"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">self_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> <span class="fn">A</span> (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)</span></div></div></div></div><div class="decl" id="Matrix.Commute.zpow_zpow_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L240-L241">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.Commute.zpow_zpow_self"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">zpow_zpow_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span>) (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)</span></div></div></div></div><div class="decl" id="Matrix.zpow_bit0"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L245-L248">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_bit0"><span class="name">Matrix</span>.<span class="name">zpow_bit0</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#bit0">bit0</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_add_one_of_ne_neg_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L251-L258">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_add_one_of_ne_neg_one"><span class="name">Matrix</span>.<span class="name">zpow_add_one_of_ne_neg_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">n</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">1</span></span></span> → <span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">n</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">1</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">A</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_bit1"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L262-L265">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_bit1"><span class="name">Matrix</span>.<span class="name">zpow_bit1</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#bit1">bit1</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">A</span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L268-L279">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_mul"><span class="name">Matrix</span>.<span class="name">zpow_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_mul'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L282-L283">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_mul'"><span class="name">Matrix</span>.<span class="name">zpow_mul'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span></span></div></div></div></div><div class="decl" id="Matrix.coe_units_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L288-L291">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.coe_units_zpow"><span class="name">Matrix</span>.<span class="name">coe_units_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(u : <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)<a href="../../.././Mathlib/Algebra/Group/Units.html#Units">ˣ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><span class="fn">u</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">↑<span class="fn">u</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_ne_zero_of_isUnit_det"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L294-L299">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_ne_zero_of_isUnit_det"><span class="name">Matrix</span>.<span class="name">zpow_ne_zero_of_isUnit_det</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Logic/Nontrivial.html#Nontrivial">Nontrivial</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(z : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">z</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Matrix.zpow_sub"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L302-L303">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_sub"><span class="name">Matrix</span>.<span class="name">zpow_sub</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(ha : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(z1 : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(z2 : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><span class="fn">z1</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">z2</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">z1</span></span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">z2</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.Commute.mul_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L306-L310">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.Commute.mul_zpow"><span class="name">Matrix</span>.<span class="name">Commute</span>.<span class="name">mul_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{B : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Commute.html#Commute">Commute</a> <span class="fn">A</span> <span class="fn">B</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">B</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">i</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">B</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">i</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_bit0'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L314-L315">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_bit0'"><span class="name">Matrix</span>.<span class="name">zpow_bit0'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#bit0">bit0</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">A</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_bit1'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L319-L320">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_bit1'"><span class="name">Matrix</span>.<span class="name">zpow_bit1'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><a href="../../.././Mathlib/Init/ZeroOne.html#bit1">bit1</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">(<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">A</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">A</span></span></span></div></div></div></div><div class="decl" id="Matrix.zpow_neg_mul_zpow_self"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L323-L324">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.zpow_neg_mul_zpow_self"><span class="name">Matrix</span>.<span class="name">zpow_neg_mul_zpow_self</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Matrix/Determinant.html#Matrix.det">Matrix.det</a> <span class="fn">A</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></div></div></div></div><div class="decl" id="Matrix.one_div_pow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L327-L327">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.one_div_pow"><span class="name">Matrix</span>.<span class="name">one_div_pow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">A</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.one_div_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L330-L330">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.one_div_zpow"><span class="name">Matrix</span>.<span class="name">one_div_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">A</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></span></div></div></div></div><div class="decl" id="Matrix.transpose_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L334-L336">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.transpose_zpow"><span class="name">Matrix</span>.<span class="name">transpose_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.transpose">Matrix.transpose</a> (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.transpose">Matrix.transpose</a> <span class="fn">A</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div><div class="decl" id="Matrix.conjTranspose_zpow"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/Matrix/ZPow.lean#L340-L342">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/LinearAlgebra/Matrix/ZPow.html#Matrix.conjTranspose_zpow"><span class="name">Matrix</span>.<span class="name">conjTranspose_zpow</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n' : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">n'</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Star/Basic.html#StarRing">StarRing</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(A : <span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix">Matrix</a> <span class="fn">n'</span> <span class="fn">n'</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Data/Int/Basic.html#Int">ℤ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.conjTranspose">Matrix.conjTranspose</a> (<span class="fn"><span class="fn">A</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Matrix/Basic.html#Matrix.conjTranspose">Matrix.conjTranspose</a> <span class="fn">A</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

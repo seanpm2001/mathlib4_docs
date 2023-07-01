@@ -1,0 +1,393 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.Analytic.IsolatedZeros</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.Analytic.IsolatedZeros";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">Analytic</span>.<span class="name">IsolatedZeros</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">Analytic</span>.<span class="name">IsolatedZeros</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Analysis/Analytic/Basic.html">Mathlib.Analysis.Analytic.Basic</a></li><li><a href="../../.././Mathlib/Analysis/Analytic/Uniqueness.html">Mathlib.Analysis.Analytic.Uniqueness</a></li><li><a href="../../.././Mathlib/Analysis/Calculus/Dslope.html">Mathlib.Analysis.Calculus.Dslope</a></li><li><a href="../../.././Mathlib/Analysis/Calculus/FDerivAnalytic.html">Mathlib.Analysis.Calculus.FDerivAnalytic</a></li><li><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html">Mathlib.Analysis.Calculus.FormalMultilinearSeries</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.Analytic.IsolatedZeros" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#HasSum.hasSum_at_zero"><span class="name">HasSum</span>.<span class="name">hasSum_at_zero</span></a></div><div class="nav_link"><a class="break_within" href="#HasSum.exists_hasSum_smul_of_apply_eq_zero"><span class="name">HasSum</span>.<span class="name">exists_hasSum_smul_of_apply_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesAt.has_fpower_series_dslope_fslope"><span class="name">HasFPowerSeriesAt</span>.<span class="name">has_fpower_series_dslope_fslope</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesAt.has_fpower_series_iterate_dslope_fslope"><span class="name">HasFPowerSeriesAt</span>.<span class="name">has_fpower_series_iterate_dslope_fslope</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesAt.iterate_dslope_fslope_ne_zero"><span class="name">HasFPowerSeriesAt</span>.<span class="name">iterate_dslope_fslope_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesAt.eq_pow_order_mul_iterate_dslope"><span class="name">HasFPowerSeriesAt</span>.<span class="name">eq_pow_order_mul_iterate_dslope</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesAt.locally_ne_zero"><span class="name">HasFPowerSeriesAt</span>.<span class="name">locally_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#HasFPowerSeriesAt.locally_zero_iff"><span class="name">HasFPowerSeriesAt</span>.<span class="name">locally_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticAt.eventually_eq_zero_or_eventually_ne_zero"><span class="name">AnalyticAt</span>.<span class="name">eventually_eq_zero_or_eventually_ne_zero</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticAt.eventually_eq_or_eventually_ne"><span class="name">AnalyticAt</span>.<span class="name">eventually_eq_or_eventually_ne</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticAt.frequently_zero_iff_eventually_zero"><span class="name">AnalyticAt</span>.<span class="name">frequently_zero_iff_eventually_zero</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticAt.frequently_eq_iff_eventually_eq"><span class="name">AnalyticAt</span>.<span class="name">frequently_eq_iff_eventually_eq</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticOn.eqOn_zero_of_preconnected_of_frequently_eq_zero"><span class="name">AnalyticOn</span>.<span class="name">eqOn_zero_of_preconnected_of_frequently_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticOn.eqOn_zero_of_preconnected_of_mem_closure"><span class="name">AnalyticOn</span>.<span class="name">eqOn_zero_of_preconnected_of_mem_closure</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticOn.eqOn_of_preconnected_of_frequently_eq"><span class="name">AnalyticOn</span>.<span class="name">eqOn_of_preconnected_of_frequently_eq</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticOn.eqOn_of_preconnected_of_mem_closure"><span class="name">AnalyticOn</span>.<span class="name">eqOn_of_preconnected_of_mem_closure</span></a></div><div class="nav_link"><a class="break_within" href="#AnalyticOn.eq_of_frequently_eq"><span class="name">AnalyticOn</span>.<span class="name">eq_of_frequently_eq</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Principle-of-isolated-zeros">Principle of isolated zeros <a class="hover-link" href="#Principle-of-isolated-zeros">#</a></h1><p>This file proves the fact that the zeros of a non-constant analytic function of one variable are
+isolated. It also introduces a little bit of API in the <code><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesAt">HasFPowerSeriesAt</a></code> namespace that is
+useful in this setup.</p><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#AnalyticAt.eventually_eq_zero_or_eventually_ne_zero">AnalyticAt.eventually_eq_zero_or_eventually_ne_zero</a></code> is the main statement that if a function is
+analytic at <code>z₀</code>, then either it is identically zero in a neighborhood of <code>z₀</code>, or it does not
+vanish in a punctured neighborhood of <code>z₀</code>.</li>
+<li><code><a href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#AnalyticOn.eqOn_of_preconnected_of_frequently_eq">AnalyticOn.eqOn_of_preconnected_of_frequently_eq</a></code> is the identity theorem for analytic
+functions: if a function <code>f</code> is analytic on a connected set <code>U</code> and is zero on a set with an
+accumulation point in <code>U</code> then <code>f</code> is identically <code>0</code> on <code>U</code>.</li>
+</ul></div><div class="decl" id="HasSum.hasSum_at_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L50-L54">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#HasSum.hasSum_at_zero"><span class="name">HasSum</span>.<span class="name">hasSum_at_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#HasSum">HasSum</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">a</span> <span class="fn">n</span></span></span></span>) (<span class="fn"><span class="fn">a</span> <span class="fn">0</span></span>)</span></div></div></div></div><div class="decl" id="HasSum.exists_hasSum_smul_of_apply_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L57-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#HasSum.exists_hasSum_smul_of_apply_eq_zero"><span class="name">HasSum</span>.<span class="name">exists_hasSum_smul_of_apply_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#HasSum">HasSum</a> (<span class="fn">fun <span class="fn">m</span> =&gt <span class="fn"><span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">a</span> <span class="fn">m</span></span></span></span>) <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ha : <span class="fn">∀ (<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">k</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">n</span></span> → <span class="fn"><span class="fn"><span class="fn">a</span> <span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">t</span>, <span class="fn"><span class="fn"><span class="fn"><span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">t</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">s</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#HasSum">HasSum</a> (<span class="fn">fun <span class="fn">m</span> =&gt <span class="fn"><span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">m</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">a</span> (<span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n</span></span>)</span></span></span>) <span class="fn">t</span></span></span></span></div></div></div></div><div class="decl" id="HasFPowerSeriesAt.has_fpower_series_dslope_fslope"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L78-L89">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#HasFPowerSeriesAt.has_fpower_series_dslope_fslope"><span class="name">HasFPowerSeriesAt</span>.<span class="name">has_fpower_series_dslope_fslope</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesAt">HasFPowerSeriesAt</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">z₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesAt">HasFPowerSeriesAt</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Dslope.html#dslope">dslope</a> <span class="fn">f</span> <span class="fn">z₀</span></span>) (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries.fslope">FormalMultilinearSeries.fslope</a> <span class="fn">p</span></span>) <span class="fn">z₀</span></span></div></div></div></div><div class="decl" id="HasFPowerSeriesAt.has_fpower_series_iterate_dslope_fslope"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L92-L96">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#HasFPowerSeriesAt.has_fpower_series_iterate_dslope_fslope"><span class="name">HasFPowerSeriesAt</span>.<span class="name">has_fpower_series_iterate_dslope_fslope</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesAt">HasFPowerSeriesAt</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">z₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesAt">HasFPowerSeriesAt</a> (<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">(<span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.swap">Function.swap</a> <span class="fn">dslope</span> <span class="fn">z₀</span></span>)<a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">f</span></span>) (<span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate"><span class="fn">FormalMultilinearSeries.fslope</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn">n</span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> <span class="fn">p</span></span>) <span class="fn">z₀</span></span></div></div></div></div><div class="decl" id="HasFPowerSeriesAt.iterate_dslope_fslope_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L99-L102">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#HasFPowerSeriesAt.iterate_dslope_fslope_ne_zero"><span class="name">HasFPowerSeriesAt</span>.<span class="name">iterate_dslope_fslope_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesAt">HasFPowerSeriesAt</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">z₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">(<span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>)<a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.swap">Function.swap</a> <span class="fn">dslope</span> <span class="fn">z₀</span></span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries.order">FormalMultilinearSeries.order</a> <span class="fn">p</span></span>) <span class="fn">f</span> <span class="fn">z₀</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="HasFPowerSeriesAt.eq_pow_order_mul_iterate_dslope"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L105-L114">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#HasFPowerSeriesAt.eq_pow_order_mul_iterate_dslope"><span class="name">HasFPowerSeriesAt</span>.<span class="name">eq_pow_order_mul_iterate_dslope</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesAt">HasFPowerSeriesAt</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">z₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">z₀</span></span>,
+  <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>     <span class="fn"><span class="fn">(<span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">z₀</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries.order">FormalMultilinearSeries.order</a> <span class="fn">p</span></span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">(<span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>)<a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">^[</a><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.swap">Function.swap</a> <span class="fn">dslope</span> <span class="fn">z₀</span></span><a href="../../.././Mathlib/Init/Data/Nat/Lemmas.html#Nat.iterate">]</a></a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries.order">FormalMultilinearSeries.order</a> <span class="fn">p</span></span>) <span class="fn">f</span> <span class="fn">z</span></span></span></span></span></div></div></div></div><div class="decl" id="HasFPowerSeriesAt.locally_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L117-L122">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#HasFPowerSeriesAt.locally_ne_zero"><span class="name">HasFPowerSeriesAt</span>.<span class="name">locally_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesAt">HasFPowerSeriesAt</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">z₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhdsWithin">nhdsWithin</a> <span class="fn">z₀</span> <span class="fn"><span class="fn">{<span class="fn">z₀</span>}</span><a href="../../.././Mathlib/Order/Basic.html#HasCompl.compl">ᶜ</a></span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="HasFPowerSeriesAt.locally_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L125-L126">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#HasFPowerSeriesAt.locally_zero_iff"><span class="name">HasFPowerSeriesAt</span>.<span class="name">locally_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FormalMultilinearSeries.html#FormalMultilinearSeries">FormalMultilinearSeries</a> <span class="fn">𝕜</span> <span class="fn">𝕜</span> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#HasFPowerSeriesAt">HasFPowerSeriesAt</a> <span class="fn">f</span> <span class="fn">p</span> <span class="fn">z₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">∀ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">z₀</span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span>) <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="AnalyticAt.eventually_eq_zero_or_eventually_ne_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L136-L141">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#AnalyticAt.eventually_eq_zero_or_eventually_ne_zero"><span class="name">AnalyticAt</span>.<span class="name">eventually_eq_zero_or_eventually_ne_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">z₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">∀ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">z₀</span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span>) <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn">∀ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhdsWithin">nhdsWithin</a> <span class="fn">z₀</span> <span class="fn"><span class="fn">{<span class="fn">z₀</span>}</span><a href="../../.././Mathlib/Order/Basic.html#HasCompl.compl">ᶜ</a></span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span></span></div></div><p>The <em>principle of isolated zeros</em> for an analytic function, local version: if a function is
+analytic at <code>z₀</code>, then either it is identically zero in a neighborhood of <code>z₀</code>, or it does not
+vanish in a punctured neighborhood of <code>z₀</code>.</p></div></div><div class="decl" id="AnalyticAt.eventually_eq_or_eventually_ne"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L144-L146">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#AnalyticAt.eventually_eq_or_eventually_ne"><span class="name">AnalyticAt</span>.<span class="name">eventually_eq_or_eventually_ne</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">z₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">g</span> <span class="fn">z₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">∀ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">z₀</span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">z</span></span></span></span>) <a href="../../.././Init/Prelude.html#Or">∨</a> <span class="fn">∀ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhdsWithin">nhdsWithin</a> <span class="fn">z₀</span> <span class="fn"><span class="fn">{<span class="fn">z₀</span>}</span><a href="../../.././Mathlib/Order/Basic.html#HasCompl.compl">ᶜ</a></span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn"><span class="fn">g</span> <span class="fn">z</span></span></span></span></span></div></div></div></div><div class="decl" id="AnalyticAt.frequently_zero_iff_eventually_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L149-L152">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#AnalyticAt.frequently_zero_iff_eventually_zero"><span class="name">AnalyticAt</span>.<span class="name">frequently_zero_iff_eventually_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">w</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">∃ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhdsWithin">nhdsWithin</a> <span class="fn">w</span> <span class="fn"><span class="fn">{<span class="fn">w</span>}</span><a href="../../.././Mathlib/Order/Basic.html#HasCompl.compl">ᶜ</a></span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span>) <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">w</span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></span></div></div></div></div><div class="decl" id="AnalyticAt.frequently_eq_iff_eventually_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L155-L157">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#AnalyticAt.frequently_eq_iff_eventually_eq"><span class="name">AnalyticAt</span>.<span class="name">frequently_eq_iff_eventually_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">z₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticAt">AnalyticAt</a> <span class="fn">𝕜</span> <span class="fn">g</span> <span class="fn">z₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">∃ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhdsWithin">nhdsWithin</a> <span class="fn">z₀</span> <span class="fn"><span class="fn">{<span class="fn">z₀</span>}</span><a href="../../.././Mathlib/Order/Basic.html#HasCompl.compl">ᶜ</a></span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">z</span></span></span></span>) <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn">∀ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">z₀</span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">z</span></span></span></span></span></div></div></div></div><div class="decl" id="AnalyticOn.eqOn_zero_of_preconnected_of_frequently_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L171-L174">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#AnalyticOn.eqOn_zero_of_preconnected_of_frequently_eq_zero"><span class="name">AnalyticOn</span>.<span class="name">eqOn_zero_of_preconnected_of_frequently_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOn">AnalyticOn</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hU : <span class="fn"><a href="../../.././Mathlib/Topology/Connected.html#IsPreconnected">IsPreconnected</a> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">z₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfw : <span class="fn">∃ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhdsWithin">nhdsWithin</a> <span class="fn">z₀</span> <span class="fn"><span class="fn">{<span class="fn">z₀</span>}</span><a href="../../.././Mathlib/Order/Basic.html#HasCompl.compl">ᶜ</a></span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Set/Function.html#Set.EqOn">Set.EqOn</a> <span class="fn">f</span> <span class="fn">0</span> <span class="fn">U</span></span></div></div><p>The <em>principle of isolated zeros</em> for an analytic function, global version: if a function is
+analytic on a connected set <code>U</code> and vanishes in arbitrary neighborhoods of a point <code>z₀ ∈ U</code>, then
+it is identically zero in <code>U</code>.
+For higher-dimensional versions requiring that the function vanishes in a neighborhood of <code>z₀</code>,
+see <code><a href="../../.././Mathlib/Analysis/Analytic/Uniqueness.html#AnalyticOn.eqOn_zero_of_preconnected_of_eventuallyEq_zero">AnalyticOn.eqOn_zero_of_preconnected_of_eventuallyEq_zero</a></code>.</p></div></div><div class="decl" id="AnalyticOn.eqOn_zero_of_preconnected_of_mem_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L177-L180">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#AnalyticOn.eqOn_zero_of_preconnected_of_mem_closure"><span class="name">AnalyticOn</span>.<span class="name">eqOn_zero_of_preconnected_of_mem_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOn">AnalyticOn</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hU : <span class="fn"><a href="../../.././Mathlib/Topology/Connected.html#IsPreconnected">IsPreconnected</a> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">z₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfz₀ : <span class="fn"><span class="fn">z₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#closure">closure</a> (<span class="fn"><span class="fn">{<span class="fn">z</span> | <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>}</span> <a href="../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">{<span class="fn">z₀</span>}</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Set/Function.html#Set.EqOn">Set.EqOn</a> <span class="fn">f</span> <span class="fn">0</span> <span class="fn">U</span></span></div></div></div></div><div class="decl" id="AnalyticOn.eqOn_of_preconnected_of_frequently_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L188-L193">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#AnalyticOn.eqOn_of_preconnected_of_frequently_eq"><span class="name">AnalyticOn</span>.<span class="name">eqOn_of_preconnected_of_frequently_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOn">AnalyticOn</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOn">AnalyticOn</a> <span class="fn">𝕜</span> <span class="fn">g</span> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hU : <span class="fn"><a href="../../.././Mathlib/Topology/Connected.html#IsPreconnected">IsPreconnected</a> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">z₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn">∃ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhdsWithin">nhdsWithin</a> <span class="fn">z₀</span> <span class="fn"><span class="fn">{<span class="fn">z₀</span>}</span><a href="../../.././Mathlib/Order/Basic.html#HasCompl.compl">ᶜ</a></span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">z</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Set/Function.html#Set.EqOn">Set.EqOn</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">U</span></span></div></div><p>The <em>identity principle</em> for analytic functions, global version: if two functions are
+analytic on a connected set <code>U</code> and coincide at points which accumulate to a point <code>z₀ ∈ U</code>, then
+they coincide globally in <code>U</code>.
+For higher-dimensional versions requiring that the functions coincide in a neighborhood of <code>z₀</code>,
+see <code><a href="../../.././Mathlib/Analysis/Analytic/Uniqueness.html#AnalyticOn.eqOn_of_preconnected_of_eventuallyEq">AnalyticOn.eqOn_of_preconnected_of_eventuallyEq</a></code>.</p></div></div><div class="decl" id="AnalyticOn.eqOn_of_preconnected_of_mem_closure"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L196-L199">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#AnalyticOn.eqOn_of_preconnected_of_mem_closure"><span class="name">AnalyticOn</span>.<span class="name">eqOn_of_preconnected_of_mem_closure</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{U : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOn">AnalyticOn</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOn">AnalyticOn</a> <span class="fn">𝕜</span> <span class="fn">g</span> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hU : <span class="fn"><a href="../../.././Mathlib/Topology/Connected.html#IsPreconnected">IsPreconnected</a> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">z₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">U</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn"><span class="fn">z₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#closure">closure</a> (<span class="fn"><span class="fn">{<span class="fn">z</span> | <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">z</span></span></span>}</span> <a href="../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">{<span class="fn">z₀</span>}</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Set/Function.html#Set.EqOn">Set.EqOn</a> <span class="fn">f</span> <span class="fn">g</span> <span class="fn">U</span></span></div></div></div></div><div class="decl" id="AnalyticOn.eq_of_frequently_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Analytic/IsolatedZeros.lean#L207-L210">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Analytic/IsolatedZeros.html#AnalyticOn.eq_of_frequently_eq"><span class="name">AnalyticOn</span>.<span class="name">eq_of_frequently_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z₀ : <span class="fn">𝕜</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Connected.html#ConnectedSpace">ConnectedSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOn">AnalyticOn</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">Set.univ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/Analysis/Analytic/Basic.html#AnalyticOn">AnalyticOn</a> <span class="fn">𝕜</span> <span class="fn">g</span> <span class="fn">Set.univ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfg : <span class="fn">∃ᶠ (z : <span class="fn">𝕜</span>) in <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhdsWithin">nhdsWithin</a> <span class="fn">z₀</span> <span class="fn"><span class="fn">{<span class="fn">z₀</span>}</span><a href="../../.././Mathlib/Order/Basic.html#HasCompl.compl">ᶜ</a></span></span>, <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">g</span> <span class="fn">z</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">g</span></span></div></div><p>The <em>identity principle</em> for analytic functions, global version: if two functions on a normed
+field <code>𝕜</code> are analytic everywhere and coincide at points which accumulate to a point <code>z₀</code>, then
+they coincide globally.
+For higher-dimensional versions requiring that the functions coincide in a neighborhood of <code>z₀</code>,
+see <code><a href="../../.././Mathlib/Analysis/Analytic/Uniqueness.html#AnalyticOn.eq_of_eventuallyEq">AnalyticOn.eq_of_eventuallyEq</a></code>.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

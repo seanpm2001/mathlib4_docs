@@ -1,0 +1,580 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.Calculus.Series</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.Calculus.Series";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">Calculus</span>.<span class="name">Series</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">Calculus</span>.<span class="name">Series</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Analysis/Calculus/ContDiff.html">Mathlib.Analysis.Calculus.ContDiff</a></li><li><a href="../../.././Mathlib/Analysis/Calculus/UniformLimitsDeriv.html">Mathlib.Analysis.Calculus.UniformLimitsDeriv</a></li><li><a href="../../.././Mathlib/Data/Nat/Cast/WithTop.html">Mathlib.Data.Nat.Cast.WithTop</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.Calculus.Series" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#tendstoUniformlyOn_tsum"><span class="name">tendstoUniformlyOn_tsum</span></a></div><div class="nav_link"><a class="break_within" href="#tendstoUniformlyOn_tsum_nat"><span class="name">tendstoUniformlyOn_tsum_nat</span></a></div><div class="nav_link"><a class="break_within" href="#tendstoUniformly_tsum"><span class="name">tendstoUniformly_tsum</span></a></div><div class="nav_link"><a class="break_within" href="#tendstoUniformly_tsum_nat"><span class="name">tendstoUniformly_tsum_nat</span></a></div><div class="nav_link"><a class="break_within" href="#continuousOn_tsum"><span class="name">continuousOn_tsum</span></a></div><div class="nav_link"><a class="break_within" href="#continuous_tsum"><span class="name">continuous_tsum</span></a></div><div class="nav_link"><a class="break_within" href="#summable_of_summable_hasFDerivAt_of_isPreconnected"><span class="name">summable_of_summable_hasFDerivAt_of_isPreconnected</span></a></div><div class="nav_link"><a class="break_within" href="#hasFDerivAt_tsum_of_isPreconnected"><span class="name">hasFDerivAt_tsum_of_isPreconnected</span></a></div><div class="nav_link"><a class="break_within" href="#summable_of_summable_hasFDerivAt"><span class="name">summable_of_summable_hasFDerivAt</span></a></div><div class="nav_link"><a class="break_within" href="#hasFDerivAt_tsum"><span class="name">hasFDerivAt_tsum</span></a></div><div class="nav_link"><a class="break_within" href="#differentiable_tsum"><span class="name">differentiable_tsum</span></a></div><div class="nav_link"><a class="break_within" href="#fderiv_tsum_apply"><span class="name">fderiv_tsum_apply</span></a></div><div class="nav_link"><a class="break_within" href="#fderiv_tsum"><span class="name">fderiv_tsum</span></a></div><div class="nav_link"><a class="break_within" href="#iteratedFDeriv_tsum"><span class="name">iteratedFDeriv_tsum</span></a></div><div class="nav_link"><a class="break_within" href="#iteratedFDeriv_tsum_apply"><span class="name">iteratedFDeriv_tsum_apply</span></a></div><div class="nav_link"><a class="break_within" href="#contDiff_tsum"><span class="name">contDiff_tsum</span></a></div><div class="nav_link"><a class="break_within" href="#contDiff_tsum_of_eventually"><span class="name">contDiff_tsum_of_eventually</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Smoothness-of-series">Smoothness of series <a class="hover-link" href="#Smoothness-of-series">#</a></h1><p>We show that series of functions are continuous, or differentiable, or smooth, when each individual
+function in the series is and additionally suitable uniform summable bounds are satisfied.</p><p>More specifically,</p><ul>
+<li><code><a href="../../.././Mathlib/Analysis/Calculus/Series.html#continuous_tsum">continuous_tsum</a></code> ensures that a series of continuous functions is continuous.</li>
+<li><code><a href="../../.././Mathlib/Analysis/Calculus/Series.html#differentiable_tsum">differentiable_tsum</a></code> ensures that a series of differentiable functions is differentiable.</li>
+<li><code><a href="../../.././Mathlib/Analysis/Calculus/Series.html#contDiff_tsum">contDiff_tsum</a></code> ensures that a series of smooth functions is smooth.</li>
+</ul><p>We also give versions of these statements which are localized to a set.</p></div><div class="mod_doc"><h3 class="markdown-heading" id="Continuity">Continuity <a class="hover-link" href="#Continuity">#</a></h3></div><div class="decl" id="tendstoUniformlyOn_tsum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L42-L53">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#tendstoUniformlyOn_tsum"><span class="name">tendstoUniformlyOn_tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfu : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/UniformConvergence.html#TendstoUniformlyOn">TendstoUniformlyOn</a> (<span class="fn">fun <span class="fn">t</span> <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">t</span> <span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span></span>) (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span>) <span class="fn">Filter.atTop</span> <span class="fn">s</span></span></div></div><p>An infinite sum of functions with summable sup norm is the uniform limit of its partial sums.
+Version relative to a set, with general index set.</p></div></div><div class="decl" id="tendstoUniformlyOn_tsum_nat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L58-L62">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#tendstoUniformlyOn_tsum_nat"><span class="name">tendstoUniformlyOn_tsum_nat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">β</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hfu : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/UniformConvergence.html#TendstoUniformlyOn">TendstoUniformlyOn</a> (<span class="fn">fun <span class="fn">N</span> <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href="../../.././Mathlib/Data/Finset/Basic.html#Finset.range">Finset.range</a> <span class="fn">N</span></span>) <span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span></span>) (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">∑' (n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span>) <span class="fn">Filter.atTop</span> <span class="fn">s</span></span></div></div><p>An infinite sum of functions with summable sup norm is the uniform limit of its partial sums.
+Version relative to a set, with index set <code>ℕ</code>.</p></div></div><div class="decl" id="tendstoUniformly_tsum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L67-L69">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#tendstoUniformly_tsum"><span class="name">tendstoUniformly_tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfu : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/UniformConvergence.html#TendstoUniformly">TendstoUniformly</a> (<span class="fn">fun <span class="fn">t</span> <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">t</span> <span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span></span>) (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span>) <span class="fn">Filter.atTop</span></span></div></div><p>An infinite sum of functions with summable sup norm is the uniform limit of its partial sums.
+Version with general index set.</p></div></div><div class="decl" id="tendstoUniformly_tsum_nat"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L74-L78">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#tendstoUniformly_tsum_nat"><span class="name">tendstoUniformly_tsum_nat</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">β</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfu : <span class="fn">∀ (<span class="fn">n</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/UniformConvergence.html#TendstoUniformly">TendstoUniformly</a> (<span class="fn">fun <span class="fn">N</span> <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href="../../.././Mathlib/Data/Finset/Basic.html#Finset.range">Finset.range</a> <span class="fn">N</span></span>) <span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span></span>) (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">∑' (n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span>) <span class="fn">Filter.atTop</span></span></div></div><p>An infinite sum of functions with summable sup norm is the uniform limit of its partial sums.
+Version with index set <code>ℕ</code>.</p></div></div><div class="decl" id="continuousOn_tsum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L83-L89">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#continuousOn_tsum"><span class="name">continuousOn_tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousOn.html#ContinuousOn">ContinuousOn</a> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>) <span class="fn">s</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfu : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/ContinuousOn.html#ContinuousOn">ContinuousOn</a> (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span>) <span class="fn">s</span></span></div></div><p>An infinite sum of functions with summable sup norm is continuous on a set if each individual
+function is.</p></div></div><div class="decl" id="continuous_tsum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L94-L97">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#continuous_tsum"><span class="name">continuous_tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">β</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hfu : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">β</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span></span></div></div><p>An infinite sum of functions with summable sup norm is continuous if each individual
+function is.</p></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Differentiability">Differentiability <a class="hover-link" href="#Differentiability">#</a></h3></div><div class="decl" id="summable_of_summable_hasFDerivAt_of_isPreconnected"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L109-L119">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#summable_of_summable_hasFDerivAt_of_isPreconnected"><span class="name">summable_of_summable_hasFDerivAt_of_isPreconnected</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f' : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h's : <span class="fn"><a href="../../.././Mathlib/Topology/Connected.html#IsPreconnected">IsPreconnected</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#HasFDerivAt">HasFDerivAt</a> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) (<span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span>) <span class="fn">x</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf' : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx₀ : <span class="fn"><span class="fn">x₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf0 : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">x</span> <span class="fn">x₀</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span></div></div><p>Consider a series of functions <code>∑' n, f n x</code> on a preconnected open set. If the series converges
+at a point, and all functions in the series are differentiable with a summable bound on the
+derivatives, then the series converges everywhere on the set.</p></div></div><div class="decl" id="hasFDerivAt_tsum_of_isPreconnected"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L126-L138">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#hasFDerivAt_tsum_of_isPreconnected"><span class="name">hasFDerivAt_tsum_of_isPreconnected</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f' : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h's : <span class="fn"><a href="../../.././Mathlib/Topology/Connected.html#IsPreconnected">IsPreconnected</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#HasFDerivAt">HasFDerivAt</a> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) (<span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span>) <span class="fn">x</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf' : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx₀ : <span class="fn"><span class="fn">x₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf0 : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x₀</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#HasFDerivAt">HasFDerivAt</a> (<span class="fn">fun <span class="fn">y</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">y</span></span></span></span>) (<span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span></span>) <span class="fn">x</span></span></div></div><p>Consider a series of functions <code>∑' n, f n x</code> on a preconnected open set. If the series converges
+at a point, and all functions in the series are differentiable with a summable bound on the
+derivatives, then the series is differentiable on the set and its derivative is the sum of the
+derivatives.</p></div></div><div class="decl" id="summable_of_summable_hasFDerivAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L144-L149">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#summable_of_summable_hasFDerivAt"><span class="name">summable_of_summable_hasFDerivAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f' : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#HasFDerivAt">HasFDerivAt</a> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) (<span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span>) <span class="fn">x</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf' : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf0 : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x₀</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x</span></span></span></span></div></div><p>Consider a series of functions <code>∑' n, f n x</code>. If the series converges at a
+point, and all functions in the series are differentiable with a summable bound on the derivatives,
+then the series converges everywhere.</p></div></div><div class="decl" id="hasFDerivAt_tsum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L155-L160">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#hasFDerivAt_tsum"><span class="name">hasFDerivAt_tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f' : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#HasFDerivAt">HasFDerivAt</a> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) (<span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span>) <span class="fn">x</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf' : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf0 : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x₀</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#HasFDerivAt">HasFDerivAt</a> (<span class="fn">fun <span class="fn">y</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">y</span></span></span></span>) (<span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span></span>) <span class="fn">x</span></span></div></div><p>Consider a series of functions <code>∑' n, f n x</code>. If the series converges at a
+point, and all functions in the series are differentiable with a summable bound on the derivatives,
+then the series is differentiable and its derivative is the sum of the derivatives.</p></div></div><div class="decl" id="differentiable_tsum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L167-L176">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#differentiable_tsum"><span class="name">differentiable_tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f' : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#HasFDerivAt">HasFDerivAt</a> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) (<span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span>) <span class="fn">x</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf' : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f'</span> <span class="fn">n</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#Differentiable">Differentiable</a> <span class="fn">𝕜</span> <span class="fn">fun <span class="fn">y</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">y</span></span></span></span></span></div></div><p>Consider a series of functions <code>∑' n, f n x</code>. If all functions in the series are differentiable
+with a summable bound on the derivatives, then the series is differentiable.
+Note that our assumptions do not ensure the pointwise convergence, but if there is no pointwise
+convergence then the series is zero everywhere so the result still holds.</p></div></div><div class="decl" id="fderiv_tsum_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L179-L182">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#fderiv_tsum_apply"><span class="name">fderiv_tsum_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#Differentiable">Differentiable</a> <span class="fn">𝕜</span> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf' : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf0 : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x₀</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> (<span class="fn">fun <span class="fn">y</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">y</span></span></span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="fderiv_tsum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L185-L189">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#fderiv_tsum"><span class="name">fderiv_tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{u : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hu : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">u</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#Differentiable">Differentiable</a> <span class="fn">𝕜</span> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf' : <span class="fn">∀ (<span class="fn">n</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">u</span> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf0 : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> <span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">x₀</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> <span class="fn">fun <span class="fn">y</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">y</span></span></span></span></span>) <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) <span class="fn">x</span></span></span></span></span></div></div></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Higher-smoothness">Higher smoothness <a class="hover-link" href="#Higher-smoothness">#</a></h3></div><div class="decl" id="iteratedFDeriv_tsum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L196-L215">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#iteratedFDeriv_tsum"><span class="name">iteratedFDeriv_tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././Mathlib/Data/ENat/Basic.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#ContDiff">ContDiff</a> <span class="fn">𝕜</span> <span class="fn">N</span> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hv : <span class="fn">∀ (<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">N</span></span> → <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> (<span class="fn"><span class="fn">v</span> <span class="fn">k</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'f : <span class="fn">∀ (<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">i</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">N</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#iteratedFDeriv">iteratedFDeriv</a> <span class="fn">𝕜</span> <span class="fn">k</span> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>) <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">v</span> <span class="fn">k</span> <span class="fn">i</span></span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hk : <span class="fn"><span class="fn">↑<span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#iteratedFDeriv">iteratedFDeriv</a> <span class="fn">𝕜</span> <span class="fn">k</span> <span class="fn">fun <span class="fn">y</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">y</span></span></span></span></span>) <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#iteratedFDeriv">iteratedFDeriv</a> <span class="fn">𝕜</span> <span class="fn">k</span> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) <span class="fn">x</span></span></span></span></span></div></div><p>Consider a series of smooth functions, with summable uniform bounds on the successive
+derivatives. Then the iterated derivative of the sum is the sum of the iterated derivative.</p></div></div><div class="decl" id="iteratedFDeriv_tsum_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L220-L225">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#iteratedFDeriv_tsum_apply"><span class="name">iteratedFDeriv_tsum_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././Mathlib/Data/ENat/Basic.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#ContDiff">ContDiff</a> <span class="fn">𝕜</span> <span class="fn">N</span> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hv : <span class="fn">∀ (<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">N</span></span> → <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> (<span class="fn"><span class="fn">v</span> <span class="fn">k</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'f : <span class="fn">∀ (<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">i</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">N</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#iteratedFDeriv">iteratedFDeriv</a> <span class="fn">𝕜</span> <span class="fn">k</span> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>) <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">v</span> <span class="fn">k</span> <span class="fn">i</span></span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hk : <span class="fn"><span class="fn">↑<span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">N</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#iteratedFDeriv">iteratedFDeriv</a> <span class="fn">𝕜</span> <span class="fn">k</span> (<span class="fn">fun <span class="fn">y</span> =&gt <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">n</span> <span class="fn">y</span></span></span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∑' (n : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#iteratedFDeriv">iteratedFDeriv</a> <span class="fn">𝕜</span> <span class="fn">k</span> (<span class="fn"><span class="fn">f</span> <span class="fn">n</span></span>) <span class="fn">x</span></span></span></span></div></div><p>Consider a series of smooth functions, with summable uniform bounds on the successive
+derivatives. Then the iterated derivative of the sum is the sum of the iterated derivative.</p></div></div><div class="decl" id="contDiff_tsum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L231-L252">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#contDiff_tsum"><span class="name">contDiff_tsum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././Mathlib/Data/ENat/Basic.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#ContDiff">ContDiff</a> <span class="fn">𝕜</span> <span class="fn">N</span> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hv : <span class="fn">∀ (<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">N</span></span> → <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> (<span class="fn"><span class="fn">v</span> <span class="fn">k</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'f : <span class="fn">∀ (<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (<span class="fn">i</span> : <span class="fn">α</span>) (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">N</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#iteratedFDeriv">iteratedFDeriv</a> <span class="fn">𝕜</span> <span class="fn">k</span> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>) <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">v</span> <span class="fn">k</span> <span class="fn">i</span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#ContDiff">ContDiff</a> <span class="fn">𝕜</span> <span class="fn">N</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">∑' (i : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">i</span> <span class="fn">x</span></span></span></span></span></div></div><p>Consider a series of functions <code>∑' i, f i x</code>. Assume that each individual function <code>f i</code> is of
+class <code>C^N</code>, and moreover there is a uniform summable upper bound on the <code>k</code>-th derivative
+for each <code>k ≤ N</code>. Then the series is also <code>C^N</code>.</p></div></div><div class="decl" id="contDiff_tsum_of_eventually"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/Series.lean#L258-L296">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/Series.html#contDiff_tsum_of_eventually"><span class="name">contDiff_tsum_of_eventually</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Data/IsROrC/Basic.html#IsROrC">IsROrC</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">α</span> → <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{v : <span class="fn"><a href="../../.././Init/Prelude.html#Nat">ℕ</a> → <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{N : <a href="../../.././Mathlib/Data/ENat/Basic.html#ENat">ℕ∞</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">α</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#ContDiff">ContDiff</a> <span class="fn">𝕜</span> <span class="fn">N</span> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hv : <span class="fn">∀ (<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">N</span></span> → <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/InfiniteSum/Basic.html#Summable">Summable</a> (<span class="fn"><span class="fn">v</span> <span class="fn">k</span></span>)</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'f : <span class="fn">∀ (<span class="fn">k</span> : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>), <span class="fn"><span class="fn"><span class="fn">↑<span class="fn">k</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">N</span></span> → <span class="fn">∀ᶠ (i : <span class="fn">α</span>) in <span class="fn">Filter.cofinite</span>, <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#iteratedFDeriv">iteratedFDeriv</a> <span class="fn">𝕜</span> <span class="fn">k</span> (<span class="fn"><span class="fn">f</span> <span class="fn">i</span></span>) <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">v</span> <span class="fn">k</span> <span class="fn">i</span></span></span></span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/ContDiffDef.html#ContDiff">ContDiff</a> <span class="fn">𝕜</span> <span class="fn">N</span> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">∑' (i : <span class="fn">α</span>), <span class="fn"><span class="fn">f</span> <span class="fn">i</span> <span class="fn">x</span></span></span></span></span></div></div><p>Consider a series of functions <code>∑' i, f i x</code>. Assume that each individual function <code>f i</code> is of
+class <code>C^N</code>, and moreover there is a uniform summable upper bound on the <code>k</code>-th derivative
+for each <code>k ≤ N</code> (except maybe for finitely many <code>i</code>s). Then the series is also <code>C^N</code>.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

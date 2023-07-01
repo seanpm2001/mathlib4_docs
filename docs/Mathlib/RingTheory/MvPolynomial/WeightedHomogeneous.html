@@ -1,0 +1,755 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">RingTheory</span>.<span class="name">MvPolynomial</span>.<span class="name">WeightedHomogeneous</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">RingTheory</span>.<span class="name">MvPolynomial</span>.<span class="name">WeightedHomogeneous</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Algebra/GradedMonoid.html">Mathlib.Algebra.GradedMonoid</a></li><li><a href="../../.././Mathlib/Data/MvPolynomial/Variables.html">Mathlib.Data.MvPolynomial.Variables</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedDegree'"><span class="name">MvPolynomial</span>.<span class="name">weightedDegree'</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedTotalDegree'"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree'</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedTotalDegree'_eq_bot_iff"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree'_eq_bot_iff</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedTotalDegree'_zero"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree'_zero</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedTotalDegree"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedTotalDegree_coe"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree_coe</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedTotalDegree_zero"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree_zero</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.le_weightedTotalDegree"><span class="name">MvPolynomial</span>.<span class="name">le_weightedTotalDegree</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.IsWeightedHomogeneous"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousSubmodule"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousSubmodule</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.mem_weightedHomogeneousSubmodule"><span class="name">MvPolynomial</span>.<span class="name">mem_weightedHomogeneousSubmodule</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousSubmodule_eq_finsupp_supported"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousSubmodule_eq_finsupp_supported</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousSubmodule_mul"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousSubmodule_mul</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.isWeightedHomogeneous_monomial"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_monomial</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.isWeightedHomogeneous_of_total_degree_zero"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_of_total_degree_zero</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.isWeightedHomogeneous_C"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_C</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.isWeightedHomogeneous_zero"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_zero</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.isWeightedHomogeneous_one"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_one</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.isWeightedHomogeneous_X"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_X</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.IsWeightedHomogeneous.coeff_eq_zero"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">coeff_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.IsWeightedHomogeneous.inj_right"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">inj_right</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.IsWeightedHomogeneous.add"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">add</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.IsWeightedHomogeneous.sum"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">sum</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.IsWeightedHomogeneous.mul"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">mul</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.IsWeightedHomogeneous.prod"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">prod</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.IsWeightedHomogeneous.weighted_total_degree"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">weighted_total_degree</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.IsWeightedHomogeneous.WeightedHomogeneousSubmodule.gcomm_monoid"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">WeightedHomogeneousSubmodule</span>.<span class="name">gcomm_monoid</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousComponent"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.coeff_weightedHomogeneousComponent"><span class="name">MvPolynomial</span>.<span class="name">coeff_weightedHomogeneousComponent</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousComponent_apply"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_apply</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousComponent_isWeightedHomogeneous"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_isWeightedHomogeneous</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousComponent_C_mul"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_C_mul</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousComponent_eq_zero'"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_eq_zero'</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousComponent_eq_zero"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousComponent_finsupp"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_finsupp</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.sum_weightedHomogeneousComponent"><span class="name">MvPolynomial</span>.<span class="name">sum_weightedHomogeneousComponent</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousComponent_weighted_homogeneous_polynomial"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_weighted_homogeneous_polynomial</span></a></div><div class="nav_link"><a class="break_within" href="#MvPolynomial.weightedHomogeneousComponent_zero"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_zero</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Weighted-homogeneous-polynomials">Weighted homogeneous polynomials <a class="hover-link" href="#Weighted-homogeneous-polynomials">#</a></h1><p>It is possible to assign weights (in a commutative additive monoid <code>M</code>) to the variables of a
+multivariate polynomial ring, so that monomials of the ring then have a weighted degree with
+respect to the weights of the variables. The weights are represented by a function <code>w : σ → M</code>,
+where <code>σ</code> are the indeterminates.</p><p>A multivariate polynomial <code>φ</code> is weighted homogeneous of weighted degree <code>m : M</code> if all monomials
+occurring in <code>φ</code> have the same weighted degree <code>m</code>.</p><h2 class="markdown-heading" id="Main-definitions-lemmas">Main definitions/lemmas <a class="hover-link" href="#Main-definitions-lemmas">#</a></h2><ul>
+<li>
+<p><code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'">weightedTotalDegree'</a> w φ</code> : the weighted total degree of a multivariate polynomial with respect
+to the weights <code>w</code>, taking values in <code><a href="../../.././Mathlib/Order/WithBot.html#WithBot">WithBot</a> M</code>.</p>
+</li>
+<li>
+<p><code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree">weightedTotalDegree</a> w φ</code> : When <code>M</code> has a <code>⊥</code> element, we can define the weighted total degree
+of a multivariate polynomial as a function taking values in <code>M</code>.</p>
+</li>
+<li>
+<p><code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">IsWeightedHomogeneous</a> w φ m</code>: a predicate that asserts that <code>φ</code> is weighted homogeneous
+of weighted degree <code>m</code> with respect to the weights <code>w</code>.</p>
+</li>
+<li>
+<p><code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule">weightedHomogeneousSubmodule</a> R w m</code>: the submodule of homogeneous polynomials
+of weighted degree <code>m</code>.</p>
+</li>
+<li>
+<p><code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">weightedHomogeneousComponent</a> w m</code>: the additive morphism that projects polynomials
+onto their summand that is weighted homogeneous of degree <code>n</code> with respect to <code>w</code>.</p>
+</li>
+<li>
+<p><code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.sum_weightedHomogeneousComponent">sum_weightedHomogeneousComponent</a></code>: every polynomial is the sum of its weighted homogeneous
+components.</p>
+</li>
+</ul></div><div class="mod_doc"><h3 class="markdown-heading" id="weightedDegree"><code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">weightedDegree'</a></code> <a class="hover-link" href="#weightedDegree">#</a></h3></div><div class="decl" id="MvPolynomial.weightedDegree'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L68-L69">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'"><span class="name">MvPolynomial</span>.<span class="name">weightedDegree'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn"><span class="fn">σ</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>) <a href="../../.././Mathlib/Algebra/Hom/Group.html#AddMonoidHom">→+</a> <span class="fn">M</span></span></div></div><p>The <code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">weightedDegree'</a></code> of the finitely supported function <code>s : σ →₀ ℕ</code> is the sum
+<code>∑(s i)•(w i)</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">MvPolynomial.weightedDegree'</a> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap.toAddMonoidHom">LinearMap.toAddMonoidHom</a> (<span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp.html#Finsupp.total">Finsupp.total</a> <span class="fn">σ</span> <span class="fn">M</span> <a href="../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">w</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MvPolynomial.weightedDegree'" class="instances-for-list"></ul></details></div></div><div class="decl" id="MvPolynomial.weightedTotalDegree'"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L77-L78">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/WithBot.html#WithBot">WithBot</a> <span class="fn">M</span></span></div></div><p>The weighted total degree of a multivariate polynomial, taking values in <code><a href="../../.././Mathlib/Order/WithBot.html#WithBot">WithBot</a> M</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'">MvPolynomial.weightedTotalDegree'</a> <span class="fn">w</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Data/Finset/Lattice.html#Finset.sup">Finset.sup</a> (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.support">MvPolynomial.support</a> <span class="fn">p</span></span>) <span class="fn">fun <span class="fn">s</span> =&gt <span class="fn">↑(<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">MvPolynomial.weightedDegree'</a> <span class="fn">w</span></span>) <span class="fn">s</span></span>)</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MvPolynomial.weightedTotalDegree'" class="instances-for-list"></ul></details></div></div><div class="decl" id="MvPolynomial.weightedTotalDegree'_eq_bot_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L82-L86">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'_eq_bot_iff"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree'_eq_bot_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'">MvPolynomial.weightedTotalDegree'</a> <span class="fn">w</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div><p>The <code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'">weightedTotalDegree'</a></code> of a polynomial <code>p</code> is <code>⊥</code> if and only if <code>p = 0</code>.</p></div></div><div class="decl" id="MvPolynomial.weightedTotalDegree'_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L90-L91">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'_zero"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree'_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'">MvPolynomial.weightedTotalDegree'</a> <span class="fn">w</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span></div></div><p>The <code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'">weightedTotalDegree'</a></code> of the zero polynomial is <code>⊥</code>.</p></div></div><div class="decl" id="MvPolynomial.weightedTotalDegree"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L100-L101">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/BoundedOrder.html#OrderBot">OrderBot</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">M</span></div></div><p>When <code>M</code> has a <code>⊥</code> element, we can define the weighted total degree of a multivariate
+polynomial as a function taking values in <code>M</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree">MvPolynomial.weightedTotalDegree</a> <span class="fn">w</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Finset/Lattice.html#Finset.sup">Finset.sup</a> (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.support">MvPolynomial.support</a> <span class="fn">p</span></span>) <span class="fn">fun <span class="fn">s</span> =&gt <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">MvPolynomial.weightedDegree'</a> <span class="fn">w</span></span>) <span class="fn">s</span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MvPolynomial.weightedTotalDegree" class="instances-for-list"></ul></details></div></div><div class="decl" id="MvPolynomial.weightedTotalDegree_coe"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L105-L116">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree_coe"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree_coe</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/BoundedOrder.html#OrderBot">OrderBot</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'">MvPolynomial.weightedTotalDegree'</a> <span class="fn">w</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree">MvPolynomial.weightedTotalDegree</a> <span class="fn">w</span> <span class="fn">p</span></span>)</span></span></div></div><p>This lemma relates <code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree">weightedTotalDegree</a></code> and <code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'">weightedTotalDegree'</a></code>.</p></div></div><div class="decl" id="MvPolynomial.weightedTotalDegree_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L120-L121">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree_zero"><span class="name">MvPolynomial</span>.<span class="name">weightedTotalDegree_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/BoundedOrder.html#OrderBot">OrderBot</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree">MvPolynomial.weightedTotalDegree</a> <span class="fn">w</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span></div></div><p>The <code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree">weightedTotalDegree</a></code> of the zero polynomial is <code>⊥</code>.</p></div></div><div class="decl" id="MvPolynomial.le_weightedTotalDegree"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L124-L126">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.le_weightedTotalDegree"><span class="name">MvPolynomial</span>.<span class="name">le_weightedTotalDegree</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/BoundedOrder.html#OrderBot">OrderBot</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn"><span class="fn">σ</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hd : <span class="fn"><span class="fn">d</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.support">MvPolynomial.support</a> <span class="fn">φ</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">MvPolynomial.weightedDegree'</a> <span class="fn">w</span></span>) <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree">MvPolynomial.weightedTotalDegree</a> <span class="fn">w</span> <span class="fn">φ</span></span></span></div></div></div></div><div class="decl" id="MvPolynomial.IsWeightedHomogeneous"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L135-L136">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>A multivariate polynomial <code>φ</code> is weighted homogeneous of weighted degree <code>m</code> if all monomials
+occurring in <code>φ</code> have weighted degree <code>m</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">φ</span> <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">∀ ⦃<span class="fn">d</span> : <span class="fn"><span class="fn">σ</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>⦄, <span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.coeff">MvPolynomial.coeff</a> <span class="fn">d</span> <span class="fn">φ</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span> → <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">MvPolynomial.weightedDegree'</a> <span class="fn">w</span></span>) <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">m</span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MvPolynomial.IsWeightedHomogeneous" class="instances-for-list"></ul></details></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousSubmodule"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L142-L154">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousSubmodule</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> <span class="fn">R</span> (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></div></div><p>The submodule of homogeneous <code><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a></code>s of degree <code>n</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MvPolynomial.weightedHomogeneousSubmodule" class="instances-for-list"></ul></details></div></div><div class="decl" id="MvPolynomial.mem_weightedHomogeneousSubmodule"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L158-L160">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.mem_weightedHomogeneousSubmodule"><span class="name">MvPolynomial</span>.<span class="name">mem_weightedHomogeneousSubmodule</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule">MvPolynomial.weightedHomogeneousSubmodule</a> <span class="fn">R</span> <span class="fn">w</span> <span class="fn">m</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">p</span> <span class="fn">m</span></span></span></div></div></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousSubmodule_eq_finsupp_supported"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L167-L172">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule_eq_finsupp_supported"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousSubmodule_eq_finsupp_supported</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule">MvPolynomial.weightedHomogeneousSubmodule</a> <span class="fn">R</span> <span class="fn">w</span> <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/LinearAlgebra/Finsupp.html#Finsupp.supported">Finsupp.supported</a> <span class="fn">R</span> <span class="fn">R</span> <span class="fn">{<span class="fn">d</span> | <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">MvPolynomial.weightedDegree'</a> <span class="fn">w</span></span>) <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">m</span></span>}</span></span></span></div></div><p>The submodule <code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule">weightedHomogeneousSubmodule</a> R w m</code> of homogeneous <code><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a></code>s of
+degree <code>n</code> is equal to the <code>R</code>-submodule of all <code>p : (σ →₀ ℕ) →₀ R</code> such that
+<code>p.support ⊆ {d | <a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">weightedDegree'</a> w d = m}</code>. While equal, the former has a
+convenient definitional reduction.</p></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousSubmodule_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L179-L190">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule_mul"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousSubmodule_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule">MvPolynomial.weightedHomogeneousSubmodule</a> <span class="fn">R</span> <span class="fn">w</span> <span class="fn">m</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule">MvPolynomial.weightedHomogeneousSubmodule</a> <span class="fn">R</span> <span class="fn">w</span> <span class="fn">n</span></span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a>   <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule">MvPolynomial.weightedHomogeneousSubmodule</a> <span class="fn">R</span> <span class="fn">w</span> (<span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n</span></span>)</span></span></div></div><p>The submodule generated by products <code>Pm * Pn</code> of weighted homogeneous polynomials of degrees <code>m</code>
+and <code>n</code> is contained in the submodule of weighted homogeneous polynomials of degree <code>m + n</code>.</p></div></div><div class="decl" id="MvPolynomial.isWeightedHomogeneous_monomial"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L194-L202">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.isWeightedHomogeneous_monomial"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_monomial</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(d : <span class="fn"><span class="fn">σ</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn">M</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hm : <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">MvPolynomial.weightedDegree'</a> <span class="fn">w</span></span>) <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">m</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.monomial">MvPolynomial.monomial</a> <span class="fn">d</span></span>) <span class="fn">r</span></span>) <span class="fn">m</span></span></div></div><p>Monomials are weighted homogeneous.</p></div></div><div class="decl" id="MvPolynomial.isWeightedHomogeneous_of_total_degree_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L206-L213">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.isWeightedHomogeneous_of_total_degree_zero"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_of_total_degree_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/BoundedOrder.html#OrderBot">OrderBot</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree">MvPolynomial.weightedTotalDegree</a> <span class="fn">w</span> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">p</span> <a href="../../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span></div></div><p>A polynomial of weightedTotalDegree <code>⊥</code> is weighted_homogeneous of degree <code>⊥</code>.</p></div></div><div class="decl" id="MvPolynomial.isWeightedHomogeneous_C"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L217-L219">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.isWeightedHomogeneous_C"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_C</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> (<span class="fn">↑<span class="fn">MvPolynomial.C</span> <span class="fn">r</span></span>) <span class="fn">0</span></span></div></div><p>Constant polynomials are weighted homogeneous of degree 0.</p></div></div><div class="decl" id="MvPolynomial.isWeightedHomogeneous_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L226-L228">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.isWeightedHomogeneous_zero"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_zero</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">0</span> <span class="fn">m</span></span></div></div><p>0 is weighted homogeneous of any degree.</p></div></div><div class="decl" id="MvPolynomial.isWeightedHomogeneous_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L232-L233">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.isWeightedHomogeneous_one"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_one</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">1</span> <span class="fn">0</span></span></div></div><p>1 is weighted homogeneous of degree 0.</p></div></div><div class="decl" id="MvPolynomial.isWeightedHomogeneous_X"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L237-L240">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.isWeightedHomogeneous_X"><span class="name">MvPolynomial</span>.<span class="name">isWeightedHomogeneous_X</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn">σ</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.X">MvPolynomial.X</a> <span class="fn">i</span></span>) (<span class="fn"><span class="fn">w</span> <span class="fn">i</span></span>)</span></div></div><p>An indeterminate <code>i : σ</code> is weighted homogeneous of degree <code>w i</code>.</p></div></div><div class="decl" id="MvPolynomial.IsWeightedHomogeneous.coeff_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L251-L254">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.coeff_eq_zero"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">coeff_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hφ : <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">φ</span> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(d : <span class="fn"><span class="fn">σ</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hd : <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">MvPolynomial.weightedDegree'</a> <span class="fn">w</span></span>) <span class="fn">d</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.coeff">MvPolynomial.coeff</a> <span class="fn">d</span> <span class="fn">φ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div><p>The weighted degree of a weighted homogeneous polynomial controls its support.</p></div></div><div class="decl" id="MvPolynomial.IsWeightedHomogeneous.inj_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L258-L261">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.inj_right"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">inj_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hφ : <span class="fn"><span class="fn">φ</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hm : <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">φ</span> <span class="fn">m</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hn : <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">φ</span> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">n</span></span></div></div><p>The weighted degree of a nonzero weighted homogeneous polynomial is well-defined.</p></div></div><div class="decl" id="MvPolynomial.IsWeightedHomogeneous.add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L266-L268">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.add"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ψ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hφ : <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">φ</span> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hψ : <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">ψ</span> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> (<span class="fn"><span class="fn">φ</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">ψ</span></span>) <span class="fn">n</span></span></div></div><p>The sum of two weighted homogeneous polynomials of degree <code>n</code> is weighted homogeneous of
+weighted degree <code>n</code>.</p></div></div><div class="decl" id="MvPolynomial.IsWeightedHomogeneous.sum"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L273-L275">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.sum"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">sum</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">ι</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(φ : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <span class="fn">M</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> (<span class="fn"><span class="fn">φ</span> <span class="fn">i</span></span>) <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> (<span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">s</span> <span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><span class="fn">φ</span> <span class="fn">i</span></span></span></span>) <span class="fn">n</span></span></div></div><p>The sum of weighted homogeneous polynomials of degree <code>n</code> is weighted homogeneous of
+weighted degree <code>n</code>.</p></div></div><div class="decl" id="MvPolynomial.IsWeightedHomogeneous.mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L280-L282">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.mul"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ψ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{m : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hφ : <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">φ</span> <span class="fn">m</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hψ : <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">ψ</span> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> (<span class="fn"><span class="fn">φ</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">ψ</span></span>) (<span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">n</span></span>)</span></div></div><p>The product of weighted homogeneous polynomials of weighted degrees <code>m</code> and <code>n</code> is weighted
+homogeneous of weighted degree <code>m + n</code>.</p></div></div><div class="decl" id="MvPolynomial.IsWeightedHomogeneous.prod"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L287-L298">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.prod"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">prod</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Data/Finset/Basic.html#Finset">Finset</a> <span class="fn">ι</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(φ : <span class="fn"><span class="fn">ι</span> → <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <span class="fn"><span class="fn">ι</span> → <span class="fn">M</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">(<span class="fn">∀ (<span class="fn">i</span> : <span class="fn">ι</span>), <span class="fn"><span class="fn"><span class="fn">i</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> (<span class="fn"><span class="fn">φ</span> <span class="fn">i</span></span>) (<span class="fn"><span class="fn">n</span> <span class="fn">i</span></span>)</span></span></span>) →
+  <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> (<span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.prod">Finset.prod</a> <span class="fn">s</span> <span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><span class="fn">φ</span> <span class="fn">i</span></span></span></span>) (<span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">s</span> <span class="fn">fun <span class="fn">i</span> =&gt <span class="fn"><span class="fn">n</span> <span class="fn">i</span></span></span></span>)</span></span></div></div><p>A product of weighted homogeneous polynomials is weighted homogeneous, with weighted degree
+equal to the sum of the weighted degrees.</p></div></div><div class="decl" id="MvPolynomial.IsWeightedHomogeneous.weighted_total_degree"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L303-L312">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.weighted_total_degree"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">weighted_total_degree</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{n : <span class="fn">M</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hφ : <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> <span class="fn">φ</span> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">φ</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree'">MvPolynomial.weightedTotalDegree'</a> <span class="fn">w</span> <span class="fn">φ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">n</span></span></span></div></div><p>A non zero weighted homogeneous polynomial of weighted degree <code>n</code> has weighted total degree
+<code>n</code>.</p></div></div><div class="decl" id="MvPolynomial.IsWeightedHomogeneous.WeightedHomogeneousSubmodule.gcomm_monoid"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L316-L319">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.WeightedHomogeneousSubmodule.gcomm_monoid"><span class="name">MvPolynomial</span>.<span class="name">IsWeightedHomogeneous</span>.<span class="name">WeightedHomogeneousSubmodule</span>.<span class="name">gcomm_monoid</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/GradedMonoid.html#SetLike.GradedMonoid">SetLike.GradedMonoid</a> (<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule">MvPolynomial.weightedHomogeneousSubmodule</a> <span class="fn">R</span> <span class="fn">w</span></span>)</span></div></div><p>The weighted homogeneous submodules form a graded monoid.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.WeightedHomogeneousSubmodule.gcomm_monoid">@<a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.WeightedHomogeneousSubmodule.gcomm_monoid">MvPolynomial.IsWeightedHomogeneous.WeightedHomogeneousSubmodule.gcomm_monoid</a></a> <a href="../../.././Init/Prelude.html#Eq">=</a>   <a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.WeightedHomogeneousSubmodule.gcomm_monoid.proof_1">@<a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous.WeightedHomogeneousSubmodule.gcomm_monoid.proof_1">MvPolynomial.IsWeightedHomogeneous.WeightedHomogeneousSubmodule.gcomm_monoid.proof_1</a></a></span></li></ul></details></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousComponent"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L330-L331">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <span class="fn">M</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">R</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span></span></div></div><p><code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">weightedHomogeneousComponent</a> w n φ</code> is the part of <code>φ</code> that is weighted homogeneous of
+weighted degree <code>n</code>, with respect to the weights <code>w</code>.
+See <code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.sum_weightedHomogeneousComponent">sum_weightedHomogeneousComponent</a></code> for the statement that <code>φ</code> is equal to the sum
+of all its weighted homogeneous components.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-MvPolynomial.weightedHomogeneousComponent" class="instances-for-list"></ul></details></div></div><div class="decl" id="MvPolynomial.coeff_weightedHomogeneousComponent"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L338-L341">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.coeff_weightedHomogeneousComponent"><span class="name">MvPolynomial</span>.<span class="name">coeff_weightedHomogeneousComponent</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(d : <span class="fn"><span class="fn">σ</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.coeff">MvPolynomial.coeff</a> <span class="fn">d</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">MvPolynomial.weightedHomogeneousComponent</a> <span class="fn">w</span> <span class="fn">n</span></span>) <span class="fn">φ</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">if <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">MvPolynomial.weightedDegree'</a> <span class="fn">w</span></span>) <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">n</span></span> then <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.coeff">MvPolynomial.coeff</a> <span class="fn">d</span> <span class="fn">φ</span></span> else <span class="fn">0</span></span></span></div></div></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousComponent_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L344-L347">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent_apply"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">MvPolynomial.weightedHomogeneousComponent</a> <span class="fn">w</span> <span class="fn">n</span></span>) <span class="fn">φ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> (<span class="fn"><a href="../../.././Mathlib/Data/Finset/Basic.html#Finset.filter">Finset.filter</a> (<span class="fn">fun <span class="fn">d</span> =&gt <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">MvPolynomial.weightedDegree'</a> <span class="fn">w</span></span>) <span class="fn">d</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">n</span></span></span>) (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.support">MvPolynomial.support</a> <span class="fn">φ</span></span>)</span>) <span class="fn">fun <span class="fn">d</span> =&gt
+    <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.monomial">MvPolynomial.monomial</a> <span class="fn">d</span></span>) (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.coeff">MvPolynomial.coeff</a> <span class="fn">d</span> <span class="fn">φ</span></span>)</span></span></span></span></div></div></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousComponent_isWeightedHomogeneous"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L352-L357">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent_isWeightedHomogeneous"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_isWeightedHomogeneous</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.IsWeightedHomogeneous">MvPolynomial.IsWeightedHomogeneous</a> <span class="fn">w</span> (<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">MvPolynomial.weightedHomogeneousComponent</a> <span class="fn">w</span> <span class="fn">n</span></span>) <span class="fn">φ</span></span>) <span class="fn">n</span></span></div></div><p>The <code>n</code> weighted homogeneous component of a polynomial is weighted homogeneous of
+weighted degree <code>n</code>.</p></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousComponent_C_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L361-L363">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent_C_mul"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_C_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <span class="fn">R</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">MvPolynomial.weightedHomogeneousComponent</a> <span class="fn">w</span> <span class="fn">n</span></span>) (<span class="fn"><span class="fn">↑<span class="fn">MvPolynomial.C</span> <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">φ</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn">↑<span class="fn">MvPolynomial.C</span> <span class="fn">r</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">MvPolynomial.weightedHomogeneousComponent</a> <span class="fn">w</span> <span class="fn">n</span></span>) <span class="fn">φ</span></span></span></span></div></div></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousComponent_eq_zero'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L367-L373">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent_eq_zero'"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_eq_zero'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">d</span> : <span class="fn"><span class="fn">σ</span> <a href="../../.././Mathlib/Data/Finsupp/Defs.html#Finsupp">→₀</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a></span>), <span class="fn"><span class="fn"><span class="fn">d</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.support">MvPolynomial.support</a> <span class="fn">φ</span></span></span> → <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedDegree'">MvPolynomial.weightedDegree'</a> <span class="fn">w</span></span>) <span class="fn">d</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">n</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">MvPolynomial.weightedHomogeneousComponent</a> <span class="fn">w</span> <span class="fn">n</span></span>) <span class="fn">φ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousComponent_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L376-L385">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent_eq_zero"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(n : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/Lattice.html#SemilatticeSup">SemilatticeSup</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Order/BoundedOrder.html#OrderBot">OrderBot</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedTotalDegree">MvPolynomial.weightedTotalDegree</a> <span class="fn">w</span> <span class="fn">φ</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">n</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">MvPolynomial.weightedHomogeneousComponent</a> <span class="fn">w</span> <span class="fn">n</span></span>) <span class="fn">φ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousComponent_finsupp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L388-L399">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent_finsupp"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_finsupp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Data/Set/Finite.html#Set.Finite">Set.Finite</a> (<span class="fn"><a href="../../.././Mathlib/Algebra/Support.html#Function.support">Function.support</a> <span class="fn">fun <span class="fn">m</span> =&gt <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">MvPolynomial.weightedHomogeneousComponent</a> <span class="fn">w</span> <span class="fn">m</span></span>) <span class="fn">φ</span></span></span></span>)</span></div></div></div></div><div class="decl" id="MvPolynomial.sum_weightedHomogeneousComponent"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L405-L420">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.sum_weightedHomogeneousComponent"><span class="name">MvPolynomial</span>.<span class="name">sum_weightedHomogeneousComponent</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∑ᶠ (m : <span class="fn">M</span>), <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">MvPolynomial.weightedHomogeneousComponent</a> <span class="fn">w</span> <span class="fn">m</span></span>) <span class="fn">φ</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">φ</span></span></div></div><p>Every polynomial is the sum of its weighted homogeneous components.</p></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousComponent_weighted_homogeneous_polynomial"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L426-L439">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent_weighted_homogeneous_polynomial"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_weighted_homogeneous_polynomial</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommMonoid">AddCommMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#DecidableEq">DecidableEq</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(m : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(n : <span class="fn">M</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousSubmodule">MvPolynomial.weightedHomogeneousSubmodule</a> <span class="fn">R</span> <span class="fn">w</span> <span class="fn">n</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">MvPolynomial.weightedHomogeneousComponent</a> <span class="fn">w</span> <span class="fn">m</span></span>) <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">if <span class="fn"><span class="fn">m</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">n</span></span> then <span class="fn">p</span> else <span class="fn">0</span></span></span></div></div><p>The weighted homogeneous components of a weighted homogeneous polynomial.</p></div></div><div class="decl" id="MvPolynomial.weightedHomogeneousComponent_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean#L453-L465">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent_zero"><span class="name">MvPolynomial</span>.<span class="name">weightedHomogeneousComponent_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{M : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{σ : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddMonoid">CanonicallyOrderedAddMonoid</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{w : <span class="fn"><span class="fn">σ</span> → <span class="fn">M</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(φ : <span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial">MvPolynomial</a> <span class="fn">σ</span> <span class="fn">R</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#NoZeroSMulDivisors">NoZeroSMulDivisors</a> <a href="../../.././Init/Prelude.html#Nat">ℕ</a> <span class="fn">M</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hw : <span class="fn">∀ (<span class="fn">i</span> : <span class="fn">σ</span>), <span class="fn"><span class="fn"><span class="fn">w</span> <span class="fn">i</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">MvPolynomial.weightedHomogeneousComponent</a> <span class="fn">w</span> <span class="fn">0</span></span>) <span class="fn">φ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">MvPolynomial.C</span> (<span class="fn"><a href="../../.././Mathlib/Data/MvPolynomial/Basic.html#MvPolynomial.coeff">MvPolynomial.coeff</a> <span class="fn">0</span> <span class="fn">φ</span></span>)</span></span></div></div><p>If <code>M</code> is a <code><a href="../../.././Mathlib/Algebra/Order/Monoid/Canonical/Defs.html#CanonicallyOrderedAddMonoid">CanonicallyOrderedAddMonoid</a></code>, then the <code><a href="../../.././Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.html#MvPolynomial.weightedHomogeneousComponent">weightedHomogeneousComponent</a></code>
+of weighted degree <code>0</code> of a polynomial is its constant coefficient.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

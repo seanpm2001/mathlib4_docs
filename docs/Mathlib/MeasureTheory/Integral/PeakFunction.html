@@ -1,0 +1,314 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.MeasureTheory.Integral.PeakFunction</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.MeasureTheory.Integral.PeakFunction";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">MeasureTheory</span>.<span class="name">Integral</span>.<span class="name">PeakFunction</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">MeasureTheory</span>.<span class="name">Integral</span>.<span class="name">PeakFunction</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Integral/PeakFunction.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/MeasureTheory/Function/LocallyIntegrable.html">Mathlib.MeasureTheory.Function.LocallyIntegrable</a></li><li><a href="../../.././Mathlib/MeasureTheory/Integral/SetIntegral.html">Mathlib.MeasureTheory.Integral.SetIntegral</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.MeasureTheory.Integral.PeakFunction" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Set.disjoint_sdiff_inter"><span class="name">Set</span>.<span class="name">disjoint_sdiff_inter</span></a></div><div class="nav_link"><a class="break_within" href="#integrableOn_peak_smul_of_integrableOn_of_continuousWithinAt"><span class="name">integrableOn_peak_smul_of_integrableOn_of_continuousWithinAt</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt_aux"><span class="name">tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt_aux</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt"><span class="name">tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_measure_nhdsWithin_pos"><span class="name">tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_measure_nhdsWithin_pos</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_integrableOn"><span class="name">tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_integrableOn</span></a></div><div class="nav_link"><a class="break_within" href="#tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_continuousOn"><span class="name">tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_continuousOn</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Integrals-against-peak-functions">Integrals against peak functions <a class="hover-link" href="#Integrals-against-peak-functions">#</a></h1><p>A sequence of peak functions is a sequence of functions with average one concentrating around
+a point <code>x₀</code>. Given such a sequence <code>φₙ</code>, then <code>∫ φₙ g</code> tends to <code>g x₀</code> in many situations, with
+a whole zoo of possible assumptions on <code>φₙ</code> and <code>g</code>. This file is devoted to such results.</p><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/MeasureTheory/Integral/PeakFunction.html#tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt">tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt</a></code>: If a sequence of peak
+functions <code>φᵢ</code> converges uniformly to zero away from a point <code>x₀</code>, and
+<code>g</code> is integrable and continuous at <code>x₀</code>, then <code>∫ φᵢ • g</code> converges to <code>g x₀</code>.</li>
+<li><code><a href="../../.././Mathlib/MeasureTheory/Integral/PeakFunction.html#tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_continuousOn">tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_continuousOn</a></code>:
+If a continuous function <code>c</code> realizes its maximum at a unique point <code>x₀</code> in a compact set <code>s</code>,
+then the sequence of functions <code>(c x) ^ n / ∫ (c x) ^ n</code> is a sequence of peak functions
+concentrating around <code>x₀</code>. Therefore, <code>∫ (c x) ^ n * g / ∫ (c x) ^ n</code> converges to <code>g x₀</code>
+if <code>g</code> is continuous on <code>s</code>.</li>
+</ul><p>Note that there are related results about convolution with respect to peak functions in the file
+<code>Analysis.Convolution</code>, such as <code>convolution_tendsto_right</code> there.</p></div><div class="decl" id="Set.disjoint_sdiff_inter"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Integral/PeakFunction.lean#L45-L46">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Integral/PeakFunction.html#Set.disjoint_sdiff_inter"><span class="name">Set</span>.<span class="name">disjoint_sdiff_inter</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="decl_args">
+<span class="fn">(s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Disjoint.html#Disjoint">Disjoint</a> (<span class="fn"><span class="fn">s</span> <a href="../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">t</span></span>) (<span class="fn"><span class="fn">s</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">t</span></span>)</span></div></div><p>This lemma exists for finsets, but not for sets currently. porting note: move to
+data.set.basic after the port.</p></div></div><div class="decl" id="integrableOn_peak_smul_of_integrableOn_of_continuousWithinAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Integral/PeakFunction.lean#L57-L80">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Integral/PeakFunction.html#integrableOn_peak_smul_of_integrableOn_of_continuousWithinAt"><span class="name">integrableOn_peak_smul_of_integrableOn_of_continuousWithinAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{hm : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hlφ : <span class="fn">∀ (<span class="fn">u</span> : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">u</span></span> → <span class="fn"><span class="fn"><span class="fn">x₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">u</span></span> → <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/UniformConvergence.html#TendstoUniformlyOn">TendstoUniformlyOn</a> <span class="fn">φ</span> <span class="fn">0</span> <span class="fn">l</span> (<span class="fn"><span class="fn">s</span> <a href="../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">u</span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hiφ : <span class="fn">∀ᶠ (i : <span class="fn">ι</span>) in <span class="fn">l</span>, <span class="fn"><span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn">φ</span> <span class="fn">i</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Integral/IntegrableOn.html#MeasureTheory.IntegrableOn">MeasureTheory.IntegrableOn</a> <span class="fn">g</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcg : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousOn.html#ContinuousWithinAt">ContinuousWithinAt</a> <span class="fn">g</span> <span class="fn">s</span> <span class="fn">x₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ᶠ (i : <span class="fn">ι</span>) in <span class="fn">l</span>, <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Integral/IntegrableOn.html#MeasureTheory.IntegrableOn">MeasureTheory.IntegrableOn</a> (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><span class="fn"><span class="fn">φ</span> <span class="fn">i</span> <span class="fn">x</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span></span></span>) <span class="fn">s</span></span></span></div></div><p>If a sequence of peak functions <code>φᵢ</code> converges uniformly to zero away from a point <code>x₀</code>, and
+<code>g</code> is integrable and continuous at <code>x₀</code>, then <code>φᵢ • g</code> is eventually integrable.</p></div></div><div class="decl" id="tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt_aux"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Integral/PeakFunction.lean#L88-L158">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Integral/PeakFunction.html#tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt_aux"><span class="name">tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt_aux</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{hm : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hnφ : <span class="fn">∀ᶠ (i : <span class="fn">ι</span>) in <span class="fn">l</span>, <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">φ</span> <span class="fn">i</span> <span class="fn">x</span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hlφ : <span class="fn">∀ (<span class="fn">u</span> : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">u</span></span> → <span class="fn"><span class="fn"><span class="fn">x₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">u</span></span> → <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/UniformConvergence.html#TendstoUniformlyOn">TendstoUniformlyOn</a> <span class="fn">φ</span> <span class="fn">0</span> <span class="fn">l</span> (<span class="fn"><span class="fn">s</span> <a href="../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">u</span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hiφ : <span class="fn">∀ᶠ (i : <span class="fn">ι</span>) in <span class="fn">l</span>, <span class="fn"><span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn">φ</span> <span class="fn">i</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Integral/IntegrableOn.html#MeasureTheory.IntegrableOn">MeasureTheory.IntegrableOn</a> <span class="fn">g</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'g : <span class="fn"><span class="fn"><span class="fn">g</span> <span class="fn">x₀</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcg : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousOn.html#ContinuousWithinAt">ContinuousWithinAt</a> <span class="fn">g</span> <span class="fn">s</span> <span class="fn">x₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">i</span> =&gt <span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">φ</span> <span class="fn">i</span> <span class="fn">x</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span></span> ∂<span class="fn">μ</span></span></span>) <span class="fn">l</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> <span class="fn">0</span></span>)</span></div></div><p>If a sequence of peak functions <code>φᵢ</code> converges uniformly to zero away from a point <code>x₀</code>, and
+<code>g</code> is integrable and continuous at <code>x₀</code>, then <code>∫ φᵢ • g</code> converges to <code>x₀</code>. Auxiliary lemma
+where one assumes additionally <code>g x₀ = 0</code>.</p></div></div><div class="decl" id="tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Integral/PeakFunction.lean#L163-L186">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Integral/PeakFunction.html#tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt"><span class="name">tendsto_set_integral_peak_smul_of_integrableOn_of_continuousWithinAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ι : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{hm : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{l : <span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter">Filter</a> <span class="fn">ι</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{φ : <span class="fn"><span class="fn">ι</span> → <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h's : <span class="fn"><span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> <span class="fn">s</span></span> <a href="../../.././Init/Core.html#Ne">≠</a> <a href="../../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hnφ : <span class="fn">∀ᶠ (i : <span class="fn">ι</span>) in <span class="fn">l</span>, <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">φ</span> <span class="fn">i</span> <span class="fn">x</span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hlφ : <span class="fn">∀ (<span class="fn">u</span> : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">u</span></span> → <span class="fn"><span class="fn"><span class="fn">x₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">u</span></span> → <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/UniformConvergence.html#TendstoUniformlyOn">TendstoUniformlyOn</a> <span class="fn">φ</span> <span class="fn">0</span> <span class="fn">l</span> (<span class="fn"><span class="fn">s</span> <a href="../../.././Std/Classes/SetNotation.html#SDiff.sdiff">\</a> <span class="fn">u</span></span>)</span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hiφ : <span class="fn">(<span class="fn">fun <span class="fn">i</span> =&gt <span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn">φ</span> <span class="fn">i</span> <span class="fn">x</span></span> ∂<span class="fn">μ</span></span></span>) <a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn">l</span><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Integral/IntegrableOn.html#MeasureTheory.IntegrableOn">MeasureTheory.IntegrableOn</a> <span class="fn">g</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcg : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousOn.html#ContinuousWithinAt">ContinuousWithinAt</a> <span class="fn">g</span> <span class="fn">s</span> <span class="fn">x₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">i</span> =&gt <span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">φ</span> <span class="fn">i</span> <span class="fn">x</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span></span> ∂<span class="fn">μ</span></span></span>) <span class="fn">l</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><span class="fn">g</span> <span class="fn">x₀</span></span>)</span>)</span></div></div></div></div><div class="decl" id="tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_measure_nhdsWithin_pos"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Integral/PeakFunction.lean#L198-L285">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Integral/PeakFunction.html#tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_measure_nhdsWithin_pos"><span class="name">tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_measure_nhdsWithin_pos</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{hm : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Metrizable.html#TopologicalSpace.MetrizableSpace">TopologicalSpace.MetrizableSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsLocallyFiniteMeasure">MeasureTheory.IsLocallyFiniteMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hμ : <span class="fn">∀ (<span class="fn">u</span> : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> <span class="fn">u</span></span> → <span class="fn"><span class="fn"><span class="fn">x₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">u</span></span> → <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">↑<span class="fn">↑<span class="fn">μ</span></span> (<span class="fn"><span class="fn">u</span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn">s</span></span>)</span></span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousOn.html#ContinuousOn">ContinuousOn</a> <span class="fn">c</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'c : <span class="fn">∀ (<span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">x₀</span></span> → <span class="fn"><span class="fn"><span class="fn">c</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">c</span> <span class="fn">x₀</span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hnc : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">c</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hnc₀ : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">c</span> <span class="fn">x₀</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">x₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Integral/IntegrableOn.html#MeasureTheory.IntegrableOn">MeasureTheory.IntegrableOn</a> <span class="fn">g</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcg : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousOn.html#ContinuousWithinAt">ContinuousWithinAt</a> <span class="fn">g</span> <span class="fn">s</span> <span class="fn">x₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">(<span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">c</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> ∂<span class="fn">μ</span></span>)<a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span></span> ∂<span class="fn">μ</span></span></span></span>) <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><span class="fn">g</span> <span class="fn">x₀</span></span>)</span>)</span></div></div><p>If a continuous function <code>c</code> realizes its maximum at a unique point <code>x₀</code> in a compact set <code>s</code>,
+then the sequence of functions <code>(c x) ^ n / ∫ (c x) ^ n</code> is a sequence of peak functions
+concentrating around <code>x₀</code>. Therefore, <code>∫ (c x) ^ n * g / ∫ (c x) ^ n</code> converges to <code>g x₀</code> if <code>g</code> is
+integrable on <code>s</code> and continuous at <code>x₀</code>.</p><p>Version assuming that <code>μ</code> gives positive mass to all neighborhoods of <code>x₀</code> within <code>s</code>.
+For a less precise but more usable version, see
+<code><a href="../../.././Mathlib/MeasureTheory/Integral/PeakFunction.html#tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_continuousOn">tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_continuousOn</a></code>.</p></div></div><div class="decl" id="tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_integrableOn"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Integral/PeakFunction.lean#L297-L312">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Integral/PeakFunction.html#tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_integrableOn"><span class="name">tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_integrableOn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{hm : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Metrizable.html#TopologicalSpace.MetrizableSpace">TopologicalSpace.MetrizableSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsLocallyFiniteMeasure">MeasureTheory.IsLocallyFiniteMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/OpenPos.html#MeasureTheory.Measure.IsOpenPosMeasure">MeasureTheory.Measure.IsOpenPosMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousOn.html#ContinuousOn">ContinuousOn</a> <span class="fn">c</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'c : <span class="fn">∀ (<span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">x₀</span></span> → <span class="fn"><span class="fn"><span class="fn">c</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">c</span> <span class="fn">x₀</span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hnc : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">c</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hnc₀ : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">c</span> <span class="fn">x₀</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">x₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#closure">closure</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#interior">interior</a> <span class="fn">s</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Integral/IntegrableOn.html#MeasureTheory.IntegrableOn">MeasureTheory.IntegrableOn</a> <span class="fn">g</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hcg : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousOn.html#ContinuousWithinAt">ContinuousWithinAt</a> <span class="fn">g</span> <span class="fn">s</span> <span class="fn">x₀</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">(<span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">c</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> ∂<span class="fn">μ</span></span>)<a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span></span> ∂<span class="fn">μ</span></span></span></span>) <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><span class="fn">g</span> <span class="fn">x₀</span></span>)</span>)</span></div></div><p>If a continuous function <code>c</code> realizes its maximum at a unique point <code>x₀</code> in a compact set <code>s</code>,
+then the sequence of functions <code>(c x) ^ n / ∫ (c x) ^ n</code> is a sequence of peak functions
+concentrating around <code>x₀</code>. Therefore, <code>∫ (c x) ^ n * g / ∫ (c x) ^ n</code> converges to <code>g x₀</code> if <code>g</code> is
+integrable on <code>s</code> and continuous at <code>x₀</code>.</p><p>Version assuming that <code>μ</code> gives positive mass to all open sets.
+For a less precise but more usable version, see
+<code><a href="../../.././Mathlib/MeasureTheory/Integral/PeakFunction.html#tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_continuousOn">tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_continuousOn</a></code>.</p></div></div><div class="decl" id="tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_continuousOn"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/MeasureTheory/Integral/PeakFunction.lean#L319-L327">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/MeasureTheory/Integral/PeakFunction.html#tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_continuousOn"><span class="name">tendsto_set_integral_pow_smul_of_unique_maximum_of_isCompact_of_continuousOn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{α : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{hm : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">α</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">α</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">α</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Metrizable.html#TopologicalSpace.MetrizableSpace">TopologicalSpace.MetrizableSpace</a> <span class="fn">α</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsLocallyFiniteMeasure">MeasureTheory.IsLocallyFiniteMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/OpenPos.html#MeasureTheory.Measure.IsOpenPosMeasure">MeasureTheory.Measure.IsOpenPosMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hs : <span class="fn"><a href="../../.././Mathlib/Topology/SubsetProperties.html#IsCompact">IsCompact</a> <span class="fn">s</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn"><span class="fn">α</span> → <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousOn.html#ContinuousOn">ContinuousOn</a> <span class="fn">c</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'c : <span class="fn">∀ (<span class="fn">y</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../.././Init/Core.html#Ne">≠</a> <span class="fn">x₀</span></span> → <span class="fn"><span class="fn"><span class="fn">c</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">c</span> <span class="fn">x₀</span></span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hnc : <span class="fn">∀ (<span class="fn">x</span> : <span class="fn">α</span>), <span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">s</span></span> → <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">c</span> <span class="fn">x</span></span></span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hnc₀ : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><span class="fn">c</span> <span class="fn">x₀</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">x₀</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#closure">closure</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#interior">interior</a> <span class="fn">s</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hmg : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousOn.html#ContinuousOn">ContinuousOn</a> <span class="fn">g</span> <span class="fn">s</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Order/Filter/Basic.html#Filter.Tendsto">Filter.Tendsto</a> (<span class="fn">fun <span class="fn">n</span> =&gt <span class="fn"><span class="fn">(<span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn">c</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> ∂<span class="fn">μ</span></span>)<a href="../../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">∫ (x : <span class="fn">α</span>) in <span class="fn">s</span>, <span class="fn"><span class="fn"><span class="fn"><span class="fn">c</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">n</span></span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">g</span> <span class="fn">x</span></span></span> ∂<span class="fn">μ</span></span></span></span>) <span class="fn">Filter.atTop</span> (<span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhds">nhds</a> (<span class="fn"><span class="fn">g</span> <span class="fn">x₀</span></span>)</span>)</span></div></div><p>If a continuous function <code>c</code> realizes its maximum at a unique point <code>x₀</code> in a compact set <code>s</code>,
+then the sequence of functions <code>(c x) ^ n / ∫ (c x) ^ n</code> is a sequence of peak functions
+concentrating around <code>x₀</code>. Therefore, <code>∫ (c x) ^ n * g / ∫ (c x) ^ n</code> converges to <code>g x₀</code> if <code>g</code> is
+continuous on <code>s</code>.</p></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

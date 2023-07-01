@@ -1,0 +1,255 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.CategoryTheory.Abelian.Transfer</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.CategoryTheory.Abelian.Transfer";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">Transfer</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">CategoryTheory</span>.<span class="name">Abelian</span>.<span class="name">Transfer</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Transfer.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html">Mathlib.CategoryTheory.Abelian.Basic</a></li><li><a href="../../.././Mathlib/CategoryTheory/Adjunction/Limits.html">Mathlib.CategoryTheory.Adjunction.Limits</a></li><li><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Kernels.html">Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.CategoryTheory.Abelian.Transfer" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.AbelianOfAdjunction.hasKernels"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">hasKernels</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.AbelianOfAdjunction.hasCokernels"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">hasCokernels</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.AbelianOfAdjunction.cokernelIso"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">cokernelIso</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.AbelianOfAdjunction.coimageIsoImageAux"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">coimageIsoImageAux</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.AbelianOfAdjunction.coimageIsoImage"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">coimageIsoImage</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.AbelianOfAdjunction.coimageIsoImage_hom"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">coimageIsoImage_hom</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.abelianOfAdjunction"><span class="name">CategoryTheory</span>.<span class="name">abelianOfAdjunction</span></a></div><div class="nav_link"><a class="break_within" href="#CategoryTheory.abelianOfEquivalence"><span class="name">CategoryTheory</span>.<span class="name">abelianOfEquivalence</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Transferring-abelian-ness-across-a-functor">Transferring "abelian-ness" across a functor <a class="hover-link" href="#Transferring-abelian-ness-across-a-functor">#</a></h1><p>If <code>C</code> is an additive category, <code>D</code> is an abelian category,
+we have <code>F : C ⥤ D</code> <code>G : D ⥤ C</code> (both preserving zero morphisms),
+<code>G</code> is left exact (that is, preserves finite limits),
+and further we have <code>adj : G ⊣ F</code> and <code>i : F ⋙ G ≅ 𝟭 C</code>,
+then <code>C</code> is also abelian.</p><p>See <a href="https://stacks.math.columbia.edu/tag/03A3">https://stacks.math.columbia.edu/tag/03A3</a></p><h2 class="markdown-heading" id="Notes">Notes <a class="hover-link" href="#Notes">#</a></h2><p>The hypotheses, following the statement from the Stacks project,
+may appear surprising: we don't ask that the counit of the adjunction is an isomorphism,
+but just that we have some potentially unrelated isomorphism <code>i : F ⋙ G ≅ 𝟭 C</code>.</p><p>However Lemma A1.1.1 from [Elephant] shows that in this situation the counit itself
+must be an isomorphism, and thus that <code>C</code> is a reflective subcategory of <code>D</code>.</p><p>Someone may like to formalize that lemma, and restate this theorem in terms of <code>Reflective</code>.
+(That lemma has a nice string diagrammatic proof that holds in any bicategory.)</p></div><div class="decl" id="CategoryTheory.AbelianOfAdjunction.hasKernels"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Transfer.lean#L60-L66">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Transfer.html#CategoryTheory.AbelianOfAdjunction.hasKernels"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">hasKernels</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><span class="fn">D</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">C</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.html#CategoryTheory.Functor.PreservesZeroMorphisms">CategoryTheory.Functor.PreservesZeroMorphisms</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.comp">⋙</a> <span class="fn">G</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.id">𝟭</a> <span class="fn">C</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Finite.html#CategoryTheory.Limits.PreservesFiniteLimits">CategoryTheory.Limits.PreservesFiniteLimits</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.HasKernels">CategoryTheory.Limits.HasKernels</a> <span class="fn">C</span></span></div></div><p>No point making this an instance, as it requires <code>i</code>.</p></div></div><div class="decl" id="CategoryTheory.AbelianOfAdjunction.hasCokernels"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Transfer.lean#L70-L77">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Transfer.html#CategoryTheory.AbelianOfAdjunction.hasCokernels"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">hasCokernels</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><span class="fn">D</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">C</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.html#CategoryTheory.Functor.PreservesZeroMorphisms">CategoryTheory.Functor.PreservesZeroMorphisms</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.comp">⋙</a> <span class="fn">G</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.id">𝟭</a> <span class="fn">C</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(adj : <span class="fn"><span class="fn">G</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.HasCokernels">CategoryTheory.Limits.HasCokernels</a> <span class="fn">C</span></span></div></div><p>No point making this an instance, as it requires <code>i</code> and <code>adj</code>.</p></div></div><div class="decl" id="CategoryTheory.AbelianOfAdjunction.cokernelIso"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Transfer.lean#L83-L94">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Transfer.html#CategoryTheory.AbelianOfAdjunction.cokernelIso"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">cokernelIso</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><span class="fn">D</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">C</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.html#CategoryTheory.Functor.PreservesZeroMorphisms">CategoryTheory.Functor.PreservesZeroMorphisms</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.comp">⋙</a> <span class="fn">G</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.id">𝟭</a> <span class="fn">C</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(adj : <span class="fn"><span class="fn">G</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.HasCokernels">CategoryTheory.Limits.HasCokernels</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">G</span>.obj (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel">CategoryTheory.Limits.cokernel</a> (<span class="fn"><span class="fn">F</span>.map <span class="fn">f</span></span>)</span>)</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel">CategoryTheory.Limits.cokernel</a> <span class="fn">f</span></span></span></div></div><p>Auxiliary construction for <code><a href="../../.././Mathlib/CategoryTheory/Abelian/Transfer.html#CategoryTheory.AbelianOfAdjunction.coimageIsoImage">coimageIsoImage</a></code></p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-CategoryTheory.AbelianOfAdjunction.cokernelIso" class="instances-for-list"></ul></details></div></div><div class="decl" id="CategoryTheory.AbelianOfAdjunction.coimageIsoImageAux"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Transfer.lean#L100-L121">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Transfer.html#CategoryTheory.AbelianOfAdjunction.coimageIsoImageAux"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">coimageIsoImageAux</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><span class="fn">D</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">C</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.html#CategoryTheory.Functor.PreservesZeroMorphisms">CategoryTheory.Functor.PreservesZeroMorphisms</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.comp">⋙</a> <span class="fn">G</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.id">𝟭</a> <span class="fn">C</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(adj : <span class="fn"><span class="fn">G</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.HasCokernels">CategoryTheory.Limits.HasCokernels</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.HasKernels">CategoryTheory.Limits.HasKernels</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Finite.html#CategoryTheory.Limits.PreservesFiniteLimits">CategoryTheory.Limits.PreservesFiniteLimits</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel">CategoryTheory.Limits.kernel</a> (<span class="fn"><span class="fn">G</span>.map (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> (<span class="fn"><span class="fn">F</span>.map <span class="fn">f</span></span>)</span>)</span>)</span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a>   <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.kernel">CategoryTheory.Limits.kernel</a> (<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.cokernel.π">CategoryTheory.Limits.cokernel.π</a> <span class="fn">f</span></span>)</span></span></div></div><p>Auxiliary construction for <code><a href="../../.././Mathlib/CategoryTheory/Abelian/Transfer.html#CategoryTheory.AbelianOfAdjunction.coimageIsoImage">coimageIsoImage</a></code></p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-CategoryTheory.AbelianOfAdjunction.coimageIsoImageAux" class="instances-for-list"></ul></details></div></div><div class="decl" id="CategoryTheory.AbelianOfAdjunction.coimageIsoImage"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Transfer.lean#L129-L144">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Transfer.html#CategoryTheory.AbelianOfAdjunction.coimageIsoImage"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">coimageIsoImage</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><span class="fn">D</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">C</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.html#CategoryTheory.Functor.PreservesZeroMorphisms">CategoryTheory.Functor.PreservesZeroMorphisms</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.comp">⋙</a> <span class="fn">G</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.id">𝟭</a> <span class="fn">C</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(adj : <span class="fn"><span class="fn">G</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.HasCokernels">CategoryTheory.Limits.HasCokernels</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.HasKernels">CategoryTheory.Limits.HasKernels</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Finite.html#CategoryTheory.Limits.PreservesFiniteLimits">CategoryTheory.Limits.PreservesFiniteLimits</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.html#CategoryTheory.Functor.PreservesZeroMorphisms">CategoryTheory.Functor.PreservesZeroMorphisms</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Images.html#CategoryTheory.Abelian.coimage">CategoryTheory.Abelian.coimage</a> <span class="fn">f</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Images.html#CategoryTheory.Abelian.image">CategoryTheory.Abelian.image</a> <span class="fn">f</span></span></span></div></div><p>Auxiliary definition: the abelian coimage and abelian image agree.
+We still need to check that this agrees with the canonical morphism.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-CategoryTheory.AbelianOfAdjunction.coimageIsoImage" class="instances-for-list"></ul></details></div></div><div class="decl" id="CategoryTheory.AbelianOfAdjunction.coimageIsoImage_hom"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Transfer.lean#L149-L166">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Transfer.html#CategoryTheory.AbelianOfAdjunction.coimageIsoImage_hom"><span class="name">CategoryTheory</span>.<span class="name">AbelianOfAdjunction</span>.<span class="name">coimageIsoImage_hom</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><span class="fn">D</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">C</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.html#CategoryTheory.Functor.PreservesZeroMorphisms">CategoryTheory.Functor.PreservesZeroMorphisms</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.comp">⋙</a> <span class="fn">G</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.id">𝟭</a> <span class="fn">C</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(adj : <span class="fn"><span class="fn">G</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.HasCokernels">CategoryTheory.Limits.HasCokernels</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/Kernels.html#CategoryTheory.Limits.HasKernels">CategoryTheory.Limits.HasKernels</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Finite.html#CategoryTheory.Limits.PreservesFiniteLimits">CategoryTheory.Limits.PreservesFiniteLimits</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.html#CategoryTheory.Functor.PreservesZeroMorphisms">CategoryTheory.Functor.PreservesZeroMorphisms</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn">C</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn">C</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">X</span> <a href="../../.././Mathlib/Combinatorics/Quiver/Basic.html#Quiver.Hom">⟶</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">(<span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Transfer.html#CategoryTheory.AbelianOfAdjunction.coimageIsoImage">CategoryTheory.AbelianOfAdjunction.coimageIsoImage</a> <span class="fn">F</span> <span class="fn">G</span> <span class="fn">i</span> <span class="fn">adj</span> <span class="fn">f</span></span>).hom</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Images.html#CategoryTheory.Abelian.coimageImageComparison">CategoryTheory.Abelian.coimageImageComparison</a> <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="CategoryTheory.abelianOfAdjunction"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Transfer.lean#L181-L191">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Transfer.html#CategoryTheory.abelianOfAdjunction"><span class="name">CategoryTheory</span>.<span class="name">abelianOfAdjunction</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/FiniteProducts.html#CategoryTheory.Limits.HasFiniteProducts">CategoryTheory.Limits.HasFiniteProducts</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.html#CategoryTheory.Functor.PreservesZeroMorphisms">CategoryTheory.Functor.PreservesZeroMorphisms</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <span class="fn"><span class="fn">D</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">C</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.html#CategoryTheory.Functor.PreservesZeroMorphisms">CategoryTheory.Functor.PreservesZeroMorphisms</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Finite.html#CategoryTheory.Limits.PreservesFiniteLimits">CategoryTheory.Limits.PreservesFiniteLimits</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn"><span class="fn">F</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.comp">⋙</a> <span class="fn">G</span></span> <a href="../../.././Mathlib/CategoryTheory/Iso.html#CategoryTheory.Iso">≅</a> <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor.id">𝟭</a> <span class="fn">C</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(adj : <span class="fn"><span class="fn">G</span> <a href="../../.././Mathlib/CategoryTheory/Adjunction/Basic.html#CategoryTheory.Adjunction">⊣</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">C</span></span></div></div><p>If <code>C</code> is an additive category, <code>D</code> is an abelian category,
+we have <code>F : C ⥤ D</code> <code>G : D ⥤ C</code> (both preserving zero morphisms),
+<code>G</code> is left exact (that is, preserves finite limits),
+and further we have <code>adj : G ⊣ F</code> and <code>i : F ⋙ G ≅ 𝟭 C</code>,
+then <code>C</code> is also abelian.</p><p>See <a href="https://stacks.math.columbia.edu/tag/03A3">https://stacks.math.columbia.edu/tag/03A3</a></p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-CategoryTheory.abelianOfAdjunction" class="instances-for-list"></ul></details></div></div><div class="decl" id="CategoryTheory.abelianOfEquivalence"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/CategoryTheory/Abelian/Transfer.lean#L198-L201">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/CategoryTheory/Abelian/Transfer.html#CategoryTheory.abelianOfEquivalence"><span class="name">CategoryTheory</span>.<span class="name">abelianOfEquivalence</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{C : <a href="../../.././foundational_types.html">Type</a> u₁}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Preadditive/Basic.html#CategoryTheory.Preadditive">CategoryTheory.Preadditive</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Shapes/FiniteProducts.html#CategoryTheory.Limits.HasFiniteProducts">CategoryTheory.Limits.HasFiniteProducts</a> <span class="fn">C</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{D : <a href="../../.././foundational_types.html">Type</a> u₂}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Category/Basic.html#CategoryTheory.Category">CategoryTheory.Category</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">D</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><span class="fn">C</span> <a href="../../.././Mathlib/CategoryTheory/Functor/Basic.html#CategoryTheory.Functor">⥤</a> <span class="fn">D</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.html#CategoryTheory.Functor.PreservesZeroMorphisms">CategoryTheory.Functor.PreservesZeroMorphisms</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/CategoryTheory/Equivalence.html#CategoryTheory.IsEquivalence">CategoryTheory.IsEquivalence</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/CategoryTheory/Abelian/Basic.html#CategoryTheory.Abelian">CategoryTheory.Abelian</a> <span class="fn">C</span></span></div></div><p>If <code>C</code> is an additive category equivalent to an abelian category <code>D</code>
+via a functor that preserves zero morphisms,
+then <code>C</code> is also abelian.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-CategoryTheory.abelianOfEquivalence" class="instances-for-list"></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

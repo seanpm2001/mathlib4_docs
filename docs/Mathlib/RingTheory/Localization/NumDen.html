@@ -1,0 +1,248 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.RingTheory.Localization.NumDen</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.RingTheory.Localization.NumDen";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">RingTheory</span>.<span class="name">Localization</span>.<span class="name">NumDen</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">RingTheory</span>.<span class="name">Localization</span>.<span class="name">NumDen</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html">Mathlib.RingTheory.UniqueFactorizationDomain</a></li><li><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html">Mathlib.RingTheory.Localization.FractionRing</a></li><li><a href="../../.././Mathlib/RingTheory/Localization/Integer.html">Mathlib.RingTheory.Localization.Integer</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.RingTheory.Localization.NumDen" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.exists_reduced_fraction"><span class="name">IsFractionRing</span>.<span class="name">exists_reduced_fraction</span></a></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.num"><span class="name">IsFractionRing</span>.<span class="name">num</span></a></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.den"><span class="name">IsFractionRing</span>.<span class="name">den</span></a></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.num_den_reduced"><span class="name">IsFractionRing</span>.<span class="name">num_den_reduced</span></a></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.mk'_num_den"><span class="name">IsFractionRing</span>.<span class="name">mk'_num_den</span></a></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.mk'_num_den'"><span class="name">IsFractionRing</span>.<span class="name">mk'_num_den'</span></a></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.num_mul_den_eq_num_iff_eq"><span class="name">IsFractionRing</span>.<span class="name">num_mul_den_eq_num_iff_eq</span></a></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.num_mul_den_eq_num_iff_eq'"><span class="name">IsFractionRing</span>.<span class="name">num_mul_den_eq_num_iff_eq'</span></a></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.num_mul_den_eq_num_mul_den_iff_eq"><span class="name">IsFractionRing</span>.<span class="name">num_mul_den_eq_num_mul_den_iff_eq</span></a></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.eq_zero_of_num_eq_zero"><span class="name">IsFractionRing</span>.<span class="name">eq_zero_of_num_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.isInteger_of_isUnit_den"><span class="name">IsFractionRing</span>.<span class="name">isInteger_of_isUnit_den</span></a></div><div class="nav_link"><a class="break_within" href="#IsFractionRing.isUnit_den_of_num_eq_zero"><span class="name">IsFractionRing</span>.<span class="name">isUnit_den_of_num_eq_zero</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Numerator-and-denominator-in-a-localization">Numerator and denominator in a localization <a class="hover-link" href="#Numerator-and-denominator-in-a-localization">#</a></h1><h2 class="markdown-heading" id="Implementation-notes">Implementation notes <a class="hover-link" href="#Implementation-notes">#</a></h2><p>See <code>Mathlib/RingTheory/Localization/Basic.lean</code> for a design overview.</p><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>localization, ring localization, commutative ring localization, characteristic predicate,
+commutative ring, field of fractions</p></div><div class="decl" id="IsFractionRing.exists_reduced_fraction"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L42-L52">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.exists_reduced_fraction"><span class="name">IsFractionRing</span>.<span class="name">exists_reduced_fraction</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">a</span> <span class="fn">b</span>, <span class="fn">(<span class="fn">∀ {<span class="fn">d</span> : <span class="fn">A</span>}, <span class="fn"><span class="fn"><span class="fn">d</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">a</span></span> → <span class="fn"><span class="fn"><span class="fn">d</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">↑<span class="fn">b</span></span></span> → <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">d</span></span></span></span></span>) <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/Basic.html#IsLocalization.mk'">IsLocalization.mk'</a> <span class="fn">K</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="IsFractionRing.num"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L56-L57">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num"><span class="name">IsFractionRing</span>.<span class="name">num</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">A</span></div></div><p><code>f.<a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num">num</a> x</code> is the numerator of <code>x : f.codomain</code> as a reduced fraction.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num">IsFractionRing.num</a> <span class="fn">A</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Init/Classical.html#Classical.choose">Classical.choose</a> <span class="fn">(_ : <span class="fn">∃ <span class="fn">a</span> <span class="fn">b</span>, <span class="fn">(<span class="fn">∀ {<span class="fn">d</span> : <span class="fn">A</span>}, <span class="fn"><span class="fn"><span class="fn">d</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">a</span></span> → <span class="fn"><span class="fn"><span class="fn">d</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">↑<span class="fn">b</span></span></span> → <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">d</span></span></span></span></span>) <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/Basic.html#IsLocalization.mk'">IsLocalization.mk'</a> <span class="fn">K</span> <span class="fn">a</span> <span class="fn">b</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-IsFractionRing.num" class="instances-for-list"></ul></details></div></div><div class="decl" id="IsFractionRing.den"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L61-L62">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.den"><span class="name">IsFractionRing</span>.<span class="name">den</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/RingTheory/NonZeroDivisors.html#nonZeroDivisors">nonZeroDivisors</a> <span class="fn">A</span></span></span> }</span></div></div><p><code>f.<a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.den">den</a> x</code> is the denominator of <code>x : f.codomain</code> as a reduced fraction.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-IsFractionRing.den" class="instances-for-list"></ul></details></div></div><div class="decl" id="IsFractionRing.num_den_reduced"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L65-L66">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num_den_reduced"><span class="name">IsFractionRing</span>.<span class="name">num_den_reduced</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">K</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{d : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">d</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num">IsFractionRing.num</a> <span class="fn">A</span> <span class="fn">x</span></span></span> → <span class="fn"><span class="fn"><span class="fn">d</span> <a href="../../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.den">IsFractionRing.den</a> <span class="fn">A</span> <span class="fn">x</span></span>)</span></span> → <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">d</span></span></span></span></div></div></div></div><div class="decl" id="IsFractionRing.mk'_num_den"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L70-L71">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.mk'_num_den"><span class="name">IsFractionRing</span>.<span class="name">mk'_num_den</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/Basic.html#IsLocalization.mk'">IsLocalization.mk'</a> <span class="fn">K</span> (<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num">IsFractionRing.num</a> <span class="fn">A</span> <span class="fn">x</span></span>) (<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.den">IsFractionRing.den</a> <span class="fn">A</span> <span class="fn">x</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="IsFractionRing.mk'_num_den'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L75-L77">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.mk'_num_den'"><span class="name">IsFractionRing</span>.<span class="name">mk'_num_den'</span></a></span><span class="decl_args">
+<span class="fn">(A : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x : <span class="fn">K</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">A</span> <span class="fn">K</span></span>) (<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num">IsFractionRing.num</a> <span class="fn">A</span> <span class="fn">x</span></span>)</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">A</span> <span class="fn">K</span></span>) <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.den">IsFractionRing.den</a> <span class="fn">A</span> <span class="fn">x</span></span>)</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="IsFractionRing.num_mul_den_eq_num_iff_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L81-L84">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num_mul_den_eq_num_iff_eq"><span class="name">IsFractionRing</span>.<span class="name">num_mul_den_eq_num_iff_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">A</span> <span class="fn">K</span></span>) <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.den">IsFractionRing.den</a> <span class="fn">A</span> <span class="fn">y</span></span>)</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">A</span> <span class="fn">K</span></span>) (<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num">IsFractionRing.num</a> <span class="fn">A</span> <span class="fn">y</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">y</span></span></span></div></div></div></div><div class="decl" id="IsFractionRing.num_mul_den_eq_num_iff_eq'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L87-L90">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num_mul_den_eq_num_iff_eq'"><span class="name">IsFractionRing</span>.<span class="name">num_mul_den_eq_num_iff_eq'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">A</span> <span class="fn">K</span></span>) <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.den">IsFractionRing.den</a> <span class="fn">A</span> <span class="fn">x</span></span>)</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#algebraMap">algebraMap</a> <span class="fn">A</span> <span class="fn">K</span></span>) (<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num">IsFractionRing.num</a> <span class="fn">A</span> <span class="fn">x</span></span>)</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">y</span></span></span></div></div></div></div><div class="decl" id="IsFractionRing.num_mul_den_eq_num_mul_den_iff_eq"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L93-L95">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num_mul_den_eq_num_mul_den_iff_eq"><span class="name">IsFractionRing</span>.<span class="name">num_mul_den_eq_num_mul_den_iff_eq</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">K</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num">IsFractionRing.num</a> <span class="fn">A</span> <span class="fn">y</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.den">IsFractionRing.den</a> <span class="fn">A</span> <span class="fn">x</span></span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num">IsFractionRing.num</a> <span class="fn">A</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.den">IsFractionRing.den</a> <span class="fn">A</span> <span class="fn">y</span></span>)</span></span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">y</span></span></span></div></div></div></div><div class="decl" id="IsFractionRing.eq_zero_of_num_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L98-L99">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.eq_zero_of_num_eq_zero"><span class="name">IsFractionRing</span>.<span class="name">eq_zero_of_num_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num">IsFractionRing.num</a> <span class="fn">A</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="IsFractionRing.isInteger_of_isUnit_den"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L102-L110">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.isInteger_of_isUnit_den"><span class="name">IsFractionRing</span>.<span class="name">isInteger_of_isUnit_den</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.den">IsFractionRing.den</a> <span class="fn">A</span> <span class="fn">x</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/Integer.html#IsLocalization.IsInteger">IsLocalization.IsInteger</a> <span class="fn">A</span> <span class="fn">x</span></span></div></div></div></div><div class="decl" id="IsFractionRing.isUnit_den_of_num_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RingTheory/Localization/NumDen.lean#L113-L114">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.isUnit_den_of_num_eq_zero"><span class="name">IsFractionRing</span>.<span class="name">isUnit_den_of_num_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#IsDomain">IsDomain</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/UniqueFactorizationDomain.html#UniqueFactorizationMonoid">UniqueFactorizationMonoid</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/FractionRing.html#IsFractionRing">IsFractionRing</a> <span class="fn">A</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">K</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.num">IsFractionRing.num</a> <span class="fn">A</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/Units.html#IsUnit">IsUnit</a> <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/RingTheory/Localization/NumDen.html#IsFractionRing.den">IsFractionRing.den</a> <span class="fn">A</span> <span class="fn">x</span></span>)</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

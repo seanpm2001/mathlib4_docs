@@ -1,0 +1,463 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.RepresentationTheory.Maschke</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.RepresentationTheory.Maschke";</script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">RepresentationTheory</span>.<span class="name">Maschke</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">RepresentationTheory</span>.<span class="name">Maschke</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/LinearAlgebra/Basis.html">Mathlib.LinearAlgebra.Basis</a></li><li><a href="../.././Mathlib/Algebra/CharP/Invertible.html">Mathlib.Algebra.CharP.Invertible</a></li><li><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html">Mathlib.Algebra.MonoidAlgebra.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.RepresentationTheory.Maschke" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#LinearMap.conjugate"><span class="name">LinearMap</span>.<span class="name">conjugate</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.conjugate_apply"><span class="name">LinearMap</span>.<span class="name">conjugate_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.conjugate_i"><span class="name">LinearMap</span>.<span class="name">conjugate_i</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.sumOfConjugates"><span class="name">LinearMap</span>.<span class="name">sumOfConjugates</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.sumOfConjugates_apply"><span class="name">LinearMap</span>.<span class="name">sumOfConjugates_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.sumOfConjugatesEquivariant"><span class="name">LinearMap</span>.<span class="name">sumOfConjugatesEquivariant</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.sumOfConjugatesEquivariant_apply"><span class="name">LinearMap</span>.<span class="name">sumOfConjugatesEquivariant_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.equivariantProjection"><span class="name">LinearMap</span>.<span class="name">equivariantProjection</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.equivariantProjection_apply"><span class="name">LinearMap</span>.<span class="name">equivariantProjection_apply</span></a></div><div class="nav_link"><a class="break_within" href="#LinearMap.equivariantProjection_condition"><span class="name">LinearMap</span>.<span class="name">equivariantProjection_condition</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.exists_leftInverse_of_injective"><span class="name">MonoidAlgebra</span>.<span class="name">exists_leftInverse_of_injective</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.Submodule.exists_isCompl"><span class="name">MonoidAlgebra</span>.<span class="name">Submodule</span>.<span class="name">exists_isCompl</span></a></div><div class="nav_link"><a class="break_within" href="#MonoidAlgebra.Submodule.complementedLattice"><span class="name">MonoidAlgebra</span>.<span class="name">Submodule</span>.<span class="name">complementedLattice</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Maschke-s-theorem">Maschke's theorem <a class="hover-link" href="#Maschke-s-theorem">#</a></h1><p>We prove <strong>Maschke's theorem</strong> for finite groups,
+in the formulation that every submodule of a <code>k[G]</code> module has a complement,
+when <code>k</code> is a field with <code><a href="../.././Mathlib/Algebra/Invertible.html#Invertible">Invertible</a> (Fintype.card G : k)</code>.</p><p>We do the core computation in greater generality.
+For any <code>[CommRing k]</code> in which  <code>[Invertible (Fintype.card G : k)]</code>,
+and a <code>k[G]</code>-linear map <code>i : V → W</code> which admits a <code>k</code>-linear retraction <code>π</code>,
+we produce a <code>k[G]</code>-linear retraction by
+taking the average over <code>G</code> of the conjugates of <code>π</code>.</p><h2 class="markdown-heading" id="Implementation-Notes">Implementation Notes <a class="hover-link" href="#Implementation-Notes">#</a></h2><ul>
+<li>These results assume <code><a href="../.././Mathlib/Algebra/Invertible.html#Invertible">Invertible</a> (Fintype.card G : k)</code> which is equivalent to the more
+familiar <code>¬(ringChar k ∣ <a href="../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> G)</code>. It is possible to convert between them using
+<code><a href="../.././Mathlib/Algebra/CharP/Invertible.html#invertibleOfRingCharNotDvd">invertibleOfRingCharNotDvd</a></code> and <code><a href="../.././Mathlib/Algebra/CharP/Invertible.html#not_ringChar_dvd_of_invertible">not_ringChar_dvd_of_invertible</a></code>.</li>
+</ul><h2 class="markdown-heading" id="Future-work">Future work <a class="hover-link" href="#Future-work">#</a></h2><p>It's not so far to give the usual statement, that every finite dimensional representation
+of a finite group is semisimple (i.e. a direct sum of irreducibles).</p></div><div class="mod_doc"><p>We now do the key calculation in Maschke's theorem.</p><p>Given <code>V → W</code>, an inclusion of <code>k[G]</code> modules,
+assume we have some retraction <code>π</code> (i.e. <code>∀ v, π (i v) = v</code>),
+just as a <code>k</code>-linear map.
+(When <code>k</code> is a field, this will be available cheaply, by choosing a basis.)</p><p>We now construct a retraction of the inclusion as a <code>k[G]</code>-linear map,
+by the formula
+$$ \frac{1}{|G|} \sum_{g \in G} g⁻¹ • π(g • -). $$</p></div><div class="decl" id="LinearMap.conjugate"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L73-L74">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.conjugate"><span class="name">LinearMap</span>.<span class="name">conjugate</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(π : <span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn">G</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span></div></div><p>We define the conjugate of <code>π</code> by <code>g</code>, as a <code>k</code>-linear map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.conjugate">LinearMap.conjugate</a> <span class="fn">π</span> <span class="fn">g</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap.comp">LinearMap.comp</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap.comp">LinearMap.comp</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra.GroupSmul.linearMap">MonoidAlgebra.GroupSmul.linearMap</a> <span class="fn">k</span> <span class="fn">V</span> <span class="fn"><span class="fn">g</span><a href="../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span>) <span class="fn">π</span></span>)
+    (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra.GroupSmul.linearMap">MonoidAlgebra.GroupSmul.linearMap</a> <span class="fn">k</span> <span class="fn">W</span> <span class="fn">g</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-LinearMap.conjugate" class="instances-for-list"></ul></details></div></div><div class="decl" id="LinearMap.conjugate_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L77-L79">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.conjugate_apply"><span class="name">LinearMap</span>.<span class="name">conjugate_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(π : <span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn">G</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">W</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.conjugate">LinearMap.conjugate</a> <span class="fn">π</span> <span class="fn">g</span></span>) <span class="fn">v</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra.single">MonoidAlgebra.single</a> <span class="fn"><span class="fn">g</span><a href="../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span> <span class="fn">1</span></span> <a href="../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">↑<span class="fn">π</span> (<span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra.single">MonoidAlgebra.single</a> <span class="fn">g</span> <span class="fn">1</span></span> <a href="../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">v</span></span>)</span></span></span></div></div></div></div><div class="decl" id="LinearMap.conjugate_i"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L85-L87">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.conjugate_i"><span class="name">LinearMap</span>.<span class="name">conjugate_i</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(π : <span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">V</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">v</span> : <span class="fn">V</span>), <span class="fn"><span class="fn">↑<span class="fn">π</span> (<span class="fn">↑<span class="fn">i</span> <span class="fn">v</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">v</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn">G</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.conjugate">LinearMap.conjugate</a> <span class="fn">π</span> <span class="fn">g</span></span>) (<span class="fn">↑<span class="fn">i</span> <span class="fn">v</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">v</span></span></div></div></div></div><div class="decl" id="LinearMap.sumOfConjugates"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L98-L99">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.sumOfConjugates"><span class="name">LinearMap</span>.<span class="name">sumOfConjugates</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(π : <span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span></div></div><p>The sum of the conjugates of <code>π</code> by each element <code>g : G</code>, as a <code>k</code>-linear map.</p><p>(We postpone dividing by the size of the group as long as possible.)</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.sumOfConjugates">LinearMap.sumOfConjugates</a> <span class="fn">G</span> <span class="fn">π</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">g</span> =&gt <span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.conjugate">LinearMap.conjugate</a> <span class="fn">π</span> <span class="fn">g</span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-LinearMap.sumOfConjugates" class="instances-for-list"></ul></details></div></div><div class="decl" id="LinearMap.sumOfConjugates_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L102-L103">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.sumOfConjugates_apply"><span class="name">LinearMap</span>.<span class="name">sumOfConjugates_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(π : <span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(v : <span class="fn">W</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.sumOfConjugates">LinearMap.sumOfConjugates</a> <span class="fn">G</span> <span class="fn">π</span></span>) <span class="fn">v</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">g</span> =&gt <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.conjugate">LinearMap.conjugate</a> <span class="fn">π</span> <span class="fn">g</span></span>) <span class="fn">v</span></span></span></span></span></div></div></div></div><div class="decl" id="LinearMap.sumOfConjugatesEquivariant"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L107-L111">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.sumOfConjugatesEquivariant"><span class="name">LinearMap</span>.<span class="name">sumOfConjugatesEquivariant</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(π : <span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span></div></div><p>In fact, the sum over <code>g : G</code> of the conjugate of <code>π</code> by <code>g</code> is a <code>k[G]</code>-linear map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-LinearMap.sumOfConjugatesEquivariant" class="instances-for-list"></ul></details></div></div><div class="decl" id="LinearMap.sumOfConjugatesEquivariant_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L114-L116">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.sumOfConjugatesEquivariant_apply"><span class="name">LinearMap</span>.<span class="name">sumOfConjugatesEquivariant_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(π : <span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(v : <span class="fn">W</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.sumOfConjugatesEquivariant">LinearMap.sumOfConjugatesEquivariant</a> <span class="fn">G</span> <span class="fn">π</span></span>) <span class="fn">v</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">g</span> =&gt <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.conjugate">LinearMap.conjugate</a> <span class="fn">π</span> <span class="fn">g</span></span>) <span class="fn">v</span></span></span></span></span></div></div></div></div><div class="decl" id="LinearMap.equivariantProjection"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L125-L126">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.equivariantProjection"><span class="name">LinearMap</span>.<span class="name">equivariantProjection</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(π : <span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Invertible.html#Invertible">Invertible</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> <span class="fn">G</span></span>)</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span></div></div><p>We construct our <code>k[G]</code>-linear retraction of <code>i</code> as
+$$ \frac{1}{|G|} \sum_{g \in G} g⁻¹ • π(g • -). $$</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.equivariantProjection">LinearMap.equivariantProjection</a> <span class="fn">G</span> <span class="fn">π</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Invertible.html#Invertible.invOf">⅟</a><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> <span class="fn">G</span></span>)</span></span> <a href="../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.sumOfConjugatesEquivariant">LinearMap.sumOfConjugatesEquivariant</a> <span class="fn">G</span> <span class="fn">π</span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-LinearMap.equivariantProjection" class="instances-for-list"></ul></details></div></div><div class="decl" id="LinearMap.equivariantProjection_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L129-L131">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.equivariantProjection_apply"><span class="name">LinearMap</span>.<span class="name">equivariantProjection_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(π : <span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Invertible.html#Invertible">Invertible</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> <span class="fn">G</span></span>)</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(v : <span class="fn">W</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.equivariantProjection">LinearMap.equivariantProjection</a> <span class="fn">G</span> <span class="fn">π</span></span>) <span class="fn">v</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Invertible.html#Invertible.invOf">⅟</a><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> <span class="fn">G</span></span>)</span></span> <a href="../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../.././Mathlib/Algebra/BigOperators/Basic.html#Finset.sum">Finset.sum</a> <span class="fn">Finset.univ</span> <span class="fn">fun <span class="fn">g</span> =&gt <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.conjugate">LinearMap.conjugate</a> <span class="fn">π</span> <span class="fn">g</span></span>) <span class="fn">v</span></span></span></span></span></span></div></div></div></div><div class="decl" id="LinearMap.equivariantProjection_condition"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L133-L137">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.equivariantProjection_condition"><span class="name">LinearMap</span>.<span class="name">equivariantProjection_condition</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(G : <a href="../.././foundational_types.html">Type</a> u)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../.././foundational_types.html">Type</a> w}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(π : <span class="fn"><span class="fn">W</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">k</span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(i : <span class="fn"><span class="fn">V</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h : <span class="fn">∀ (<span class="fn">v</span> : <span class="fn">V</span>), <span class="fn"><span class="fn">↑<span class="fn">π</span> (<span class="fn">↑<span class="fn">i</span> <span class="fn">v</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">v</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Invertible.html#Invertible">Invertible</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> <span class="fn">G</span></span>)</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(v : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#LinearMap.equivariantProjection">LinearMap.equivariantProjection</a> <span class="fn">G</span> <span class="fn">π</span></span>) (<span class="fn">↑<span class="fn">i</span> <span class="fn">v</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">v</span></span></div></div></div></div><div class="decl" id="MonoidAlgebra.exists_leftInverse_of_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L156-L162">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#MonoidAlgebra.exists_leftInverse_of_injective"><span class="name">MonoidAlgebra</span>.<span class="name">exists_leftInverse_of_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Invertible.html#Invertible">Invertible</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> <span class="fn">G</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> <a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">W</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/Basic.html#LinearMap.ker">LinearMap.ker</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">g</span>, <span class="fn"><span class="fn"><a href="../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap.comp">LinearMap.comp</a> <span class="fn">g</span> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">LinearMap.id</span></span></span></div></div></div></div><div class="decl" id="MonoidAlgebra.Submodule.exists_isCompl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L167-L172">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#MonoidAlgebra.Submodule.exists_isCompl"><span class="name">MonoidAlgebra</span>.<span class="name">Submodule</span>.<span class="name">exists_isCompl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Invertible.html#Invertible">Invertible</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> <span class="fn">G</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">q</span>, <span class="fn"><a href="../.././Mathlib/Order/Disjoint.html#IsCompl">IsCompl</a> <span class="fn">p</span> <span class="fn">q</span></span></span></div></div></div></div><div class="decl" id="MonoidAlgebra.Submodule.complementedLattice"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/RepresentationTheory/Maschke.lean#L176-L177">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/RepresentationTheory/Maschke.html#MonoidAlgebra.Submodule.complementedLattice"><span class="name">MonoidAlgebra</span>.<span class="name">Submodule</span>.<span class="name">complementedLattice</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{k : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">k</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{G : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Fintype/Basic.html#Fintype">Fintype</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Invertible.html#Invertible">Invertible</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> <span class="fn">G</span></span>)</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#Group">Group</a> <span class="fn">G</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">k</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/GroupTheory/GroupAction/Defs.html#IsScalarTower">IsScalarTower</a> <span class="fn">k</span> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Order/Disjoint.html#ComplementedLattice">ComplementedLattice</a> (<span class="fn"><a href="../.././Mathlib/Algebra/Module/Submodule/Basic.html#Submodule">Submodule</a> (<span class="fn"><a href="../.././Mathlib/Algebra/MonoidAlgebra/Basic.html#MonoidAlgebra">MonoidAlgebra</a> <span class="fn">k</span> <span class="fn">G</span></span>) <span class="fn">V</span></span>)</span></div></div><p>This also implies an instance <code>IsSemisimpleModule (MonoidAlgebra k G) V</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../.././Mathlib/RepresentationTheory/Maschke.html#MonoidAlgebra.Submodule.complementedLattice">@<a href="../.././Mathlib/RepresentationTheory/Maschke.html#MonoidAlgebra.Submodule.complementedLattice">MonoidAlgebra.Submodule.complementedLattice</a></a> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/RepresentationTheory/Maschke.html#MonoidAlgebra.Submodule.complementedLattice.proof_1">@<a href="../.././Mathlib/RepresentationTheory/Maschke.html#MonoidAlgebra.Submodule.complementedLattice.proof_1">MonoidAlgebra.Submodule.complementedLattice.proof_1</a></a></span></li></ul></details></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

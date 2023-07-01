@@ -1,0 +1,872 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Topology.Homotopy.Path</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Topology.Homotopy.Path";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Topology</span>.<span class="name">Homotopy</span>.<span class="name">Path</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Topology</span>.<span class="name">Homotopy</span>.<span class="name">Path</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Topology/PathConnected.html">Mathlib.Topology.PathConnected</a></li><li><a href="../../.././Mathlib/Analysis/Convex/Basic.html">Mathlib.Analysis.Convex.Basic</a></li><li><a href="../../.././Mathlib/Topology/Homotopy/Basic.html">Mathlib.Topology.Homotopy.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Topology.Homotopy.Path" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy"><span class="name">Path</span>.<span class="name">Homotopy</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.coeFn_injective"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">coeFn_injective</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.source"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">source</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.target"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">target</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.eval"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">eval</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.eval_zero"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">eval_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.eval_one"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">eval_one</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.refl_toFun"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">refl_toFun</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.refl_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">refl_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.refl"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">refl</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.symm_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.symm_toFun"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm_toFun</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.symm"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.symm_symm"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm_symm</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.trans"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">trans</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.trans_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">trans_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.symm_trans"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm_trans</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.cast_toFun"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">cast_toFun</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.cast_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">cast_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.cast"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">cast</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.hcomp"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">hcomp</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.hcomp_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">hcomp_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.hcomp_half"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">hcomp_half</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.reparam"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">reparam</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.symm₂_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm₂_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.symm₂_toFun"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm₂_toFun</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.symm₂"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm₂</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.map_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">map_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.map_toFun"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">map_toFun</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopy.map"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">map</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic"><span class="name">Path</span>.<span class="name">Homotopic</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.refl"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">refl</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.symm"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">symm</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.trans"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">trans</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.equivalence"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">equivalence</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.map"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">map</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.hcomp"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">hcomp</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.setoid"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">setoid</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.Quotient"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">Quotient</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.instInhabitedQuotientUnitInstTopologicalSpacePUnitUnit"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">instInhabitedQuotientUnitInstTopologicalSpacePUnitUnit</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.Quotient.comp"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">Quotient</span>.<span class="name">comp</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.comp_lift"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">comp_lift</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.Quotient.mapFn"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">Quotient</span>.<span class="name">mapFn</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.map_lift"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">map_lift</span></a></div><div class="nav_link"><a class="break_within" href="#Path.Homotopic.hpath_hext"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">hpath_hext</span></a></div><div class="nav_link"><a class="break_within" href="#Path.toHomotopyConst_apply"><span class="name">Path</span>.<span class="name">toHomotopyConst_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Path.toHomotopyConst"><span class="name">Path</span>.<span class="name">toHomotopyConst</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousMap.homotopic_const_iff"><span class="name">ContinuousMap</span>.<span class="name">homotopic_const_iff</span></a></div><div class="nav_link"><a class="break_within" href="#ContinuousMap.Homotopy.evalAt"><span class="name">ContinuousMap</span>.<span class="name">Homotopy</span>.<span class="name">evalAt</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Homotopy-between-paths">Homotopy between paths <a class="hover-link" href="#Homotopy-between-paths">#</a></h1><p>In this file, we define a <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a></code> between two <code><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a></code>s. In addition, we define a relation
+<code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Homotopic</a></code> on <code><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a></code>s, and prove that it is an equivalence relation.</p><h2 class="markdown-heading" id="Definitions">Definitions <a class="hover-link" href="#Definitions">#</a></h2><ul>
+<li><code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> p₀ p₁</code> is the type of homotopies between paths <code>p₀</code> and <code>p₁</code></li>
+<li><code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.refl">Path.Homotopy.refl</a> p</code> is the constant homotopy between <code>p</code> and itself</li>
+<li><code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm">Path.Homotopy.symm</a> F</code> is the <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> p₁ p₀</code> defined by reversing the homotopy</li>
+<li><code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.trans">Path.Homotopy.trans</a> F G</code>, where <code>F : <a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> p₀ p₁</code>, <code>G : <a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> p₁ p₂</code> is the
+<code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> p₀ p₂</code> defined by putting the first homotopy on <code>[0, 1/2]</code> and the second on
+<code>[1/2, 1]</code></li>
+<li><code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.hcomp">Path.Homotopy.hcomp</a> F G</code>, where <code>F : <a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> p₀ q₀</code> and <code>G : <a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> p₁ q₁</code> is
+a <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> (p₀.<a href="../../.././Mathlib/Init/Algebra/Classes.html#trans">trans</a> p₁) (q₀.<a href="../../.././Mathlib/Init/Algebra/Classes.html#trans">trans</a> q₁)</code></li>
+<li><code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> p₀ p₁</code> is the relation saying that there is a homotopy between <code>p₀</code> and <code>p₁</code></li>
+<li><code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid">Path.Homotopic.setoid</a> x₀ x₁</code> is the setoid on <code><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a></code>s from <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a></code></li>
+<li><code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient">Path.Homotopic.Quotient</a> x₀ x₁</code> is the quotient type from <code><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> x₀ x₀</code> by <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid">Path.Homotopic.setoid</a></code></li>
+</ul></div><div class="decl" id="Path.Homotopy"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L52-L53">source</a></div><div class="attributes">@[inline]</div>
+<div class="decl_header"><span class="decl_kind">abbrev</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy"><span class="name">Path</span>.<span class="name">Homotopy</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a> u</div></div><p>The type of homotopies between two paths.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Basic.html#ContinuousMap.HomotopyRel">ContinuousMap.HomotopyRel</a> <span class="fn"><span class="fn">p₀</span>.toContinuousMap</span> <span class="fn"><span class="fn">p₁</span>.toContinuousMap</span> <span class="fn">{<span class="fn">0</span>, <span class="fn">1</span>}</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopy" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopy.coeFn_injective"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L62-L63">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.coeFn_injective"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">coeFn_injective</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Function.html#Function.Injective">Function.Injective</a> <span class="fn">FunLike.coe</span></span></div></div></div></div><div class="decl" id="Path.Homotopy.source"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L67-L69">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.source"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">source</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">F</span> <span class="fn">(<span class="fn">t</span>, <span class="fn">0</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x₀</span></span></div></div></div></div><div class="decl" id="Path.Homotopy.target"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L73-L75">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.target"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">target</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑<span class="fn">F</span> <span class="fn">(<span class="fn">t</span>, <span class="fn">1</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x₁</span></span></div></div></div></div><div class="decl" id="Path.Homotopy.eval"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L80-L83">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.eval"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">eval</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span></div></div><p>Evaluating a path homotopy at an intermediate point, giving us a <code><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.eval">Path.Homotopy.eval</a> <span class="fn">F</span> <span class="fn">t</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">toContinuousMap</span> := <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap.mk">ContinuousMap.mk</a> <span class="fn">↑(<span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Basic.html#ContinuousMap.Homotopy.curry">ContinuousMap.Homotopy.curry</a> <span class="fn"><span class="fn">F</span>.toHomotopy</span></span>) <span class="fn">t</span></span>)</span></span>,
+    <span class="fn">source'</span> := <span class="fn">(_ : <span class="fn"><span class="fn">↑<span class="fn">F</span> <span class="fn">(<span class="fn">t</span>, <span class="fn">0</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x₀</span></span>)</span>, <span class="fn">target'</span> := <span class="fn">(_ : <span class="fn"><span class="fn">↑<span class="fn">F</span> <span class="fn">(<span class="fn">t</span>, <span class="fn">1</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x₁</span></span>)</span> }</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopy.eval" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopy.eval_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L87-L89">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.eval_zero"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">eval_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.eval">Path.Homotopy.eval</a> <span class="fn">F</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p₀</span></span></div></div></div></div><div class="decl" id="Path.Homotopy.eval_one"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L93-L95">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.eval_one"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">eval_one</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.eval">Path.Homotopy.eval</a> <span class="fn">F</span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">p₁</span></span></div></div></div></div><div class="decl" id="Path.Homotopy.refl_toFun"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L106-L106">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.refl_toFun"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">refl_toFun</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.refl">Path.Homotopy.refl</a> <span class="fn">p</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">p</span> <span class="fn"><span class="fn">x</span>.snd</span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.refl_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L106-L106">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.refl_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">refl_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.refl">Path.Homotopy.refl</a> <span class="fn">p</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">p</span> <span class="fn"><span class="fn">x</span>.snd</span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.refl"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L107-L108">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.refl"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">refl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p</span> <span class="fn">p</span></span></div></div><p>Given a path <code>p</code>, we can define a <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p p</code> by <code>F (t, x) = p x</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.refl">Path.Homotopy.refl</a> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Basic.html#ContinuousMap.HomotopyRel.refl">ContinuousMap.HomotopyRel.refl</a> <span class="fn"><span class="fn">p</span>.toContinuousMap</span> <span class="fn">{<span class="fn">0</span>, <span class="fn">1</span>}</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopy.refl" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopy.symm_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L113-L113">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm">Path.Homotopy.symm</a> <span class="fn">F</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">F</span> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval.symm">unitInterval.symm</a> <span class="fn"><span class="fn">x</span>.fst</span></span>, <span class="fn"><span class="fn">x</span>.snd</span>)</span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.symm_toFun"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L113-L113">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm_toFun"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm_toFun</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm">Path.Homotopy.symm</a> <span class="fn">F</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">F</span> <span class="fn">(<span class="fn"><a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval.symm">unitInterval.symm</a> <span class="fn"><span class="fn">x</span>.fst</span></span>, <span class="fn"><span class="fn">x</span>.snd</span>)</span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.symm"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L114-L115">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₁</span> <span class="fn">p₀</span></span></div></div><p>Given a <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p₀ p₁</code>, we can define a <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p₁ p₀</code> by reversing the homotopy.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm">Path.Homotopy.symm</a> <span class="fn">F</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Basic.html#ContinuousMap.HomotopyRel.symm">ContinuousMap.HomotopyRel.symm</a> <span class="fn">F</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopy.symm" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopy.symm_symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L119-L120">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm_symm"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm_symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm">Path.Homotopy.symm</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm">Path.Homotopy.symm</a> <span class="fn">F</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">F</span></span></div></div></div></div><div class="decl" id="Path.Homotopy.trans"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L127-L128">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.trans"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">trans</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₁</span> <span class="fn">p₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₂</span></span></div></div><p>Given <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p₀ p₁</code> and <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p₁ p₂</code>, we can define a <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p₀ p₂</code> by putting the first
+homotopy on <code>[0, 1/2]</code> and the second on <code>[1/2, 1]</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.trans">Path.Homotopy.trans</a> <span class="fn">F</span> <span class="fn">G</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Basic.html#ContinuousMap.HomotopyRel.trans">ContinuousMap.HomotopyRel.trans</a> <span class="fn">F</span> <span class="fn">G</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopy.trans" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopy.trans_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L131-L137">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.trans_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">trans_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₁</span> <span class="fn">p₂</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.trans">Path.Homotopy.trans</a> <span class="fn">F</span> <span class="fn">G</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">if h : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">x</span>.fst</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span></span> then <span class="fn">↑<span class="fn">F</span> <span class="fn">(<span class="fn">{ <span class="fn">val</span> := <span class="fn"><span class="fn">2</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.fst</span></span></span>, <span class="fn">property</span> := <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn">2</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.fst</span></span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span>)</span> }</span>, <span class="fn"><span class="fn">x</span>.snd</span>)</span></span>
+  else <span class="fn">↑<span class="fn">G</span> <span class="fn">(<span class="fn">{ <span class="fn">val</span> := <span class="fn"><span class="fn"><span class="fn">2</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.fst</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span>, <span class="fn">property</span> := <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn"><span class="fn">2</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.fst</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span>)</span> }</span>, <span class="fn"><span class="fn">x</span>.snd</span>)</span></span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.symm_trans"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L140-L142">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm_trans"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm_trans</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₁</span> <span class="fn">p₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm">Path.Homotopy.symm</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.trans">Path.Homotopy.trans</a> <span class="fn">F</span> <span class="fn">G</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.trans">Path.Homotopy.trans</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm">Path.Homotopy.symm</a> <span class="fn">G</span></span>) (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm">Path.Homotopy.symm</a> <span class="fn">F</span></span>)</span></span></div></div></div></div><div class="decl" id="Path.Homotopy.cast_toFun"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L146-L146">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.cast_toFun"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">cast_toFun</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">p₀</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.cast">Path.Homotopy.cast</a> <span class="fn">F</span> <span class="fn">h₀</span> <span class="fn">h₁</span></span>) <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">F</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.cast_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L146-L146">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.cast_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">cast_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">p₀</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(a : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.cast">Path.Homotopy.cast</a> <span class="fn">F</span> <span class="fn">h₀</span> <span class="fn">h₁</span></span>) <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">F</span> <span class="fn">a</span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.cast"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L147-L149">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.cast"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">cast</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><span class="fn">p₀</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">p₁</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">q₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">q₀</span> <span class="fn">q₁</span></span></div></div><p>Casting a <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p₀ p₁</code> to a <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> q₀ q₁</code> where <code>p₀ = q₀</code> and <code>p₁ = q₁</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.cast">Path.Homotopy.cast</a> <span class="fn">F</span> <span class="fn">h₀</span> <span class="fn">h₁</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Basic.html#ContinuousMap.HomotopyRel.cast">ContinuousMap.HomotopyRel.cast</a> <span class="fn">F</span> <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn">p₀</span>.toContinuousMap</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q₀</span>.toContinuousMap</span></span>)</span>
+    <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn">p₁</span>.toContinuousMap</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">q₁</span>.toContinuousMap</span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopy.cast" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopy.hcomp"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L162-L176">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.hcomp"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">hcomp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₂ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₁</span> <span class="fn">x₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₁</span> <span class="fn">x₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">q₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₁</span> <span class="fn">q₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.trans">Path.trans</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>) (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.trans">Path.trans</a> <span class="fn">q₀</span> <span class="fn">q₁</span></span>)</span></div></div><p>Suppose <code>p₀</code> and <code>q₀</code> are paths from <code>x₀</code> to <code>x₁</code>, <code>p₁</code> and <code>q₁</code> are paths from <code>x₁</code> to <code>x₂</code>.
+Furthermore, suppose <code>F : <a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p₀ q₀</code> and <code>G : <a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p₁ q₁</code>. Then we can define a homotopy
+from <code>p₀.<a href="../../.././Mathlib/Init/Algebra/Classes.html#trans">trans</a> p₁</code> to <code>q₀.<a href="../../.././Mathlib/Init/Algebra/Classes.html#trans">trans</a> q₁</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopy.hcomp" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopy.hcomp_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L179-L186">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.hcomp_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">hcomp_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₂ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₁</span> <span class="fn">x₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₁</span> <span class="fn">x₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">q₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₁</span> <span class="fn">q₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.hcomp">Path.Homotopy.hcomp</a> <span class="fn">F</span> <span class="fn">G</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">if h : <span class="fn"><span class="fn">↑<span class="fn"><span class="fn">x</span>.snd</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span></span> then
+    <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.eval">Path.Homotopy.eval</a> <span class="fn">F</span> <span class="fn"><span class="fn">x</span>.fst</span></span>) <span class="fn">{ <span class="fn">val</span> := <span class="fn"><span class="fn">2</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.snd</span></span></span>, <span class="fn">property</span> := <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn">2</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.snd</span></span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span>)</span> }</span></span>
+  else <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.eval">Path.Homotopy.eval</a> <span class="fn">G</span> <span class="fn"><span class="fn">x</span>.fst</span></span>) <span class="fn">{ <span class="fn">val</span> := <span class="fn"><span class="fn"><span class="fn">2</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.snd</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span>, <span class="fn">property</span> := <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn"><span class="fn">2</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn"><span class="fn">x</span>.snd</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span>)</span> }</span></span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.hcomp_half"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L189-L191">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.hcomp_half"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">hcomp_half</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₂ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₁</span> <span class="fn">x₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₁</span> <span class="fn">x₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">q₀</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(G : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₁</span> <span class="fn">q₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(t : <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.hcomp">Path.Homotopy.hcomp</a> <span class="fn">F</span> <span class="fn">G</span></span>) <span class="fn">(<span class="fn">t</span>, <span class="fn">{ <span class="fn">val</span> := <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>, <span class="fn">property</span> := <span class="fn">(_ : <span class="fn"><span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">1</span></span></span>)</span> }</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x₁</span></span></div></div></div></div><div class="decl" id="Path.Homotopy.reparam"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L199-L221">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.reparam"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">reparam</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> → <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf₀ : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hf₁ : <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">1</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p</span> (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.reparam">Path.reparam</a> <span class="fn">p</span> <span class="fn">f</span> <span class="fn">hf</span> <span class="fn">hf₀</span> <span class="fn">hf₁</span></span>)</span></div></div><p>Suppose <code>p</code> is a path, then we have a homotopy from <code>p</code> to <code>p.<a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.reparam">reparam</a> f</code> by the convexity of <code>I</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopy.reparam" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopy.symm₂_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L227-L227">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm₂_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm₂_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm₂">Path.Homotopy.symm₂</a> <span class="fn">F</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">F</span> <span class="fn">(<span class="fn"><span class="fn">x</span>.fst</span>, <span class="fn"><a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval.symm">unitInterval.symm</a> <span class="fn"><span class="fn">x</span>.snd</span></span>)</span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.symm₂_toFun"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L227-L227">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm₂_toFun"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm₂_toFun</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm₂">Path.Homotopy.symm₂</a> <span class="fn">F</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">F</span> <span class="fn">(<span class="fn"><span class="fn">x</span>.fst</span>, <span class="fn"><a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval.symm">unitInterval.symm</a> <span class="fn"><span class="fn">x</span>.snd</span></span>)</span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.symm₂"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L228-L238">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.symm₂"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">symm₂</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.symm">Path.symm</a> <span class="fn">p</span></span>) (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.symm">Path.symm</a> <span class="fn">q</span></span>)</span></div></div><p>Suppose <code>F : <a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p q</code>. Then we have a <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p.<a href="../../.././Mathlib/Init/Algebra/Classes.html#symm">symm</a> q.<a href="../../.././Mathlib/Init/Algebra/Classes.html#symm">symm</a></code> by reversing the second
+argument.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopy.symm₂" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopy.map_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L245-L245">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.map_apply"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">map_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <span class="fn">Y</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ (<span class="fn">a</span> : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>), <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.map">Path.Homotopy.map</a> <span class="fn">F</span> <span class="fn">f</span></span>) <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Function.comp"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">↑<span class="fn">F</span></span></a>) <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.map_toFun"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L245-L245">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.map_toFun"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">map_toFun</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <span class="fn">Y</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ (<span class="fn">a</span> : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span></span>), <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.map">Path.Homotopy.map</a> <span class="fn">F</span> <span class="fn">f</span></span>) <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<a href="../../.././Init/Prelude.html#Function.comp"><span class="fn">↑<span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">↑<span class="fn">F</span></span></a>) <span class="fn">a</span></span></span></span></div></div></div></div><div class="decl" id="Path.Homotopy.map"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L246-L255">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.map"><span class="name">Path</span>.<span class="name">Homotopy</span>.<span class="name">map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(F : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <span class="fn">Y</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.map">Path.map</a> <span class="fn">p</span> <span class="fn">(_ : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>) (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.map">Path.map</a> <span class="fn">q</span> <span class="fn">(_ : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>)</span></div></div><p>Given <code>F : <a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a> p q</code>, and <code>f : C(X, Y)</code>, we can define a homotopy from <code>p.<a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.map">map</a> f.continuous</code> to
+<code>q.<a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy.map">map</a> f.continuous</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopy.map" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopic"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L262-L263">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic"><span class="name">Path</span>.<span class="name">Homotopic</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Prop</a></div></div><p>Two paths <code>p₀</code> and <code>p₁</code> are <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a></code> if there exists a <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a></code> between them.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Nonempty">Nonempty</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Path.Homotopy</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopic" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopic.refl"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L269-L270">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.refl"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">refl</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> <span class="fn">p</span> <span class="fn">p</span></span></div></div></div></div><div class="decl" id="Path.Homotopic.symm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L274-L275">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.symm"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">symm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>⦄</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>⦄</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> <span class="fn">p₁</span> <span class="fn">p₀</span></span></div></div></div></div><div class="decl" id="Path.Homotopic.trans"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L279-L281">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.trans"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">trans</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>⦄</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>⦄</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">⦃p₂ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>⦄</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₀ : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> <span class="fn">p₁</span> <span class="fn">p₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> <span class="fn">p₀</span> <span class="fn">p₂</span></span></div></div></div></div><div class="decl" id="Path.Homotopic.equivalence"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L284-L285">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.equivalence"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">equivalence</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Core.html#Equivalence">Equivalence</a> <span class="fn">Path.Homotopic</span></span></div></div></div></div><div class="decl" id="Path.Homotopic.map"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L288-L290">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.map"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">map</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> <span class="fn">p</span> <span class="fn">q</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <span class="fn">Y</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.map">Path.map</a> <span class="fn">p</span> <span class="fn">(_ : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>) (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.map">Path.map</a> <span class="fn">q</span> <span class="fn">(_ : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>)</span></div></div></div></div><div class="decl" id="Path.Homotopic.hcomp"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L293-L295">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.hcomp"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">hcomp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₂ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₁</span> <span class="fn">x₂</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{q₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₁</span> <span class="fn">x₂</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> <span class="fn">p₀</span> <span class="fn">p₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hq : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> <span class="fn">q₀</span> <span class="fn">q₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a> (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.trans">Path.trans</a> <span class="fn">p₀</span> <span class="fn">q₀</span></span>) (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.trans">Path.trans</a> <span class="fn">p₁</span> <span class="fn">q₁</span></span>)</span></div></div></div></div><div class="decl" id="Path.Homotopic.setoid"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L302-L303">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">setoid</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x₀ : <span class="fn">X</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x₁ : <span class="fn">X</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Core.html#Setoid">Setoid</a> (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></div></div><p>The setoid on <code><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a></code>s defined by the equivalence relation <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a></code>. That is, two paths are
+equivalent if there is a <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopy">Homotopy</a></code> between them.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid">Path.Homotopic.setoid</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">r</span> := <span class="fn">Path.Homotopic</span>, <span class="fn">iseqv</span> := <span class="fn">(_ : <span class="fn"><a href="../../.././Init/Core.html#Equivalence">Equivalence</a> <span class="fn">Path.Homotopic</span></span>)</span> }</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopic.setoid" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopic.Quotient"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L308-L309">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">Quotient</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(x₀ : <span class="fn">X</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x₁ : <span class="fn">X</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><a href="../../.././foundational_types.html">Type</a> u</div></div><p>The quotient on <code><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> x₀ x₁</code> by the equivalence relation <code><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic">Path.Homotopic</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient">Path.Homotopic.Quotient</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Core.html#Quotient">Quotient</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid">Path.Homotopic.setoid</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopic.Quotient" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopic.instInhabitedQuotientUnitInstTopologicalSpacePUnitUnit"><div class="instance"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L314-L315">source</a></div><div class="decl_header"><span class="decl_kind">instance</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.instInhabitedQuotientUnitInstTopologicalSpacePUnitUnit"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">instInhabitedQuotientUnitInstTopologicalSpacePUnitUnit</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#Inhabited">Inhabited</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient">Path.Homotopic.Quotient</a> <a href="../../.././Init/Prelude.html#Unit.unit">()</a> <a href="../../.././Init/Prelude.html#Unit.unit">()</a></span>)</span></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.instInhabitedQuotientUnitInstTopologicalSpacePUnitUnit">Path.Homotopic.instInhabitedQuotientUnitInstTopologicalSpacePUnitUnit</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">{ <span class="fn">default</span> := <span class="fn"><a href="../../.././Init/Core.html#Quotient.mk'">Quotient.mk'</a> (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.refl">Path.refl</a> <a href="../../.././Init/Prelude.html#Unit.unit">()</a></span>)</span> }</span></span></li></ul></details></div></div><div class="decl" id="Path.Homotopic.Quotient.comp"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L318-L320">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient.comp"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">Quotient</span>.<span class="name">comp</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₂ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(P₀ : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient">Path.Homotopic.Quotient</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(P₁ : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient">Path.Homotopic.Quotient</a> <span class="fn">x₁</span> <span class="fn">x₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient">Path.Homotopic.Quotient</a> <span class="fn">x₀</span> <span class="fn">x₂</span></span></div></div><p>The composition of path homotopy classes. This is <code><a href="../../.././Mathlib/Topology/PathConnected.html#Path.trans">Path.trans</a></code> descended to the quotient.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopic.Quotient.comp" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopic.comp_lift"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L323-L324">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.comp_lift"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">comp_lift</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₂ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(P₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(P₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₁</span> <span class="fn">x₂</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Core.html#Quotient.mk">Quotient.mk</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid">Path.Homotopic.setoid</a> <span class="fn">x₀</span> <span class="fn">x₂</span></span>) (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.trans">Path.trans</a> <span class="fn">P₀</span> <span class="fn">P₁</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient.comp">Path.Homotopic.Quotient.comp</a> (<span class="fn"><a href="../../.././Init/Core.html#Quotient.mk">Quotient.mk</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid">Path.Homotopic.setoid</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>) <span class="fn">P₀</span></span>)
+    (<span class="fn"><a href="../../.././Init/Core.html#Quotient.mk">Quotient.mk</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid">Path.Homotopic.setoid</a> <span class="fn">x₁</span> <span class="fn">x₂</span></span>) <span class="fn">P₁</span></span>)</span></span></div></div></div></div><div class="decl" id="Path.Homotopic.Quotient.mapFn"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L329-L331">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient.mapFn"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">Quotient</span>.<span class="name">mapFn</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(P₀ : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient">Path.Homotopic.Quotient</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <span class="fn">Y</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient">Path.Homotopic.Quotient</a> (<span class="fn">↑<span class="fn">f</span> <span class="fn">x₀</span></span>) (<span class="fn">↑<span class="fn">f</span> <span class="fn">x₁</span></span>)</span></div></div><p>The image of a path homotopy class <code>P₀</code> under a map <code>f</code>.
+This is <code><a href="../../.././Mathlib/Topology/PathConnected.html#Path.map">Path.map</a></code> descended to the quotient.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.Homotopic.Quotient.mapFn" class="instances-for-list"></ul></details></div></div><div class="decl" id="Path.Homotopic.map_lift"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L334-L335">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.map_lift"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">map_lift</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(P₀ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <span class="fn">Y</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Init/Core.html#Quotient.mk">Quotient.mk</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid">Path.Homotopic.setoid</a> (<span class="fn">↑<span class="fn">f</span> <span class="fn">x₀</span></span>) (<span class="fn">↑<span class="fn">f</span> <span class="fn">x₁</span></span>)</span>) (<span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path.map">Path.map</a> <span class="fn">P₀</span> <span class="fn">(_ : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">↑<span class="fn">f</span></span></span>)</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.Quotient.mapFn">Path.Homotopic.Quotient.mapFn</a> (<span class="fn"><a href="../../.././Init/Core.html#Quotient.mk">Quotient.mk</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid">Path.Homotopic.setoid</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>) <span class="fn">P₀</span></span>) <span class="fn">f</span></span></span></div></div></div></div><div class="decl" id="Path.Homotopic.hpath_hext"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L339-L343">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.hpath_hext"><span class="name">Path</span>.<span class="name">Homotopic</span>.<span class="name">hpath_hext</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₂ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₃ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₁ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p₂ : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₂</span> <span class="fn">x₃</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hp : <span class="fn">∀ (<span class="fn">t</span> : <span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span>), <span class="fn"><span class="fn">↑<span class="fn">p₁</span> <span class="fn">t</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">p₂</span> <span class="fn">t</span></span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Init/Prelude.html#HEq">HEq</a> (<span class="fn"><a href="../../.././Init/Core.html#Quotient.mk">Quotient.mk</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid">Path.Homotopic.setoid</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>) <span class="fn">p₁</span></span>) (<span class="fn"><a href="../../.././Init/Core.html#Quotient.mk">Quotient.mk</a> (<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.Homotopic.setoid">Path.Homotopic.setoid</a> <span class="fn">x₂</span> <span class="fn">x₃</span></span>) <span class="fn">p₂</span></span>)</span></div></div></div></div><div class="decl" id="Path.toHomotopyConst_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L350-L350">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.toHomotopyConst_apply"><span class="name">Path</span>.<span class="name">toHomotopyConst_apply</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∀ (<span class="fn">a</span> : <span class="fn"><span class="fn">↑<a href="../../.././Mathlib/Topology/UnitInterval.html#unitInterval">unitInterval</a></span> <a href="../../.././Init/Prelude.html#Prod">×</a> <span class="fn">Y</span></span>), <span class="fn"><span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.toHomotopyConst">Path.toHomotopyConst</a> <span class="fn">p</span></span>) <span class="fn">a</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">p</span> <span class="fn"><span class="fn">a</span>.fst</span></span></span></span></div></div></div></div><div class="decl" id="Path.toHomotopyConst"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L351-L355">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.toHomotopyConst"><span class="name">Path</span>.<span class="name">toHomotopyConst</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Basic.html#ContinuousMap.Homotopy">ContinuousMap.Homotopy</a> (<span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap.const">ContinuousMap.const</a> <span class="fn">Y</span> <span class="fn">x₀</span></span>) (<span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap.const">ContinuousMap.const</a> <span class="fn">Y</span> <span class="fn">x₁</span></span>)</span></div></div><p>A path <code><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> x₀ x₁</code> generates a homotopy between constant functions <code>fun _ ↦ x₀</code> and
+<code>fun _ ↦ x₁</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#Path.toHomotopyConst">Path.toHomotopyConst</a> <span class="fn">p</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">toContinuousMap</span> := <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap.comp">ContinuousMap.comp</a> <span class="fn"><span class="fn">p</span>.toContinuousMap</span> <span class="fn">ContinuousMap.fst</span></span>, <span class="fn">map_zero_left</span> := <span class="fn">(_ : <span class="fn"><span class="fn">Y</span> → <span class="fn"><span class="fn">↑<span class="fn">p</span> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x₀</span></span></span>)</span>,
+    <span class="fn">map_one_left</span> := <span class="fn">(_ : <span class="fn"><span class="fn">Y</span> → <span class="fn"><span class="fn">↑<span class="fn">p</span> <span class="fn">1</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">x₁</span></span></span>)</span> }</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Path.toHomotopyConst" class="instances-for-list"></ul></details></div></div><div class="decl" id="ContinuousMap.homotopic_const_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L362-L366">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#ContinuousMap.homotopic_const_iff"><span class="name">ContinuousMap</span>.<span class="name">homotopic_const_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../../.././foundational_types.html">Type</a> v}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₀ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x₁ : <span class="fn">X</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Init/Prelude.html#Nonempty">Nonempty</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Basic.html#ContinuousMap.Homotopic">ContinuousMap.Homotopic</a> (<span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap.const">ContinuousMap.const</a> <span class="fn">Y</span> <span class="fn">x₀</span></span>) (<span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap.const">ContinuousMap.const</a> <span class="fn">Y</span> <span class="fn">x₁</span></span>)</span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Joined">Joined</a> <span class="fn">x₀</span> <span class="fn">x₁</span></span></span></div></div><p>Two constant continuous maps with nonempty domain are homotopic if and only if their values are
+joined by a path in the codomain.</p></div></div><div class="decl" id="ContinuousMap.Homotopy.evalAt"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Topology/Homotopy/Path.lean#L373-L377">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Topology/Homotopy/Path.html#ContinuousMap.Homotopy.evalAt"><span class="name">ContinuousMap</span>.<span class="name">Homotopy</span>.<span class="name">evalAt</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">X</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">Y</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <span class="fn">Y</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">C(</a><span class="fn">X</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">,</a> <span class="fn">Y</span><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap">)</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(H : <span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Basic.html#ContinuousMap.Homotopy">ContinuousMap.Homotopy</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(x : <span class="fn">X</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/PathConnected.html#Path">Path</a> (<span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span>) (<span class="fn">↑<span class="fn">g</span> <span class="fn">x</span></span>)</span></div></div><p>Given a homotopy <code>H : f ∼ g</code>, get the path traced by the point <code>x</code> as it moves from
+<code>f x</code> to <code>g x</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Topology/Homotopy/Path.html#ContinuousMap.Homotopy.evalAt">ContinuousMap.Homotopy.evalAt</a> <span class="fn">H</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{ <span class="fn">toContinuousMap</span> := <span class="fn"><a href="../../.././Mathlib/Topology/ContinuousFunction/Basic.html#ContinuousMap.mk">ContinuousMap.mk</a> <span class="fn">fun <span class="fn">t</span> =&gt <span class="fn">↑<span class="fn">H</span> <span class="fn">(<span class="fn">t</span>, <span class="fn">x</span>)</span></span></span></span>, <span class="fn">source'</span> := <span class="fn">(_ : <span class="fn"><span class="fn">↑<span class="fn">H</span> <span class="fn">(<span class="fn">0</span>, <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">f</span> <span class="fn">x</span></span></span>)</span>,
+    <span class="fn">target'</span> := <span class="fn">(_ : <span class="fn"><span class="fn">↑<span class="fn">H</span> <span class="fn">(<span class="fn">1</span>, <span class="fn">x</span>)</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">↑<span class="fn">g</span> <span class="fn">x</span></span></span>)</span> }</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-ContinuousMap.Homotopy.evalAt" class="instances-for-list"></ul></details></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

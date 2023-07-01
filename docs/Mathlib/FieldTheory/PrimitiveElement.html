@@ -1,0 +1,138 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.FieldTheory.PrimitiveElement</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.FieldTheory.PrimitiveElement";</script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">FieldTheory</span>.<span class="name">PrimitiveElement</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">FieldTheory</span>.<span class="name">PrimitiveElement</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/FieldTheory/PrimitiveElement.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/FieldTheory/Separable.html">Mathlib.FieldTheory.Separable</a></li><li><a href="../.././Mathlib/RingTheory/IntegralDomain.html">Mathlib.RingTheory.IntegralDomain</a></li><li><a href="../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html">Mathlib.FieldTheory.IsAlgClosed.Basic</a></li><li><a href="../.././Mathlib/FieldTheory/SplittingField/Construction.html">Mathlib.FieldTheory.SplittingField.Construction</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.FieldTheory.PrimitiveElement" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Field.exists_primitive_element_of_finite_top"><span class="name">Field</span>.<span class="name">exists_primitive_element_of_finite_top</span></a></div><div class="nav_link"><a class="break_within" href="#Field.exists_primitive_element_of_finite_bot"><span class="name">Field</span>.<span class="name">exists_primitive_element_of_finite_bot</span></a></div><div class="nav_link"><a class="break_within" href="#Field.primitive_element_inf_aux_exists_c"><span class="name">Field</span>.<span class="name">primitive_element_inf_aux_exists_c</span></a></div><div class="nav_link"><a class="break_within" href="#Field.primitive_element_inf_aux"><span class="name">Field</span>.<span class="name">primitive_element_inf_aux</span></a></div><div class="nav_link"><a class="break_within" href="#Field.exists_primitive_element"><span class="name">Field</span>.<span class="name">exists_primitive_element</span></a></div><div class="nav_link"><a class="break_within" href="#Field.powerBasisOfFiniteOfSeparable"><span class="name">Field</span>.<span class="name">powerBasisOfFiniteOfSeparable</span></a></div><div class="nav_link"><a class="break_within" href="#AlgHom.card"><span class="name">AlgHom</span>.<span class="name">card</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Primitive-Element-Theorem">Primitive Element Theorem <a class="hover-link" href="#Primitive-Element-Theorem">#</a></h1><p>In this file we prove the primitive element theorem.</p><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><ul>
+<li><code><a href="../.././Mathlib/FieldTheory/PrimitiveElement.html#Field.exists_primitive_element">exists_primitive_element</a></code>: a finite separable extension <code>E / F</code> has a primitive element, i.e.
+there is an <code>α : E</code> such that <code>F⟮α⟯ = (⊤ : <a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a> F E)</code>.</li>
+</ul><h2 class="markdown-heading" id="Implementation-notes">Implementation notes <a class="hover-link" href="#Implementation-notes">#</a></h2><p>In declaration names, <code>primitive_element</code> abbreviates <code>adjoin_simple_eq_top</code>:
+it stands for the statement <code>F⟮α⟯ = (⊤ : <a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a> F E)</code>. We did not add an extra
+declaration <code>IsPrimitiveElement F α := F⟮α⟯ = (⊤ : <a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a> F E)</code> because this
+requires more unfolding without much obvious benefit.</p><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>primitive element, separable field extension, separable extension, intermediate field, adjoin,
+exists_adjoin_simple_eq_top</p></div><div class="mod_doc"><h3 class="markdown-heading" id="Primitive-element-theorem-for-finite-fields">Primitive element theorem for finite fields <a class="hover-link" href="#Primitive-element-theorem-for-finite-fields">#</a></h3></div><div class="decl" id="Field.exists_primitive_element_of_finite_top"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/FieldTheory/PrimitiveElement.lean#L57-L68">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/PrimitiveElement.html#Field.exists_primitive_element_of_finite_top"><span class="name">Field</span>.<span class="name">exists_primitive_element_of_finite_top</span></a></span><span class="decl_args">
+<span class="fn">(F : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">α</span>, <span class="fn"><span class="fn"><span class="fn">F</span>⟮<span class="fn">α</span>⟯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span></span></div></div><p><strong>Primitive element theorem</strong> assuming E is finite.</p></div></div><div class="decl" id="Field.exists_primitive_element_of_finite_bot"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/FieldTheory/PrimitiveElement.lean#L72-L75">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/PrimitiveElement.html#Field.exists_primitive_element_of_finite_bot"><span class="name">Field</span>.<span class="name">exists_primitive_element_of_finite_bot</span></a></span><span class="decl_args">
+<span class="fn">(F : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(E : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Finite/Defs.html#Finite">Finite</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">α</span>, <span class="fn"><span class="fn"><span class="fn">F</span>⟮<span class="fn">α</span>⟯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span></span></div></div><p>Primitive element theorem for finite dimensional extension of a finite field.</p></div></div><div class="mod_doc"><h3 class="markdown-heading" id="Primitive-element-theorem-for-infinite-fields">Primitive element theorem for infinite fields <a class="hover-link" href="#Primitive-element-theorem-for-infinite-fields">#</a></h3></div><div class="decl" id="Field.primitive_element_inf_aux_exists_c"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/FieldTheory/PrimitiveElement.lean#L87-L96">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/PrimitiveElement.html#Field.primitive_element_inf_aux_exists_c"><span class="name">Field</span>.<span class="name">primitive_element_inf_aux_exists_c</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Finite/Defs.html#Infinite">Infinite</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(ϕ : <span class="fn"><span class="fn">F</span> <a href="../.././Mathlib/Algebra/Hom/Ring.html#RingHom">→+*</a> <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(α : <span class="fn">E</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn">E</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../.././Mathlib/Data/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(g : <span class="fn"><a href="../.././Mathlib/Data/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">c</span>,
+  <span class="fn">∀ (<span class="fn">α'</span> : <span class="fn">E</span>),
+    <span class="fn"><span class="fn"><span class="fn">α'</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Data/Polynomial/RingDivision.html#Polynomial.roots">Polynomial.roots</a> (<span class="fn"><a href="../.././Mathlib/Data/Polynomial/Eval.html#Polynomial.map">Polynomial.map</a> <span class="fn">ϕ</span> <span class="fn">f</span></span>)</span></span> →
+      <span class="fn">∀ (<span class="fn">β'</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">β'</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/Data/Polynomial/RingDivision.html#Polynomial.roots">Polynomial.roots</a> (<span class="fn"><a href="../.././Mathlib/Data/Polynomial/Eval.html#Polynomial.map">Polynomial.map</a> <span class="fn">ϕ</span> <span class="fn">g</span></span>)</span></span> → <span class="fn"><span class="fn"><span class="fn"><a href="../.././Init/Prelude.html#Neg.neg">-</a>(<span class="fn"><span class="fn">α'</span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">α</span></span>)</span> <a href="../.././Init/Prelude.html#HDiv.hDiv">/</a> (<span class="fn"><span class="fn">β'</span> <a href="../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">β</span></span>)</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">↑<span class="fn">ϕ</span> <span class="fn">c</span></span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="Field.primitive_element_inf_aux"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/FieldTheory/PrimitiveElement.lean#L105-L177">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/PrimitiveElement.html#Field.primitive_element_inf_aux"><span class="name">Field</span>.<span class="name">primitive_element_inf_aux</span></a></span><span class="decl_args">
+<span class="fn">(F : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Data/Finite/Defs.html#Infinite">Infinite</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(α : <span class="fn">E</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(β : <span class="fn">E</span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">γ</span>, <span class="fn"><span class="fn"><span class="fn">F</span>⟮<span class="fn">α</span>, <span class="fn">β</span>⟯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">F</span>⟮<span class="fn">γ</span>⟯</span></span></span></div></div></div></div><div class="decl" id="Field.exists_primitive_element"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/FieldTheory/PrimitiveElement.lean#L192-L204">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/PrimitiveElement.html#Field.exists_primitive_element"><span class="name">Field</span>.<span class="name">exists_primitive_element</span></a></span><span class="decl_args">
+<span class="fn">(F : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">α</span>, <span class="fn"><span class="fn"><span class="fn">F</span>⟮<span class="fn">α</span>⟯</span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Top.top">⊤</a></span></span></div></div><p>Primitive element theorem: a finite separable field extension <code>E</code> of <code>F</code> has a
+primitive element, i.e. there is an <code>α ∈ E</code> such that <code>F⟮α⟯ = (⊤ : <a href="../.././Mathlib/Algebra/Algebra/Subalgebra/Basic.html#Subalgebra">Subalgebra</a> F E)</code>.</p></div></div><div class="decl" id="Field.powerBasisOfFiniteOfSeparable"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/FieldTheory/PrimitiveElement.lean#L211-L215">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/PrimitiveElement.html#Field.powerBasisOfFiniteOfSeparable"><span class="name">Field</span>.<span class="name">powerBasisOfFiniteOfSeparable</span></a></span><span class="decl_args">
+<span class="fn">(F : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/PowerBasis.html#PowerBasis">PowerBasis</a> <span class="fn">F</span> <span class="fn">E</span></span></div></div><p>Alternative phrasing of primitive element theorem:
+a finite separable field extension has a basis <code>1, α, α^2, ..., α^n</code>.</p><p>See also <code><a href="../.././Mathlib/FieldTheory/PrimitiveElement.html#Field.exists_primitive_element">exists_primitive_element</a></code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Field.powerBasisOfFiniteOfSeparable" class="instances-for-list"></ul></details></div></div><div class="decl" id="AlgHom.card"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/FieldTheory/PrimitiveElement.lean#L223-L227">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/FieldTheory/PrimitiveElement.html#AlgHom.card"><span class="name">AlgHom</span>.<span class="name">card</span></a></span><span class="decl_args">
+<span class="fn">(F : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="decl_args">
+<span class="fn">(E : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <a href="../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/IsAlgClosed/Basic.html#IsAlgClosed">IsAlgClosed</a> <span class="fn">K</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/LinearAlgebra/FiniteDimensional.html#FiniteDimensional">FiniteDimensional</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/FieldTheory/Separable.html#IsSeparable">IsSeparable</a> <span class="fn">F</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">F</span> <span class="fn">K</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Fintype/Card.html#Fintype.card">Fintype.card</a> (<span class="fn"><span class="fn">E</span> <a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">→ₐ[</a><span class="fn">F</span><a href="../.././Mathlib/Algebra/Algebra/Hom.html#AlgHom">]</a> <span class="fn">K</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/Finrank.html#FiniteDimensional.finrank">FiniteDimensional.finrank</a> <span class="fn">F</span> <span class="fn">E</span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

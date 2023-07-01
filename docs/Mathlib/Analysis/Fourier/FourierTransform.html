@@ -1,0 +1,528 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.Fourier.FourierTransform</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.Fourier.FourierTransform";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">Fourier</span>.<span class="name">FourierTransform</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">Fourier</span>.<span class="name">FourierTransform</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Analysis/Complex/Circle.html">Mathlib.Analysis.Complex.Circle</a></li><li><a href="../../.././Mathlib/MeasureTheory/Group/Integration.html">Mathlib.MeasureTheory.Group.Integration</a></li><li><a href="../../.././Mathlib/MeasureTheory/Measure/Haar/OfBasis.html">Mathlib.MeasureTheory.Measure.Haar.OfBasis</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.Fourier.FourierTransform" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#FourierTransform.«term_[_]»"><span class="name">FourierTransform</span>.<span class="name">«term_[_]»</span></a></div><div class="nav_link"><a class="break_within" href="#VectorFourier.fourierIntegral"><span class="name">VectorFourier</span>.<span class="name">fourierIntegral</span></a></div><div class="nav_link"><a class="break_within" href="#VectorFourier.fourierIntegral_smul_const"><span class="name">VectorFourier</span>.<span class="name">fourierIntegral_smul_const</span></a></div><div class="nav_link"><a class="break_within" href="#VectorFourier.norm_fourierIntegral_le_integral_norm"><span class="name">VectorFourier</span>.<span class="name">norm_fourierIntegral_le_integral_norm</span></a></div><div class="nav_link"><a class="break_within" href="#VectorFourier.fourierIntegral_comp_add_right"><span class="name">VectorFourier</span>.<span class="name">fourierIntegral_comp_add_right</span></a></div><div class="nav_link"><a class="break_within" href="#VectorFourier.fourier_integral_convergent_iff"><span class="name">VectorFourier</span>.<span class="name">fourier_integral_convergent_iff</span></a></div><div class="nav_link"><a class="break_within" href="#VectorFourier.fourierIntegral_add"><span class="name">VectorFourier</span>.<span class="name">fourierIntegral_add</span></a></div><div class="nav_link"><a class="break_within" href="#VectorFourier.fourierIntegral_continuous"><span class="name">VectorFourier</span>.<span class="name">fourierIntegral_continuous</span></a></div><div class="nav_link"><a class="break_within" href="#Fourier.fourierIntegral"><span class="name">Fourier</span>.<span class="name">fourierIntegral</span></a></div><div class="nav_link"><a class="break_within" href="#Fourier.fourierIntegral_def"><span class="name">Fourier</span>.<span class="name">fourierIntegral_def</span></a></div><div class="nav_link"><a class="break_within" href="#Fourier.fourierIntegral_smul_const"><span class="name">Fourier</span>.<span class="name">fourierIntegral_smul_const</span></a></div><div class="nav_link"><a class="break_within" href="#Fourier.norm_fourierIntegral_le_integral_norm"><span class="name">Fourier</span>.<span class="name">norm_fourierIntegral_le_integral_norm</span></a></div><div class="nav_link"><a class="break_within" href="#Fourier.fourierIntegral_comp_add_right"><span class="name">Fourier</span>.<span class="name">fourierIntegral_comp_add_right</span></a></div><div class="nav_link"><a class="break_within" href="#Real.fourierChar"><span class="name">Real</span>.<span class="name">fourierChar</span></a></div><div class="nav_link"><a class="break_within" href="#Real.fourierChar_apply"><span class="name">Real</span>.<span class="name">fourierChar_apply</span></a></div><div class="nav_link"><a class="break_within" href="#Real.continuous_fourierChar"><span class="name">Real</span>.<span class="name">continuous_fourierChar</span></a></div><div class="nav_link"><a class="break_within" href="#Real.vector_fourierIntegral_eq_integral_exp_smul"><span class="name">Real</span>.<span class="name">vector_fourierIntegral_eq_integral_exp_smul</span></a></div><div class="nav_link"><a class="break_within" href="#Real.fourierIntegral"><span class="name">Real</span>.<span class="name">fourierIntegral</span></a></div><div class="nav_link"><a class="break_within" href="#Real.fourierIntegral_def"><span class="name">Real</span>.<span class="name">fourierIntegral_def</span></a></div><div class="nav_link"><a class="break_within" href="#FourierTransform.term𝓕"><span class="name">FourierTransform</span>.<span class="name">term𝓕</span></a></div><div class="nav_link"><a class="break_within" href="#Real.fourierIntegral_eq_integral_exp_smul"><span class="name">Real</span>.<span class="name">fourierIntegral_eq_integral_exp_smul</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="The-Fourier-transform">The Fourier transform <a class="hover-link" href="#The-Fourier-transform">#</a></h1><p>We set up the Fourier transform for complex-valued functions on finite-dimensional spaces.</p><h2 class="markdown-heading" id="Design-choices">Design choices <a class="hover-link" href="#Design-choices">#</a></h2><p>In namespace <code>VectorFourier</code>, we define the Fourier integral in the following context:</p><ul>
+<li><code>𝕜</code> is a commutative ring.</li>
+<li><code>V</code> and <code>W</code> are <code>𝕜</code>-modules.</li>
+<li><code>e</code> is a unitary additive character of <code>𝕜</code>, i.e. a homomorphism <code>(Multiplicative 𝕜) →* <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></code>.</li>
+<li><code>μ</code> is a measure on <code>V</code>.</li>
+<li><code>L</code> is a <code>𝕜</code>-bilinear form <code>V × W → 𝕜</code>.</li>
+<li><code>E</code> is a complete normed <code>ℂ</code>-vector space.</li>
+</ul><p>With these definitions, we define <code><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">fourierIntegral</a></code> to be the map from functions <code>V → E</code> to
+functions <code>W → E</code> that sends <code>f</code> to</p><p><code>fun w ↦ ∫ v in V, e [-L v w] • f v ∂μ</code>,</p><p>where <code>e [x]</code> is notational sugar for <code>(e (Multiplicative.ofAdd x) : ℂ)</code> (available in locale
+<code>fourier_transform</code>). This includes the cases <code>W</code> is the dual of <code>V</code> and <code>L</code> is the canonical
+pairing, or <code>W = V</code> and <code>L</code> is a bilinear form (e.g. an inner product).</p><p>In namespace <code>fourier</code>, we consider the more familiar special case when <code>V = W = 𝕜</code> and <code>L</code> is the
+multiplication map (but still allowing <code>𝕜</code> to be an arbitrary ring equipped with a measure).</p><p>The most familiar case of all is when <code>V = W = 𝕜 = ℝ</code>, <code>L</code> is multiplication, <code>μ</code> is volume, and
+<code>e</code> is <code><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierChar">Real.fourierChar</a></code>, i.e. the character <code>fun x ↦ exp ((2 * π * x) * I)</code>. The Fourier integral
+in this case is defined as <code><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierIntegral">Real.fourierIntegral</a></code>.</p><h2 class="markdown-heading" id="Main-results">Main results <a class="hover-link" href="#Main-results">#</a></h2><p>At present the only nontrivial lemma we prove is <code><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral_continuous">fourierIntegral_continuous</a></code>, stating that the
+Fourier transform of an integrable function is continuous (under mild assumptions).</p></div><div class="decl" id="FourierTransform.«term_[_]»"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L62-L62">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#FourierTransform.«term_[_]»"><span class="name">FourierTransform</span>.<span class="name">«term_[_]»</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.TrailingParserDescr">Lean.TrailingParserDescr</a></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-FourierTransform.«term_[_]»" class="instances-for-list"></ul></details></div></div><div class="mod_doc"><h2 class="markdown-heading" id="Fourier-theory-for-functions-on-general-vector-spaces">Fourier theory for functions on general vector spaces <a class="hover-link" href="#Fourier-theory-for-functions-on-general-vector-spaces">#</a></h2></div><div class="decl" id="VectorFourier.fourierIntegral"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L80-L82">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral"><span class="name">VectorFourier</span>.<span class="name">fourierIntegral</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">𝕜</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn">W</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">E</span></div></div><p>The Fourier transform integral for <code>f : V → E</code>, with respect to a bilinear form <code>L : V × W → 𝕜</code>
+and an additive character <code>e</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">L</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∫ (v : <span class="fn">V</span>), <span class="fn"><span class="fn">↑(<span class="fn">↑<span class="fn">e</span> (<span class="fn">↑<span class="fn">Multiplicative.ofAdd</span> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">↑(<span class="fn">↑<span class="fn">L</span> <span class="fn">v</span></span>) <span class="fn">w</span></span></span>)</span>)</span>)</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">v</span></span></span> ∂<span class="fn">μ</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-VectorFourier.fourierIntegral" class="instances-for-list"></ul></details></div></div><div class="decl" id="VectorFourier.fourierIntegral_smul_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L85-L93">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral_smul_const"><span class="name">VectorFourier</span>.<span class="name">fourierIntegral_smul_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">𝕜</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">L</span> (<span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">L</span> <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="VectorFourier.norm_fourierIntegral_le_integral_norm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L97-L101">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.norm_fourierIntegral_le_integral_norm"><span class="name">VectorFourier</span>.<span class="name">norm_fourierIntegral_le_integral_norm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">𝕜</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn">W</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">L</span> <span class="fn">f</span> <span class="fn">w</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">∫ (v : <span class="fn">V</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">v</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> ∂<span class="fn">μ</span></span></span></div></div><p>The uniform norm of the Fourier integral of <code>f</code> is bounded by the <code>L¹</code> norm of <code>f</code>.</p></div></div><div class="decl" id="VectorFourier.fourierIntegral_comp_add_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L105-L117">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral_comp_add_right"><span class="name">VectorFourier</span>.<span class="name">fourierIntegral_comp_add_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Group/Arithmetic.html#MeasurableAdd">MeasurableAdd</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">V</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Group/Measure.html#MeasureTheory.Measure.IsAddRightInvariant">MeasureTheory.Measure.IsAddRightInvariant</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">𝕜</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v₀ : <span class="fn">V</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">L</span> (<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">fun <span class="fn">v</span> =&gt <span class="fn"><span class="fn">v</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">v₀</span></span></span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">fun <span class="fn">w</span> =&gt
+  <span class="fn"><span class="fn">↑(<span class="fn">↑<span class="fn">e</span> (<span class="fn">↑<span class="fn">Multiplicative.ofAdd</span> (<span class="fn">↑(<span class="fn">↑<span class="fn">L</span> <span class="fn">v₀</span></span>) <span class="fn">w</span></span>)</span>)</span>)</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">L</span> <span class="fn">f</span> <span class="fn">w</span></span></span></span></span></div></div><p>The Fourier integral converts right-translation into scalar multiplication by a phase factor.</p></div></div><div class="decl" id="VectorFourier.fourier_integral_convergent_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L134-L152">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourier_integral_convergent_iff"><span class="name">VectorFourier</span>.<span class="name">fourier_integral_convergent_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalRing">TopologicalRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">V</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">𝕜</span></span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(he : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">↑<span class="fn">e</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hL : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">fun <span class="fn">p</span> =&gt <span class="fn">↑(<span class="fn">↑<span class="fn">L</span> <span class="fn"><span class="fn">p</span>.fst</span></span>) <span class="fn"><span class="fn">p</span>.snd</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">V</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(w : <span class="fn">W</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span> <a href="../../.././Init/Core.html#Iff">↔</a> <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">fun <span class="fn">v</span> =&gt <span class="fn"><span class="fn">↑(<span class="fn">↑<span class="fn">e</span> (<span class="fn">↑<span class="fn">Multiplicative.ofAdd</span> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">↑(<span class="fn">↑<span class="fn">L</span> <span class="fn">v</span></span>) <span class="fn">w</span></span></span>)</span>)</span>)</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">v</span></span></span></span></span></span></div></div><p>For any <code>w</code>, the Fourier integral is convergent iff <code>f</code> is integrable.</p></div></div><div class="decl" id="VectorFourier.fourierIntegral_add"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L157-L165">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral_add"><span class="name">VectorFourier</span>.<span class="name">fourierIntegral_add</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalRing">TopologicalRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">V</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">𝕜</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(he : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">↑<span class="fn">e</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hL : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">fun <span class="fn">p</span> =&gt <span class="fn">↑(<span class="fn">↑<span class="fn">L</span> <span class="fn"><span class="fn">p</span>.fst</span></span>) <span class="fn"><span class="fn">p</span>.snd</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">V</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">V</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">L</span> <span class="fn">f</span></span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">L</span> <span class="fn">g</span></span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">L</span> (<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">g</span></span>)</span></span></div></div></div></div><div class="decl" id="VectorFourier.fourierIntegral_continuous"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L169-L180">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral_continuous"><span class="name">VectorFourier</span>.<span class="name">fourierIntegral_continuous</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <span class="fn">𝕜</span> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_4}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Algebra/Ring/Basic.html#TopologicalRing">TopologicalRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#TopologicalSpace">TopologicalSpace</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">V</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn">𝕜</span></span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Bases.html#TopologicalSpace.FirstCountableTopology">TopologicalSpace.FirstCountableTopology</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(he : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">↑<span class="fn">e</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hL : <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">fun <span class="fn">p</span> =&gt <span class="fn">↑(<span class="fn">↑<span class="fn">L</span> <span class="fn"><span class="fn">p</span>.fst</span></span>) <span class="fn"><span class="fn">p</span>.snd</span></span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">V</span> → <span class="fn">E</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hf : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">L</span> <span class="fn">f</span></span>)</span></div></div><p>The Fourier integral of an <code>L^1</code> function is a continuous function.</p></div></div><div class="mod_doc"><h2 class="markdown-heading" id="Fourier-theory-for-functions-on-𝕜">Fourier theory for functions on <code>𝕜</code> <a class="hover-link" href="#Fourier-theory-for-functions-on-𝕜">#</a></h2></div><div class="decl" id="Fourier.fourierIntegral"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L201-L202">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral"><span class="name">Fourier</span>.<span class="name">fourierIntegral</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">E</span></div></div><p>The Fourier transform integral for <code>f : 𝕜 → E</code>, with respect to the measure <code>μ</code> and additive
+character <code>e</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral">Fourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> (<span class="fn"><a href="../../.././Mathlib/Algebra/Algebra/Bilinear.html#LinearMap.mul">LinearMap.mul</a> <span class="fn">𝕜</span> <span class="fn">𝕜</span></span>) <span class="fn">f</span> <span class="fn">w</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Fourier.fourierIntegral" class="instances-for-list"></ul></details></div></div><div class="decl" id="Fourier.fourierIntegral_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L205-L207">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral_def"><span class="name">Fourier</span>.<span class="name">fourierIntegral_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral">Fourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∫ (v : <span class="fn">𝕜</span>), <span class="fn"><span class="fn">↑(<span class="fn">↑<span class="fn">e</span> (<span class="fn">↑<span class="fn">Multiplicative.ofAdd</span> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a>(<span class="fn"><span class="fn">v</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">w</span></span>)</span>)</span>)</span>)</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">v</span></span></span> ∂<span class="fn">μ</span></span></span></div></div></div></div><div class="decl" id="Fourier.fourierIntegral_smul_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L210-L212">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral_smul_const"><span class="name">Fourier</span>.<span class="name">fourierIntegral_smul_const</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral">Fourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> (<span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">f</span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral">Fourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">f</span></span></span></span></div></div></div></div><div class="decl" id="Fourier.norm_fourierIntegral_le_integral_norm"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L216-L218">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.norm_fourierIntegral_le_integral_norm"><span class="name">Fourier</span>.<span class="name">norm_fourierIntegral_le_integral_norm</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral">Fourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">w</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">∫ (x : <span class="fn">𝕜</span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">f</span> <span class="fn">x</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> ∂<span class="fn">μ</span></span></span></div></div><p>The uniform norm of the Fourier transform of <code>f</code> is bounded by the <code>L¹</code> norm of <code>f</code>.</p></div></div><div class="decl" id="Fourier.fourierIntegral_comp_add_right"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L222-L225">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral_comp_add_right"><span class="name">Fourier</span>.<span class="name">fourierIntegral_comp_add_right</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Ring/Defs.html#CommRing">CommRing</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Group/Arithmetic.html#MeasurableAdd">MeasurableAdd</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(e : <span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <span class="fn">𝕜</span></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">𝕜</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Group/Measure.html#MeasureTheory.Measure.IsAddRightInvariant">MeasureTheory.Measure.IsAddRightInvariant</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(v₀ : <span class="fn">𝕜</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral">Fourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> (<span class="fn"><span class="fn">f</span> <a href="../../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">fun <span class="fn">v</span> =&gt <span class="fn"><span class="fn">v</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">v₀</span></span></span></span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">fun <span class="fn">w</span> =&gt
+  <span class="fn"><span class="fn">↑(<span class="fn">↑<span class="fn">e</span> (<span class="fn">↑<span class="fn">Multiplicative.ofAdd</span> (<span class="fn"><span class="fn">v₀</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">w</span></span>)</span>)</span>)</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral">Fourier.fourierIntegral</a> <span class="fn">e</span> <span class="fn">μ</span> <span class="fn">f</span> <span class="fn">w</span></span></span></span></span></div></div><p>The Fourier transform converts right-translation into scalar multiplication by a phase factor.</p></div></div><div class="decl" id="Real.fourierChar"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L237-L240">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierChar"><span class="name">Real</span>.<span class="name">fourierChar</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Algebra/Group/TypeTags.html#Multiplicative">Multiplicative</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span> <a href="../../.././Mathlib/Algebra/Hom/Group.html#MonoidHom">→*</a> <span class="fn">{ <span class="fn">x</span> // <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <a href="../../.././Mathlib/Analysis/Complex/Circle.html#circle">circle</a></span> }</span></span></div></div><p>The standard additive character of <code>ℝ</code>, given by <code>fun x ↦ exp (2 * π * x * I)</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation">One or more equations did not get rendered due to their size.</li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Real.fourierChar" class="instances-for-list"></ul></details></div></div><div class="decl" id="Real.fourierChar_apply"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L243-L244">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierChar_apply"><span class="name">Real</span>.<span class="name">fourierChar_apply</span></a></span><span class="decl_args">
+<span class="fn">(x : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn">↑<a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierChar">Real.fourierChar</a> (<span class="fn">↑<span class="fn">Multiplicative.ofAdd</span> <span class="fn">x</span></span>)</span>)</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Data/Complex/Exponential.html#Complex.exp">Complex.exp</a> (<span class="fn"><span class="fn">↑(<span class="fn"><span class="fn"><span class="fn">2</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <a href="../../.././Mathlib/Analysis/SpecialFunctions/Trigonometric/Basic.html#Real.pi">Real.pi</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">x</span></span>)</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex.I">Complex.I</a></span>)</span></span></div></div></div></div><div class="decl" id="Real.continuous_fourierChar"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L248-L249">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.continuous_fourierChar"><span class="name">Real</span>.<span class="name">continuous_fourierChar</span></a></span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#Continuous">Continuous</a> <span class="fn">↑<a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierChar">Real.fourierChar</a></span></span></div></div></div></div><div class="decl" id="Real.vector_fourierIntegral_eq_integral_exp_smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L254-L259">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.vector_fourierIntegral_eq_integral_exp_smul"><span class="name">Real</span>.<span class="name">vector_fourierIntegral_eq_integral_exp_smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{V : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">V</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{W : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Group/Defs.html#AddCommGroup">AddCommGroup</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Algebra/Module/Basic.html#Module">Module</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">W</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <span class="fn"><span class="fn">V</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <span class="fn"><span class="fn">W</span> <a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">→ₗ[</a><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a><a href="../../.././Mathlib/Algebra/Module/LinearMap.html#LinearMap">]</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">V</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">V</span> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <span class="fn">W</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#VectorFourier.fourierIntegral">VectorFourier.fourierIntegral</a> <a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierChar">Real.fourierChar</a> <span class="fn">μ</span> <span class="fn">L</span> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">∫ (v : <span class="fn">V</span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Complex/Exponential.html#Complex.exp">Complex.exp</a> (<span class="fn"><span class="fn">↑(<span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">2</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <a href="../../.././Mathlib/Analysis/SpecialFunctions/Trigonometric/Basic.html#Real.pi">Real.pi</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑(<span class="fn">↑<span class="fn">L</span> <span class="fn">v</span></span>) <span class="fn">w</span></span></span>)</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex.I">Complex.I</a></span>)</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">v</span></span></span> ∂<span class="fn">μ</span></span></span></div></div></div></div><div class="decl" id="Real.fourierIntegral"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L264-L265">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierIntegral"><span class="name">Real</span>.<span class="name">fourierIntegral</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">E</span></div></div><p>The Fourier integral for <code>f : ℝ → E</code>, with respect to the standard additive character and
+measure on <code>ℝ</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierIntegral">Real.fourierIntegral</a> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Fourier.fourierIntegral">Fourier.fourierIntegral</a> <a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierChar">Real.fourierChar</a> <span class="fn">MeasureTheory.volume</span> <span class="fn">f</span> <span class="fn">w</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Real.fourierIntegral" class="instances-for-list"></ul></details></div></div><div class="decl" id="Real.fourierIntegral_def"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L268-L270">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierIntegral_def"><span class="name">Real</span>.<span class="name">fourierIntegral_def</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierIntegral">Real.fourierIntegral</a> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∫ (v : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn"><span class="fn">↑(<span class="fn">↑<a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierChar">Real.fourierChar</a> (<span class="fn">↑<span class="fn">Multiplicative.ofAdd</span> (<span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a>(<span class="fn"><span class="fn">v</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">w</span></span>)</span>)</span>)</span>)</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">v</span></span></span></span></span></div></div></div></div><div class="decl" id="FourierTransform.term𝓕"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L273-L273">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#FourierTransform.term𝓕"><span class="name">FourierTransform</span>.<span class="name">term𝓕</span></a></span><span class="decl_args"> :</span><div class="decl_type"><a href="../../.././Init/Prelude.html#Lean.ParserDescr">Lean.ParserDescr</a></div></div><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#FourierTransform.term𝓕">FourierTransform.term𝓕</a> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Init/Prelude.html#Lean.ParserDescr.node">Lean.ParserDescr.node</a> <span class="fn">`FourierTransform.term𝓕</span> <span class="fn">1024</span> (<span class="fn"><a href="../../.././Init/Prelude.html#Lean.ParserDescr.symbol">Lean.ParserDescr.symbol</a> <span class="fn">&quot𝓕&quot</span></span>)</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-FourierTransform.term𝓕" class="instances-for-list"></ul></details></div></div><div class="decl" id="Real.fourierIntegral_eq_integral_exp_smul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Fourier/FourierTransform.lean#L275-L278">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierIntegral_eq_integral_exp_smul"><span class="name">Real</span>.<span class="name">fourierIntegral_eq_integral_exp_smul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex">ℂ</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">E</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(w : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Fourier/FourierTransform.html#Real.fourierIntegral">Real.fourierIntegral</a> <span class="fn">f</span> <span class="fn">w</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn">∫ (v : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Data/Complex/Exponential.html#Complex.exp">Complex.exp</a> (<span class="fn"><span class="fn">↑(<span class="fn"><span class="fn"><span class="fn"><span class="fn"><a href="../../.././Init/Prelude.html#Neg.neg">-</a><span class="fn">2</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <a href="../../.././Mathlib/Analysis/SpecialFunctions/Trigonometric/Basic.html#Real.pi">Real.pi</a></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">v</span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">w</span></span>)</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <a href="../../.././Mathlib/Data/Complex/Basic.html#Complex.I">Complex.I</a></span>)</span> <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><span class="fn">f</span> <span class="fn">v</span></span></span></span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

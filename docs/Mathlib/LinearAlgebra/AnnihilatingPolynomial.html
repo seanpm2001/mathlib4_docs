@@ -1,0 +1,219 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.LinearAlgebra.AnnihilatingPolynomial</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.LinearAlgebra.AnnihilatingPolynomial";</script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">LinearAlgebra</span>.<span class="name">AnnihilatingPolynomial</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">LinearAlgebra</span>.<span class="name">AnnihilatingPolynomial</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/RingTheory/PrincipalIdealDomain.html">Mathlib.RingTheory.PrincipalIdealDomain</a></li><li><a href="../.././Mathlib/FieldTheory/Minpoly/Field.html">Mathlib.FieldTheory.Minpoly.Field</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.LinearAlgebra.AnnihilatingPolynomial" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#Polynomial.annIdeal"><span class="name">Polynomial</span>.<span class="name">annIdeal</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.mem_annIdeal_iff_aeval_eq_zero"><span class="name">Polynomial</span>.<span class="name">mem_annIdeal_iff_aeval_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.annIdealGenerator"><span class="name">Polynomial</span>.<span class="name">annIdealGenerator</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.annIdealGenerator_eq_zero_iff"><span class="name">Polynomial</span>.<span class="name">annIdealGenerator_eq_zero_iff</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.span_singleton_annIdealGenerator"><span class="name">Polynomial</span>.<span class="name">span_singleton_annIdealGenerator</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.annIdealGenerator_mem"><span class="name">Polynomial</span>.<span class="name">annIdealGenerator_mem</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.mem_iff_eq_smul_annIdealGenerator"><span class="name">Polynomial</span>.<span class="name">mem_iff_eq_smul_annIdealGenerator</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.monic_annIdealGenerator"><span class="name">Polynomial</span>.<span class="name">monic_annIdealGenerator</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.annIdealGenerator_aeval_eq_zero"><span class="name">Polynomial</span>.<span class="name">annIdealGenerator_aeval_eq_zero</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.mem_iff_annIdealGenerator_dvd"><span class="name">Polynomial</span>.<span class="name">mem_iff_annIdealGenerator_dvd</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.degree_annIdealGenerator_le_of_mem"><span class="name">Polynomial</span>.<span class="name">degree_annIdealGenerator_le_of_mem</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.annIdealGenerator_eq_minpoly"><span class="name">Polynomial</span>.<span class="name">annIdealGenerator_eq_minpoly</span></a></div><div class="nav_link"><a class="break_within" href="#Polynomial.monic_generator_eq_minpoly"><span class="name">Polynomial</span>.<span class="name">monic_generator_eq_minpoly</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Annihilating-Ideal">Annihilating Ideal <a class="hover-link" href="#Annihilating-Ideal">#</a></h1><p>Given a commutative ring <code>R</code> and an <code>R</code>-algebra <code>A</code>
+Every element <code>a : A</code> defines
+an ideal <code><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> a ⊆ R[X]</code>.
+Simply put, this is the set of polynomials <code>p</code> where
+the polynomial evaluation <code>p(a)</code> is 0.</p><h2 class="markdown-heading" id="Special-case-where-the-ground-ring-is-a-field">Special case where the ground ring is a field <a class="hover-link" href="#Special-case-where-the-ground-ring-is-a-field">#</a></h2><p>In the special case that <code>R</code> is a field, we use the notation <code>R = 𝕜</code>.
+Here <code>𝕜[X]</code> is a PID, so there is a polynomial <code>g ∈ <a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> a</code>
+which generates the ideal. We show that if this generator is
+chosen to be monic, then it is the minimal polynomial of <code>a</code>,
+as defined in <code>FieldTheory.Minpoly</code>.</p><h2 class="markdown-heading" id="Special-case-endomorphism-algebra">Special case: endomorphism algebra <a class="hover-link" href="#Special-case-endomorphism-algebra">#</a></h2><p>Given an <code>R</code>-module <code>M</code> (<code>[AddCommGroup M] [Module R M]</code>)
+there are some common specializations which may be more familiar.</p><ul>
+<li>Example 1: <code>A = M →ₗ[R] M</code>, the endomorphism algebra of an <code>R</code>-module M.</li>
+<li>Example 2: <code>A = n × n</code> matrices with entries in <code>R</code>.</li>
+</ul></div><div class="decl" id="Polynomial.annIdeal"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L56-L57">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal"><span class="name">Polynomial</span>.<span class="name">annIdeal</span></a></span><span class="decl_args">
+<span class="fn">(R : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal">Ideal</a> (<span class="fn"><a href="../.././Mathlib/Data/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>)</span></div></div><p><code><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">annIdeal</a> R a</code> is the <em>annihilating ideal</em> of all <code>p : R[X]</code> such that <code>p(a) = 0</code>.</p><p>The informal notation <code>p(a)</code> stand for <code><a href="../.././Mathlib/Data/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> a p</code>.
+Again informally, the annihilating ideal of <code>a</code> is
+<code>{ p ∈ R[X] | p(a) = 0 }</code>. This is an ideal in <code>R[X]</code>.
+The formal definition uses the kernel of the aeval map.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> <span class="fn">R</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Operations.html#RingHom.ker">RingHom.ker</a> <span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">a</span></span>)</span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Polynomial.annIdeal" class="instances-for-list"></ul></details></div></div><div class="decl" id="Polynomial.mem_annIdeal_iff_aeval_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L64-L65">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.mem_annIdeal_iff_aeval_eq_zero"><span class="name">Polynomial</span>.<span class="name">mem_annIdeal_iff_aeval_eq_zero</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{R : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#CommSemiring">CommSemiring</a> <span class="fn">R</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Semiring">Semiring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">R</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">A</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../.././Mathlib/Data/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">R</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> <span class="fn">R</span> <span class="fn">a</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">a</span></span>) <span class="fn">p</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></span></div></div><p>It is useful to refer to ideal membership sometimes
+and the annihilation condition other times.</p></div></div><div class="decl" id="Polynomial.annIdealGenerator"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L85-L87">source</a></div><div class="decl_header"><span class="decl_kind">noncomputable def</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator"><span class="name">Polynomial</span>.<span class="name">annIdealGenerator</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">𝕜</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Data/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">𝕜</span></span></div></div><p><code><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">annIdealGenerator</a> 𝕜 a</code> is the monic generator of <code><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">annIdeal</a> 𝕜 a</code>
+if one exists, otherwise <code>0</code>.</p><p>Since <code>𝕜[X]</code> is a principal ideal domain there is a polynomial <code>g</code> such that
+<code>span 𝕜 {g} = <a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">annIdeal</a> a</code>. This picks some generator.
+We prefer the monic generator of the ideal.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">let g := <span class="fn"><a href="../.././Mathlib/RingTheory/PrincipalIdealDomain.html#Submodule.IsPrincipal.generator">Submodule.IsPrincipal.generator</a> (<span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> <span class="fn">𝕜</span> <span class="fn">a</span></span>)</span>;
+  <span class="fn"><span class="fn">g</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">↑<span class="fn">Polynomial.C</span> <span class="fn">(<span class="fn"><a href="../.././Mathlib/Data/Polynomial/Degree/Definitions.html#Polynomial.leadingCoeff">Polynomial.leadingCoeff</a> <span class="fn">g</span></span>)<a href="../.././Mathlib/Algebra/Group/Defs.html#Inv.inv">⁻¹</a></span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-Polynomial.annIdealGenerator" class="instances-for-list"></ul></details></div></div><div class="decl" id="Polynomial.annIdealGenerator_eq_zero_iff"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L95-L97">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator_eq_zero_iff"><span class="name">Polynomial</span>.<span class="name">annIdealGenerator_eq_zero_iff</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">𝕜</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> <span class="fn">𝕜</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <a href="../.././Mathlib/Order/BoundedOrder.html#Bot.bot">⊥</a></span></span></div></div></div></div><div class="decl" id="Polynomial.span_singleton_annIdealGenerator"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L104-L113">source</a></div><div class="attributes">@[simp]</div>
+<div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.span_singleton_annIdealGenerator"><span class="name">Polynomial</span>.<span class="name">span_singleton_annIdealGenerator</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">𝕜</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal.span">Ideal.span</a> <span class="fn">{<span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span>}</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> <span class="fn">𝕜</span> <span class="fn">a</span></span></span></div></div><p><code><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">annIdealGenerator</a> 𝕜 a</code> is indeed a generator.</p></div></div><div class="decl" id="Polynomial.annIdealGenerator_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L117-L118">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator_mem"><span class="name">Polynomial</span>.<span class="name">annIdealGenerator_mem</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">𝕜</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> <span class="fn">𝕜</span> <span class="fn">a</span></span></span></div></div><p>The annihilating ideal generator is a member of the annihilating ideal.</p></div></div><div class="decl" id="Polynomial.mem_iff_eq_smul_annIdealGenerator"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L121-L123">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.mem_iff_eq_smul_annIdealGenerator"><span class="name">Polynomial</span>.<span class="name">mem_iff_eq_smul_annIdealGenerator</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">𝕜</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../.././Mathlib/Data/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> <span class="fn">𝕜</span> <span class="fn">a</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn">∃ <span class="fn">s</span>, <span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn">s</span> <a href="../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span></span></span></span></span></div></div></div></div><div class="decl" id="Polynomial.monic_annIdealGenerator"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L127-L129">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.monic_annIdealGenerator"><span class="name">Polynomial</span>.<span class="name">monic_annIdealGenerator</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">𝕜</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hg : <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/Data/Polynomial/Degree/Definitions.html#Polynomial.Monic">Polynomial.Monic</a> (<span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span>)</span></div></div><p>The generator we chose for the annihilating ideal is monic when the ideal is non-zero.</p></div></div><div class="mod_doc"><p>We are working toward showing the generator of the annihilating ideal
+in the field case is the minimal polynomial. We are going to use a uniqueness
+theorem of the minimal polynomial.</p><p>This is the first condition: it must annihilate the original element <code>a : A</code>.</p></div><div class="decl" id="Polynomial.annIdealGenerator_aeval_eq_zero"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L139-L140">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator_aeval_eq_zero"><span class="name">Polynomial</span>.<span class="name">annIdealGenerator_aeval_eq_zero</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">𝕜</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">↑(<span class="fn"><a href="../.././Mathlib/Data/Polynomial/AlgebraMap.html#Polynomial.aeval">Polynomial.aeval</a> <span class="fn">a</span></span>) (<span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">0</span></span></div></div></div></div><div class="decl" id="Polynomial.mem_iff_annIdealGenerator_dvd"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L145-L147">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.mem_iff_annIdealGenerator_dvd"><span class="name">Polynomial</span>.<span class="name">mem_iff_annIdealGenerator_dvd</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">𝕜</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{p : <span class="fn"><a href="../.././Mathlib/Data/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">𝕜</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{a : <span class="fn">A</span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> <span class="fn">𝕜</span> <span class="fn">a</span></span></span> <a href="../.././Init/Core.html#Iff">↔</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span> <a href="../.././Std/Classes/Dvd.html#Dvd.dvd">∣</a> <span class="fn">p</span></span></span></div></div></div></div><div class="decl" id="Polynomial.degree_annIdealGenerator_le_of_mem"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L152-L154">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.degree_annIdealGenerator_le_of_mem"><span class="name">Polynomial</span>.<span class="name">degree_annIdealGenerator_le_of_mem</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">𝕜</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../.././Mathlib/Data/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hp : <span class="fn"><span class="fn">p</span> <a href="../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> <span class="fn">𝕜</span> <span class="fn">a</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hpn0 : <span class="fn"><span class="fn">p</span> <a href="../.././Init/Core.html#Ne">≠</a> <span class="fn">0</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Data/Polynomial/Degree/Definitions.html#Polynomial.degree">Polynomial.degree</a> (<span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span>)</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><a href="../.././Mathlib/Data/Polynomial/Degree/Definitions.html#Polynomial.degree">Polynomial.degree</a> <span class="fn">p</span></span></span></div></div><p>The generator of the annihilating ideal has minimal degree among
+the non-zero members of the annihilating ideal</p></div></div><div class="decl" id="Polynomial.annIdealGenerator_eq_minpoly"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L160-L169">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator_eq_minpoly"><span class="name">Polynomial</span>.<span class="name">annIdealGenerator_eq_minpoly</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">𝕜</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/FieldTheory/Minpoly/Basic.html#minpoly">minpoly</a> <span class="fn">𝕜</span> <span class="fn">a</span></span></span></div></div><p>The generator of the annihilating ideal is the minimal polynomial.</p></div></div><div class="decl" id="Polynomial.monic_generator_eq_minpoly"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean#L174-L181">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.monic_generator_eq_minpoly"><span class="name">Polynomial</span>.<span class="name">monic_generator_eq_minpoly</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../.././foundational_types.html">Type</a> u_1)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{A : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Field/Defs.html#Field">Field</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Ring/Defs.html#Ring">Ring</a> <span class="fn">A</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Algebra/Algebra/Basic.html#Algebra">Algebra</a> <span class="fn">𝕜</span> <span class="fn">A</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(a : <span class="fn">A</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p : <span class="fn"><a href="../.././Mathlib/Data/Polynomial/Basic.html#Polynomial">Polynomial</a> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p_monic : <span class="fn"><a href="../.././Mathlib/Data/Polynomial/Degree/Definitions.html#Polynomial.Monic">Polynomial.Monic</a> <span class="fn">p</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(p_gen : <span class="fn"><span class="fn"><a href="../.././Mathlib/RingTheory/Ideal/Basic.html#Ideal.span">Ideal.span</a> <span class="fn">{<span class="fn">p</span>}</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdeal">Polynomial.annIdeal</a> <span class="fn">𝕜</span> <span class="fn">a</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/LinearAlgebra/AnnihilatingPolynomial.html#Polynomial.annIdealGenerator">Polynomial.annIdealGenerator</a> <span class="fn">𝕜</span> <span class="fn">a</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">p</span></span></div></div><p>If a monic generates the annihilating ideal, it must match our choice
+of the annihilating ideal generator.</p></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

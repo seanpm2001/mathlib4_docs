@@ -1,0 +1,314 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../.././style.css"></link><link rel="stylesheet" href="../.././src/pygments.css"></link><link rel="shortcut icon" href="../.././favicon.ico"></link><link rel="prefetch" href="../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Probability.Integration</title><script defer="true" src="../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../.././";</script><script>const MODULE_NAME="Mathlib.Probability.Integration";</script><script type="module" src="../.././search.js"></script><script type="module" src="../.././how-about.js"></script><script type="module" src="../.././instances.js"></script><script type="module" src="../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Probability</span>.<span class="name">Integration</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Probability</span>.<span class="name">Integration</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../.././Init.html">Init</a></li><li><a href="../.././Mathlib/MeasureTheory/Integral/SetIntegral.html">Mathlib.MeasureTheory.Integral.SetIntegral</a></li><li><a href="../.././Mathlib/Probability/Independence/Basic.html">Mathlib.Probability.Independence.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Probability.Integration" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.lintegral_mul_indicator_eq_lintegral_mul_lintegral_indicator"><span class="name">ProbabilityTheory</span>.<span class="name">lintegral_mul_indicator_eq_lintegral_mul_lintegral_indicator</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_independent_measurableSpace"><span class="name">ProbabilityTheory</span>.<span class="name">lintegral_mul_eq_lintegral_mul_lintegral_of_independent_measurableSpace</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun"><span class="name">ProbabilityTheory</span>.<span class="name">lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun'"><span class="name">ProbabilityTheory</span>.<span class="name">lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun'</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun''"><span class="name">ProbabilityTheory</span>.<span class="name">lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun''</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IndepFun.integrable_mul"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integrable_mul</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IndepFun.integrable_left_of_integrable_mul"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integrable_left_of_integrable_mul</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IndepFun.integrable_right_of_integrable_mul"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integrable_right_of_integrable_mul</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IndepFun.integral_mul_of_nonneg"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integral_mul_of_nonneg</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IndepFun.integral_mul_of_integrable"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integral_mul_of_integrable</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IndepFun.integral_mul"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integral_mul</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.IndepFun.integral_mul'"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integral_mul'</span></a></div><div class="nav_link"><a class="break_within" href="#ProbabilityTheory.indepFun_iff_integral_comp_mul"><span class="name">ProbabilityTheory</span>.<span class="name">indepFun_iff_integral_comp_mul</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Integration-in-Probability-Theory">Integration in Probability Theory <a class="hover-link" href="#Integration-in-Probability-Theory">#</a></h1><p>Integration results for independent random variables. Specifically, for two
+independent random variables X and Y over the extended non-negative
+reals, <code>E[X * Y] = E[X] * E[Y]</code>, and similar results.</p><h2 class="markdown-heading" id="Implementation-notes">Implementation notes <a class="hover-link" href="#Implementation-notes">#</a></h2><p>Many lemmas in this file take two arguments of the same typeclass. It is worth remembering that lean
+will always pick the later typeclass in this situation, and does not care whether the arguments are
+<code>[]</code>, <code>{}</code>, or <code>()</code>. All of these use the <code><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a></code> <code>M2</code> to define <code>μ</code>:</p><pre><code class="language-lean">example {M1 : <a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> Ω} [M2 : <a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> Ω] {μ : <a href="../.././Init/WF.html#Measure">Measure</a> Ω} : sorry := sorry
+example [M1 : <a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> Ω] {M2 : <a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> Ω} {μ : <a href="../.././Init/WF.html#Measure">Measure</a> Ω} : sorry := sorry
+</code></pre></div><div class="decl" id="ProbabilityTheory.lintegral_mul_indicator_eq_lintegral_mul_lintegral_indicator"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L48-L75">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.lintegral_mul_indicator_eq_lintegral_mul_lintegral_indicator"><span class="name">ProbabilityTheory</span>.<span class="name">lintegral_mul_indicator_eq_lintegral_mul_lintegral_indicator</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Mf : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hMf : <span class="fn"><span class="fn">Mf</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">mΩ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(c : <a href="../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{T : <span class="fn"><a href="../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h_meas_T : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">T</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_ind : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepSets">ProbabilityTheory.IndepSets</a> <span class="fn">{<span class="fn">s</span> | <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">s</span></span>}</span> <span class="fn">{<span class="fn">T</span>}</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_meas_f : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">ω</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/Algebra/IndicatorFunction.html#Set.indicator">Set.indicator</a> <span class="fn">T</span> (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">c</span></span>) <span class="fn">ω</span></span></span> ∂<span class="fn">μ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a>   <span class="fn">(<span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn">f</span> <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span>) <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><a href="../.././Mathlib/Algebra/IndicatorFunction.html#Set.indicator">Set.indicator</a> <span class="fn">T</span> (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">c</span></span>) <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span></span></span></div></div><p>If a random variable <code>f</code> in <code>ℝ≥0∞</code> is independent of an event <code>T</code>, then if you restrict the
+random variable to <code>T</code>, then <code>E[f * indicator T c 0]=E[f] * E[indicator T c 0]</code>. It is useful for
+<code><a href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_independent_measurableSpace">lintegral_mul_eq_lintegral_mul_lintegral_of_independent_measurableSpace</a></code>.</p></div></div><div class="decl" id="ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_independent_measurableSpace"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L84-L106">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_independent_measurableSpace"><span class="name">ProbabilityTheory</span>.<span class="name">lintegral_mul_eq_lintegral_mul_lintegral_of_independent_measurableSpace</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Mf : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Mg : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hMf : <span class="fn"><span class="fn">Mf</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">mΩ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hMg : <span class="fn"><span class="fn">Mg</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">mΩ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_ind : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.Indep">ProbabilityTheory.Indep</a> <span class="fn">Mf</span> <span class="fn">Mg</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_meas_f : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_meas_g : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">ω</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">g</span> <span class="fn">ω</span></span></span> ∂<span class="fn">μ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn">f</span> <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span>) <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn">g</span> <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span></span></span></div></div><p>If <code>f</code> and <code>g</code> are independent random variables with values in <code>ℝ≥0∞</code>,
+then <code>E[f * g] = E[f] * E[g]</code>. However, instead of directly using the independence
+of the random variables, it uses the independence of measurable spaces for the
+domains of <code>f</code> and <code>g</code>. This is similar to the sigma-algebra approach to
+independence. See <code><a href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun">lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun</a></code> for
+a more common variant of the product of independent variables.</p></div></div><div class="decl" id="ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L111-L116">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun"><span class="name">ProbabilityTheory</span>.<span class="name">lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h_meas_f : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_meas_g : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_indep_fun : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn">(<a href="../.././Init/Prelude.html#HMul.hMul"><span class="fn">f</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">g</span></a>) <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn">f</span> <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span>) <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn">g</span> <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span></span></span></div></div><p>If <code>f</code> and <code>g</code> are independent random variables with values in <code>ℝ≥0∞</code>,
+then <code>E[f * g] = E[f] * E[g]</code>.</p></div></div><div class="decl" id="ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L122-L130">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun'"><span class="name">ProbabilityTheory</span>.<span class="name">lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h_meas_f : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_meas_g : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_indep_fun : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn">(<a href="../.././Init/Prelude.html#HMul.hMul"><span class="fn">f</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">g</span></a>) <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn">f</span> <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span>) <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn">g</span> <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span></span></span></div></div><p>If <code>f</code> and <code>g</code> with values in <code>ℝ≥0∞</code> are independent and almost everywhere measurable,
+then <code>E[f * g] = E[f] * E[g]</code> (slightly generalizing
+<code><a href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun">lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun</a></code>).</p></div></div><div class="decl" id="ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun''"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L133-L136">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun''"><span class="name">ProbabilityTheory</span>.<span class="name">lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun''</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/ENNReal.html#ENNReal">ENNReal</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h_meas_f : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> <span class="fn">f</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_meas_g : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h_indep_fun : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">f</span> <span class="fn">g</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">ω</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">g</span> <span class="fn">ω</span></span></span> ∂<span class="fn">μ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn">(<span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn">f</span> <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span>) <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">∫⁻ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn">g</span> <span class="fn">ω</span></span> ∂<span class="fn">μ</span></span></span></span></div></div></div></div><div class="decl" id="ProbabilityTheory.IndepFun.integrable_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L140-L155">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.IndepFun.integrable_mul"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integrable_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn"><span class="fn">Ω</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedDivisionRing">NormedDivisionRing</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hXY : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">X</span> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">X</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hY : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> (<span class="fn"><span class="fn">X</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">Y</span></span>)</span></div></div><p>The product of two independent, integrable, real-valued random variables is integrable.</p></div></div><div class="decl" id="ProbabilityTheory.IndepFun.integrable_left_of_integrable_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L160-L177">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.IndepFun.integrable_left_of_integrable_mul"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integrable_left_of_integrable_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn"><span class="fn">Ω</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedDivisionRing">NormedDivisionRing</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hXY : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">X</span> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'XY : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> (<span class="fn"><span class="fn">X</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">Y</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">X</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hY : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">Y</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'Y : <span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">Y</span> <a href="../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn">0</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">X</span></span></div></div><p>If the product of two independent real-valued random variables is integrable and
+the second one is not almost everywhere zero, then the first one is integrable.</p></div></div><div class="decl" id="ProbabilityTheory.IndepFun.integrable_right_of_integrable_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L182-L199">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.IndepFun.integrable_right_of_integrable_mul"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integrable_right_of_integrable_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn"><span class="fn">Ω</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/Analysis/Normed/Field/Basic.html#NormedDivisionRing">NormedDivisionRing</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">β</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(hXY : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">X</span> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'XY : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> (<span class="fn"><span class="fn">X</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">Y</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">X</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hY : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">Y</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h'X : <span class="fn"><a href="../.././Init/Prelude.html#Not">¬</a><span class="fn"><span class="fn">X</span> <a href="../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">=ᶠ[</a><span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure.ae">MeasureTheory.Measure.ae</a> <span class="fn">μ</span></span><a href="../.././Mathlib/Order/Filter/Basic.html#Filter.EventuallyEq">]</a> <span class="fn">0</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">Y</span></span></div></div><p>If the product of two independent real-valued random variables is integrable and the
+first one is not almost everywhere zero, then the second one is integrable.</p></div></div><div class="decl" id="ProbabilityTheory.IndepFun.integral_mul_of_nonneg"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L205-L220">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.IndepFun.integral_mul_of_nonneg"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integral_mul_of_nonneg</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hXY : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">X</span> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hXp : <span class="fn"><span class="fn">0</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">X</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hYp : <span class="fn"><span class="fn">0</span> <a href="../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hXm : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> <span class="fn">X</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hYm : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> (<span class="fn"><span class="fn">X</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">Y</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> <span class="fn">X</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> <span class="fn">Y</span></span></span></span></div></div><p>The (Bochner) integral of the product of two independent, nonnegative random
+variables is the product of their integrals. The proof is just plumbing around
+<code><a href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun'">lintegral_mul_eq_lintegral_mul_lintegral_of_indepFun'</a></code>.</p></div></div><div class="decl" id="ProbabilityTheory.IndepFun.integral_mul_of_integrable"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L227-L267">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.IndepFun.integral_mul_of_integrable"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integral_mul_of_integrable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hXY : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">X</span> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">X</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hY : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> (<span class="fn"><span class="fn">X</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">Y</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> <span class="fn">X</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> <span class="fn">Y</span></span></span></span></div></div><p>The (Bochner) integral of the product of two independent, integrable random
+variables is the product of their integrals. The proof is pedestrian decomposition
+into their positive and negative parts in order to apply <code><a href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.IndepFun.integral_mul_of_nonneg">IndepFun.integral_mul_of_nonneg</a></code>
+four times.</p></div></div><div class="decl" id="ProbabilityTheory.IndepFun.integral_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L272-L295">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.IndepFun.integral_mul"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integral_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hXY : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">X</span> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">X</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hY : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">Y</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> (<span class="fn"><span class="fn">X</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">Y</span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> <span class="fn">X</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> <span class="fn">Y</span></span></span></span></div></div><p>The (Bochner) integral of the product of two independent random
+variables is the product of their integrals.</p></div></div><div class="decl" id="ProbabilityTheory.IndepFun.integral_mul'"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L298-L301">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.IndepFun.integral_mul'"><span class="name">ProbabilityTheory</span>.<span class="name">IndepFun</span>.<span class="name">integral_mul'</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{X : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Y : <span class="fn"><span class="fn">Ω</span> → <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hXY : <span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">X</span> <span class="fn">Y</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hX : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">X</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hY : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> <span class="fn">Y</span> <span class="fn">μ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">∫ (ω : <span class="fn">Ω</span>), <span class="fn"><span class="fn"><span class="fn">X</span> <span class="fn">ω</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">Y</span> <span class="fn">ω</span></span></span> ∂<span class="fn">μ</span></span> <a href="../.././Init/Prelude.html#Eq">=</a> <span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> <span class="fn">X</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> <span class="fn">Y</span></span></span></span></div></div></div></div><div class="decl" id="ProbabilityTheory.indepFun_iff_integral_comp_mul"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Probability/Integration.lean#L307-L321">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../.././Mathlib/Probability/Integration.html#ProbabilityTheory.indepFun_iff_integral_comp_mul"><span class="name">ProbabilityTheory</span>.<span class="name">indepFun_iff_integral_comp_mul</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{Ω : <a href="../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mΩ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{μ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">Ω</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../.././Mathlib/MeasureTheory/Measure/MeasureSpace.html#MeasureTheory.IsFiniteMeasure">MeasureTheory.IsFiniteMeasure</a> <span class="fn">μ</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β : <a href="../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{β' : <a href="../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mβ : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{mβ' : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">β'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">Ω</span> → <span class="fn">β</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{g : <span class="fn"><span class="fn">Ω</span> → <span class="fn">β'</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{hfm : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">f</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{hgm : <span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">g</span></span>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../.././Mathlib/Probability/Independence/Basic.html#ProbabilityTheory.IndepFun">ProbabilityTheory.IndepFun</a> <span class="fn">f</span> <span class="fn">g</span></span> <a href="../.././Init/Core.html#Iff">↔</a>   <span class="fn">∀ {<span class="fn">φ</span> : <span class="fn"><span class="fn">β</span> → <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>} {<span class="fn">ψ</span> : <span class="fn"><span class="fn">β'</span> → <a href="../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>},
+    <span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">φ</span></span> →
+      <span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">ψ</span></span> →
+        <span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> (<span class="fn"><span class="fn">φ</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span>)</span> →
+          <span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Function/L1Space.html#MeasureTheory.Integrable">MeasureTheory.Integrable</a> (<span class="fn"><span class="fn">ψ</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">g</span></span>)</span> →
+            <span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> (<span class="fn"><span class="fn"><span class="fn">φ</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><span class="fn">ψ</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">g</span></span></span>)</span> <a href="../.././Init/Prelude.html#Eq">=</a>               <span class="fn"><span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> (<span class="fn"><span class="fn">φ</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">f</span></span>)</span> <a href="../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../.././Mathlib/MeasureTheory/Integral/Bochner.html#MeasureTheory.integral">MeasureTheory.integral</a> <span class="fn">μ</span> (<span class="fn"><span class="fn">ψ</span> <a href="../.././Init/Prelude.html#Function.comp">∘</a> <span class="fn">g</span></span>)</span></span></span></span></span></span></span></span></span></div></div><p>Independence of functions <code>f</code> and <code>g</code> into arbitrary types is characterized by the relation
+<code>E[(φ ∘ f) * (ψ ∘ g)] = E[φ ∘ f] * E[ψ ∘ g]</code> for all measurable <code>φ</code> and <code>ψ</code> with values in <code>ℝ</code>
+satisfying appropriate integrability conditions.</p></div></div></main>
+<nav class="nav"><iframe src="../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>

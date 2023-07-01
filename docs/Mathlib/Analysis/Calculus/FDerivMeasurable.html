@@ -1,0 +1,1000 @@
+<html lang="en"><head><meta charset="UTF-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><link rel="stylesheet" href="../../.././style.css"></link><link rel="stylesheet" href="../../.././src/pygments.css"></link><link rel="shortcut icon" href="../../.././favicon.ico"></link><link rel="prefetch" href="../../.././/declarations/declaration-data.bmp" as="image"></link><title>Mathlib.Analysis.Calculus.FDerivMeasurable</title><script defer="true" src="../../.././mathjax-config.js"></script><script defer="true" src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script defer="true" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>const SITE_ROOT="../../.././";</script><script>const MODULE_NAME="Mathlib.Analysis.Calculus.FDerivMeasurable";</script><script type="module" src="../../.././search.js"></script><script type="module" src="../../.././how-about.js"></script><script type="module" src="../../.././instances.js"></script><script type="module" src="../../.././importedBy.js"></script></head><body><input id="nav_toggle" type="checkbox"></input><header><h1><label for="nav_toggle"></label>Documentation</h1><p class="header_filename break_within"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">Calculus</span>.<span class="name">FDerivMeasurable</span></p><form action="https://google.com/search" method="get" id="search_form"><input type="hidden" name="sitesearch" value="https://leanprover-community.github.io/mathlib4_docs"></input><input type="text" name="q" autocomplete="off"></input>&#32;
+            <button id="search_button" onclick="javascript: form.action='../../.././search.html';">Search</button><button>Google site search</button></form></header><nav class="internal_nav"><h3><a class="break_within" href="#top"><span class="name">Mathlib</span>.<span class="name">Analysis</span>.<span class="name">Calculus</span>.<span class="name">FDerivMeasurable</span></a></h3><p class="gh_nav_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean">source</a></p><div class="imports"><details><summary>Imports</summary><ul><li><a href="../../.././Init.html">Init</a></li><li><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html">Mathlib.Analysis.Calculus.Deriv.Basic</a></li><li><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/ContinuousLinearMap.html">Mathlib.MeasureTheory.Constructions.BorelSpace.ContinuousLinearMap</a></li><li><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html">Mathlib.MeasureTheory.Function.StronglyMeasurable.Basic</a></li></ul></details><details><summary>Imported by</summary><ul id="imported-by-Mathlib.Analysis.Calculus.FDerivMeasurable" class="imported-by-list"></ul></details></div><div class="nav_link"><a class="break_within" href="#ContinuousLinearMap.measurable_apply₂"><span class="name">ContinuousLinearMap</span>.<span class="name">measurable_apply₂</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.A"><span class="name">FDerivMeasurableAux</span>.<span class="name">A</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.B"><span class="name">FDerivMeasurableAux</span>.<span class="name">B</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.D"><span class="name">FDerivMeasurableAux</span>.<span class="name">D</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.isOpen_a"><span class="name">FDerivMeasurableAux</span>.<span class="name">isOpen_a</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.isOpen_b"><span class="name">FDerivMeasurableAux</span>.<span class="name">isOpen_b</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.a_mono"><span class="name">FDerivMeasurableAux</span>.<span class="name">a_mono</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.le_of_mem_a"><span class="name">FDerivMeasurableAux</span>.<span class="name">le_of_mem_a</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.mem_a_of_differentiable"><span class="name">FDerivMeasurableAux</span>.<span class="name">mem_a_of_differentiable</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.norm_sub_le_of_mem_a"><span class="name">FDerivMeasurableAux</span>.<span class="name">norm_sub_le_of_mem_a</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.differentiable_set_subset_d"><span class="name">FDerivMeasurableAux</span>.<span class="name">differentiable_set_subset_d</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.d_subset_differentiable_set"><span class="name">FDerivMeasurableAux</span>.<span class="name">d_subset_differentiable_set</span></a></div><div class="nav_link"><a class="break_within" href="#FDerivMeasurableAux.differentiable_set_eq_d"><span class="name">FDerivMeasurableAux</span>.<span class="name">differentiable_set_eq_d</span></a></div><div class="nav_link"><a class="break_within" href="#measurableSet_of_differentiableAt_of_isComplete"><span class="name">measurableSet_of_differentiableAt_of_isComplete</span></a></div><div class="nav_link"><a class="break_within" href="#measurableSet_of_differentiableAt"><span class="name">measurableSet_of_differentiableAt</span></a></div><div class="nav_link"><a class="break_within" href="#measurable_fderiv"><span class="name">measurable_fderiv</span></a></div><div class="nav_link"><a class="break_within" href="#measurable_fderiv_apply_const"><span class="name">measurable_fderiv_apply_const</span></a></div><div class="nav_link"><a class="break_within" href="#measurable_deriv"><span class="name">measurable_deriv</span></a></div><div class="nav_link"><a class="break_within" href="#stronglyMeasurable_deriv"><span class="name">stronglyMeasurable_deriv</span></a></div><div class="nav_link"><a class="break_within" href="#aemeasurable_deriv"><span class="name">aemeasurable_deriv</span></a></div><div class="nav_link"><a class="break_within" href="#aestronglyMeasurable_deriv"><span class="name">aestronglyMeasurable_deriv</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.A"><span class="name">RightDerivMeasurableAux</span>.<span class="name">A</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.B"><span class="name">RightDerivMeasurableAux</span>.<span class="name">B</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.D"><span class="name">RightDerivMeasurableAux</span>.<span class="name">D</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.a_mem_nhdsWithin_Ioi"><span class="name">RightDerivMeasurableAux</span>.<span class="name">a_mem_nhdsWithin_Ioi</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.b_mem_nhdsWithin_Ioi"><span class="name">RightDerivMeasurableAux</span>.<span class="name">b_mem_nhdsWithin_Ioi</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.measurableSet_b"><span class="name">RightDerivMeasurableAux</span>.<span class="name">measurableSet_b</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.a_mono"><span class="name">RightDerivMeasurableAux</span>.<span class="name">a_mono</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.le_of_mem_a"><span class="name">RightDerivMeasurableAux</span>.<span class="name">le_of_mem_a</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.mem_a_of_differentiable"><span class="name">RightDerivMeasurableAux</span>.<span class="name">mem_a_of_differentiable</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.norm_sub_le_of_mem_a"><span class="name">RightDerivMeasurableAux</span>.<span class="name">norm_sub_le_of_mem_a</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.differentiable_set_subset_d"><span class="name">RightDerivMeasurableAux</span>.<span class="name">differentiable_set_subset_d</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.d_subset_differentiable_set"><span class="name">RightDerivMeasurableAux</span>.<span class="name">d_subset_differentiable_set</span></a></div><div class="nav_link"><a class="break_within" href="#RightDerivMeasurableAux.differentiable_set_eq_d"><span class="name">RightDerivMeasurableAux</span>.<span class="name">differentiable_set_eq_d</span></a></div><div class="nav_link"><a class="break_within" href="#measurableSet_of_differentiableWithinAt_Ici_of_isComplete"><span class="name">measurableSet_of_differentiableWithinAt_Ici_of_isComplete</span></a></div><div class="nav_link"><a class="break_within" href="#measurableSet_of_differentiableWithinAt_Ici"><span class="name">measurableSet_of_differentiableWithinAt_Ici</span></a></div><div class="nav_link"><a class="break_within" href="#measurable_derivWithin_Ici"><span class="name">measurable_derivWithin_Ici</span></a></div><div class="nav_link"><a class="break_within" href="#stronglyMeasurable_derivWithin_Ici"><span class="name">stronglyMeasurable_derivWithin_Ici</span></a></div><div class="nav_link"><a class="break_within" href="#aemeasurable_derivWithin_Ici"><span class="name">aemeasurable_derivWithin_Ici</span></a></div><div class="nav_link"><a class="break_within" href="#aestronglyMeasurable_derivWithin_Ici"><span class="name">aestronglyMeasurable_derivWithin_Ici</span></a></div><div class="nav_link"><a class="break_within" href="#measurableSet_of_differentiableWithinAt_Ioi"><span class="name">measurableSet_of_differentiableWithinAt_Ioi</span></a></div><div class="nav_link"><a class="break_within" href="#measurable_derivWithin_Ioi"><span class="name">measurable_derivWithin_Ioi</span></a></div><div class="nav_link"><a class="break_within" href="#stronglyMeasurable_derivWithin_Ioi"><span class="name">stronglyMeasurable_derivWithin_Ioi</span></a></div><div class="nav_link"><a class="break_within" href="#aemeasurable_derivWithin_Ioi"><span class="name">aemeasurable_derivWithin_Ioi</span></a></div><div class="nav_link"><a class="break_within" href="#aestronglyMeasurable_derivWithin_Ioi"><span class="name">aestronglyMeasurable_derivWithin_Ioi</span></a></div></nav><main>
+<div class="mod_doc"><h1 class="markdown-heading" id="Derivative-is-measurable">Derivative is measurable <a class="hover-link" href="#Derivative-is-measurable">#</a></h1><p>In this file we prove that the derivative of any function with complete codomain is a measurable
+function. Namely, we prove:</p><ul>
+<li><code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurableSet_of_differentiableAt">measurableSet_of_differentiableAt</a></code>: the set <code>{x | <a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableAt">DifferentiableAt</a> 𝕜 f x}</code> is measurable;</li>
+<li><code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurable_fderiv">measurable_fderiv</a></code>: the function <code><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> 𝕜 f</code> is measurable;</li>
+<li><code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurable_fderiv_apply_const">measurable_fderiv_apply_const</a></code>: for a fixed vector <code>y</code>, the function <code>fun x ↦ <a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> 𝕜 f x y</code>
+is measurable;</li>
+<li><code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurable_deriv">measurable_deriv</a></code>: the function <code><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#deriv">deriv</a> f</code> is measurable (for <code>f : 𝕜 → F</code>).</li>
+</ul><p>We also show the same results for the right derivative on the real line
+(see <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurable_derivWithin_Ici">measurable_derivWithin_Ici</a></code> and <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurable_derivWithin_Ioi">measurable_derivWithin_Ioi</a></code>), following the same
+proof strategy.</p><h2 class="markdown-heading" id="Implementation">Implementation <a class="hover-link" href="#Implementation">#</a></h2><p>We give a proof that avoids second-countability issues, by expressing the differentiability set
+as a function of open sets in the following way. Define <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">A</a> (L, r, ε)</code> to be the set of points
+where, on a ball of radius roughly <code>r</code> around <code>x</code>, the function is uniformly approximated by the
+linear map <code>L</code>, up to <code>ε r</code>. It is an open set.
+Let also <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.B">B</a> (L, r, s, ε) = <a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">A</a> (L, r, ε) ∩ <a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">A</a> (L, s, ε)</code>: we require that at two possibly different
+scales <code>r</code> and <code>s</code>, the function is well approximated by the linear map <code>L</code>. It is also open.</p><p>We claim that the differentiability set of <code>f</code> is exactly
+<code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a> = ⋂ ε > 0, ⋃ δ > 0, ⋂ r, s < δ, ⋃ L, <a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.B">B</a> (L, r, s, ε)</code>.
+In other words, for any <code>ε > 0</code>, we require that there is a size <code>δ</code> such that, for any two scales
+below this size, the function is well approximated by a linear map, common to the two scales.</p><p>The set <code>⋃ L, <a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.B">B</a> (L, r, s, ε)</code> is open, as a union of open sets. Converting the intersections and
+unions to countable ones (using real numbers of the form <code>2 ^ (-n)</code>), it follows that the
+differentiability set is measurable.</p><p>To prove the claim, there are two inclusions. One is trivial: if the function is differentiable
+at <code>x</code>, then <code>x</code> belongs to <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a></code> (just take <code>L</code> to be the derivative, and use that the
+differentiability exactly says that the map is well approximated by <code>L</code>). This is proved in
+<code>mem_A_of_differentiable</code> and <code>differentiable_set_subset_D</code>.</p><p>For the other direction, the difficulty is that <code>L</code> in the union may depend on <code>ε, r, s</code>. The key
+point is that, in fact, it doesn't depend too much on them. First, if <code>x</code> belongs both to
+<code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">A</a> (L, r, ε)</code> and <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">A</a> (L', r, ε)</code>, then <code>L</code> and <code>L'</code> have to be close on a shell, and thus
+<code>‖L - L'‖</code> is bounded by <code>ε</code> (see <code>norm_sub_le_of_mem_A</code>). Assume now <code>x ∈ <a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a></code>. If one has two maps
+<code>L</code> and <code>L'</code> such that <code>x</code> belongs to <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">A</a> (L, r, ε)</code> and to <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">A</a> (L', r', ε')</code>, one deduces that <code>L</code> is
+close to <code>L'</code> by arguing as follows. Consider another scale <code>s</code> smaller than <code>r</code> and <code>r'</code>. Take a
+linear map <code>L₁</code> that approximates <code>f</code> around <code>x</code> both at scales <code>r</code> and <code>s</code> w.r.t. <code>ε</code> (it exists as
+<code>x</code> belongs to <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a></code>). Take also <code>L₂</code> that approximates <code>f</code> around <code>x</code> both at scales <code>r'</code> and <code>s</code>
+w.r.t. <code>ε'</code>. Then <code>L₁</code> is close to <code>L</code> (as they are close on a shell of radius <code>r</code>), and <code>L₂</code> is
+close to <code>L₁</code> (as they are close on a shell of radius <code>s</code>), and <code>L'</code> is close to <code>L₂</code> (as they are
+close on a shell of radius <code>r'</code>). It follows that <code>L</code> is close to <code>L'</code>, as we claimed.</p><p>It follows that the different approximating linear maps that show up form a Cauchy sequence when
+<code>ε</code> tends to <code>0</code>. When the target space is complete, this sequence converges, to a limit <code>f'</code>.
+With the same kind of arguments, one checks that <code>f</code> is differentiable with derivative <code>f'</code>.</p><p>To show that the derivative itself is measurable, add in the definition of <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.B">B</a></code> and <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a></code> a set
+<code>K</code> of continuous linear maps to which <code>L</code> should belong. Then, when <code>K</code> is complete, the set <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a> K</code>
+is exactly the set of points where <code>f</code> is differentiable with a derivative in <code>K</code>.</p><h2 class="markdown-heading" id="Tags">Tags <a class="hover-link" href="#Tags">#</a></h2><p>derivative, measurable function, Borel σ-algebra</p></div><div class="decl" id="ContinuousLinearMap.measurable_apply₂"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L92-L95">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#ContinuousLinearMap.measurable_apply₂"><span class="name">ContinuousLinearMap</span>.<span class="name">measurable_apply₂</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#OpensMeasurableSpace">OpensMeasurableSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Bases.html#TopologicalSpace.SecondCountableTopology">TopologicalSpace.SecondCountableTopology</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Bases.html#TopologicalSpace.SecondCountableTopology">TopologicalSpace.SecondCountableTopology</a> (<span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">fun <span class="fn">p</span> =&gt <span class="fn">↑<span class="fn"><span class="fn">p</span>.fst</span> <span class="fn"><span class="fn">p</span>.snd</span></span></span></span></div></div></div></div><div class="decl" id="FDerivMeasurableAux.A"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L115-L118">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A"><span class="name">FDerivMeasurableAux</span>.<span class="name">A</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span></div></div><p>The set <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">A</a> f L r ε</code> is the set of points <code>x</code> around which the function <code>f</code> is well approximated
+at scale <code>r</code> by the linear map <code>L</code>, up to an error <code>ε</code>. We tweak the definition to make sure that
+this is an open set.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">FDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">ε</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{<span class="fn">x</span> |
+    <span class="fn">∃ <span class="fn">r'</span>,
+      <span class="fn"><span class="fn"><span class="fn">r'</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioc">Set.Ioc</a> (<span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a>         <span class="fn">∀ (<span class="fn">y</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.ball">Metric.ball</a> <span class="fn">x</span> <span class="fn">r'</span></span></span> → <span class="fn">∀ (<span class="fn">z</span> : <span class="fn">E</span>), <span class="fn"><span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.ball">Metric.ball</a> <span class="fn">x</span> <span class="fn">r'</span></span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑<span class="fn">L</span> (<span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span></span>)</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">ε</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span></span></span></span></span></span></span></span>}</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-FDerivMeasurableAux.A" class="instances-for-list"></ul></details></div></div><div class="decl" id="FDerivMeasurableAux.B"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L124-L125">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.B"><span class="name">FDerivMeasurableAux</span>.<span class="name">B</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> (<span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span></div></div><p>The set <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.B">B</a> f K r s ε</code> is the set of points <code>x</code> around which there exists a continuous linear map
+<code>L</code> belonging to <code>K</code> (a given set of continuous linear maps) that approximates well the
+function <code>f</code> (up to an error <code>ε</code>), simultaneously at scales <code>r</code> and <code>s</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.B">FDerivMeasurableAux.B</a> <span class="fn">f</span> <span class="fn">K</span> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">ε</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">⋃ (L : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>) (_ : <span class="fn"><span class="fn">L</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">FDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">ε</span></span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">FDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">s</span> <span class="fn">ε</span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-FDerivMeasurableAux.B" class="instances-for-list"></ul></details></div></div><div class="decl" id="FDerivMeasurableAux.D"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L131-L132">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D"><span class="name">FDerivMeasurableAux</span>.<span class="name">D</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> (<span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">E</span></span></div></div><p>The set <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a> f K</code> is a complicated set constructed using countable intersections and unions. Its
+main use is that, when <code>K</code> is complete, it is exactly the set of points where <code>f</code> is differentiable,
+with a derivative in <code>K</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">FDerivMeasurableAux.D</a> <span class="fn">f</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">⋂ (e : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>),
+    <span class="fn">⋃ (n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>),
+      <span class="fn">⋂ (p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (_ : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">n</span></span>) (q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (_ : <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">n</span></span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.B">FDerivMeasurableAux.B</a> <span class="fn">f</span> <span class="fn">K</span> (<span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">p</span></span>) (<span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span>) (<span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">e</span></span>)</span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-FDerivMeasurableAux.D" class="instances-for-list"></ul></details></div></div><div class="decl" id="FDerivMeasurableAux.isOpen_a"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L135-L143">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.isOpen_a"><span class="name">FDerivMeasurableAux</span>.<span class="name">isOpen_a</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">FDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">ε</span></span>)</span></div></div></div></div><div class="decl" id="FDerivMeasurableAux.isOpen_b"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L146-L150">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.isOpen_b"><span class="name">FDerivMeasurableAux</span>.<span class="name">isOpen_b</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> (<span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#IsOpen">IsOpen</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.B">FDerivMeasurableAux.B</a> <span class="fn">f</span> <span class="fn">K</span> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">ε</span></span>)</span></div></div></div></div><div class="decl" id="FDerivMeasurableAux.a_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L153-L156">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.a_mono"><span class="name">FDerivMeasurableAux</span>.<span class="name">a_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">ε</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">FDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">ε</span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">FDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">δ</span></span></span></div></div></div></div><div class="decl" id="FDerivMeasurableAux.le_of_mem_a"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L159-L163">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.le_of_mem_a"><span class="name">FDerivMeasurableAux</span>.<span class="name">le_of_mem_a</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">FDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">ε</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hy : <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.closedBall">Metric.closedBall</a> <span class="fn">x</span> (<span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hz : <span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/MetricSpace/Basic.html#Metric.closedBall">Metric.closedBall</a> <span class="fn">x</span> (<span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">↑<span class="fn">L</span> (<span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span></span>)</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">ε</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span></span></div></div></div></div><div class="decl" id="FDerivMeasurableAux.mem_a_of_differentiable"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L166-L183">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.mem_a_of_differentiable"><span class="name">FDerivMeasurableAux</span>.<span class="name">mem_a_of_differentiable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">ε</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableAt">DifferentiableAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">R</span>, <span class="fn"><span class="fn"><span class="fn">R</span> <a href="../../.././Init/Prelude.html#GT.gt">&gt</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">r</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioo">Set.Ioo</a> <span class="fn">0</span> <span class="fn">R</span></span></span> → <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">FDerivMeasurableAux.A</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span>) <span class="fn">r</span> <span class="fn">ε</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="FDerivMeasurableAux.norm_sub_le_of_mem_a"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L186-L207">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.norm_sub_le_of_mem_a"><span class="name">FDerivMeasurableAux</span>.<span class="name">norm_sub_le_of_mem_a</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{c : <span class="fn">𝕜</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hc : <span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">c</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">ε</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <span class="fn">E</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L₁ : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L₂ : <span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">FDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L₁</span> <span class="fn">r</span> <span class="fn">ε</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">FDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L₂</span> <span class="fn">r</span> <span class="fn">ε</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">L₁</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">L₂</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn"><span class="fn">4</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn">c</span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span></span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">ε</span></span></span></div></div></div></div><div class="decl" id="FDerivMeasurableAux.differentiable_set_subset_d"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L211-L223">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.differentiable_set_subset_d"><span class="name">FDerivMeasurableAux</span>.<span class="name">differentiable_set_subset_d</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> (<span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableAt">DifferentiableAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span></span>}</span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">FDerivMeasurableAux.D</a> <span class="fn">f</span> <span class="fn">K</span></span></span></div></div><p>Easy inclusion: a differentiability point with derivative in <code>K</code> belongs to <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a> f K</code>.</p></div></div><div class="decl" id="FDerivMeasurableAux.d_subset_differentiable_set"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L227-L366">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.d_subset_differentiable_set"><span class="name">FDerivMeasurableAux</span>.<span class="name">d_subset_differentiable_set</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> (<span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hK : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#IsComplete">IsComplete</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">FDerivMeasurableAux.D</a> <span class="fn">f</span> <span class="fn">K</span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableAt">DifferentiableAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span></span>}</span></span></div></div><p>Harder inclusion: at a point in <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a> f K</code>, the function <code>f</code> has a derivative, in <code>K</code>.</p></div></div><div class="decl" id="FDerivMeasurableAux.differentiable_set_eq_d"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L369-L371">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.differentiable_set_eq_d"><span class="name">FDerivMeasurableAux</span>.<span class="name">differentiable_set_eq_d</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> (<span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hK : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#IsComplete">IsComplete</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableAt">DifferentiableAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span></span>}</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">FDerivMeasurableAux.D</a> <span class="fn">f</span> <span class="fn">K</span></span></span></div></div></div></div><div class="decl" id="measurableSet_of_differentiableAt_of_isComplete"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L384-L396">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurableSet_of_differentiableAt_of_isComplete"><span class="name">measurableSet_of_differentiableAt_of_isComplete</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#OpensMeasurableSpace">OpensMeasurableSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> (<span class="fn"><span class="fn">E</span> <a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">→L[</a><span class="fn">𝕜</span><a href="../../.././Mathlib/Topology/Algebra/Module/Basic.html#ContinuousLinearMap">]</a> <span class="fn">F</span></span>)</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hK : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#IsComplete">IsComplete</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableAt">DifferentiableAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span></span>}</span></span></div></div><p>The set of differentiability points of a function, with derivative in a given complete set,
+is Borel-measurable.</p></div></div><div class="decl" id="measurableSet_of_differentiableAt"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L403-L406">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurableSet_of_differentiableAt"><span class="name">measurableSet_of_differentiableAt</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_2)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_3}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#OpensMeasurableSpace">OpensMeasurableSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">{<span class="fn">x</span> | <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableAt">DifferentiableAt</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span>}</span></span></div></div><p>The set of differentiability points of a function taking values in a complete space is
+Borel-measurable.</p></div></div><div class="decl" id="measurable_fderiv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L410-L420">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurable_fderiv"><span class="name">measurable_fderiv</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#OpensMeasurableSpace">OpensMeasurableSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="measurable_fderiv_apply_const"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L424-L426">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurable_fderiv_apply_const"><span class="name">measurable_fderiv_apply_const</span></a></span><span class="decl_args">
+<span class="fn">(𝕜 : <a href="../../.././foundational_types.html">Type</a> u_3)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{E : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">E</span> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#OpensMeasurableSpace">OpensMeasurableSpace</a> <span class="fn">E</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(y : <span class="fn">E</span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn">↑(<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#fderiv">fderiv</a> <span class="fn">𝕜</span> <span class="fn">f</span> <span class="fn">x</span></span>) <span class="fn">y</span></span></span></span></div></div></div></div><div class="decl" id="measurable_deriv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L432-L434">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurable_deriv"><span class="name">measurable_deriv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#OpensMeasurableSpace">OpensMeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#deriv">deriv</a> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="stronglyMeasurable_deriv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L437-L440">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#stronglyMeasurable_deriv"><span class="name">stronglyMeasurable_deriv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#OpensMeasurableSpace">OpensMeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Bases.html#TopologicalSpace.SecondCountableTopology">TopologicalSpace.SecondCountableTopology</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.StronglyMeasurable">MeasureTheory.StronglyMeasurable</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#deriv">deriv</a> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="aemeasurable_deriv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L443-L445">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#aemeasurable_deriv"><span class="name">aemeasurable_deriv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#OpensMeasurableSpace">OpensMeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#deriv">deriv</a> <span class="fn">f</span></span>)</span></div></div></div></div><div class="decl" id="aestronglyMeasurable_deriv"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L448-L450">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#aestronglyMeasurable_deriv"><span class="name">aestronglyMeasurable_deriv</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{𝕜 : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Field/Basic.html#NontriviallyNormedField">NontriviallyNormedField</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_2}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <span class="fn">𝕜</span> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#OpensMeasurableSpace">OpensMeasurableSpace</a> <span class="fn">𝕜</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Bases.html#TopologicalSpace.SecondCountableTopology">TopologicalSpace.SecondCountableTopology</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><span class="fn">𝕜</span> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <span class="fn">𝕜</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#deriv">deriv</a> <span class="fn">f</span></span>) <span class="fn">μ</span></span></div></div></div></div><div class="decl" id="RightDerivMeasurableAux.A"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L466-L470">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A"><span class="name">RightDerivMeasurableAux</span>.<span class="name">A</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(L : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></div></div><p>The set <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.A">A</a> f L r ε</code> is the set of points <code>x</code> around which the function <code>f</code> is well approximated
+at scale <code>r</code> by the linear map <code>h ↦ h • L</code>, up to an error <code>ε</code>. We tweak the definition to
+make sure that this is open on the right.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A">RightDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">ε</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">{<span class="fn">x</span> |
+    <span class="fn">∃ <span class="fn">r'</span>,
+      <span class="fn"><span class="fn"><span class="fn">r'</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioc">Set.Ioc</a> (<span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>) <span class="fn">r</span></span></span> <a href="../../.././Init/Prelude.html#And">∧</a>         <span class="fn">∀ (<span class="fn">y</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn"><span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> (<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">r'</span></span>)</span></span> → <span class="fn">∀ (<span class="fn">z</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn"><span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> (<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn">r'</span></span>)</span></span> → <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">(<span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span></span>) <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">L</span></span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">ε</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span></span></span></span></span></span></span></span>}</span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-RightDerivMeasurableAux.A" class="instances-for-list"></ul></details></div></div><div class="decl" id="RightDerivMeasurableAux.B"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L476-L477">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.B"><span class="name">RightDerivMeasurableAux</span>.<span class="name">B</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(s : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></div></div><p>The set <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.B">B</a> f K r s ε</code> is the set of points <code>x</code> around which there exists a vector
+<code>L</code> belonging to <code>K</code> (a given set of vectors) such that <code>h • L</code> approximates well <code>f (x + h)</code>
+(up to an error <code>ε</code>), simultaneously at scales <code>r</code> and <code>s</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.B">RightDerivMeasurableAux.B</a> <span class="fn">f</span> <span class="fn">K</span> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">ε</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">⋃ (L : <span class="fn">F</span>) (_ : <span class="fn"><span class="fn">L</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span>), <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A">RightDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">ε</span></span> <a href="../../.././Std/Classes/SetNotation.html#Inter.inter">∩</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A">RightDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">s</span> <span class="fn">ε</span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-RightDerivMeasurableAux.B" class="instances-for-list"></ul></details></div></div><div class="decl" id="RightDerivMeasurableAux.D"><div class="def"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L483-L484">source</a></div><div class="decl_header"><span class="decl_kind">def</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.D"><span class="name">RightDerivMeasurableAux</span>.<span class="name">D</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span></div></div><p>The set <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a> f K</code> is a complicated set constructed using countable intersections and unions. Its
+main use is that, when <code>K</code> is complete, it is exactly the set of points where <code>f</code> is differentiable,
+with a derivative in <code>K</code>.</p><details><summary>Equations</summary><ul class="equations"><li class="equation"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.D">RightDerivMeasurableAux.D</a> <span class="fn">f</span> <span class="fn">K</span></span> <a href="../../.././Init/Prelude.html#Eq">=</a>   <span class="fn">⋂ (e : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>),
+    <span class="fn">⋃ (n : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>),
+      <span class="fn">⋂ (p : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (_ : <span class="fn"><span class="fn">p</span> <a href="../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">n</span></span>) (q : <a href="../../.././Init/Prelude.html#Nat">ℕ</a>) (_ : <span class="fn"><span class="fn">q</span> <a href="../../.././Init/Prelude.html#GE.ge">≥</a> <span class="fn">n</span></span>), <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.B">RightDerivMeasurableAux.B</a> <span class="fn">f</span> <span class="fn">K</span> (<span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">p</span></span>) (<span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">q</span></span>) (<span class="fn">(<span class="fn"><span class="fn">1</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span>) <a href="../../.././Init/Prelude.html#HPow.hPow">^</a> <span class="fn">e</span></span>)</span></span></span></span></span></li></ul></details><details class="instances"><summary>Instances For</summary><ul id="instances-for-list-RightDerivMeasurableAux.D" class="instances-for-list"></ul></details></div></div><div class="decl" id="RightDerivMeasurableAux.a_mem_nhdsWithin_Ioi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L487-L497">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.a_mem_nhdsWithin_Ioi"><span class="name">RightDerivMeasurableAux</span>.<span class="name">a_mem_nhdsWithin_Ioi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn">F</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A">RightDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">ε</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A">RightDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">ε</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhdsWithin">nhdsWithin</a> <span class="fn">x</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">x</span></span>)</span></span></div></div></div></div><div class="decl" id="RightDerivMeasurableAux.b_mem_nhdsWithin_Ioi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L500-L506">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.b_mem_nhdsWithin_Ioi"><span class="name">RightDerivMeasurableAux</span>.<span class="name">b_mem_nhdsWithin_Ioi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.B">RightDerivMeasurableAux.B</a> <span class="fn">f</span> <span class="fn">K</span> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">ε</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.B">RightDerivMeasurableAux.B</a> <span class="fn">f</span> <span class="fn">K</span> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">ε</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Topology/Basic.html#nhdsWithin">nhdsWithin</a> <span class="fn">x</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">x</span></span>)</span></span></div></div></div></div><div class="decl" id="RightDerivMeasurableAux.measurableSet_b"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L509-L510">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.measurableSet_b"><span class="name">RightDerivMeasurableAux</span>.<span class="name">measurableSet_b</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{s : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.B">RightDerivMeasurableAux.B</a> <span class="fn">f</span> <span class="fn">K</span> <span class="fn">r</span> <span class="fn">s</span> <span class="fn">ε</span></span>)</span></div></div></div></div><div class="decl" id="RightDerivMeasurableAux.a_mono"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L513-L516">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.a_mono"><span class="name">RightDerivMeasurableAux</span>.<span class="name">a_mono</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(L : <span class="fn">F</span>)</span></span>
+<span class="decl_args">
+<span class="fn">(r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{δ : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h : <span class="fn"><span class="fn">ε</span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn">δ</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A">RightDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">ε</span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A">RightDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">δ</span></span></span></div></div></div></div><div class="decl" id="RightDerivMeasurableAux.le_of_mem_a"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L519-L524">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.le_of_mem_a"><span class="name">RightDerivMeasurableAux</span>.<span class="name">le_of_mem_a</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L : <span class="fn">F</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A">RightDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L</span> <span class="fn">r</span> <span class="fn">ε</span></span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{y : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{z : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hy : <span class="fn"><span class="fn">y</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> (<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span></span>)</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hz : <span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Icc">Set.Icc</a> <span class="fn">x</span> (<span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#HAdd.hAdd">+</a> <span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#HDiv.hDiv">/</a> <span class="fn">2</span></span></span>)</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn"><span class="fn"><span class="fn">f</span> <span class="fn">z</span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn"><span class="fn">f</span> <span class="fn">y</span></span></span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">(<span class="fn"><span class="fn">z</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">y</span></span>) <a href="../../.././Mathlib/Algebra/Group/Defs.html#HSMul.hSMul">•</a> <span class="fn">L</span></span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">ε</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">r</span></span></span></div></div></div></div><div class="decl" id="RightDerivMeasurableAux.mem_a_of_differentiable"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L527-L552">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.mem_a_of_differentiable"><span class="name">RightDerivMeasurableAux</span>.<span class="name">mem_a_of_differentiable</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hε : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">ε</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hx : <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableWithinAt">DifferentiableWithinAt</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn">∃ <span class="fn">R</span>, <span class="fn"><span class="fn"><span class="fn">R</span> <a href="../../.././Init/Prelude.html#GT.gt">&gt</a> <span class="fn">0</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn">∀ (<span class="fn">r</span> : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>), <span class="fn"><span class="fn"><span class="fn">r</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioo">Set.Ioo</a> <span class="fn">0</span> <span class="fn">R</span></span></span> → <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A">RightDerivMeasurableAux.A</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span>) <span class="fn">r</span> <span class="fn">ε</span></span></span></span></span></span></span></div></div></div></div><div class="decl" id="RightDerivMeasurableAux.norm_sub_le_of_mem_a"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L555-L572">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.norm_sub_le_of_mem_a"><span class="name">RightDerivMeasurableAux</span>.<span class="name">norm_sub_le_of_mem_a</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{r : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{x : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hr : <span class="fn"><span class="fn">0</span> <a href="../../.././Init/Prelude.html#LT.lt">&lt</a> <span class="fn">r</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(ε : <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{L₁ : <span class="fn">F</span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{L₂ : <span class="fn">F</span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(h₁ : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A">RightDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L₁</span> <span class="fn">r</span> <span class="fn">ε</span></span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(h₂ : <span class="fn"><span class="fn">x</span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.A">RightDerivMeasurableAux.A</a> <span class="fn">f</span> <span class="fn">L₂</span> <span class="fn">r</span> <span class="fn">ε</span></span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a><span class="fn"><span class="fn">L₁</span> <a href="../../.././Init/Prelude.html#HSub.hSub">-</a> <span class="fn">L₂</span></span><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#Norm.norm">‖</a></span> <a href="../../.././Init/Prelude.html#LE.le">≤</a> <span class="fn"><span class="fn">4</span> <a href="../../.././Init/Prelude.html#HMul.hMul">*</a> <span class="fn">ε</span></span></span></div></div></div></div><div class="decl" id="RightDerivMeasurableAux.differentiable_set_subset_d"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L576-L588">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.differentiable_set_subset_d"><span class="name">RightDerivMeasurableAux</span>.<span class="name">differentiable_set_subset_d</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableWithinAt">DifferentiableWithinAt</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span></span>}</span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.D">RightDerivMeasurableAux.D</a> <span class="fn">f</span> <span class="fn">K</span></span></span></div></div><p>Easy inclusion: a differentiability point with derivative in <code>K</code> belongs to <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a> f K</code>.</p></div></div><div class="decl" id="RightDerivMeasurableAux.d_subset_differentiable_set"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L592-L732">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.d_subset_differentiable_set"><span class="name">RightDerivMeasurableAux</span>.<span class="name">d_subset_differentiable_set</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hK : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#IsComplete">IsComplete</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.D">RightDerivMeasurableAux.D</a> <span class="fn">f</span> <span class="fn">K</span></span> <a href="../../.././Std/Classes/SetNotation.html#HasSubset.Subset">⊆</a> <span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableWithinAt">DifferentiableWithinAt</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span></span>}</span></span></div></div><p>Harder inclusion: at a point in <code><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#FDerivMeasurableAux.D">D</a> f K</code>, the function <code>f</code> has a derivative, in <code>K</code>.</p></div></div><div class="decl" id="RightDerivMeasurableAux.differentiable_set_eq_d"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L735-L737">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.differentiable_set_eq_d"><span class="name">RightDerivMeasurableAux</span>.<span class="name">differentiable_set_eq_d</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">F</span></span>)</span></span>
+<span class="decl_args">
+<span class="fn">(hK : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#IsComplete">IsComplete</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableWithinAt">DifferentiableWithinAt</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span></span>}</span> <a href="../../.././Init/Prelude.html#Eq">=</a> <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#RightDerivMeasurableAux.D">RightDerivMeasurableAux.D</a> <span class="fn">f</span> <span class="fn">K</span></span></span></div></div></div></div><div class="decl" id="measurableSet_of_differentiableWithinAt_Ici_of_isComplete"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L748-L759">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurableSet_of_differentiableWithinAt_Ici_of_isComplete"><span class="name">measurableSet_of_differentiableWithinAt_Ici_of_isComplete</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">{K : <span class="fn"><a href="../../.././Mathlib/Init/Set.html#Set">Set</a> <span class="fn">F</span></span>}</span></span>
+</span><span class="decl_args">
+<span class="fn">(hK : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#IsComplete">IsComplete</a> <span class="fn">K</span></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">{<span class="fn">x</span> | <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableWithinAt">DifferentiableWithinAt</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#And">∧</a> <span class="fn"><span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span> <a href="../../.././Init/Prelude.html#Membership.mem">∈</a> <span class="fn">K</span></span></span>}</span></span></div></div><p>The set of right differentiability points of a function, with derivative in a given complete
+set, is Borel-measurable.</p></div></div><div class="decl" id="measurableSet_of_differentiableWithinAt_Ici"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L766-L770">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurableSet_of_differentiableWithinAt_Ici"><span class="name">measurableSet_of_differentiableWithinAt_Ici</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">{<span class="fn">x</span> | <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableWithinAt">DifferentiableWithinAt</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span>}</span></span></div></div><p>The set of right differentiability points of a function taking values in a complete space is
+Borel-measurable.</p></div></div><div class="decl" id="measurable_derivWithin_Ici"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L774-L785">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurable_derivWithin_Ici"><span class="name">measurable_derivWithin_Ici</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="stronglyMeasurable_derivWithin_Ici"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L788-L791">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#stronglyMeasurable_derivWithin_Ici"><span class="name">stronglyMeasurable_derivWithin_Ici</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Bases.html#TopologicalSpace.SecondCountableTopology">TopologicalSpace.SecondCountableTopology</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.StronglyMeasurable">MeasureTheory.StronglyMeasurable</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="aemeasurable_derivWithin_Ici"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L794-L796">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#aemeasurable_derivWithin_Ici"><span class="name">aemeasurable_derivWithin_Ici</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="aestronglyMeasurable_derivWithin_Ici"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L799-L801">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#aestronglyMeasurable_derivWithin_Ici"><span class="name">aestronglyMeasurable_derivWithin_Ici</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Bases.html#TopologicalSpace.SecondCountableTopology">TopologicalSpace.SecondCountableTopology</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ici">Set.Ici</a> <span class="fn">x</span></span>) <span class="fn">x</span></span></span>) <span class="fn">μ</span></span></div></div></div></div><div class="decl" id="measurableSet_of_differentiableWithinAt_Ioi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L806-L808">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurableSet_of_differentiableWithinAt_Ioi"><span class="name">measurableSet_of_differentiableWithinAt_Ioi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSet">MeasurableSet</a> <span class="fn">{<span class="fn">x</span> | <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/FDeriv/Basic.html#DifferentiableWithinAt">DifferentiableWithinAt</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">x</span></span>) <span class="fn">x</span></span>}</span></span></div></div><p>The set of right differentiability points of a function taking values in a complete space is
+Borel-measurable.</p></div></div><div class="decl" id="measurable_derivWithin_Ioi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L812-L814">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#measurable_derivWithin_Ioi"><span class="name">measurable_derivWithin_Ioi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#Measurable">Measurable</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">x</span></span>) <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="stronglyMeasurable_derivWithin_Ioi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L817-L820">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#stronglyMeasurable_derivWithin_Ioi"><span class="name">stronglyMeasurable_derivWithin_Ioi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Bases.html#TopologicalSpace.SecondCountableTopology">TopologicalSpace.SecondCountableTopology</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.StronglyMeasurable">MeasureTheory.StronglyMeasurable</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">x</span></span>) <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="aemeasurable_derivWithin_Ioi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L823-L825">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#aemeasurable_derivWithin_Ioi"><span class="name">aemeasurable_derivWithin_Ioi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/MeasurableSpaceDef.html#MeasurableSpace">MeasurableSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Constructions/BorelSpace/Basic.html#BorelSpace">BorelSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#AEMeasurable">AEMeasurable</a> <span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">x</span></span>) <span class="fn">x</span></span></span></span></div></div></div></div><div class="decl" id="aestronglyMeasurable_derivWithin_Ioi"><div class="theorem"><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib4/blob/44c828ca5b12983ef1d4eea5c54f95c2ef52cb36/Mathlib/Analysis/Calculus/FDerivMeasurable.lean#L828-L830">source</a></div><div class="decl_header"><span class="decl_kind">theorem</span>
+<span class="decl_name"><a class="break_within" href="../../.././Mathlib/Analysis/Calculus/FDerivMeasurable.html#aestronglyMeasurable_derivWithin_Ioi"><span class="name">aestronglyMeasurable_derivWithin_Ioi</span></a></span><span class="impl_arg"><span class="decl_args">
+<span class="fn">{F : <a href="../../.././foundational_types.html">Type</a> u_1}</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/Normed/Group/Basic.html#NormedAddCommGroup">NormedAddCommGroup</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Analysis/NormedSpace/Basic.html#NormedSpace">NormedSpace</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(f : <span class="fn"><a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a> → <span class="fn">F</span></span>)</span></span>
+<span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/UniformSpace/Cauchy.html#CompleteSpace">CompleteSpace</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="impl_arg"><span class="decl_args">
+<span class="fn">[inst : <span class="fn"><a href="../../.././Mathlib/Topology/Bases.html#TopologicalSpace.SecondCountableTopology">TopologicalSpace.SecondCountableTopology</a> <span class="fn">F</span></span>]</span></span>
+</span><span class="decl_args">
+<span class="fn">(μ : <span class="fn"><a href="../../.././Mathlib/MeasureTheory/Measure/MeasureSpaceDef.html#MeasureTheory.Measure">MeasureTheory.Measure</a> <a href="../../.././Mathlib/Data/Real/Basic.html#Real">ℝ</a></span>)</span></span>
+<span class="decl_args"> :</span><div class="decl_type"><span class="fn"><a href="../../.././Mathlib/MeasureTheory/Function/StronglyMeasurable/Basic.html#MeasureTheory.AEStronglyMeasurable">MeasureTheory.AEStronglyMeasurable</a> (<span class="fn">fun <span class="fn">x</span> =&gt <span class="fn"><a href="../../.././Mathlib/Analysis/Calculus/Deriv/Basic.html#derivWithin">derivWithin</a> <span class="fn">f</span> (<span class="fn"><a href="../../.././Mathlib/Data/Set/Intervals/Basic.html#Set.Ioi">Set.Ioi</a> <span class="fn">x</span></span>) <span class="fn">x</span></span></span>) <span class="fn">μ</span></span></div></div></div></div></main>
+<nav class="nav"><iframe src="../../.././navbar.html" class="navframe" frameBorder="0"></iframe></nav></body></html>
